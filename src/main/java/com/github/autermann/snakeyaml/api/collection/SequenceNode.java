@@ -16,22 +16,31 @@
  */
 package com.github.autermann.snakeyaml.api.collection;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
+import java.util.List;
 
 import org.yaml.snakeyaml.nodes.Tag;
 
 import com.github.autermann.snakeyaml.api.Node;
 import com.github.autermann.snakeyaml.api.NodeFactory;
-
+import com.google.common.collect.Lists;
 
 /**
  * TODO JavaDoc
  *
  * @author Christian Autermann <c.autermann@52north.org>
  */
-public class SequenceNode extends ContainerNode {
+public class SequenceNode extends AbstractSequenceNode<SequenceNode> {
+    private final List<Node> nodes;
 
     public SequenceNode(NodeFactory factory) {
+        this(factory, Lists.<Node>newArrayList());
+    }
+
+    public SequenceNode(NodeFactory factory, List<Node> seq) {
         super(factory);
+        this.nodes = checkNotNull(seq);
     }
 
     @Override
@@ -40,32 +49,29 @@ public class SequenceNode extends ContainerNode {
     }
 
     @Override
+    public SequenceNode asSequence() {
+        return this;
+    }
+
+    @Override
     public Tag tag() {
         return Tag.SEQ;
     }
 
     @Override
-    public boolean equals(Object o) {
-        /* TODO implement com.github.autermann.snakeyaml.api.collection.SequenceNode.equals() */
-        throw new UnsupportedOperationException("com.github.autermann.snakeyaml.api.collection.SequenceNode.equals() not yet implemented");
+    protected List<Node> getNodes() {
+        return nodes;
     }
 
     @Override
-    public int hashCode() {
-        /* TODO implement com.github.autermann.snakeyaml.api.collection.SequenceNode.hashCode() */
-        throw new UnsupportedOperationException("com.github.autermann.snakeyaml.api.collection.SequenceNode.hashCode() not yet implemented");
-    }
-
-    @Override
-    public String toString() {
-        /* TODO implement com.github.autermann.snakeyaml.api.collection.SequenceNode.toString() */
-        throw new UnsupportedOperationException("com.github.autermann.snakeyaml.api.collection.SequenceNode.toString() not yet implemented");
-    }
-
-    @Override
+    @SuppressWarnings("unchecked")
     public <T extends Node> T copy() {
-        /* TODO implement com.github.autermann.snakeyaml.api.collection.SequenceNode.copy() */
-        throw new UnsupportedOperationException("com.github.autermann.snakeyaml.api.collection.SequenceNode.copy() not yet implemented");
+        SequenceNode copy = getNodeFactory().sequenceNode();
+        for (Node node  : this) {
+            copy.add(node.copy());
+        }
+        return (T) copy;
     }
+
 
 }

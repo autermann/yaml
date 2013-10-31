@@ -16,20 +16,33 @@
  */
 package com.github.autermann.snakeyaml.api.collection;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
+import java.util.Set;
+
 import org.yaml.snakeyaml.nodes.Tag;
 
+import com.github.autermann.snakeyaml.api.Node;
 import com.github.autermann.snakeyaml.api.NodeFactory;
+import com.google.common.collect.Sets;
 
 /**
  * TODO JavaDoc
  *
  * @author Christian Autermann <c.autermann@52north.org>
  */
-public class SetNode extends SequenceNode {
+public class SetNode extends AbstractSequenceNode<SetNode> {
+    private final Set<Node> nodes;
+
+    public SetNode(NodeFactory factory, Set<Node> nodes) {
+        super(factory);
+        this.nodes = checkNotNull(nodes);
+    }
 
     public SetNode(NodeFactory factory) {
-        super(factory);
+        this(factory, Sets.<Node>newLinkedHashSet());
     }
+
     @Override
     public boolean isSet() {
         return true;
@@ -43,6 +56,21 @@ public class SetNode extends SequenceNode {
     @Override
     public SetNode asSet() {
         return this;
+    }
+
+    @Override
+    protected Set<Node> getNodes() {
+        return this.nodes;
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public <T extends Node> T copy() {
+        SetNode copy = getNodeFactory().setNode();
+        for (Node node : this) {
+            copy.add(node.copy());
+        }
+        return (T) copy;
     }
 
 }

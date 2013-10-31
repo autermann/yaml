@@ -64,4 +64,10 @@ public class PairsNode extends ContainerNode {
         /* TODO implement com.github.autermann.snakeyaml.api.collection.PairsNode.copy() */
         throw new UnsupportedOperationException("com.github.autermann.snakeyaml.api.collection.PairsNode.copy() not yet implemented");
     }
+
+    @Override
+    public int size() {
+        /* TODO implement com.github.autermann.snakeyaml.api.collection.PairsNode.size() */
+        throw new UnsupportedOperationException("com.github.autermann.snakeyaml.api.collection.PairsNode.size() not yet implemented");
+    }
 }

@@ -36,6 +36,8 @@ public abstract class ContainerNode extends BaseNode {
         return factory;
     }
 
+    public abstract int size();
+
     @Override
     public boolean isContainer() {
         return true;

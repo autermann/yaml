@@ -38,6 +38,9 @@ public abstract class ScalarNode extends BaseNode {
     }
 
     @Override
+    public abstract String textValue();
+
+    @Override
     @SuppressWarnings("unchecked")
     public <T extends Node> T copy() {
         // subclasses are immutable

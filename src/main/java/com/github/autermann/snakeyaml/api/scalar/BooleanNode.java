@@ -21,20 +21,14 @@ import java.math.BigInteger;
 
 import org.yaml.snakeyaml.nodes.Tag;
 
-
 /**
  * TODO JavaDoc
  *
  * @author Christian Autermann <c.autermann@52north.org>
  */
-public class BooleanNode extends ScalarNode {
-    private static final BooleanNode TRUE = new BooleanNode(true);
-    private static final BooleanNode FALSE = new BooleanNode(false);
-    private final boolean value;
-
-    private BooleanNode(boolean value) {
-        this.value = value;
-    }
+public abstract class BooleanNode extends ScalarNode {
+    private static final BooleanNode TRUE = new TrueNode();
+    private static final BooleanNode FALSE = new FalseNode();
 
     @Override
     public String textValue() {
@@ -57,64 +51,40 @@ public class BooleanNode extends ScalarNode {
     }
 
     @Override
-    public boolean booleanValue() {
-        return value;
-    }
+    public abstract boolean booleanValue();
 
     @Override
-    public Number asNumberValue(Number defaultValue) {
-        return booleanValue() ? 1 : 0;
-    }
+    public abstract Number asNumberValue(Number defaultValue);
 
     @Override
-    public BigDecimal asBigDecimalValue(BigDecimal defaultValue) {
-        return booleanValue() ? BigDecimal.ONE : BigDecimal.ZERO;
-    }
+    public abstract BigDecimal asBigDecimalValue(BigDecimal defaultValue);
 
     @Override
-    public double asDoubleValue(double defaultValue) {
-        return booleanValue() ? 1 : 0;
-    }
+    public abstract double asDoubleValue(double defaultValue);
 
     @Override
-    public float asFloatValue(float defaultValue) {
-        return booleanValue() ? 1 : 0;
-    }
+    public abstract float asFloatValue(float defaultValue);
 
     @Override
-    public BigInteger asBigIntegerValue(BigInteger defaultValue) {
-        return booleanValue() ? BigInteger.ONE : BigInteger.ZERO;
-    }
+    public abstract BigInteger asBigIntegerValue(BigInteger defaultValue);
 
     @Override
-    public long asLongValue(long defaultValue) {
-        return booleanValue() ? 1 : 0;
-    }
+    public abstract long asLongValue(long defaultValue);
 
     @Override
-    public int asIntValue(int defaultValue) {
-        return booleanValue() ? 1 : 0;
-    }
+    public abstract int asIntValue(int defaultValue);
 
     @Override
-    public short asShortValue(short defaultValue) {
-        return (short) (booleanValue() ? 1 : 0);
-    }
+    public abstract short asShortValue(short defaultValue);
 
     @Override
-    public byte asByteValue(byte defaultValue) {
-        return (byte) (booleanValue() ? 1 : 0);
-    }
+    public abstract byte asByteValue(byte defaultValue);
 
     @Override
-    public String asTextValue(String defaultValue) {
-        return textValue();
-    }
+    public abstract String asTextValue(String defaultValue);
 
     @Override
-    public boolean asBooleanValue(boolean defaultValue) {
-        return booleanValue();
-    }
+    public abstract boolean asBooleanValue(boolean defaultValue);
 
     public static ScalarNode of(Boolean value) {
         if (value == null) {
@@ -125,5 +95,137 @@ public class BooleanNode extends ScalarNode {
 
     public static BooleanNode of(boolean value) {
         return value ? TRUE : FALSE;
+    }
+
+    private static class TrueNode extends BooleanNode {
+
+        private TrueNode() {
+        }
+
+        @Override
+        public boolean booleanValue() {
+            return true;
+        }
+
+        @Override
+        public Number asNumberValue(Number defaultValue) {
+            return 1;
+        }
+
+        @Override
+        public BigDecimal asBigDecimalValue(BigDecimal defaultValue) {
+            return BigDecimal.ONE;
+        }
+
+        @Override
+        public double asDoubleValue(double defaultValue) {
+            return 1.0d;
+        }
+
+        @Override
+        public float asFloatValue(float defaultValue) {
+            return 1.0f;
+        }
+
+        @Override
+        public BigInteger asBigIntegerValue(BigInteger defaultValue) {
+            return BigInteger.ONE;
+        }
+
+        @Override
+        public long asLongValue(long defaultValue) {
+            return 1l;
+        }
+
+        @Override
+        public int asIntValue(int defaultValue) {
+            return 1;
+        }
+
+        @Override
+        public short asShortValue(short defaultValue) {
+            return (short) 1;
+        }
+
+        @Override
+        public byte asByteValue(byte defaultValue) {
+            return (byte) 1;
+        }
+
+        @Override
+        public String asTextValue(String defaultValue) {
+            return "true";
+        }
+
+        @Override
+        public boolean asBooleanValue(boolean defaultValue) {
+            return true;
+        }
+    }
+
+    private static class FalseNode extends BooleanNode {
+
+        private FalseNode() {
+        }
+
+        @Override
+        public boolean booleanValue() {
+            return false;
+        }
+
+        @Override
+        public Number asNumberValue(Number defaultValue) {
+            return 0;
+        }
+
+        @Override
+        public BigDecimal asBigDecimalValue(BigDecimal defaultValue) {
+            return BigDecimal.ZERO;
+        }
+
+        @Override
+        public double asDoubleValue(double defaultValue) {
+            return 0.0d;
+        }
+
+        @Override
+        public float asFloatValue(float defaultValue) {
+            return 0.0f;
+        }
+
+        @Override
+        public BigInteger asBigIntegerValue(BigInteger defaultValue) {
+            return BigInteger.ZERO;
+        }
+
+        @Override
+        public long asLongValue(long defaultValue) {
+            return 0l;
+        }
+
+        @Override
+        public int asIntValue(int defaultValue) {
+            return 0;
+        }
+
+        @Override
+        public short asShortValue(short defaultValue) {
+            return (short) 0;
+        }
+
+        @Override
+        public byte asByteValue(byte defaultValue) {
+            return (byte) 0;
+        }
+
+        @Override
+        public String asTextValue(String defaultValue) {
+            return "false";
+        }
+
+        @Override
+        public boolean asBooleanValue(boolean defaultValue) {
+            return false;
+        }
     }
 }

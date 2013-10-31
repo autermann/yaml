@@ -161,11 +161,23 @@ public abstract class NodeFactory {
 
     public abstract BooleanNode booleanNode(boolean value);
 
+    public MappingNode objectNode() {
+        return mappingNode();
+    }
+
     public abstract MappingNode mappingNode();
 
     public abstract OrderedMappingNode orderedMappingNode();
 
     public abstract PairsNode pairsNode();
+
+    public SequenceNode arrayNode() {
+        return sequenceNode();
+    }
+
+    public SequenceNode listNode() {
+        return sequenceNode();
+    }
 
     public abstract SequenceNode sequenceNode();
 

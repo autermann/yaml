@@ -47,12 +47,24 @@ public abstract class AbstractMappingNode<T extends AbstractMappingNode<T>>
         return putPairs(getNodeFactory().textNode(key));
     }
 
+    public SequenceNode putArray(String key) {
+        return putSequence(key);
+    }
+
+    public SequenceNode putList(String key) {
+        return putSequence(key);
+    }
+
     public SequenceNode putSequence(String key) {
         return putSequence(getNodeFactory().textNode(key));
     }
 
     public SetNode putSet(String key) {
         return putSet(getNodeFactory().textNode(key));
+    }
+
+    public MappingNode putObject(String key) {
+        return putMapping(key);
     }
 
     public MappingNode putMapping(String key) {
@@ -67,12 +79,24 @@ public abstract class AbstractMappingNode<T extends AbstractMappingNode<T>>
         return putContainer(key, getNodeFactory().pairsNode());
     }
 
+    public SequenceNode putArray(Node key) {
+        return putSequence(key);
+    }
+
+    public SequenceNode putList(Node key) {
+        return putSequence(key);
+    }
+
     public SequenceNode putSequence(Node key) {
         return putContainer(key, getNodeFactory().sequenceNode());
     }
 
     public SetNode putSet(Node key) {
         return putContainer(key, getNodeFactory().setNode());
+    }
+
+    public MappingNode putObject(Node key) {
+        return putMapping(key);
     }
 
     public MappingNode putMapping(Node key) {

@@ -130,4 +130,9 @@ public class MappingNode extends AbstractMappingNode<MappingNode> {
     protected Map<Node, Node> getNodes() {
         return nodes;
     }
+
+    @Override
+    public int size() {
+        return getNodes().size();
+    }
 }

@@ -42,6 +42,11 @@ public class BinaryNode extends ScalarNode {
     }
 
     @Override
+    public String asTextValue() {
+        return textValue();
+    }
+
+    @Override
     public String textValue() {
         return BaseEncoding.base64().encode(binaryValue());
     }

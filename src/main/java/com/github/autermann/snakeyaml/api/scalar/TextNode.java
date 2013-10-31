@@ -16,6 +16,9 @@
  */
 package com.github.autermann.snakeyaml.api.scalar;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
+
 import org.yaml.snakeyaml.nodes.Tag;
 
 /**
@@ -38,6 +41,102 @@ public class TextNode extends ScalarNode {
     @Override
     public String textValue() {
         return value;
+    }
+
+    @Override
+    public String asTextValue(String defaultValue) {
+        return textValue();
+    }
+
+    @Override
+    public short asShortValue(short defaultValue) {
+        try {
+            return Short.parseShort(textValue());
+        } catch (NumberFormatException e) {
+            return defaultValue;
+        }
+    }
+
+    @Override
+    public Number asNumberValue(Number defaultValue) {
+        try {
+            return new BigDecimal(textValue());
+        } catch (NumberFormatException e) {
+            return defaultValue;
+        }
+    }
+
+    @Override
+    public long asLongValue(long defaultValue) {
+        try {
+            return Long.parseLong(textValue());
+        } catch (NumberFormatException e) {
+            return defaultValue;
+        }
+    }
+
+    @Override
+    public int asIntValue(int defaultValue) {
+        try {
+            return Integer.parseInt(textValue());
+        } catch (NumberFormatException e) {
+            return defaultValue;
+        }
+    }
+
+    @Override
+    public float asFloatValue(float defaultValue) {
+        try {
+            return Float.parseFloat(textValue());
+        } catch (NumberFormatException e) {
+            return defaultValue;
+        }
+    }
+
+    @Override
+    public double asDoubleValue(double defaultValue) {
+        try {
+            return Double.parseDouble(textValue());
+        } catch (NumberFormatException e) {
+            return defaultValue;
+        }
+    }
+
+    @Override
+    public byte[] asBinaryValue(byte[] defaultValue) {
+        return textValue().getBytes();
+    }
+
+    @Override
+    public byte asByteValue(byte defaultValue) {
+        try {
+            return Byte.parseByte(textValue());
+        } catch (NumberFormatException e) {
+            return defaultValue;
+        }
+    }
+
+    @Override
+    public boolean asBooleanValue(boolean defaultValue) {
+        return Boolean.parseBoolean(textValue());
+    }
+
+    @Override
+    public BigInteger asBigIntegerValue(BigInteger defaultValue) {
+        try {
+            return new BigInteger(textValue());
+        } catch (NumberFormatException e) {
+            return defaultValue;
+        }
+    }
+
+    @Override
+    public BigDecimal asBigDecimalValue(BigDecimal defaultValue) {
+        try {
+            return new BigDecimal(textValue());
+        } catch (NumberFormatException e) {
+            return defaultValue;
+        }
     }
 
     @Override
