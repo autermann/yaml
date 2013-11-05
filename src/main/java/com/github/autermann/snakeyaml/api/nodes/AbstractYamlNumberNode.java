@@ -14,14 +14,10 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.github.autermann.snakeyaml.api.scalar;
-
-import static com.google.common.base.Preconditions.checkNotNull;
+package com.github.autermann.snakeyaml.api.nodes;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
-
-import org.yaml.snakeyaml.nodes.Tag;
 
 import com.google.common.base.Objects;
 
@@ -30,7 +26,7 @@ import com.google.common.base.Objects;
  *
  * @author Christian Autermann <c.autermann@52north.org>
  */
-public abstract class NumberNode extends ScalarNode {
+public abstract class AbstractYamlNumberNode extends AbstractYamlScalarNode<Number> {
     @Override
     public byte byteValue() {
         return numberValue().byteValue();
@@ -112,11 +108,6 @@ public abstract class NumberNode extends ScalarNode {
     }
 
     @Override
-    public String textValue() {
-        return numberValue().toString();
-    }
-
-    @Override
     public String toString() {
         return numberValue().toString();
     }
@@ -129,7 +120,12 @@ public abstract class NumberNode extends ScalarNode {
     @Override
     public boolean equals(Object o) {
         return o != null && getClass() == o.getClass() &&
-               Objects.equal(numberValue(), ((NumberNode) o).numberValue());
+               Objects.equal(numberValue(), ((AbstractYamlNumberNode) o)
+                .numberValue());
     }
 
+    @Override
+    public Number value() {
+        return numberValue();
+    }
 }

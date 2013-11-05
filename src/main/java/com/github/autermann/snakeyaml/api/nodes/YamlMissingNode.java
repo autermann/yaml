@@ -14,37 +14,62 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.github.autermann.snakeyaml.api.scalar;
+package com.github.autermann.snakeyaml.api.nodes;
 
+import org.yaml.snakeyaml.nodes.Tag;
 
-import com.github.autermann.snakeyaml.api.BaseNode;
-import com.github.autermann.snakeyaml.api.Node;
+import com.github.autermann.snakeyaml.api.YamlNode;
 
 /**
  * TODO JavaDoc
  *
  * @author Christian Autermann <c.autermann@52north.org>
  */
-public abstract class ScalarNode extends BaseNode {
-
-    @Override
-    public boolean isScalar() {
-        return true;
-    }
+public class YamlMissingNode extends AbstractYamlNode {
+    private static final YamlMissingNode instance = new YamlMissingNode();
 
     @Override
     public String toString() {
-        return textValue();
+        return "";
     }
 
     @Override
-    public abstract String textValue();
+    public boolean equals(Object o) {
+        return (o == this);
+    }
+
+    @Override
+    public int hashCode() {
+        return System.identityHashCode(this);
+    }
+
+    @Override
+    public boolean exists() {
+        return false;
+    }
+
+    @Override
+    public Tag tag() {
+        return null;
+    }
 
     @Override
     @SuppressWarnings("unchecked")
-    public <T extends Node> T copy() {
-        // subclasses are immutable
+    public <T extends YamlNode> T copy() {
         return (T) this;
+    }
+
+    @Override
+    public void accept(Visitor visitor) {
+    }
+
+    @Override
+    public <T> T accept(ReturningVisitor<T> visitor) {
+        return null;
+    }
+
+    public static YamlMissingNode instance() {
+        return instance;
     }
 
 }

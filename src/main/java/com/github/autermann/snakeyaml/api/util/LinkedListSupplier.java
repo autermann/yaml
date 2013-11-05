@@ -14,46 +14,33 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.github.autermann.snakeyaml.api.scalar;
+package com.github.autermann.snakeyaml.api.util;
 
-import java.math.BigDecimal;
-import java.math.BigInteger;
+import java.util.List;
 
-import org.yaml.snakeyaml.nodes.Tag;
-
-import com.google.common.base.Preconditions;
+import com.github.autermann.snakeyaml.api.YamlNode;
+import com.google.common.base.Supplier;
+import com.google.common.collect.Lists;
 
 /**
  * TODO JavaDoc
  *
  * @author Christian Autermann <c.autermann@52north.org>
  */
-public class IntegralNode extends NumberNode {
+public class LinkedListSupplier implements Supplier<List<?>> {
+    private static final LinkedListSupplier INSTANCE = new LinkedListSupplier();
 
-    private final BigInteger value;
-
-    public IntegralNode(BigInteger value) {
-        this.value = Preconditions.checkNotNull(value);
+    private LinkedListSupplier() {
     }
 
     @Override
-    public BigInteger numberValue() {
-        return this.value;
+    public List<YamlNode> get() {
+        return Lists.newLinkedList();
     }
 
-    @Override
-    public Tag tag() {
-        return Tag.INT;
-    }
-
-    @Override
-    public BigInteger bigIntegerValue() {
-        return numberValue();
-    }
-
-    @Override
-    public BigDecimal bigDecimalValue() {
-        return new BigDecimal(numberValue());
+    @SuppressWarnings(value = "unchecked")
+    public static <T> Supplier<List<T>> instance() {
+        return (Supplier<List<T>>) INSTANCE;
     }
 
 }

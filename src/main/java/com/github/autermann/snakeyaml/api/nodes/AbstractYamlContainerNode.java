@@ -14,25 +14,33 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.github.autermann.snakeyaml.api;
+package com.github.autermann.snakeyaml.api.nodes;
 
-import com.github.autermann.snakeyaml.api.scalar.NullNode;
+import com.github.autermann.snakeyaml.api.YamlNodeFactory;
 
 /**
  * TODO JavaDoc
  *
  * @author Christian Autermann <c.autermann@52north.org>
  */
-public class Nodes {
+public abstract class AbstractYamlContainerNode extends AbstractYamlNode {
 
-    private Nodes() {
+    private final YamlNodeFactory factory;
+
+    public AbstractYamlContainerNode(YamlNodeFactory factory) {
+        this.factory = factory;
     }
 
-    public static Node nullToNode(Node value) {
-        return value == null ? NullNode.instance() : value;
+    public YamlNodeFactory getNodeFactory() {
+        return factory;
     }
 
-    public static Node nullToMissing(Node value) {
-        return value == null ? MissingNode.instance() : value;
+    public abstract int size();
+
+    public abstract boolean isEmpty();
+
+    @Override
+    public boolean isContainer() {
+        return true;
     }
 }

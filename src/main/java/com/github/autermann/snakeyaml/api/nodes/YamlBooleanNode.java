@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.github.autermann.snakeyaml.api.scalar;
+package com.github.autermann.snakeyaml.api.nodes;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -26,14 +26,9 @@ import org.yaml.snakeyaml.nodes.Tag;
  *
  * @author Christian Autermann <c.autermann@52north.org>
  */
-public abstract class BooleanNode extends ScalarNode {
-    private static final BooleanNode TRUE = new TrueNode();
-    private static final BooleanNode FALSE = new FalseNode();
-
-    @Override
-    public String textValue() {
-        return String.valueOf(booleanValue());
-    }
+public abstract class YamlBooleanNode extends AbstractYamlScalarNode<Boolean> {
+    private static final YamlBooleanNode TRUE = new TrueNode();
+    private static final YamlBooleanNode FALSE = new FalseNode();
 
     @Override
     public int hashCode() {
@@ -48,6 +43,21 @@ public abstract class BooleanNode extends ScalarNode {
     @Override
     public Tag tag() {
         return Tag.BOOL;
+    }
+
+    @Override
+    public void accept(Visitor visitor) {
+        visitor.visit(this);
+    }
+
+    @Override
+    public <T> T accept(ReturningVisitor<T> visitor) {
+        return visitor.visit(this);
+    }
+
+    @Override
+    public Boolean value() {
+        return booleanValue();
     }
 
     @Override
@@ -86,18 +96,11 @@ public abstract class BooleanNode extends ScalarNode {
     @Override
     public abstract boolean asBooleanValue(boolean defaultValue);
 
-    public static ScalarNode of(Boolean value) {
-        if (value == null) {
-            return NullNode.instance();
-        }
-        return of(value.booleanValue());
-    }
-
-    public static BooleanNode of(boolean value) {
+    public static YamlBooleanNode of(boolean value) {
         return value ? TRUE : FALSE;
     }
 
-    private static class TrueNode extends BooleanNode {
+    private static class TrueNode extends YamlBooleanNode {
 
         private TrueNode() {
         }
@@ -163,7 +166,7 @@ public abstract class BooleanNode extends ScalarNode {
         }
     }
 
-    private static class FalseNode extends BooleanNode {
+    private static class FalseNode extends YamlBooleanNode {
 
         private FalseNode() {
         }

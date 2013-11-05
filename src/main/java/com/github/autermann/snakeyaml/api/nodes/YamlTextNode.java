@@ -14,11 +14,14 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.github.autermann.snakeyaml.api.scalar;
+package com.github.autermann.snakeyaml.api.nodes;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.util.Date;
 
+import org.joda.time.DateTime;
+import org.joda.time.format.ISODateTimeFormat;
 import org.yaml.snakeyaml.nodes.Tag;
 
 /**
@@ -26,10 +29,10 @@ import org.yaml.snakeyaml.nodes.Tag;
  *
  * @author Christian Autermann <c.autermann@52north.org>
  */
-public class TextNode extends ScalarNode {
+public class YamlTextNode extends AbstractYamlScalarNode<String> {
     private final String value;
 
-    public TextNode(String value) {
+    public YamlTextNode(String value) {
         this.value = value;
     }
 
@@ -146,7 +149,37 @@ public class TextNode extends ScalarNode {
 
     @Override
     public boolean equals(Object o) {
-        return o instanceof TextNode &&
-               textValue().equals(((TextNode) o).textValue());
+        return o instanceof YamlTextNode &&
+               textValue().equals(((YamlTextNode) o).textValue());
+    }
+
+    @Override
+    public void accept(Visitor visitor) {
+        visitor.visit(this);
+    }
+
+    @Override
+    public <T> T accept(ReturningVisitor<T> visitor) {
+        return visitor.visit(this);
+    }
+
+    @Override
+    public String value() {
+        return textValue();
+    }
+
+    @Override
+    public Date asDateValue(Date defaultValue) {
+        DateTime dt = asDateTimeValue(null);
+        return dt == null ? defaultValue : dt.toDate();
+    }
+
+    @Override
+    public DateTime asDateTimeValue(DateTime defaultValue) {
+        try {
+            return ISODateTimeFormat.dateTime().parseDateTime(textValue());
+        } catch (IllegalArgumentException e) {
+            return defaultValue;
+        }
     }
 }

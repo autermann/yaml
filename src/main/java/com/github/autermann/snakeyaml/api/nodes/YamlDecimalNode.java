@@ -14,51 +14,55 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.github.autermann.snakeyaml.api;
+package com.github.autermann.snakeyaml.api.nodes;
+
+import java.math.BigDecimal;
+import java.math.BigInteger;
 
 import org.yaml.snakeyaml.nodes.Tag;
+
+import com.google.common.base.Preconditions;
 
 /**
  * TODO JavaDoc
  *
  * @author Christian Autermann <c.autermann@52north.org>
  */
-public class MissingNode extends BaseNode {
-    private static final MissingNode instance = new MissingNode();
+public class YamlDecimalNode extends AbstractYamlNumberNode {
 
-    @Override
-    public String toString() {
-        return "";
+    private final BigDecimal value;
+
+    public YamlDecimalNode(BigDecimal value) {
+        this.value = Preconditions.checkNotNull(value);
     }
 
     @Override
-    public boolean equals(Object o) {
-        return (o == this);
-    }
-
-    @Override
-    public int hashCode() {
-        return System.identityHashCode(this);
-    }
-
-    @Override
-    public boolean exists() {
-        return false;
+    public BigDecimal numberValue() {
+        return this.value;
     }
 
     @Override
     public Tag tag() {
-        return null;
+        return Tag.FLOAT;
     }
 
     @Override
-    @SuppressWarnings("unchecked")
-    public <T extends Node> T copy() {
-        return (T) this;
+    public BigDecimal bigDecimalValue() {
+        return numberValue();
     }
 
-    public static MissingNode instance() {
-        return instance;
+    @Override
+    public BigInteger bigIntegerValue() {
+        return numberValue().toBigInteger();
     }
 
+    @Override
+    public void accept(Visitor visitor) {
+        visitor.visit(this);
+    }
+
+    @Override
+    public <T> T accept(ReturningVisitor<T> visitor) {
+        return visitor.visit(this);
+    }
 }

@@ -14,45 +14,45 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.github.autermann.snakeyaml.api;
+package com.github.autermann.snakeyaml.api.nodes;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.util.Date;
 
-import com.github.autermann.snakeyaml.api.collection.MappingNode;
-import com.github.autermann.snakeyaml.api.collection.OrderedMappingNode;
-import com.github.autermann.snakeyaml.api.collection.PairsNode;
-import com.github.autermann.snakeyaml.api.collection.SequenceNode;
-import com.github.autermann.snakeyaml.api.collection.SetNode;
+import org.joda.time.DateTime;
+
+import com.github.autermann.snakeyaml.api.YamlNode;
 
 /**
  * TODO JavaDoc
  *
  * @author Christian Autermann <c.autermann@52north.org>
  */
-public abstract class BaseNode implements Node {
+public abstract class AbstractYamlNode implements YamlNode {
+
     @Override
-    public MappingNode asMapping() {
+    public YamlMappingNode asMapping() {
         return null;
     }
 
     @Override
-    public OrderedMappingNode asOrderedMapping() {
+    public YamlOrderedMappingNode asOrderedMapping() {
         return null;
     }
 
     @Override
-    public PairsNode asPairs() {
+    public YamlPairsNode asPairs() {
         return null;
     }
 
     @Override
-    public SequenceNode asSequence() {
+    public YamlSequenceNode asSequence() {
         return null;
     }
 
     @Override
-    public SetNode asSet() {
+    public YamlSetNode asSet() {
         return null;
     }
 
@@ -122,7 +122,7 @@ public abstract class BaseNode implements Node {
     }
 
     @Override
-    public BigDecimal asBigDecimalValue() {
+    public final BigDecimal asBigDecimalValue() {
         return asBigDecimalValue(BigDecimal.ZERO);
     }
 
@@ -137,7 +137,7 @@ public abstract class BaseNode implements Node {
     }
 
     @Override
-    public BigInteger asBigIntegerValue() {
+    public final BigInteger asBigIntegerValue() {
         return asBigIntegerValue(BigInteger.ZERO);
     }
 
@@ -152,7 +152,7 @@ public abstract class BaseNode implements Node {
     }
 
     @Override
-    public boolean asBooleanValue() {
+    public final boolean asBooleanValue() {
         return asBooleanValue(false);
     }
 
@@ -167,7 +167,7 @@ public abstract class BaseNode implements Node {
     }
 
     @Override
-    public byte asByteValue() {
+    public final byte asByteValue() {
         return asByteValue((byte) 0);
     }
 
@@ -182,7 +182,7 @@ public abstract class BaseNode implements Node {
     }
 
     @Override
-    public byte[] asBinaryValue() {
+    public final byte[] asBinaryValue() {
         return asBinaryValue(null);
     }
 
@@ -197,7 +197,7 @@ public abstract class BaseNode implements Node {
     }
 
     @Override
-    public double asDoubleValue() {
+    public final double asDoubleValue() {
         return asDoubleValue(0.0d);
     }
 
@@ -212,7 +212,7 @@ public abstract class BaseNode implements Node {
     }
 
     @Override
-    public float asFloatValue() {
+    public final float asFloatValue() {
         return asFloatValue(0.0f);
     }
 
@@ -227,7 +227,7 @@ public abstract class BaseNode implements Node {
     }
 
     @Override
-    public int asIntValue() {
+    public final int asIntValue() {
         return asIntValue(0);
     }
 
@@ -242,7 +242,7 @@ public abstract class BaseNode implements Node {
     }
 
     @Override
-    public long asLongValue() {
+    public final long asLongValue() {
         return asLongValue(0l);
     }
 
@@ -257,7 +257,7 @@ public abstract class BaseNode implements Node {
     }
 
     @Override
-    public Number asNumberValue() {
+    public final Number asNumberValue() {
         return asNumberValue(null);
     }
 
@@ -272,7 +272,7 @@ public abstract class BaseNode implements Node {
     }
 
     @Override
-    public short asShortValue() {
+    public final short asShortValue() {
         return asShortValue((short) 0);
     }
 
@@ -287,7 +287,7 @@ public abstract class BaseNode implements Node {
     }
 
     @Override
-    public String asTextValue() {
+    public final String asTextValue() {
         return asTextValue("");
     }
 
@@ -309,5 +309,35 @@ public abstract class BaseNode implements Node {
 
     @Override
     public abstract String toString();
+
+    @Override
+    public final DateTime asDateTimeValue() {
+        return asDateTimeValue(null);
+    }
+
+    @Override
+    public DateTime asDateTimeValue(DateTime defaultValue) {
+        return defaultValue;
+    }
+
+    @Override
+    public DateTime dateTimeValue() {
+        return null;
+    }
+
+    @Override
+    public final Date asDateValue() {
+        return asDateValue(null);
+    }
+
+    @Override
+    public Date asDateValue(Date defaultValue) {
+        return defaultValue;
+    }
+
+    @Override
+    public Date dateValue() {
+        return null;
+    }
 
 }

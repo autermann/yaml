@@ -14,16 +14,19 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.github.autermann.snakeyaml.api.collection;
+package com.github.autermann.snakeyaml.api.nodes;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Collection;
+import java.util.Date;
 import java.util.Iterator;
 
-import com.github.autermann.snakeyaml.api.Node;
-import com.github.autermann.snakeyaml.api.NodeFactory;
-import com.github.autermann.snakeyaml.api.Nodes;
+import org.joda.time.DateTime;
+
+import com.github.autermann.snakeyaml.api.YamlNode;
+import com.github.autermann.snakeyaml.api.YamlNodeFactory;
+import com.github.autermann.snakeyaml.api.YamlNodes;
 import com.google.common.base.Joiner;
 import com.google.common.collect.Iterators;
 
@@ -32,54 +35,61 @@ import com.google.common.collect.Iterators;
  *
  * @author Christian Autermann <c.autermann@52north.org>
  */
-public abstract class AbstractSequenceNode<T extends AbstractSequenceNode<T>>
-        extends ContainerNode implements Iterable<Node> {
+public abstract class AbstractYamlSequenceNode<T extends AbstractYamlSequenceNode<T>>
+        extends AbstractYamlContainerNode implements Iterable<YamlNode> {
     private static final Joiner JOINER = Joiner.on(", ");
 
-    public AbstractSequenceNode(NodeFactory factory) {
+    public AbstractYamlSequenceNode(YamlNodeFactory factory) {
         super(factory);
-        getNodeFactory().sequenceNode().addMapping()
-                .putSequence("hallo").add("adsf").add(true);
     }
 
     @Override
-    public Iterator<Node> iterator() {
-        return Iterators.unmodifiableIterator(getNodes().iterator());
+    public Iterator<YamlNode> iterator() {
+        return Iterators.unmodifiableIterator(value().iterator());
     }
 
     @Override
     public int size() {
-        return getNodes().size();
+        return value().size();
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return value().isEmpty();
     }
 
     @SuppressWarnings("unchecked")
-    public T add(Node node) {
-        getNodes().add(Nodes.nullToNode(node));
+    public T add(YamlNode node) {
+        // small protected adding this to a collection added to this still works
+        if (node == this) {
+            throw new IllegalArgumentException("recursive structures are currently not supported");
+        }
+        value().add(YamlNodes.nullToNode(node));
         return (T) this;
     }
 
-    private <X extends ContainerNode> X addContainer(X node) {
+    private <X extends AbstractYamlContainerNode> X addContainer(X node) {
         add(node);
         return node;
     }
 
-    public OrderedMappingNode addOrderedMapping() {
+    public YamlOrderedMappingNode addOrderedMapping() {
         return addContainer(getNodeFactory().orderedMappingNode());
     }
 
-    public PairsNode addPairs() {
+    public YamlPairsNode addPairs() {
         return addContainer(getNodeFactory().pairsNode());
     }
 
-    public SequenceNode addSequence() {
+    public YamlSequenceNode addSequence() {
         return addContainer(getNodeFactory().sequenceNode());
     }
 
-    public SetNode addSet() {
+    public YamlSetNode addSet() {
         return addContainer(getNodeFactory().setNode());
     }
 
-    public MappingNode addMapping() {
+    public YamlMappingNode addMapping() {
         return addContainer(getNodeFactory().mappingNode());
     }
 
@@ -163,16 +173,24 @@ public abstract class AbstractSequenceNode<T extends AbstractSequenceNode<T>>
         return add(getNodeFactory().textNode(value));
     }
 
+    public T add(Date value) {
+        return add(getNodeFactory().dateTimeNode(value));
+    }
+
+    public T add(DateTime value) {
+        return add(getNodeFactory().dateTimeNode(value));
+    }
+
     @Override
     public boolean equals(Object o) {
         return o != null &&
                getClass() == o.getClass() &&
-               getNodes().equals(((SequenceNode) o).getNodes());
+               value().equals(((AbstractYamlSequenceNode<?>) o).value());
     }
 
     @Override
     public int hashCode() {
-        return getNodes().hashCode();
+        return value().hashCode();
     }
 
     @Override
@@ -180,9 +198,9 @@ public abstract class AbstractSequenceNode<T extends AbstractSequenceNode<T>>
         StringBuilder builder
                 = new StringBuilder().append(getClass().getSimpleName())
                 .append("[");
-        return JOINER.appendTo(builder, getNodes()).append("]").toString();
+        return JOINER.appendTo(builder, value()).append("]").toString();
     }
 
-    protected abstract Collection<Node> getNodes();
+    public abstract Collection<YamlNode> value();
 
 }

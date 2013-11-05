@@ -14,61 +14,64 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.github.autermann.snakeyaml.api.scalar;
-
-import static com.google.common.base.Preconditions.checkNotNull;
-
-import java.util.Arrays;
+package com.github.autermann.snakeyaml.api.nodes;
 
 import org.yaml.snakeyaml.nodes.Tag;
-
-import com.google.common.io.BaseEncoding;
 
 /**
  * TODO JavaDoc
  *
  * @author Christian Autermann <c.autermann@52north.org>
  */
-public class BinaryNode extends ScalarNode {
-    private final byte[] value;
+public class YamlNullNode extends AbstractYamlScalarNode<Object> {
+    private static final YamlNullNode instance = new YamlNullNode();
+    private static final String TEXT_VALUE = "null";
 
-    public BinaryNode(byte[] value) {
-        this.value = checkNotNull(value);
-    }
-
-    @Override
-    public byte[] binaryValue() {
-        return value;
-    }
-
-    @Override
-    public String asTextValue() {
-        return textValue();
-    }
-
-    @Override
-    public String textValue() {
-        return BaseEncoding.base64().encode(binaryValue());
-    }
-
-    @Override
-    public int hashCode() {
-        return Arrays.hashCode(binaryValue());
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        return o instanceof BinaryNode &&
-               Arrays.equals(binaryValue(), ((BinaryNode) o).binaryValue());
+    private YamlNullNode() {
     }
 
     @Override
     public Tag tag() {
-        return Tag.BINARY;
+        return Tag.NULL;
     }
 
     @Override
-    public boolean isBinary() {
+    public int hashCode() {
+        return System.identityHashCode(this);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        return o == this;
+    }
+
+    @Override
+    public boolean isNull() {
         return true;
+    }
+
+    @Override
+    public String asTextValue(String defaultValue) {
+        return TEXT_VALUE;
+    }
+
+    @Override
+    public Object value() {
+        return null;
+    }
+
+    @Override
+    public void accept(Visitor visitor) {
+        visitor.visit(this);
+    }
+
+    @Override
+    public <T> T accept(ReturningVisitor<T> visitor) {
+        return visitor.visit(this);
+    }
+
+    @SuppressWarnings("unchecked")
+    public static YamlNullNode instance() {
+        return instance;
     }
 }

@@ -14,50 +14,37 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.github.autermann.snakeyaml.api.scalar;
+package com.github.autermann.snakeyaml.api.nodes;
 
-import org.yaml.snakeyaml.nodes.Tag;
-
+import com.github.autermann.snakeyaml.api.YamlNode;
 
 /**
  * TODO JavaDoc
  *
  * @author Christian Autermann <c.autermann@52north.org>
  */
-public class NullNode extends ScalarNode {
-    private static final NullNode instance = new NullNode();
-    private static final String TEXT_VALUE = "null";
-
-    private NullNode() {
-    }
+public abstract class AbstractYamlScalarNode<T> extends AbstractYamlNode {
 
     @Override
-    public Tag tag() {
-        return Tag.NULL;
-    }
-
-    @Override
-    public int hashCode() {
-        return System.identityHashCode(this);
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        return o == this;
-    }
-
-    @Override
-    public boolean isNull() {
+    public boolean isScalar() {
         return true;
     }
 
     @Override
-    public String textValue() {
-        return TEXT_VALUE;
+    public String toString() {
+        return asTextValue();
     }
 
-    public static NullNode instance() {
-        return instance;
+    @Override
+    public abstract String asTextValue(String defaultValue);
+
+    public abstract T value();
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public <T extends YamlNode> T copy() {
+        // subclasses are immutable
+        return (T) this;
     }
 
 }

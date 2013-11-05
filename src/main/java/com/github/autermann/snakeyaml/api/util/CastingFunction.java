@@ -14,32 +14,30 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.github.autermann.snakeyaml.api.collection;
+package com.github.autermann.snakeyaml.api.util;
 
-import com.github.autermann.snakeyaml.api.BaseNode;
-import com.github.autermann.snakeyaml.api.NodeFactory;
+import com.google.common.base.Function;
 
 /**
  * TODO JavaDoc
  *
  * @author Christian Autermann <c.autermann@52north.org>
  */
-public abstract class ContainerNode extends BaseNode {
+public class CastingFunction<T> implements Function<Object, T> {
+    private static final CastingFunction<?> instance = new CastingFunction<Object>();
 
-    private final NodeFactory factory;
-
-    public ContainerNode(NodeFactory factory) {
-        this.factory = factory;
+    private CastingFunction() {
     }
-
-    public NodeFactory getNodeFactory() {
-        return factory;
-    }
-
-    public abstract int size();
 
     @Override
-    public boolean isContainer() {
-        return true;
+    @SuppressWarnings(value = "unchecked")
+    public T apply(Object input) {
+        return (T) input;
     }
+
+    @SuppressWarnings("unchecked")
+    public static <T> CastingFunction<T> instance() {
+        return (CastingFunction<T>) instance;
+    }
+
 }

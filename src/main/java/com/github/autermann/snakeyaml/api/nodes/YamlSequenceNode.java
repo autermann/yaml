@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.github.autermann.snakeyaml.api.collection;
+package com.github.autermann.snakeyaml.api.nodes;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -22,8 +22,8 @@ import java.util.List;
 
 import org.yaml.snakeyaml.nodes.Tag;
 
-import com.github.autermann.snakeyaml.api.Node;
-import com.github.autermann.snakeyaml.api.NodeFactory;
+import com.github.autermann.snakeyaml.api.YamlNode;
+import com.github.autermann.snakeyaml.api.YamlNodeFactory;
 import com.google.common.collect.Lists;
 
 /**
@@ -31,14 +31,14 @@ import com.google.common.collect.Lists;
  *
  * @author Christian Autermann <c.autermann@52north.org>
  */
-public class SequenceNode extends AbstractSequenceNode<SequenceNode> {
-    private final List<Node> nodes;
+public class YamlSequenceNode extends AbstractYamlSequenceNode<YamlSequenceNode> {
+    private final List<YamlNode> nodes;
 
-    public SequenceNode(NodeFactory factory) {
-        this(factory, Lists.<Node>newArrayList());
+    public YamlSequenceNode(YamlNodeFactory factory) {
+        this(factory, Lists.<YamlNode>newArrayList());
     }
 
-    public SequenceNode(NodeFactory factory, List<Node> seq) {
+    public YamlSequenceNode(YamlNodeFactory factory, List<YamlNode> seq) {
         super(factory);
         this.nodes = checkNotNull(seq);
     }
@@ -49,7 +49,7 @@ public class SequenceNode extends AbstractSequenceNode<SequenceNode> {
     }
 
     @Override
-    public SequenceNode asSequence() {
+    public YamlSequenceNode asSequence() {
         return this;
     }
 
@@ -59,19 +59,28 @@ public class SequenceNode extends AbstractSequenceNode<SequenceNode> {
     }
 
     @Override
-    protected List<Node> getNodes() {
+    public List<YamlNode> value() {
         return nodes;
     }
 
     @Override
     @SuppressWarnings("unchecked")
-    public <T extends Node> T copy() {
-        SequenceNode copy = getNodeFactory().sequenceNode();
-        for (Node node  : this) {
+    public <T extends YamlNode> T copy() {
+        YamlSequenceNode copy = getNodeFactory().sequenceNode();
+        for (YamlNode node : this) {
             copy.add(node.copy());
         }
         return (T) copy;
     }
 
+    @Override
+    public void accept(Visitor visitor) {
+        visitor.visit(this);
+    }
+
+    @Override
+    public <T> T accept(ReturningVisitor<T> visitor) {
+        return visitor.visit(this);
+    }
 
 }

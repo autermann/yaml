@@ -14,63 +14,61 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.github.autermann.snakeyaml.api.collection;
+package com.github.autermann.snakeyaml.api.nodes;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-
-import java.util.Set;
+import java.util.Map.Entry;
 
 import org.yaml.snakeyaml.nodes.Tag;
 
-import com.github.autermann.snakeyaml.api.Node;
-import com.github.autermann.snakeyaml.api.NodeFactory;
-import com.google.common.collect.Sets;
+import com.github.autermann.snakeyaml.api.YamlNode;
+import com.github.autermann.snakeyaml.api.YamlNodeFactory;
+import com.google.common.collect.Maps;
 
 /**
  * TODO JavaDoc
  *
  * @author Christian Autermann <c.autermann@52north.org>
  */
-public class SetNode extends AbstractSequenceNode<SetNode> {
-    private final Set<Node> nodes;
+public class YamlOrderedMappingNode extends YamlMappingNode {
 
-    public SetNode(NodeFactory factory, Set<Node> nodes) {
-        super(factory);
-        this.nodes = checkNotNull(nodes);
-    }
-
-    public SetNode(NodeFactory factory) {
-        this(factory, Sets.<Node>newLinkedHashSet());
+    public YamlOrderedMappingNode(YamlNodeFactory factory) {
+        super(factory, Maps.<YamlNode, YamlNode>newLinkedHashMap());
     }
 
     @Override
-    public boolean isSet() {
+    public boolean isOrderedMapping() {
         return true;
     }
 
     @Override
-    public Tag tag() {
-        return Tag.SET;
-    }
-
-    @Override
-    public SetNode asSet() {
+    public YamlOrderedMappingNode asOrderedMapping() {
         return this;
     }
 
     @Override
-    protected Set<Node> getNodes() {
-        return this.nodes;
+    public Tag tag() {
+        return Tag.OMAP;
     }
 
     @Override
     @SuppressWarnings("unchecked")
-    public <T extends Node> T copy() {
-        SetNode copy = getNodeFactory().setNode();
-        for (Node node : this) {
-            copy.add(node.copy());
+    public <T extends YamlNode> T copy() {
+        YamlOrderedMappingNode copy = getNodeFactory().orderedMappingNode();
+        for (Entry<YamlNode, YamlNode> e : entries()) {
+            copy.put(e.getKey().copy(),
+                     e.getValue().copy());
         }
         return (T) copy;
+    }
+
+    @Override
+    public void accept(Visitor visitor) {
+        visitor.visit(this);
+    }
+
+    @Override
+    public <T> T accept(ReturningVisitor<T> visitor) {
+        return visitor.visit(this);
     }
 
 }
