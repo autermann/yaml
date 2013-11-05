@@ -149,7 +149,6 @@ public class YamlNodeConstructor extends SafeConstructor {
             }
             return mapping;
         }
-
     }
 
     private class YamlSequenceNodeConstruct extends AbstractConstruct {

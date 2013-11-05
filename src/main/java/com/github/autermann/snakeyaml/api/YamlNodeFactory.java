@@ -182,6 +182,18 @@ public abstract class YamlNodeFactory {
         return sequenceNode();
     }
 
+    public Supplier<YamlMappingNode> mappingNodeSupplier() {
+        return new YamlMappingNodeSupplier(this);
+    }
+
+    public Supplier<YamlOrderedMappingNode> orderedMappingNodeSupplier() {
+        return new YamlOrderedMappingNodeSupplier(this);
+    }
+
+    public Supplier<YamlPairsNode> pairsNodeSupplier() {
+        return new YamlPairsNodeSupplier(this);
+    }
+
     protected abstract YamlTextNode createTextNode(String value);
 
     protected abstract YamlDecimalNode createDecimalNode(BigDecimal value);
@@ -196,21 +208,9 @@ public abstract class YamlNodeFactory {
 
     public abstract YamlMappingNode mappingNode();
 
-    public Supplier<YamlMappingNode> mappingNodeSupplier() {
-        return new YamlMappingNodeSupplier();
-    }
-
     public abstract YamlOrderedMappingNode orderedMappingNode();
 
-    public Supplier<YamlOrderedMappingNode> orderedMappingNodeSupplier() {
-        return new YamlOrderedMappingNodeSupplier();
-    }
-
     public abstract YamlPairsNode pairsNode();
-
-    public Supplier<YamlPairsNode> pairsNodeSupplier() {
-        return new YamlPairsNodeSupplier();
-    }
 
     public abstract YamlSequenceNode sequenceNode();
 
@@ -294,27 +294,45 @@ public abstract class YamlNodeFactory {
         }
     }
 
-    private class YamlPairsNodeSupplier
+    private static class YamlPairsNodeSupplier
             implements Supplier<YamlPairsNode> {
+        private final YamlNodeFactory factory;
+
+        YamlPairsNodeSupplier(YamlNodeFactory factory) {
+            this.factory = factory;
+        }
+
         @Override
         public YamlPairsNode get() {
-            return pairsNode();
+            return factory.pairsNode();
         }
     }
 
-    private class YamlOrderedMappingNodeSupplier
+    private static class YamlOrderedMappingNodeSupplier
             implements Supplier<YamlOrderedMappingNode> {
+        private final YamlNodeFactory factory;
+
+        YamlOrderedMappingNodeSupplier(YamlNodeFactory factory) {
+            this.factory = factory;
+        }
+
         @Override
         public YamlOrderedMappingNode get() {
-            return orderedMappingNode();
+            return factory.orderedMappingNode();
         }
     }
 
-    private class YamlMappingNodeSupplier
+    private static class YamlMappingNodeSupplier
             implements Supplier<YamlMappingNode> {
+        private final YamlNodeFactory factory;
+
+        YamlMappingNodeSupplier(YamlNodeFactory factory) {
+            this.factory = factory;
+        }
+
         @Override
         public YamlMappingNode get() {
-            return mappingNode();
+            return factory.mappingNode();
         }
     }
 }
