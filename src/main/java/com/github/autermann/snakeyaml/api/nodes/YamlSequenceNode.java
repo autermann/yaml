@@ -16,8 +16,6 @@
  */
 package com.github.autermann.snakeyaml.api.nodes;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-
 import java.util.List;
 
 import org.yaml.snakeyaml.nodes.Tag;
@@ -35,12 +33,8 @@ public class YamlSequenceNode extends AbstractYamlSequenceNode<YamlSequenceNode>
     private final List<YamlNode> nodes;
 
     public YamlSequenceNode(YamlNodeFactory factory) {
-        this(factory, Lists.<YamlNode>newArrayList());
-    }
-
-    public YamlSequenceNode(YamlNodeFactory factory, List<YamlNode> seq) {
         super(factory);
-        this.nodes = checkNotNull(seq);
+        this.nodes = Lists.newArrayList();
     }
 
     @Override
@@ -81,6 +75,19 @@ public class YamlSequenceNode extends AbstractYamlSequenceNode<YamlSequenceNode>
     @Override
     public <T> T accept(ReturningVisitor<T> visitor) {
         return visitor.visit(this);
+    }
+
+    @Override
+    public YamlNode path(int index) {
+        if (index < 0 || index >= size()) {
+            return YamlMissingNode.instance();
+        }
+        return value().get(index);
+    }
+
+    @Override
+    public YamlNode get(int index) {
+        return value().get(index);
     }
 
 }

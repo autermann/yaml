@@ -201,6 +201,7 @@ public abstract class AbstractYamlSequenceNode<T extends AbstractYamlSequenceNod
         return JOINER.appendTo(builder, value()).append("]").toString();
     }
 
+    public abstract YamlNode path(int i);
+    public abstract YamlNode get(int i);
     public abstract Collection<YamlNode> value();
-
 }

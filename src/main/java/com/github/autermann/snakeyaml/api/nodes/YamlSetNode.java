@@ -16,14 +16,14 @@
  */
 package com.github.autermann.snakeyaml.api.nodes;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import org.yaml.snakeyaml.nodes.Tag;
 
 import com.github.autermann.snakeyaml.api.YamlNode;
 import com.github.autermann.snakeyaml.api.YamlNodeFactory;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
 
 /**
@@ -32,15 +32,11 @@ import com.google.common.collect.Sets;
  * @author Christian Autermann <autermann@uni-muenster.de>
  */
 public class YamlSetNode extends AbstractYamlSequenceNode<YamlSetNode> {
-    private final Set<YamlNode> nodes;
-
-    public YamlSetNode(YamlNodeFactory factory, Set<YamlNode> nodes) {
-        super(factory);
-        this.nodes = checkNotNull(nodes);
-    }
+    private final LinkedHashSet<YamlNode> nodes;
 
     public YamlSetNode(YamlNodeFactory factory) {
-        this(factory, Sets.<YamlNode>newLinkedHashSet());
+        super(factory);
+        this.nodes =  Sets.newLinkedHashSet();
     }
 
     @Override
@@ -81,5 +77,21 @@ public class YamlSetNode extends AbstractYamlSequenceNode<YamlSetNode> {
     @Override
     public <T> T accept(ReturningVisitor<T> visitor) {
         return visitor.visit(this);
+    }
+
+    @Override
+    public YamlNode path(int i) {
+        if (i < 0 || i >= size()) {
+            return YamlMissingNode.instance();
+        }
+        return Iterables.get(value(), i);
+    }
+
+    @Override
+    public YamlNode get(int i) {
+        if (i < 0 || i >= size()) {
+            throw new IndexOutOfBoundsException();
+        }
+        return Iterables.get(value(), i);
     }
 }
