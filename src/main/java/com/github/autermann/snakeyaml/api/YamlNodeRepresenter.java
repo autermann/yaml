@@ -16,11 +16,15 @@
  */
 package com.github.autermann.snakeyaml.api;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import org.joda.time.format.DateTimeFormatter;
 import org.joda.time.format.ISODateTimeFormat;
+import org.yaml.snakeyaml.DumperOptions;
 import org.yaml.snakeyaml.DumperOptions.FlowStyle;
 import org.yaml.snakeyaml.nodes.MappingNode;
 import org.yaml.snakeyaml.nodes.Node;
@@ -57,20 +61,38 @@ import com.google.common.io.BaseEncoding;
  */
 public class YamlNodeRepresenter extends Representer {
 
+    private final BaseEncoding binaryEncoding;
+    private final DateTimeFormatter timeEncoding;
+
     public YamlNodeRepresenter() {
+        this(new DumperOptions());
+    }
+
+    public YamlNodeRepresenter(DumperOptions options) {
+        checkNotNull(options);
+        this.timeEncoding = ISODateTimeFormat.dateTime();
+        this.binaryEncoding = BaseEncoding.base64()
+                .withSeparator(options.getLineBreak().getString(),
+                               options.getWidth());
         YamlNodeRepresent represent = new YamlNodeRepresent();
-        representers.put(YamlNullNode.class, represent);
-        representers.put(YamlTextNode.class, represent);
-        representers.put(YamlBinaryNode.class, represent);
-        representers.put(YamlBooleanNode.class, represent);
-        representers.put(YamlDecimalNode.class, represent);
-        representers.put(YamlIntegralNode.class, represent);
-        representers.put(YamlMappingNode.class, represent);
-        representers.put(YamlOrderedMappingNode.class, represent);
-        representers.put(YamlPairsNode.class, represent);
-        representers.put(YamlSequenceNode.class, represent);
-        representers.put(YamlSetNode.class, represent);
-        multiRepresenters.put(YamlNode.class, represent);
+        register(YamlNullNode.class, represent);
+        register(YamlBooleanNode.class, represent);
+        register(YamlBinaryNode.class, represent);
+        register(YamlTextNode.class, represent);
+        register(YamlDecimalNode.class, represent);
+        register(YamlIntegralNode.class, represent);
+        // has to be before YamlMappingNode
+        register(YamlOrderedMappingNode.class, represent);
+        register(YamlPairsNode.class, represent);
+        register(YamlMappingNode.class, represent);
+        register(YamlSequenceNode.class, represent);
+        register(YamlSetNode.class, represent);
+        register(YamlNode.class, represent);
+    }
+
+    private void register(Class<? extends YamlNode> type, Represent represent) {
+        this.representers.put(type, represent);
+        this.multiRepresenters.put(type, represent);
     }
 
     private Node delegate(Object value) {
@@ -115,7 +137,9 @@ public class YamlNodeRepresenter extends Representer {
         return bestStyle;
     }
 
-    private class YamlNodeRepresent extends AbstractReturningVisitor<Node> implements Represent {
+    private class YamlNodeRepresent extends AbstractReturningVisitor<Node>
+            implements Represent {
+
         @Override
         public Node representData(Object data) {
             return ((YamlNode) data).accept(this);
@@ -138,12 +162,12 @@ public class YamlNodeRepresenter extends Representer {
 
         @Override
         public Node visit(YamlTimeNode node) {
-            return delegate(node.tag(), ISODateTimeFormat.dateTime().print(node.value()));
+            return delegate(node.tag(), timeEncoding.print(node.value()));
         }
 
         @Override
         public Node visit(YamlBinaryNode node) {
-            return delegate(node.tag(), BaseEncoding.base64().withSeparator("\n", 80).encode(node.value()));
+            return delegate(node.tag(), binaryEncoding.encode(node.value()));
         }
     }
 }

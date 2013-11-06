@@ -37,13 +37,18 @@ public class YamlBinaryNode extends AbstractYamlScalarNode<byte[]> {
     }
 
     @Override
-    public byte[] binaryValue() {
+    public byte[] value() {
         return value;
     }
 
     @Override
+    public byte[] binaryValue() {
+        return value();
+    }
+
+    @Override
     public String asTextValue(String defaultValue) {
-        return BaseEncoding.base64().encode(binaryValue());
+        return BaseEncoding.base64().encode(value());
     }
 
     @Override
@@ -54,7 +59,7 @@ public class YamlBinaryNode extends AbstractYamlScalarNode<byte[]> {
     @Override
     public boolean equals(Object o) {
         return o instanceof YamlBinaryNode &&
-               Arrays.equals(binaryValue(), ((YamlBinaryNode) o).binaryValue());
+               Arrays.equals(value(), ((YamlBinaryNode) o).value());
     }
 
     @Override
@@ -76,10 +81,4 @@ public class YamlBinaryNode extends AbstractYamlScalarNode<byte[]> {
     public <T> T accept(ReturningVisitor<T> visitor) {
         return visitor.visit(this);
     }
-
-    @Override
-    public byte[] value() {
-        return binaryValue();
-    }
-
 }

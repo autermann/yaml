@@ -16,10 +16,14 @@
  */
 package com.github.autermann.snakeyaml.api;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import java.math.BigDecimal;
 import java.math.BigInteger;
 
+import org.joda.time.format.DateTimeFormatter;
 import org.joda.time.format.ISODateTimeFormat;
+import org.yaml.snakeyaml.DumperOptions;
 import org.yaml.snakeyaml.constructor.AbstractConstruct;
 import org.yaml.snakeyaml.constructor.SafeConstructor;
 import org.yaml.snakeyaml.nodes.MappingNode;
@@ -33,7 +37,6 @@ import com.github.autermann.snakeyaml.api.nodes.AbstractYamlMappingNode;
 import com.github.autermann.snakeyaml.api.nodes.AbstractYamlScalarNode;
 import com.github.autermann.snakeyaml.api.nodes.YamlSequenceNode;
 import com.github.autermann.snakeyaml.api.nodes.YamlSetNode;
-import com.google.common.base.Preconditions;
 import com.google.common.base.Supplier;
 import com.google.common.io.BaseEncoding;
 
@@ -43,14 +46,33 @@ import com.google.common.io.BaseEncoding;
  * @author Chrissetian Ausetermann <c.ausetermann@52norseth.org>
  */
 public class YamlNodeConstructor extends SafeConstructor {
+    private final DateTimeFormatter timeEncoding;
+    private final YamlNodeFactory nodeFactory;
+    private final BaseEncoding binaryEncoding;
 
-    private final YamlNodeFactory fac;
+    public YamlNodeConstructor() {
+        this(YamlNodeFactory.getDefault(), new DumperOptions());
+    }
+
+    public YamlNodeConstructor(DumperOptions dumperOptions) {
+        this(YamlNodeFactory.getDefault(), dumperOptions);
+    }
 
     public YamlNodeConstructor(YamlNodeFactory nodeFactory) {
-        this.fac = Preconditions.checkNotNull(nodeFactory);
-        this.yamlConstructors.put(Tag.MAP, new YamlMappingNodeConstruct(fac.mappingNodeSupplier()));
-        this.yamlConstructors.put(Tag.OMAP, new YamlMappingNodeConstruct(fac.orderedMappingNodeSupplier()));
-        this.yamlConstructors.put(Tag.PAIRS, new YamlMappingNodeConstruct(fac.pairsNodeSupplier()));
+        this(nodeFactory, new DumperOptions());
+    }
+
+    public YamlNodeConstructor(YamlNodeFactory nodeFactory,
+                               DumperOptions options) {
+        checkNotNull(options);
+        this.nodeFactory = checkNotNull(nodeFactory);
+        this.timeEncoding = ISODateTimeFormat.dateTime();
+        this.binaryEncoding = BaseEncoding.base64()
+                .withSeparator(options.getLineBreak().getString(),
+                               options.getWidth());
+        this.yamlConstructors.put(Tag.MAP, new YamlMappingNodeConstruct(this.nodeFactory.mappingNodeSupplier()));
+        this.yamlConstructors.put(Tag.OMAP, new YamlMappingNodeConstruct(this.nodeFactory.orderedMappingNodeSupplier()));
+        this.yamlConstructors.put(Tag.PAIRS, new YamlMappingNodeConstruct(this.nodeFactory.pairsNodeSupplier()));
         this.yamlConstructors.put(Tag.SEQ, new YamlSequenceNodeConstruct());
         this.yamlConstructors.put(Tag.SET, new YamlSetNodeConstruct());
         this.yamlConstructors.put(Tag.BINARY, new YamlBinaryNodeConstruct());
@@ -74,14 +96,14 @@ public class YamlNodeConstructor extends SafeConstructor {
     private class YamlNullNodeConstruct extends AbstractScalarConstruct {
         @Override
         public AbstractYamlScalarNode<?> construct(String value) {
-            return fac.nullNode();
+            return nodeFactory.nullNode();
         }
     }
 
     private class YamlTextNodeConstruct extends AbstractScalarConstruct {
         @Override
         public AbstractYamlScalarNode<?> construct(String value) {
-            return fac.textNode(value);
+            return nodeFactory.textNode(value);
         }
     }
 
@@ -90,43 +112,41 @@ public class YamlNodeConstructor extends SafeConstructor {
         public AbstractYamlScalarNode<?> construct(String value) {
             String v = value.toLowerCase().replaceAll("_", "");
             if (v.equals(".inf")) {
-                return fac.doubleNode(Double.POSITIVE_INFINITY);
+                return nodeFactory.doubleNode(Double.POSITIVE_INFINITY);
             } else if (v.equals(".nan")) {
-                return fac.doubleNode(Double.NaN);
+                return nodeFactory.doubleNode(Double.NaN);
             } else if (v.equals("-.inf")) {
-                return fac.doubleNode(Double.NEGATIVE_INFINITY);
+                return nodeFactory.doubleNode(Double.NEGATIVE_INFINITY);
             }
-            return fac.bigDecimalNode(new BigDecimal(value));
+            return nodeFactory.bigDecimalNode(new BigDecimal(value));
         }
     }
 
     private class YamlIntegralConstruct extends AbstractScalarConstruct {
         @Override
         public AbstractYamlScalarNode<?> construct(String value) {
-            return fac.bigIntegerNode(new BigInteger(value));
+            return nodeFactory.bigIntegerNode(new BigInteger(value));
         }
     }
 
     private class YamlBooleanNodeConstruct extends AbstractScalarConstruct {
         @Override
         public AbstractYamlScalarNode<?> construct(String value) {
-            return fac.booleanNode(Boolean.valueOf(value));
+            return nodeFactory.booleanNode(Boolean.valueOf(value));
         }
     }
 
     private class YamlBinaryNodeConstruct extends AbstractScalarConstruct {
         @Override
         protected AbstractYamlScalarNode<?> construct(String value) {
-            return fac.createBinaryNode(BaseEncoding.base64()
-                    .withSeparator("\n", 80).decode(value));
+            return nodeFactory.createBinaryNode(binaryEncoding.decode(value));
         }
     }
 
     private class YamlTimeNodeConstruct extends AbstractScalarConstruct {
         @Override
         protected AbstractYamlScalarNode<?> construct(String value) {
-            return fac.dateTimeNode(ISODateTimeFormat.dateTime()
-                    .parseDateTime(value));
+            return nodeFactory.dateTimeNode(timeEncoding.parseDateTime(value));
         }
     }
 
@@ -154,7 +174,7 @@ public class YamlNodeConstructor extends SafeConstructor {
     private class YamlSequenceNodeConstruct extends AbstractConstruct {
         @Override
         public YamlSequenceNode construct(Node node) {
-            YamlSequenceNode seq = fac.sequenceNode();
+            YamlSequenceNode seq = nodeFactory.sequenceNode();
             for (Object o : constructSequence((SequenceNode) node)) {
                 seq.add((YamlNode) o);
             }
@@ -165,7 +185,7 @@ public class YamlNodeConstructor extends SafeConstructor {
     private class YamlSetNodeConstruct extends AbstractConstruct {
         @Override
         public YamlSetNode construct(Node node) {
-            YamlSetNode set = fac.setNode();
+            YamlSetNode set = nodeFactory.setNode();
             for (Object o : constructSet((MappingNode) node)) {
                 set.add((YamlNode) o);
             }
