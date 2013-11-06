@@ -31,7 +31,6 @@ import org.yaml.snakeyaml.representer.Represent;
 import org.yaml.snakeyaml.representer.Representer;
 
 import com.github.autermann.snakeyaml.api.YamlNode.AbstractReturningVisitor;
-import com.github.autermann.snakeyaml.api.YamlNode.ReturningVisitor;
 import com.github.autermann.snakeyaml.api.nodes.AbstractYamlMappingNode;
 import com.github.autermann.snakeyaml.api.nodes.AbstractYamlScalarNode;
 import com.github.autermann.snakeyaml.api.nodes.AbstractYamlSequenceNode;
@@ -59,8 +58,7 @@ import com.google.common.io.BaseEncoding;
 public class YamlNodeRepresenter extends Representer {
 
     public YamlNodeRepresenter() {
-        YamlNodeRepresentingVisitor visitor = new YamlNodeRepresentingVisitor();
-        YamlNodeRepresent represent = new YamlNodeRepresent(visitor);
+        YamlNodeRepresent represent = new YamlNodeRepresent();
         representers.put(YamlNullNode.class, represent);
         representers.put(YamlTextNode.class, represent);
         representers.put(YamlBinaryNode.class, represent);
@@ -117,20 +115,11 @@ public class YamlNodeRepresenter extends Representer {
         return bestStyle;
     }
 
-    private class YamlNodeRepresent implements Represent {
-        private final ReturningVisitor<Node> visitor;
-
-        YamlNodeRepresent(ReturningVisitor<Node> visitor) {
-            this.visitor = visitor;
-        }
-
+    private class YamlNodeRepresent extends AbstractReturningVisitor<Node> implements Represent {
         @Override
         public Node representData(Object data) {
-            return ((YamlNode) data).accept(visitor);
+            return ((YamlNode) data).accept(this);
         }
-    }
-
-    private class YamlNodeRepresentingVisitor extends AbstractReturningVisitor<Node> {
 
         @Override
         protected Node visitMapping(AbstractYamlMappingNode<?> node) {
@@ -156,6 +145,5 @@ public class YamlNodeRepresenter extends Representer {
         public Node visit(YamlBinaryNode node) {
             return delegate(node.tag(), BaseEncoding.base64().withSeparator("\n", 80).encode(node.value()));
         }
-
     }
 }
