@@ -10,8 +10,8 @@
     <description>Provides the ability to run MATLAB functions remotely.</description>
     <licenses>
         <license>
-            <name>GNU General Public License (GPL) v3</name>
-            <url>http://www.gnu.org/licenses/gpl.txt</url>
+            <name>Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
         </license>
     </licenses>
     <developers>
