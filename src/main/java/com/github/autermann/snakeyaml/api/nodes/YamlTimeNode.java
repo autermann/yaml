@@ -44,6 +44,11 @@ public class YamlTimeNode extends AbstractYamlScalarNode<DateTime> {
     }
 
     @Override
+    public boolean isTime() {
+        return true;
+    }
+
+    @Override
     public DateTime dateTimeValue() {
         return value();
     }

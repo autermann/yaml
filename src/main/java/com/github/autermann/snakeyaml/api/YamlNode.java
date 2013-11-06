@@ -124,6 +124,11 @@ public interface YamlNode {
      */
     boolean isText();
 
+    /**
+     * @return if this is a time node
+     */
+    boolean isTime();
+
     YamlMappingNode asMapping();
     YamlOrderedMappingNode asOrderedMapping();
     YamlPairsNode asPairs();

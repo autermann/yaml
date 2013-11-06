@@ -136,6 +136,11 @@ public abstract class AbstractYamlNode implements YamlNode {
     }
 
     @Override
+    public boolean isTime() {
+        return false;
+    }
+
+    @Override
     public BigDecimal asBigDecimalValue() {
         return asBigDecimalValue(BigDecimal.ZERO);
     }
