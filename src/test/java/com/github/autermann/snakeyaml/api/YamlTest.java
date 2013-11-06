@@ -26,6 +26,7 @@ import org.joda.time.DateTime;
 import org.junit.Test;
 
 
+
 /**
  * TODO JavaDoc
  *
@@ -101,5 +102,4 @@ public class YamlTest {
     public void testSetNode() {
         test(factory.setNode().add("a").add("a").add("b"));
     }
-
 }

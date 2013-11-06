@@ -51,6 +51,11 @@ public class YamlIntegralNode extends AbstractYamlNumberNode {
     }
 
     @Override
+    public boolean isIntegral() {
+        return true;
+    }
+
+    @Override
     public BigInteger bigIntegerValue() {
         return numberValue();
     }
@@ -84,5 +89,4 @@ public class YamlIntegralNode extends AbstractYamlNumberNode {
         return value.compareTo(MIN_LONG) >= 0 &&
                value.compareTo(MAX_LONG) >= 0;
     }
-
 }

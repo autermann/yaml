@@ -49,20 +49,79 @@ import com.github.autermann.snakeyaml.api.nodes.YamlTimeNode;
  */
 public interface YamlNode {
 
+    /**
+     * @return if this node exists
+     */
     boolean exists();
 
+    /**
+     * @return if this is a container node
+     */
     boolean isContainer();
+
+    /**
+     * @return if this is a mapping node
+     */
     boolean isMapping();
+
+    /**
+     * @return if this is oredered mapping node
+     */
     boolean isOrderedMapping();
+
+    /**
+     * @return if this is pairs node
+     */
     boolean isPairs();
+
+    /**
+     * @return if this is a sequence node
+     */
     boolean isSequence();
+
+    /**
+     * @return if this is a set node
+     */
     boolean isSet();
 
+    /**
+     * @return if this is a scalar node
+     */
     boolean isScalar();
+
+    /**
+     * @return if this is a binary node
+     */
     boolean isBinary();
+
+    /**
+     * @return if this is a boolean node
+     */
     boolean isBoolean();
+
+    /**
+     * @return if this is a null node
+     */
     boolean isNull();
+
+    /**
+     * @return if this is a number node
+     */
     boolean isNumber();
+
+    /**
+     * @return if this is a decimal node
+     */
+    boolean isDecimal();
+
+    /**
+     * @return if this is a integral node
+     */
+    boolean isIntegral();
+
+    /**
+     * @return if this a text node
+     */
     boolean isString();
 
     YamlMappingNode asMapping();

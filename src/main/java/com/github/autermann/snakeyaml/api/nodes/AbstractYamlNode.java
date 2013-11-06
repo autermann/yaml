@@ -121,6 +121,16 @@ public abstract class AbstractYamlNode implements YamlNode {
     }
 
     @Override
+    public boolean isDecimal() {
+        return false;
+    }
+
+    @Override
+    public boolean isIntegral() {
+        return false;
+    }
+
+    @Override
     public boolean isString() {
         return false;
     }

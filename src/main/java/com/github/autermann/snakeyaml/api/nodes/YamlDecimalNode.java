@@ -47,6 +47,11 @@ public class YamlDecimalNode extends AbstractYamlNumberNode {
     }
 
     @Override
+    public boolean isDecimal() {
+        return true;
+    }
+
+    @Override
     public BigDecimal bigDecimalValue() {
         return numberValue();
     }
