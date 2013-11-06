@@ -126,7 +126,7 @@ public abstract class AbstractYamlNode implements YamlNode {
     }
 
     @Override
-    public final BigDecimal asBigDecimalValue() {
+    public BigDecimal asBigDecimalValue() {
         return asBigDecimalValue(BigDecimal.ZERO);
     }
 
@@ -141,7 +141,7 @@ public abstract class AbstractYamlNode implements YamlNode {
     }
 
     @Override
-    public final BigInteger asBigIntegerValue() {
+    public BigInteger asBigIntegerValue() {
         return asBigIntegerValue(BigInteger.ZERO);
     }
 
@@ -156,7 +156,7 @@ public abstract class AbstractYamlNode implements YamlNode {
     }
 
     @Override
-    public final boolean asBooleanValue() {
+    public boolean asBooleanValue() {
         return asBooleanValue(false);
     }
 
@@ -171,7 +171,7 @@ public abstract class AbstractYamlNode implements YamlNode {
     }
 
     @Override
-    public final byte asByteValue() {
+    public byte asByteValue() {
         return asByteValue((byte) 0);
     }
 
@@ -186,7 +186,7 @@ public abstract class AbstractYamlNode implements YamlNode {
     }
 
     @Override
-    public final byte[] asBinaryValue() {
+    public byte[] asBinaryValue() {
         return asBinaryValue(null);
     }
 
@@ -201,7 +201,7 @@ public abstract class AbstractYamlNode implements YamlNode {
     }
 
     @Override
-    public final double asDoubleValue() {
+    public double asDoubleValue() {
         return asDoubleValue(0.0d);
     }
 
@@ -216,7 +216,7 @@ public abstract class AbstractYamlNode implements YamlNode {
     }
 
     @Override
-    public final float asFloatValue() {
+    public float asFloatValue() {
         return asFloatValue(0.0f);
     }
 
@@ -231,7 +231,7 @@ public abstract class AbstractYamlNode implements YamlNode {
     }
 
     @Override
-    public final int asIntValue() {
+    public int asIntValue() {
         return asIntValue(0);
     }
 
@@ -246,7 +246,7 @@ public abstract class AbstractYamlNode implements YamlNode {
     }
 
     @Override
-    public final long asLongValue() {
+    public long asLongValue() {
         return asLongValue(0l);
     }
 
@@ -261,7 +261,7 @@ public abstract class AbstractYamlNode implements YamlNode {
     }
 
     @Override
-    public final Number asNumberValue() {
+    public Number asNumberValue() {
         return asNumberValue(null);
     }
 
@@ -276,7 +276,7 @@ public abstract class AbstractYamlNode implements YamlNode {
     }
 
     @Override
-    public final short asShortValue() {
+    public short asShortValue() {
         return asShortValue((short) 0);
     }
 
@@ -291,7 +291,7 @@ public abstract class AbstractYamlNode implements YamlNode {
     }
 
     @Override
-    public final String asTextValue() {
+    public String asTextValue() {
         return asTextValue("");
     }
 
@@ -306,16 +306,7 @@ public abstract class AbstractYamlNode implements YamlNode {
     }
 
     @Override
-    public abstract boolean equals(Object o);
-
-    @Override
-    public abstract int hashCode();
-
-    @Override
-    public abstract String toString();
-
-    @Override
-    public final DateTime asDateTimeValue() {
+    public DateTime asDateTimeValue() {
         return asDateTimeValue(null);
     }
 
@@ -330,7 +321,7 @@ public abstract class AbstractYamlNode implements YamlNode {
     }
 
     @Override
-    public final Date asDateValue() {
+    public Date asDateValue() {
         return asDateValue(null);
     }
 
@@ -388,5 +379,14 @@ public abstract class AbstractYamlNode implements YamlNode {
     public void dump(OutputStream output, Yaml yaml) {
         yaml.dump(this, output);
     }
+
+    @Override
+    public abstract boolean equals(Object o);
+
+    @Override
+    public abstract int hashCode();
+
+    @Override
+    public abstract String toString();
 
 }
