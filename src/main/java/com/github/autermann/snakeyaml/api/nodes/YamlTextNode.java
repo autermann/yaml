@@ -42,6 +42,11 @@ public class YamlTextNode extends AbstractYamlScalarNode<String> {
     }
 
     @Override
+    public boolean isText() {
+        return true;
+    }
+
+    @Override
     public String textValue() {
         return value;
     }

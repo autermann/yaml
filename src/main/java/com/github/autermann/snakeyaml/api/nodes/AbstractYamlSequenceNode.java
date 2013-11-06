@@ -195,9 +195,8 @@ public abstract class AbstractYamlSequenceNode<T extends AbstractYamlSequenceNod
 
     @Override
     public String toString() {
-        StringBuilder builder
-                = new StringBuilder().append(getClass().getSimpleName())
-                .append("[");
+        StringBuilder builder = new StringBuilder();
+        builder.append(getClass().getSimpleName()).append("[");
         return JOINER.appendTo(builder, value()).append("]").toString();
     }
 

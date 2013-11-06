@@ -122,7 +122,7 @@ public interface YamlNode {
     /**
      * @return if this a text node
      */
-    boolean isString();
+    boolean isText();
 
     YamlMappingNode asMapping();
     YamlOrderedMappingNode asOrderedMapping();

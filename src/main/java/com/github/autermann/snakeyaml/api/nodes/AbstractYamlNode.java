@@ -131,7 +131,7 @@ public abstract class AbstractYamlNode implements YamlNode {
     }
 
     @Override
-    public boolean isString() {
+    public boolean isText() {
         return false;
     }
 
