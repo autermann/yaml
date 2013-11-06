@@ -39,6 +39,7 @@ public abstract class YamlBooleanNode extends AbstractYamlScalarNode<Boolean> {
         return o == this;
     }
 
+
     @Override
     public Tag tag() {
         return Tag.BOOL;
@@ -94,6 +95,11 @@ public abstract class YamlBooleanNode extends AbstractYamlScalarNode<Boolean> {
 
     @Override
     public abstract boolean asBooleanValue(boolean defaultValue);
+
+    @Override
+    public boolean isBoolean() {
+        return true;
+    }
 
     public static YamlBooleanNode of(boolean value) {
         return value ? TRUE : FALSE;
