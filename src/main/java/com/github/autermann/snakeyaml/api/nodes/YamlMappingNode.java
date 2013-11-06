@@ -21,13 +21,13 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Objects;
 
 import org.yaml.snakeyaml.nodes.Tag;
 
 import com.github.autermann.snakeyaml.api.YamlNode;
 import com.github.autermann.snakeyaml.api.YamlNodeFactory;
 import com.github.autermann.snakeyaml.api.YamlNodes;
+import com.google.common.base.Objects;
 import com.google.common.collect.Maps;
 
 /**

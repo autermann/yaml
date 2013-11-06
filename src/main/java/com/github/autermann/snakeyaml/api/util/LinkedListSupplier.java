@@ -40,7 +40,8 @@ public class LinkedListSupplier implements Supplier<List<?>> {
 
     @SuppressWarnings(value = "unchecked")
     public static <T> Supplier<List<T>> instance() {
-        return (Supplier<List<T>>) INSTANCE;
+        Object o = INSTANCE;
+        return (Supplier<List<T>>) o;
     }
 
 }
