@@ -31,10 +31,6 @@ import static com.github.autermann.snakeyaml.api.nodes.NodesMatcher.sequenceNode
 import static com.github.autermann.snakeyaml.api.nodes.NodesMatcher.setNode;
 import static com.github.autermann.snakeyaml.api.nodes.NodesMatcher.textNode;
 import static com.github.autermann.snakeyaml.api.nodes.NodesMatcher.timeNode;
-import static com.google.common.collect.Maps.immutableEntry;
-import static org.hamcrest.Matchers.allOf;
-import static org.hamcrest.Matchers.contains;
-import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
 import static org.hamcrest.Matchers.notNullValue;
@@ -52,62 +48,18 @@ import com.github.autermann.snakeyaml.api.YamlNodeFactory;
  *
  * @author Christian Autermann <c.autermann@52north.org>
  */
-public class YamlPairsNodeTest {
-    private final YamlNodeFactory factory = YamlNodeFactory.getDefault();
+public class YamlSetNodeTest {
+
+    public final YamlNodeFactory factory = YamlNodeFactory.getDefault();
 
     @Rule
     public final ErrorCollector errors = new ErrorCollector();
 
     @Test
-    @SuppressWarnings("unchecked")
-    public void testOrder() {
-        YamlNode a = factory.textNode("a");
-        YamlNode b = factory.textNode("b");
-        errors.checkThat(
-                factory.pairsNode().put(a, a).put(b, b).put(a, a).entries(),
-                allOf(is(notNullValue()), contains(immutableEntry(a, a),
-                                                   immutableEntry(b, b),
-                                                   immutableEntry(a, a))));
-    }
-
-    @Test
-    public void testEqualsAndHashCode() {
-        YamlPairsNode a;
-        YamlPairsNode b;
-
-        a = factory.pairsNode();
-        b = factory.pairsNode();
-        checkEquals(a, b);
-        checkEqualHashCode(a, b);
-
-        a = factory.pairsNode().put("a", "b");
-        checkNotEquals(a, b);
-        checkNotEqualHashCode(a, b);
-
-        b = factory.pairsNode().put("a", "b");
-        checkEquals(a, b);
-        checkEqualHashCode(a, b);
-
-        a = factory.pairsNode().put("a", "b").put("a", "b");
-        b = factory.pairsNode().put("a", "b");
-        checkNotEquals(a, b);
-        checkNotEqualHashCode(a, b);
-
-        a = factory.pairsNode().put("a", "b").put("a", "b");
-        b = factory.pairsNode().put("a", "b").put("a", "b");
-        checkEquals(a, b);
-        checkEqualHashCode(a, b);
-
-        a = factory.pairsNode().put("a", "b").put("a", "b").put("c", "d");
-        b = factory.pairsNode().put("a", "b").put("c", "d").put("a", "b");
-        checkNotEquals(a, b);
-        checkNotEqualHashCode(a, b);
-    }
-
-    @Test
     public void testType() {
-        YamlNode node = factory.pairsNode();
+        YamlNode node = factory.setNode();
         assertThat(node, is(notNullValue()));
+        errors.checkThat(node, is((existingNode())));
         errors.checkThat(node, is(not(binaryNode())));
         errors.checkThat(node, is(not(booleanNode())));
         errors.checkThat(node, is((containerNode())));
@@ -118,39 +70,11 @@ public class YamlPairsNodeTest {
         errors.checkThat(node, is(not(nullNode())));
         errors.checkThat(node, is(not(numberNode())));
         errors.checkThat(node, is(not(orderedMappingNode())));
-        errors.checkThat(node, is((pairsNode())));
+        errors.checkThat(node, is(not(pairsNode())));
         errors.checkThat(node, is(not(scalarNode())));
         errors.checkThat(node, is(not(sequenceNode())));
-        errors.checkThat(node, is(not(setNode())));
+        errors.checkThat(node, is((setNode())));
         errors.checkThat(node, is(not(textNode())));
         errors.checkThat(node, is(not(timeNode())));
-    }
-
-    protected void checkEquals(YamlNode a, YamlNode b) {
-        errors.checkThat(a, allOf(is(equalTo(a)), is(equalTo(b))));
-        errors.checkThat(b, allOf(is(equalTo(a)), is(equalTo(b))));
-    }
-
-    protected void checkNotEquals(YamlNode a, YamlNode b) {
-        errors.checkThat(a, allOf(is(equalTo(a)), is(not(equalTo(b)))));
-        errors.checkThat(b, allOf(is(not(equalTo(a))), is(equalTo(b))));
-    }
-
-    protected void checkEqualHashCode(YamlNode a, YamlNode b) {
-        errors
-                .checkThat(a.hashCode(), allOf(is(equalTo(a.hashCode())), is(equalTo(b
-                                                .hashCode()))));
-        errors
-                .checkThat(b.hashCode(), allOf(is(equalTo(a.hashCode())), is(equalTo(b
-                                                .hashCode()))));
-    }
-
-    protected void checkNotEqualHashCode(YamlNode a, YamlNode b) {
-        errors
-                .checkThat(a.hashCode(), allOf(is(equalTo(a.hashCode())), is(not(equalTo(b
-                                                        .hashCode())))));
-        errors
-                .checkThat(b.hashCode(), allOf(is(not(equalTo(a.hashCode()))), is(equalTo(b
-                                                .hashCode()))));
     }
 }
