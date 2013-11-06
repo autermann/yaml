@@ -34,7 +34,7 @@ import com.google.common.collect.Iterables;
 /**
  * TODO JavaDoc
  *
- * @author Christian Autermann <c.autermann@52north.org>
+ * @author Christian Autermann <autermann@uni-muenster.de>
  */
 public class Yaml {
     protected final org.yaml.snakeyaml.Yaml delegate;

@@ -31,7 +31,7 @@ import com.google.common.base.Joiner.MapJoiner;
 /**
  * TODO JavaDoc
  *
- * @author Christian Autermann <c.autermann@52north.org>
+ * @author Christian Autermann <autermann@uni-muenster.de>
  * @param <T>
  */
 public abstract class AbstractYamlMappingNode<T extends AbstractYamlMappingNode<T>>

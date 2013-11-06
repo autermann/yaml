@@ -21,7 +21,7 @@ import org.yaml.snakeyaml.nodes.Tag;
 /**
  * TODO JavaDoc
  *
- * @author Christian Autermann <c.autermann@52north.org>
+ * @author Christian Autermann <autermann@uni-muenster.de>
  */
 public class YamlNullNode extends AbstractYamlScalarNode<Object> {
     private static final YamlNullNode instance = new YamlNullNode();

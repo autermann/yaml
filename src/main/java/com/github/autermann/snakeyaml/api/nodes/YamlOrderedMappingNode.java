@@ -27,7 +27,7 @@ import com.google.common.collect.Maps;
 /**
  * TODO JavaDoc
  *
- * @author Christian Autermann <c.autermann@52north.org>
+ * @author Christian Autermann <autermann@uni-muenster.de>
  */
 public class YamlOrderedMappingNode extends YamlMappingNode {
 

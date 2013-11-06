@@ -33,7 +33,7 @@ import com.google.common.collect.Iterators;
 /**
  * TODO JavaDoc
  *
- * @author Christian Autermann <c.autermann@52north.org>
+ * @author Christian Autermann <autermann@uni-muenster.de>
  */
 public abstract class AbstractYamlSequenceNode<T extends AbstractYamlSequenceNode<T>>
         extends AbstractYamlContainerNode implements Iterable<YamlNode> {

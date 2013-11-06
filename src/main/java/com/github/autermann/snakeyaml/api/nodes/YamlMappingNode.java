@@ -33,7 +33,7 @@ import com.google.common.collect.Maps;
 /**
  * TODO JavaDoc
  *
- * @author Christian Autermann <c.autermann@52north.org>
+ * @author Christian Autermann <autermann@uni-muenster.de>
  */
 public class YamlMappingNode extends AbstractYamlMappingNode<YamlMappingNode> {
     private final Map<YamlNode, YamlNode> nodes;

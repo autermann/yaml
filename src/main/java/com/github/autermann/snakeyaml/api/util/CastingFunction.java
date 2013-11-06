@@ -21,7 +21,7 @@ import com.google.common.base.Function;
 /**
  * TODO JavaDoc
  *
- * @author Christian Autermann <c.autermann@52north.org>
+ * @author Christian Autermann <autermann@uni-muenster.de>
  */
 public class CastingFunction<T> implements Function<Object, T> {
     private static final CastingFunction<?> instance = new CastingFunction<Object>();

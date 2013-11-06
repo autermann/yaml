@@ -29,7 +29,7 @@ import com.google.common.collect.Sets;
 /**
  * TODO JavaDoc
  *
- * @author Christian Autermann <c.autermann@52north.org>
+ * @author Christian Autermann <autermann@uni-muenster.de>
  */
 public class YamlSetNode extends AbstractYamlSequenceNode<YamlSetNode> {
     private final Set<YamlNode> nodes;

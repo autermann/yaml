@@ -29,7 +29,7 @@ import org.yaml.snakeyaml.nodes.Tag;
 /**
  * TODO JavaDoc
  *
- * @author Christian Autermann <c.autermann@52north.org>
+ * @author Christian Autermann <autermann@uni-muenster.de>
  */
 public class YamlTimeNode extends AbstractYamlScalarNode<DateTime> {
     private final DateTime value;
