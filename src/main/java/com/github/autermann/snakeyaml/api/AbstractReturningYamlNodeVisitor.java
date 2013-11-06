@@ -40,6 +40,8 @@ import com.github.autermann.snakeyaml.api.nodes.YamlTimeNode;
  * <li>{@link #visitScalar(AbstractYamlScalarNode)}</li>
  * <li>{@link #visitSequence(AbstractYamlSequenceNode)}</li>
  * </ul>
+ *
+ * @param <T> the returned type
  */
 public abstract class AbstractReturningYamlNodeVisitor<T>
         implements ReturningYamlNodeVisitor<T> {

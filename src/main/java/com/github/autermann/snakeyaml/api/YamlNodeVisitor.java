@@ -15,7 +15,6 @@
  */
 package com.github.autermann.snakeyaml.api;
 
-import com.github.autermann.snakeyaml.api.ReturningYamlNodeVisitor;
 import com.github.autermann.snakeyaml.api.nodes.YamlBinaryNode;
 import com.github.autermann.snakeyaml.api.nodes.YamlBooleanNode;
 import com.github.autermann.snakeyaml.api.nodes.YamlDecimalNode;
@@ -32,7 +31,8 @@ import com.github.autermann.snakeyaml.api.nodes.YamlTimeNode;
 /**
  * A visitor for {@link YamlNode}s.
  *
- * @see ReturningVisitor
+ * @see ReturningYamlNodeVisitor
+ * @see AbstractYamlNodeVisitor
  */
 public interface YamlNodeVisitor {
 

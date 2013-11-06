@@ -25,10 +25,7 @@ import org.joda.time.DateTime;
 import org.yaml.snakeyaml.DumperOptions;
 import org.yaml.snakeyaml.nodes.Tag;
 
-import com.github.autermann.snakeyaml.api.nodes.AbstractYamlMappingNode;
 import com.github.autermann.snakeyaml.api.nodes.AbstractYamlNumberNode;
-import com.github.autermann.snakeyaml.api.nodes.AbstractYamlScalarNode;
-import com.github.autermann.snakeyaml.api.nodes.AbstractYamlSequenceNode;
 import com.github.autermann.snakeyaml.api.nodes.YamlBinaryNode;
 import com.github.autermann.snakeyaml.api.nodes.YamlBooleanNode;
 import com.github.autermann.snakeyaml.api.nodes.YamlDecimalNode;
@@ -482,8 +479,8 @@ public interface YamlNode {
      *
      * @param visitor the non-{@code null} visitor
      *
-     * @see Visitor
-     * @see #accept(ReturningVisitor)
+     * @see YamlNodeVisitor
+     * @see #accept(ReturningYamlNodeVisitor)
      */
     void accept(YamlNodeVisitor visitor);
 
@@ -495,8 +492,8 @@ public interface YamlNode {
      *
      * @return the returned value of the visitor
      *
-     * @see ReturningVisitor
-     * @see #accept(Visitor)
+     * @see ReturningYamlNodeVisitor
+     * @see #accept(YamlNodeVisitor)
      */
     <T> T accept(ReturningYamlNodeVisitor<T> visitor);
 

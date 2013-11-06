@@ -33,7 +33,6 @@ import org.yaml.snakeyaml.nodes.Tag;
 import org.yaml.snakeyaml.representer.Represent;
 import org.yaml.snakeyaml.representer.Representer;
 
-import com.github.autermann.snakeyaml.api.AbstractReturningYamlNodeVisitor;
 import com.github.autermann.snakeyaml.api.nodes.AbstractYamlMappingNode;
 import com.github.autermann.snakeyaml.api.nodes.AbstractYamlScalarNode;
 import com.github.autermann.snakeyaml.api.nodes.AbstractYamlSequenceNode;

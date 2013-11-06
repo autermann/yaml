@@ -34,6 +34,7 @@ import com.github.autermann.snakeyaml.api.nodes.YamlTimeNode;
  * @param <T> the returned type
  *
  * @see YamlNodeVisitor
+ * @see AbstractReturningYamlNodeVisitor
  */
 public interface ReturningYamlNodeVisitor<T> {
 
