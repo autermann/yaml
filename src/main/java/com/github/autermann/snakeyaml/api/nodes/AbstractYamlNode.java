@@ -16,12 +16,16 @@
  */
 package com.github.autermann.snakeyaml.api.nodes;
 
+import java.io.OutputStream;
+import java.io.Writer;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Date;
 
 import org.joda.time.DateTime;
+import org.yaml.snakeyaml.DumperOptions;
 
+import com.github.autermann.snakeyaml.api.Yaml;
 import com.github.autermann.snakeyaml.api.YamlNode;
 
 /**
@@ -338,6 +342,51 @@ public abstract class AbstractYamlNode implements YamlNode {
     @Override
     public Date dateValue() {
         return null;
+    }
+
+    @Override
+    public String dump() {
+        return new Yaml().dump(this);
+    }
+
+    @Override
+    public void dump(Writer output) {
+        new Yaml().dump(this, output);
+    }
+
+    @Override
+    public void dump(OutputStream output) {
+        new Yaml().dump(this, output);
+    }
+
+    @Override
+    public String dump(DumperOptions options) {
+        return new Yaml(options).dump(this);
+    }
+
+    @Override
+    public void dump(Writer output, DumperOptions options) {
+        new Yaml(options).dump(this, output);
+    }
+
+    @Override
+    public void dump(OutputStream output, DumperOptions options) {
+        new Yaml(options).dump(this, output);
+    }
+
+    @Override
+    public String dump(Yaml yaml) {
+        return yaml.dump(this);
+    }
+
+    @Override
+    public void dump(Writer output, Yaml yaml) {
+        yaml.dump(this, output);
+    }
+
+    @Override
+    public void dump(OutputStream output, Yaml yaml) {
+        yaml.dump(this, output);
     }
 
 }

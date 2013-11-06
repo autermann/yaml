@@ -16,11 +16,14 @@
  */
 package com.github.autermann.snakeyaml.api;
 
+import java.io.OutputStream;
+import java.io.Writer;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Date;
 
 import org.joda.time.DateTime;
+import org.yaml.snakeyaml.DumperOptions;
 import org.yaml.snakeyaml.nodes.Tag;
 
 import com.github.autermann.snakeyaml.api.nodes.AbstractYamlMappingNode;
@@ -130,6 +133,17 @@ public interface YamlNode {
     <T> T accept(ReturningVisitor<T> visitor);
 
     Tag tag();
+
+     String dump();
+     void dump(Writer output);
+     void dump(OutputStream output);
+     String dump(DumperOptions options);
+     void dump(Writer output, DumperOptions options);
+     void dump(OutputStream output, DumperOptions options);
+     String dump(Yaml yaml);
+     void dump(Writer output, Yaml yaml);
+     void dump(OutputStream output, Yaml yaml);
+
     
     @Override String toString();
     @Override int hashCode();
