@@ -19,8 +19,10 @@ import java.util.List;
 
 import org.yaml.snakeyaml.nodes.Tag;
 
+import com.github.autermann.snakeyaml.api.ReturningYamlNodeVisitor;
 import com.github.autermann.snakeyaml.api.YamlNode;
 import com.github.autermann.snakeyaml.api.YamlNodeFactory;
+import com.github.autermann.snakeyaml.api.YamlNodeVisitor;
 import com.google.common.collect.Lists;
 
 /**
@@ -67,12 +69,12 @@ public class YamlSequenceNode extends AbstractYamlSequenceNode<YamlSequenceNode>
     }
 
     @Override
-    public void accept(Visitor visitor) {
+    public void accept(YamlNodeVisitor visitor) {
         visitor.visit(this);
     }
 
     @Override
-    public <T> T accept(ReturningVisitor<T> visitor) {
+    public <T> T accept(ReturningYamlNodeVisitor<T> visitor) {
         return visitor.visit(this);
     }
 

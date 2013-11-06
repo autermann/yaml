@@ -20,8 +20,10 @@ import java.util.Set;
 
 import org.yaml.snakeyaml.nodes.Tag;
 
+import com.github.autermann.snakeyaml.api.ReturningYamlNodeVisitor;
 import com.github.autermann.snakeyaml.api.YamlNode;
 import com.github.autermann.snakeyaml.api.YamlNodeFactory;
+import com.github.autermann.snakeyaml.api.YamlNodeVisitor;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
 
@@ -69,12 +71,12 @@ public class YamlSetNode extends AbstractYamlSequenceNode<YamlSetNode> {
     }
 
     @Override
-    public void accept(Visitor visitor) {
+    public void accept(YamlNodeVisitor visitor) {
         visitor.visit(this);
     }
 
     @Override
-    public <T> T accept(ReturningVisitor<T> visitor) {
+    public <T> T accept(ReturningYamlNodeVisitor<T> visitor) {
         return visitor.visit(this);
     }
 

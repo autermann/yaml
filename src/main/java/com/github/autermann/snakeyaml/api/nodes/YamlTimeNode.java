@@ -25,6 +25,9 @@ import org.joda.time.DateTime;
 import org.joda.time.format.ISODateTimeFormat;
 import org.yaml.snakeyaml.nodes.Tag;
 
+import com.github.autermann.snakeyaml.api.ReturningYamlNodeVisitor;
+import com.github.autermann.snakeyaml.api.YamlNodeVisitor;
+
 /**
  * TODO JavaDoc
  *
@@ -79,12 +82,12 @@ public class YamlTimeNode extends AbstractYamlScalarNode<DateTime> {
     }
 
     @Override
-    public void accept(Visitor visitor) {
+    public void accept(YamlNodeVisitor visitor) {
         visitor.visit(this);
     }
 
     @Override
-    public <T> T accept(ReturningVisitor<T> visitor) {
+    public <T> T accept(ReturningYamlNodeVisitor<T> visitor) {
         return visitor.visit(this);
     }
 
@@ -103,7 +106,6 @@ public class YamlTimeNode extends AbstractYamlScalarNode<DateTime> {
         return value().getMillis();
     }
 
-
     @Override
     public long asLongValue(long defaultValue) {
         return value().getMillis();
@@ -118,6 +120,5 @@ public class YamlTimeNode extends AbstractYamlScalarNode<DateTime> {
     public BigDecimal asBigDecimalValue(BigDecimal defaultValue) {
         return BigDecimal.valueOf(value().getMillis());
     }
-
 
 }

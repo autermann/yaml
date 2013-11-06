@@ -17,7 +17,9 @@ package com.github.autermann.snakeyaml.api.nodes;
 
 import org.yaml.snakeyaml.nodes.Tag;
 
+import com.github.autermann.snakeyaml.api.ReturningYamlNodeVisitor;
 import com.github.autermann.snakeyaml.api.YamlNode;
+import com.github.autermann.snakeyaml.api.YamlNodeVisitor;
 
 /**
  * TODO JavaDoc
@@ -59,11 +61,11 @@ public class YamlMissingNode extends AbstractYamlNode {
     }
 
     @Override
-    public void accept(Visitor visitor) {
+    public void accept(YamlNodeVisitor visitor) {
     }
 
     @Override
-    public <T> T accept(ReturningVisitor<T> visitor) {
+    public <T> T accept(ReturningYamlNodeVisitor<T> visitor) {
         return null;
     }
 

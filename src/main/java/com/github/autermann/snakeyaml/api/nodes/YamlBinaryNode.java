@@ -21,6 +21,8 @@ import java.util.Arrays;
 
 import org.yaml.snakeyaml.nodes.Tag;
 
+import com.github.autermann.snakeyaml.api.ReturningYamlNodeVisitor;
+import com.github.autermann.snakeyaml.api.YamlNodeVisitor;
 import com.google.common.io.BaseEncoding;
 
 /**
@@ -77,12 +79,12 @@ public class YamlBinaryNode extends AbstractYamlScalarNode<byte[]> {
     }
 
     @Override
-    public void accept(Visitor visitor) {
+    public void accept(YamlNodeVisitor visitor) {
         visitor.visit(this);
     }
 
     @Override
-    public <T> T accept(ReturningVisitor<T> visitor) {
+    public <T> T accept(ReturningYamlNodeVisitor<T> visitor) {
         return visitor.visit(this);
     }
 }
