@@ -55,6 +55,11 @@ public class YamlPairsNode extends AbstractYamlMappingNode<YamlPairsNode> {
     }
 
     @Override
+    public YamlPairsNode asPairs() {
+        return this;
+    }
+
+    @Override
     public Tag tag() {
         return Tag.PAIRS;
     }
@@ -134,5 +139,4 @@ public class YamlPairsNode extends AbstractYamlMappingNode<YamlPairsNode> {
     public <T> T accept(ReturningVisitor<T> visitor) {
         return visitor.visit(this);
     }
-
 }

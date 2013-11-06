@@ -47,6 +47,11 @@ public class YamlBinaryNode extends AbstractYamlScalarNode<byte[]> {
     }
 
     @Override
+    public byte[] asBinaryValue(byte[] defaultValue) {
+        return value();
+    }
+
+    @Override
     public String asTextValue(String defaultValue) {
         return BaseEncoding.base64().encode(value());
     }
