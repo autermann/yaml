@@ -26,6 +26,12 @@ import com.google.common.base.Objects;
  * @author Christian Autermann <autermann@uni-muenster.de>
  */
 public abstract class AbstractYamlNumberNode extends AbstractYamlScalarNode<Number> {
+
+    @Override
+    public boolean isNumber() {
+        return true;
+    }
+
     @Override
     public byte byteValue() {
         return numberValue().byteValue();
