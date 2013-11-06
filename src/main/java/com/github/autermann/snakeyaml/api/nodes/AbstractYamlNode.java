@@ -141,7 +141,7 @@ public abstract class AbstractYamlNode implements YamlNode {
 
     @Override
     public BigDecimal asBigDecimalValue() {
-        return asBigDecimalValue(BigDecimal.ZERO);
+        return asBigDecimalValue(DEFAULT_BIG_DECIMAL_VALUE);
     }
 
     @Override
@@ -156,7 +156,7 @@ public abstract class AbstractYamlNode implements YamlNode {
 
     @Override
     public BigInteger asBigIntegerValue() {
-        return asBigIntegerValue(BigInteger.ZERO);
+        return asBigIntegerValue(DEFAULT_BIG_INTEGER_VALUE);
     }
 
     @Override
@@ -166,12 +166,12 @@ public abstract class AbstractYamlNode implements YamlNode {
 
     @Override
     public BigInteger bigIntegerValue() {
-        return null;
+        return DEFAULT_BIG_INTEGER_VALUE;
     }
 
     @Override
     public boolean asBooleanValue() {
-        return asBooleanValue(false);
+        return asBooleanValue(DEFAULT_BOOLEAN_VALUE);
     }
 
     @Override
@@ -181,12 +181,12 @@ public abstract class AbstractYamlNode implements YamlNode {
 
     @Override
     public boolean booleanValue() {
-        return false;
+        return DEFAULT_BOOLEAN_VALUE;
     }
 
     @Override
     public byte asByteValue() {
-        return asByteValue((byte) 0);
+        return asByteValue(DEFAULT_BYTE_VALUE);
     }
 
     @Override
@@ -196,12 +196,12 @@ public abstract class AbstractYamlNode implements YamlNode {
 
     @Override
     public byte byteValue() {
-        return 0;
+        return DEFAULT_BYTE_VALUE;
     }
 
     @Override
     public byte[] asBinaryValue() {
-        return asBinaryValue(null);
+        return asBinaryValue(DEFAULT_BINARY_VALUE);
     }
 
     @Override
@@ -211,12 +211,12 @@ public abstract class AbstractYamlNode implements YamlNode {
 
     @Override
     public byte[] binaryValue() {
-        return null;
+        return DEFAULT_BINARY_VALUE;
     }
 
     @Override
     public double asDoubleValue() {
-        return asDoubleValue(0.0d);
+        return asDoubleValue(DEFAULT_DOUBLE_VALUE);
     }
 
     @Override
@@ -226,12 +226,12 @@ public abstract class AbstractYamlNode implements YamlNode {
 
     @Override
     public double doubleValue() {
-        return 0.0d;
+        return DEFAULT_DOUBLE_VALUE;
     }
 
     @Override
     public float asFloatValue() {
-        return asFloatValue(0.0f);
+        return asFloatValue(DEFAULT_FLOAT_VALUE);
     }
 
     @Override
@@ -241,12 +241,12 @@ public abstract class AbstractYamlNode implements YamlNode {
 
     @Override
     public float floatValue() {
-        return 0.0f;
+        return DEFAULT_FLOAT_VALUE;
     }
 
     @Override
     public int asIntValue() {
-        return asIntValue(0);
+        return asIntValue(DEFAULT_INTEGER_VALUE);
     }
 
     @Override
@@ -256,12 +256,12 @@ public abstract class AbstractYamlNode implements YamlNode {
 
     @Override
     public int intValue() {
-        return 0;
+        return DEFAULT_INTEGER_VALUE;
     }
 
     @Override
     public long asLongValue() {
-        return asLongValue(0l);
+        return asLongValue(DEFAULT_LONG_VALUE);
     }
 
     @Override
@@ -271,12 +271,12 @@ public abstract class AbstractYamlNode implements YamlNode {
 
     @Override
     public long longValue() {
-        return 0l;
+        return DEFAULT_LONG_VALUE;
     }
 
     @Override
     public Number asNumberValue() {
-        return asNumberValue(null);
+        return asNumberValue(DEFAULT_NUMBER_VALUE);
     }
 
     @Override
@@ -286,12 +286,12 @@ public abstract class AbstractYamlNode implements YamlNode {
 
     @Override
     public Number numberValue() {
-        return null;
+        return DEFAULT_NUMBER_VALUE;
     }
 
     @Override
     public short asShortValue() {
-        return asShortValue((short) 0);
+        return asShortValue(DEFAULT_SHORT_VALUE);
     }
 
     @Override
@@ -301,12 +301,12 @@ public abstract class AbstractYamlNode implements YamlNode {
 
     @Override
     public short shortValue() {
-        return 0;
+        return DEFAULT_SHORT_VALUE;
     }
 
     @Override
     public String asTextValue() {
-        return asTextValue("");
+        return asTextValue(DEFAULT_TEXT_VALUE);
     }
 
     @Override
@@ -316,12 +316,12 @@ public abstract class AbstractYamlNode implements YamlNode {
 
     @Override
     public String textValue() {
-        return null;
+        return DEFAULT_TEXT_VALUE;
     }
 
     @Override
     public DateTime asDateTimeValue() {
-        return asDateTimeValue(null);
+        return asDateTimeValue(DEFAULT_DATE_TIME_VALUE);
     }
 
     @Override
@@ -331,12 +331,12 @@ public abstract class AbstractYamlNode implements YamlNode {
 
     @Override
     public DateTime dateTimeValue() {
-        return null;
+        return DEFAULT_DATE_TIME_VALUE;
     }
 
     @Override
     public Date asDateValue() {
-        return asDateValue(null);
+        return asDateValue(DEFAULT_DATE_VALUE);
     }
 
     @Override
@@ -346,7 +346,7 @@ public abstract class AbstractYamlNode implements YamlNode {
 
     @Override
     public Date dateValue() {
-        return null;
+        return DEFAULT_DATE_VALUE;
     }
 
     @Override
