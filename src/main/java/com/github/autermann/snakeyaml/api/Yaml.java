@@ -55,8 +55,8 @@ public class Yaml {
         checkNotNull(nodeFactory);
         checkNotNull(dumperOptions);
         this.delegate = new org.yaml.snakeyaml.Yaml(
-                new YamlNodeConstructor(nodeFactory),
-                new YamlNodeRepresenter(),
+                new YamlNodeConstructor(nodeFactory, dumperOptions),
+                new YamlNodeRepresenter(dumperOptions),
                 dumperOptions);
     }
 
