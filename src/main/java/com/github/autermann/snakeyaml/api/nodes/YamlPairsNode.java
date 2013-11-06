@@ -16,6 +16,7 @@
 package com.github.autermann.snakeyaml.api.nodes;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map.Entry;
@@ -29,6 +30,7 @@ import com.github.autermann.snakeyaml.api.util.LinkedListSupplier;
 import com.google.common.base.Supplier;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.ListMultimap;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimaps;
 
@@ -38,14 +40,16 @@ import com.google.common.collect.Multimaps;
  * @author Christian Autermann <autermann@uni-muenster.de>
  */
 public class YamlPairsNode extends AbstractYamlMappingNode<YamlPairsNode> {
-    private final ListMultimap<YamlNode, YamlNode> value;
+    private final ListMultimap<YamlNode, YamlNode> multiMap;
+    private final List<Entry<YamlNode, YamlNode>> value;
 
     public YamlPairsNode(YamlNodeFactory factory) {
         super(factory);
         LinkedHashMap<YamlNode, Collection<YamlNode>> map = Maps
                 .newLinkedHashMap();
         Supplier<List<YamlNode>> supplier = LinkedListSupplier.instance();
-        this.value = Multimaps.newListMultimap(map, supplier);
+        this.multiMap = Multimaps.newListMultimap(map, supplier);
+        this.value = Lists.newLinkedList();
     }
 
     @Override
@@ -65,17 +69,18 @@ public class YamlPairsNode extends AbstractYamlMappingNode<YamlPairsNode> {
 
     @Override
     public YamlPairsNode put(YamlNode key, YamlNode value) {
-        // small protected adding this to a collection added to this still works
+        // small protection adding this to a collection added to this still works
         if (key == this || value == this) {
             throw new IllegalArgumentException("recursive structures are currently not supported");
         }
-        value().put(key, value);
+        value().add(Maps.immutableEntry(key, value));
+        this.asMap().put(key, value);
         return this;
     }
 
     @Override
     public boolean has(YamlNode key) {
-        return value().containsKey(key) && !get(key).isEmpty();
+        return this.asMap().containsKey(key) && !get(key).isEmpty();
     }
 
     @Override
@@ -84,14 +89,14 @@ public class YamlPairsNode extends AbstractYamlMappingNode<YamlPairsNode> {
     }
 
     protected List<YamlNode> get(YamlNode key) {
-        return value().get(key);
+        return this.asMap().get(key);
     }
 
-    protected ListMultimap<YamlNode, YamlNode> value() {
+    protected List<Entry<YamlNode, YamlNode>> value() {
         return this.value;
     }
 
-     @Override
+    @Override
     public int size() {
         return value().size();
     }
@@ -104,7 +109,8 @@ public class YamlPairsNode extends AbstractYamlMappingNode<YamlPairsNode> {
     @Override
     public boolean equals(Object o) {
         if (o instanceof YamlPairsNode) {
-            return value().equals(((YamlPairsNode) o).value());
+            YamlPairsNode that = (YamlPairsNode) o;
+            return this.value().equals(that.value());
         }
         return false;
     }
@@ -126,7 +132,7 @@ public class YamlPairsNode extends AbstractYamlMappingNode<YamlPairsNode> {
 
     @Override
     public Collection<Entry<YamlNode, YamlNode>> entries() {
-        return value().entries();
+        return Collections.unmodifiableCollection(value());
     }
 
     @Override
@@ -137,5 +143,9 @@ public class YamlPairsNode extends AbstractYamlMappingNode<YamlPairsNode> {
     @Override
     public <T> T accept(ReturningVisitor<T> visitor) {
         return visitor.visit(this);
+    }
+
+    protected ListMultimap<YamlNode, YamlNode> asMap() {
+        return multiMap;
     }
 }

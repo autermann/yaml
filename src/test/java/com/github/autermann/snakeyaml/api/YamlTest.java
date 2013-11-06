@@ -94,7 +94,7 @@ public class YamlTest {
 
     @Test
     public void testPairsNode() {
-        test(factory.pairsNode().put("a", "b").put("a", "b").put("b", "c"));
+        test(factory.pairsNode().put("a", "b").put("b", "c").put("a", "b"));
     }
 
     @Test
