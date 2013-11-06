@@ -564,7 +564,7 @@ public interface YamlNode {
 
     /**
      * Dumps this node to a string using the supplied {@link Yaml}. This is
-     * equivalent to {@code yaml.dump(this}.
+     * equivalent to {@code yaml.dump(this)}.
      *
      * @param yaml the {@link Yaml}
      *
@@ -574,7 +574,7 @@ public interface YamlNode {
 
     /**
      * Dumps this node to a writer using the supplied {@link Yaml}. This is
-     * equivalent to {@code yaml.dump(this, output}.
+     * equivalent to {@code yaml.dump(this, output)}.
      *
      * @param output the writer
      * @param yaml   the {@link Yaml}
@@ -583,7 +583,7 @@ public interface YamlNode {
 
     /**
      * Dumps this node to a output stream using the supplied {@link Yaml}. This
-     * is equivalent to {@code yaml.dump(this, output}.
+     * is equivalent to {@code yaml.dump(this, output)}.
      *
      * @param output the output stream
      * @param yaml   the {@link Yaml}
