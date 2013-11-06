@@ -1,8 +1,6 @@
 # snakeyaml-api [![Build Status](https://travis-ci.org/autermann/snakeyaml-api.png?branch=master)](https://travis-ci.org/autermann/snakeyaml-api)
 
-A [Jackson][jackson]-like API to create YAML nodes.
-
-[jackson]: http://jackson.codehaus.org/ "Jackson"
+A [Jackson][jackson]-like API to create YAML nodes (based on [SnakeYAML][snakeyaml]).
 
 ## Example
 
@@ -58,3 +56,7 @@ if (loaded.isMapping()) {
     node.path("message").asSequence().get(2); //snakeyaml-api
 }
 ```
+
+
+[jackson]: http://jackson.codehaus.org/ "Jackson"
+[snakeyaml]: https://code.google.com/p/snakeyaml/ "SnakeYAML"
