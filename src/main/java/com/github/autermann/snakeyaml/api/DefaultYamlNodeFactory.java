@@ -20,12 +20,16 @@ import java.math.BigInteger;
 
 import org.joda.time.DateTime;
 
+import com.github.autermann.snakeyaml.api.nodes.YamlBigDecimalNode;
 import com.github.autermann.snakeyaml.api.nodes.YamlBigIntegerNode;
 import com.github.autermann.snakeyaml.api.nodes.YamlBinaryNode;
 import com.github.autermann.snakeyaml.api.nodes.YamlBooleanNode;
 import com.github.autermann.snakeyaml.api.nodes.YamlByteNode;
 import com.github.autermann.snakeyaml.api.nodes.YamlDecimalNode;
+import com.github.autermann.snakeyaml.api.nodes.YamlDoubleNode;
+import com.github.autermann.snakeyaml.api.nodes.YamlFloatNode;
 import com.github.autermann.snakeyaml.api.nodes.YamlIntegerNode;
+import com.github.autermann.snakeyaml.api.nodes.YamlIntegralNode;
 import com.github.autermann.snakeyaml.api.nodes.YamlLongNode;
 import com.github.autermann.snakeyaml.api.nodes.YamlMappingNode;
 import com.github.autermann.snakeyaml.api.nodes.YamlNullNode;
@@ -51,12 +55,7 @@ public class DefaultYamlNodeFactory extends YamlNodeFactory {
     }
 
     @Override
-    protected YamlDecimalNode createDecimalNode(BigDecimal value) {
-        return new YamlDecimalNode(value);
-    }
-
-    @Override
-    protected YamlBigIntegerNode createBigIntegerNode(BigInteger value) {
+    protected YamlIntegralNode createBigIntegerNode(BigInteger value) {
         return new YamlBigIntegerNode(value);
     }
 
@@ -81,22 +80,22 @@ public class DefaultYamlNodeFactory extends YamlNodeFactory {
     }
 
     @Override
-    public YamlByteNode byteNode(byte value) {
+    public YamlIntegralNode byteNode(byte value) {
         return new YamlByteNode(value);
     }
 
     @Override
-    public YamlShortNode shortNode(short value) {
+    public YamlIntegralNode shortNode(short value) {
         return new YamlShortNode(value);
     }
 
     @Override
-    public YamlIntegerNode intNode(int value) {
+    public YamlIntegralNode intNode(int value) {
         return new YamlIntegerNode(value);
     }
 
     @Override
-    public YamlLongNode longNode(long value) {
+    public YamlIntegralNode longNode(long value) {
         return new YamlLongNode(value);
     }
 
@@ -123,6 +122,40 @@ public class DefaultYamlNodeFactory extends YamlNodeFactory {
     @Override
     public YamlSetNode setNode() {
         return new YamlSetNode(this);
+    }
+
+    @Override
+    protected YamlDecimalNode createBigDecimalNode(BigDecimal value) {
+        switch (getDecimalPrecision()) {
+            case BIG_DECIMAL:
+                return new YamlBigDecimalNode(value);
+            case DOUBLE:
+                return doubleNode(value.doubleValue());
+            case FLOAT:
+                return floatNode(value.floatValue());
+            default:
+                throw new Error("unknown DecimalPrecision: " +
+                                getDecimalPrecision());
+        }
+    }
+
+    @Override
+    public YamlDecimalNode doubleNode(double value) {
+        switch (getDecimalPrecision()) {
+            case BIG_DECIMAL:
+            case DOUBLE:
+                return new YamlDoubleNode(value);
+            case FLOAT:
+                return floatNode((float) value);
+            default:
+                throw new Error("unknown DecimalPrecision: " +
+                                getDecimalPrecision());
+        }
+    }
+
+    @Override
+    public YamlDecimalNode floatNode(float value) {
+        return new YamlFloatNode(value);
     }
 
     public static DefaultYamlNodeFactory instance() {

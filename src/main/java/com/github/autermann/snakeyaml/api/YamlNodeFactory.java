@@ -15,6 +15,8 @@
  */
 package com.github.autermann.snakeyaml.api;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Date;
@@ -22,25 +24,48 @@ import java.util.Date;
 import org.joda.time.DateTime;
 
 import com.github.autermann.snakeyaml.api.nodes.AbstractYamlScalarNode;
-import com.github.autermann.snakeyaml.api.nodes.YamlBigIntegerNode;
 import com.github.autermann.snakeyaml.api.nodes.YamlBinaryNode;
 import com.github.autermann.snakeyaml.api.nodes.YamlBooleanNode;
-import com.github.autermann.snakeyaml.api.nodes.YamlByteNode;
 import com.github.autermann.snakeyaml.api.nodes.YamlDecimalNode;
-import com.github.autermann.snakeyaml.api.nodes.YamlIntegerNode;
-import com.github.autermann.snakeyaml.api.nodes.YamlLongNode;
+import com.github.autermann.snakeyaml.api.nodes.YamlIntegralNode;
 import com.github.autermann.snakeyaml.api.nodes.YamlMappingNode;
 import com.github.autermann.snakeyaml.api.nodes.YamlNullNode;
 import com.github.autermann.snakeyaml.api.nodes.YamlOrderedMappingNode;
 import com.github.autermann.snakeyaml.api.nodes.YamlPairsNode;
 import com.github.autermann.snakeyaml.api.nodes.YamlSequenceNode;
 import com.github.autermann.snakeyaml.api.nodes.YamlSetNode;
-import com.github.autermann.snakeyaml.api.nodes.YamlShortNode;
 import com.github.autermann.snakeyaml.api.nodes.YamlTextNode;
 import com.github.autermann.snakeyaml.api.nodes.YamlTimeNode;
+import com.github.autermann.snakeyaml.api.util.DecimalPrecision;
 import com.google.common.base.Supplier;
 
 public abstract class YamlNodeFactory {
+
+    /**
+     * The {@link DecimalPrecision} of this factory.
+     */
+    private DecimalPrecision decimalPrecision = DecimalPrecision.BIG_DECIMAL;
+
+    /**
+     * Sets the {@link DecimalPrecision} of this factory.
+     *
+     * @param decimalPrecision the {@link DecimalPrecision}
+     *
+     * @return {@code this}
+     */
+    public YamlNodeFactory setDecimalPrecision(DecimalPrecision decimalPrecision) {
+        this.decimalPrecision = checkNotNull(decimalPrecision);
+        return this;
+    }
+
+    /**
+     * Gets the {@link DecimalPrecision} of this factory.
+     *
+     * @return the {@link DecimalPrecision}
+     */
+    public DecimalPrecision getDecimalPrecision() {
+        return decimalPrecision;
+    }
 
     public AbstractYamlScalarNode<?> binaryNode(Byte[] value) {
         if (value == null) {
@@ -74,16 +99,12 @@ public abstract class YamlNodeFactory {
         return byteNode(value.byteValue());
     }
 
-    public abstract YamlByteNode byteNode(byte value);
-
     public AbstractYamlScalarNode<?> shortNode(Short value) {
         if (value == null) {
             return nullNode();
         }
         return shortNode(value.shortValue());
     }
-
-    public abstract YamlShortNode shortNode(short value);
 
     public AbstractYamlScalarNode<?> intNode(Integer value) {
         if (value == null) {
@@ -92,16 +113,12 @@ public abstract class YamlNodeFactory {
         return intNode(value.intValue());
     }
 
-    public abstract YamlIntegerNode intNode(int value);
-
     public AbstractYamlScalarNode<?> longNode(Long value) {
         if (value == null) {
             return nullNode();
         }
         return longNode(value.longValue());
     }
-
-    public abstract YamlLongNode longNode(long value);
 
     public AbstractYamlScalarNode<?> bigIntegerNode(BigInteger value) {
         if (value == null) {
@@ -117,10 +134,6 @@ public abstract class YamlNodeFactory {
         return floatNode(value.floatValue());
     }
 
-    public YamlDecimalNode floatNode(float value) {
-        return doubleNode((double) value);
-    }
-
     public AbstractYamlScalarNode<?> doubleNode(Double value) {
         if (value == null) {
             return nullNode();
@@ -128,15 +141,11 @@ public abstract class YamlNodeFactory {
         return doubleNode(value.doubleValue());
     }
 
-    public YamlDecimalNode doubleNode(double value) {
-        return createDecimalNode(BigDecimal.valueOf(value));
-    }
-
     public AbstractYamlScalarNode<?> bigDecimalNode(BigDecimal value) {
         if (value == null) {
             return nullNode();
         }
-        return createDecimalNode(value);
+        return createBigDecimalNode(value);
     }
 
     public AbstractYamlScalarNode<?> textNode(String value) {
@@ -186,15 +195,27 @@ public abstract class YamlNodeFactory {
 
     protected abstract YamlTextNode createTextNode(String value);
 
-    protected abstract YamlDecimalNode createDecimalNode(BigDecimal value);
+    protected abstract YamlDecimalNode createBigDecimalNode(BigDecimal value);
 
-    protected abstract YamlBigIntegerNode createBigIntegerNode(BigInteger value);
+    protected abstract YamlIntegralNode createBigIntegerNode(BigInteger value);
 
     protected abstract YamlBinaryNode createBinaryNode(byte[] value);
 
     protected abstract YamlTimeNode createDateTimeNode(DateTime value);
 
     public abstract YamlBooleanNode booleanNode(boolean value);
+
+    public abstract YamlIntegralNode byteNode(byte value);
+
+    public abstract YamlIntegralNode shortNode(short value);
+
+    public abstract YamlIntegralNode intNode(int value);
+
+    public abstract YamlIntegralNode longNode(long value);
+
+    public abstract YamlDecimalNode floatNode(float value);
+
+    public abstract YamlDecimalNode doubleNode(double value);
 
     public abstract YamlMappingNode mappingNode();
 

@@ -31,7 +31,7 @@ import com.google.common.base.Charsets;
 import com.google.common.collect.Iterables;
 
 public class Yaml {
-    protected final org.yaml.snakeyaml.Yaml delegate;
+    private final org.yaml.snakeyaml.Yaml delegate;
 
     public Yaml() {
         this(new DumperOptions(), YamlNodeFactory.getDefault());
@@ -75,7 +75,8 @@ public class Yaml {
     }
 
     public void dumpAll(Iterator<? extends YamlNode> data, OutputStream output) {
-        getDelegate().dumpAll(data, new OutputStreamWriter(output, Charsets.UTF_8));
+        getDelegate()
+                .dumpAll(data, new OutputStreamWriter(output, Charsets.UTF_8));
     }
 
     public String dumpAll(Iterable<? extends YamlNode> data) {

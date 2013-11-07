@@ -21,15 +21,8 @@ import org.yaml.snakeyaml.nodes.Tag;
 
 import com.github.autermann.snakeyaml.api.ReturningYamlNodeVisitor;
 import com.github.autermann.snakeyaml.api.YamlNodeVisitor;
-import com.google.common.base.Preconditions;
 
-public class YamlDecimalNode extends AbstractYamlNumberNode {
-
-    private final BigDecimal value;
-
-    public YamlDecimalNode(BigDecimal value) {
-        this.value = Preconditions.checkNotNull(value);
-    }
+public abstract class YamlDecimalNode extends AbstractYamlNumberNode {
 
     @Override
     public Tag tag() {
@@ -42,8 +35,8 @@ public class YamlDecimalNode extends AbstractYamlNumberNode {
     }
 
     @Override
-    public BigDecimal bigDecimalValue() {
-        return value();
+    public boolean isBigDecimal() {
+        return true;
     }
 
     @Override
@@ -57,7 +50,9 @@ public class YamlDecimalNode extends AbstractYamlNumberNode {
     }
 
     @Override
-    public BigDecimal value() {
-        return this.value;
-    }
+    public abstract Number value();
+
+    @Override
+    public abstract BigDecimal bigDecimalValue();
+
 }

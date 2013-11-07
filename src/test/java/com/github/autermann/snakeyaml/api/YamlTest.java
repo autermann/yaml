@@ -22,6 +22,7 @@ import static com.github.autermann.snakeyaml.api.nodes.NodesMatcher.shortNode;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 
+import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Random;
 
@@ -30,6 +31,8 @@ import org.joda.time.DateTime;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ErrorCollector;
+
+import com.github.autermann.snakeyaml.api.util.DecimalPrecision;
 
 public class YamlTest {
     public final Yaml YAML = new Yaml();
@@ -94,7 +97,20 @@ public class YamlTest {
 
     @Test
     public void testDoubleNode() {
-        test(factory.doubleNode(42.42));
+        test(factory.setDecimalPrecision(DecimalPrecision.DOUBLE)
+                .doubleNode(42.42d));
+    }
+
+    @Test
+    public void testFloatNode() {
+        test(factory.setDecimalPrecision(DecimalPrecision.FLOAT)
+                .floatNode(42.42f));
+    }
+
+    @Test
+    public void testBigDecimalNode() {
+        test(factory.setDecimalPrecision(DecimalPrecision.BIG_DECIMAL)
+                .bigDecimalNode(BigDecimal.valueOf(42.42d)));
     }
 
     @Test

@@ -91,6 +91,36 @@ public class NodesMatcher extends ErrorCollector {
     }
 
     @Factory
+    public static Matcher<YamlNode> bigDecimalNode() {
+        return new NodeTypeMatcher("big decimal") {
+            @Override
+            protected boolean matchesSafely(YamlNode item) {
+                return item.isBigDecimal();
+            }
+        };
+    }
+
+    @Factory
+    public static Matcher<YamlNode> doubleNode() {
+        return new NodeTypeMatcher("double") {
+            @Override
+            protected boolean matchesSafely(YamlNode item) {
+                return item.isDouble();
+            }
+        };
+    }
+
+    @Factory
+    public static Matcher<YamlNode> floatNode() {
+        return new NodeTypeMatcher("float") {
+            @Override
+            protected boolean matchesSafely(YamlNode item) {
+                return item.isFloat();
+            }
+        };
+    }
+
+    @Factory
     public static Matcher<YamlNode> integralNode() {
         return new NodeTypeMatcher("integral") {
             @Override

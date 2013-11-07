@@ -15,13 +15,16 @@
  */
 package com.github.autermann.snakeyaml.api.nodes;
 
+import static com.github.autermann.snakeyaml.api.nodes.NodesMatcher.bigDecimalNode;
 import static com.github.autermann.snakeyaml.api.nodes.NodesMatcher.bigIntegerNode;
 import static com.github.autermann.snakeyaml.api.nodes.NodesMatcher.binaryNode;
 import static com.github.autermann.snakeyaml.api.nodes.NodesMatcher.booleanNode;
 import static com.github.autermann.snakeyaml.api.nodes.NodesMatcher.byteNode;
 import static com.github.autermann.snakeyaml.api.nodes.NodesMatcher.containerNode;
 import static com.github.autermann.snakeyaml.api.nodes.NodesMatcher.decimalNode;
+import static com.github.autermann.snakeyaml.api.nodes.NodesMatcher.doubleNode;
 import static com.github.autermann.snakeyaml.api.nodes.NodesMatcher.existingNode;
+import static com.github.autermann.snakeyaml.api.nodes.NodesMatcher.floatNode;
 import static com.github.autermann.snakeyaml.api.nodes.NodesMatcher.intNode;
 import static com.github.autermann.snakeyaml.api.nodes.NodesMatcher.integralNode;
 import static com.github.autermann.snakeyaml.api.nodes.NodesMatcher.longNode;
@@ -129,6 +132,9 @@ public class YamlPairsNodeTest {
         errors.checkThat(node, is(not(intNode())));
         errors.checkThat(node, is(not(shortNode())));
         errors.checkThat(node, is(not(byteNode())));
+        errors.checkThat(node, is(not(bigDecimalNode())));
+        errors.checkThat(node, is(not(doubleNode())));
+        errors.checkThat(node, is(not(floatNode())));
     }
 
     protected void checkEquals(YamlNode a, YamlNode b) {

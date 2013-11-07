@@ -48,29 +48,33 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ErrorCollector;
 
+import com.github.autermann.snakeyaml.api.util.DecimalPrecision;
 import com.github.autermann.snakeyaml.api.YamlNode;
+import com.github.autermann.snakeyaml.api.YamlNodeFactory;
 
-public class YamlMissingNodeTest {
+public class YamlFloatNodeTest {
+
+    public final YamlNodeFactory factory = YamlNodeFactory.getDefault().setDecimalPrecision(DecimalPrecision.FLOAT);
 
     @Rule
     public final ErrorCollector errors = new ErrorCollector();
 
     @Test
     public void testType() {
-        YamlNode node = YamlMissingNode.instance();
+        YamlNode node = factory.floatNode(1.0f);
         assertThat(node, is(notNullValue()));
         errors.checkThat(node, is(not(binaryNode())));
         errors.checkThat(node, is(not(booleanNode())));
         errors.checkThat(node, is(not(containerNode())));
-        errors.checkThat(node, is(not(decimalNode())));
-        errors.checkThat(node, is(not(existingNode())));
+        errors.checkThat(node, is((decimalNode())));
+        errors.checkThat(node, is((existingNode())));
         errors.checkThat(node, is(not(integralNode())));
         errors.checkThat(node, is(not(mappingNode())));
         errors.checkThat(node, is(not(nullNode())));
-        errors.checkThat(node, is(not(numberNode())));
+        errors.checkThat(node, is((numberNode())));
         errors.checkThat(node, is(not(orderedMappingNode())));
         errors.checkThat(node, is(not(pairsNode())));
-        errors.checkThat(node, is(not(scalarNode())));
+        errors.checkThat(node, is((scalarNode())));
         errors.checkThat(node, is(not(sequenceNode())));
         errors.checkThat(node, is(not(setNode())));
         errors.checkThat(node, is(not(textNode())));
@@ -80,8 +84,8 @@ public class YamlMissingNodeTest {
         errors.checkThat(node, is(not(intNode())));
         errors.checkThat(node, is(not(shortNode())));
         errors.checkThat(node, is(not(byteNode())));
-        errors.checkThat(node, is(not(bigDecimalNode())));
-        errors.checkThat(node, is(not(doubleNode())));
-        errors.checkThat(node, is(not(floatNode())));
+        errors.checkThat(node, is((bigDecimalNode())));
+        errors.checkThat(node, is((doubleNode())));
+        errors.checkThat(node, is((floatNode())));
     }
 }

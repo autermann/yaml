@@ -251,6 +251,36 @@ public interface YamlNode {
     boolean isDecimal();
 
     /**
+     * Checks if this node is {@code float} node.
+     *
+     * @return if this is a {@code float} node
+     *
+     * @see #floatValue()
+     * @see #doubleValue()
+     * @see #bigDecimalValue()
+     */
+    boolean isFloat();
+
+    /**
+     * Checks if this node is {@code double} node.
+     *
+     * @return if this is a {@code double} node
+     *
+     * @see #doubleValue()
+     * @see #bigDecimalValue()
+     */
+    boolean isDouble();
+
+    /**
+     * Checks if this node is {@code BigDecimal} node.
+     *
+     * @return if this is a {@code BigDecimal} node
+     *
+     * @see #bigDecimalValue()
+     */
+    boolean isBigDecimal();
+
+    /**
      * Checks if this node is integral node.
      *
      * @return if this is a integral node

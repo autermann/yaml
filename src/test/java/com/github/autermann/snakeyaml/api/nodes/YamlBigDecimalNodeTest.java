@@ -15,13 +15,16 @@
  */
 package com.github.autermann.snakeyaml.api.nodes;
 
+import static com.github.autermann.snakeyaml.api.nodes.NodesMatcher.bigDecimalNode;
 import static com.github.autermann.snakeyaml.api.nodes.NodesMatcher.bigIntegerNode;
 import static com.github.autermann.snakeyaml.api.nodes.NodesMatcher.binaryNode;
 import static com.github.autermann.snakeyaml.api.nodes.NodesMatcher.booleanNode;
 import static com.github.autermann.snakeyaml.api.nodes.NodesMatcher.byteNode;
 import static com.github.autermann.snakeyaml.api.nodes.NodesMatcher.containerNode;
 import static com.github.autermann.snakeyaml.api.nodes.NodesMatcher.decimalNode;
+import static com.github.autermann.snakeyaml.api.nodes.NodesMatcher.doubleNode;
 import static com.github.autermann.snakeyaml.api.nodes.NodesMatcher.existingNode;
+import static com.github.autermann.snakeyaml.api.nodes.NodesMatcher.floatNode;
 import static com.github.autermann.snakeyaml.api.nodes.NodesMatcher.intNode;
 import static com.github.autermann.snakeyaml.api.nodes.NodesMatcher.integralNode;
 import static com.github.autermann.snakeyaml.api.nodes.NodesMatcher.longNode;
@@ -41,6 +44,8 @@ import static org.hamcrest.Matchers.not;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.Assert.assertThat;
 
+import java.math.BigDecimal;
+
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ErrorCollector;
@@ -48,16 +53,16 @@ import org.junit.rules.ErrorCollector;
 import com.github.autermann.snakeyaml.api.YamlNode;
 import com.github.autermann.snakeyaml.api.YamlNodeFactory;
 
-public class YamlDecimalNodeTest {
+public class YamlBigDecimalNodeTest {
 
-public final YamlNodeFactory factory = YamlNodeFactory.getDefault();
+    public final YamlNodeFactory factory = YamlNodeFactory.getDefault();
 
     @Rule
     public final ErrorCollector errors = new ErrorCollector();
 
     @Test
     public void testType() {
-        YamlNode node = factory.doubleNode(1.0d);
+        YamlNode node = factory.bigDecimalNode(BigDecimal.ONE);
         assertThat(node, is(notNullValue()));
         errors.checkThat(node, is(not(binaryNode())));
         errors.checkThat(node, is(not(booleanNode())));
@@ -80,5 +85,8 @@ public final YamlNodeFactory factory = YamlNodeFactory.getDefault();
         errors.checkThat(node, is(not(intNode())));
         errors.checkThat(node, is(not(shortNode())));
         errors.checkThat(node, is(not(byteNode())));
+        errors.checkThat(node, is((bigDecimalNode())));
+        errors.checkThat(node, is(not(doubleNode())));
+        errors.checkThat(node, is(not(floatNode())));
     }
 }

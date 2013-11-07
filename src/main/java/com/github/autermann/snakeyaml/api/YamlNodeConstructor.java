@@ -65,9 +65,15 @@ public class YamlNodeConstructor extends SafeConstructor {
         this.binaryEncoding = BaseEncoding.base64()
                 .withSeparator(options.getLineBreak().getString(),
                                options.getWidth());
-        this.yamlConstructors.put(Tag.MAP, new YamlMappingNodeConstruct(this.nodeFactory.mappingNodeSupplier()));
-        this.yamlConstructors.put(Tag.OMAP, new YamlMappingNodeConstruct(this.nodeFactory.orderedMappingNodeSupplier()));
-        this.yamlConstructors.put(Tag.PAIRS, new YamlMappingNodeConstruct(this.nodeFactory.pairsNodeSupplier()));
+        this.yamlConstructors
+                .put(Tag.MAP, new YamlMappingNodeConstruct(this.nodeFactory
+                                .mappingNodeSupplier()));
+        this.yamlConstructors
+                .put(Tag.OMAP, new YamlMappingNodeConstruct(this.nodeFactory
+                                .orderedMappingNodeSupplier()));
+        this.yamlConstructors
+                .put(Tag.PAIRS, new YamlMappingNodeConstruct(this.nodeFactory
+                                .pairsNodeSupplier()));
         this.yamlConstructors.put(Tag.SEQ, new YamlSequenceNodeConstruct());
         this.yamlConstructors.put(Tag.SET, new YamlSetNodeConstruct());
         this.yamlConstructors.put(Tag.BINARY, new YamlBinaryNodeConstruct());
@@ -113,7 +119,18 @@ public class YamlNodeConstructor extends SafeConstructor {
             } else if (v.equals("-.inf")) {
                 return nodeFactory.doubleNode(Double.NEGATIVE_INFINITY);
             }
-            return nodeFactory.bigDecimalNode(new BigDecimal(value));
+            switch (nodeFactory.getDecimalPrecision()) {
+                case BIG_DECIMAL:
+                    return nodeFactory.bigDecimalNode(new BigDecimal(value));
+                case DOUBLE:
+                    return nodeFactory.doubleNode(Double.valueOf(value));
+                case FLOAT:
+                    return nodeFactory.floatNode(Float.valueOf(value));
+                default:
+                    throw new Error("unknown DecimalPrecision: " +
+                                    nodeFactory.getDecimalPrecision());
+            }
+
         }
     }
 

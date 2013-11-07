@@ -15,35 +15,24 @@
  */
 package com.github.autermann.snakeyaml.api.nodes;
 
-import com.github.autermann.snakeyaml.api.YamlNode;
+import java.math.BigDecimal;
 
-public abstract class AbstractYamlScalarNode<T> extends AbstractYamlNode {
+import com.google.common.base.Preconditions;
 
-    @Override
-    public boolean isScalar() {
-        return true;
+public class YamlBigDecimalNode extends YamlDecimalNode {
+    private final BigDecimal value;
+
+    public YamlBigDecimalNode(BigDecimal value) {
+        this.value = Preconditions.checkNotNull(value);
     }
 
     @Override
-    public String toString() {
-        return asTextValue();
+    public BigDecimal value() {
+        return this.value;
     }
 
     @Override
-    public abstract String asTextValue(String defaultValue);
-
-    /**
-     * Gets the internal value of this scalar.
-     *
-     * @return the value
-     */
-    public abstract T value();
-
-    @Override
-    @SuppressWarnings("unchecked")
-    public <T extends YamlNode> T copy() {
-        // subclasses are immutable
-        return (T) this;
+    public BigDecimal bigDecimalValue() {
+        return this.value;
     }
-
 }
