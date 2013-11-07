@@ -50,12 +50,15 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ErrorCollector;
 
+import com.github.autermann.snakeyaml.api.DefaultYamlNodeFactory;
 import com.github.autermann.snakeyaml.api.YamlNode;
 import com.github.autermann.snakeyaml.api.YamlNodeFactory;
+import com.github.autermann.snakeyaml.api.util.DecimalPrecision;
 
 public class YamlBigDecimalNodeTest {
 
-    public final YamlNodeFactory factory = YamlNodeFactory.createDefault();
+    public final YamlNodeFactory factory = DefaultYamlNodeFactory
+            .create(DecimalPrecision.BIG_DECIMAL);
 
     @Rule
     public final ErrorCollector errors = new ErrorCollector();

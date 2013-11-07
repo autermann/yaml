@@ -53,7 +53,7 @@ import org.junit.rules.ErrorCollector;
 import com.github.autermann.snakeyaml.api.YamlNode;
 import com.github.autermann.snakeyaml.api.YamlNodeFactory;
 
-public class YamlBigIntegerTest {
+public class YamlBigIntegerNodeTest {
 
     public final YamlNodeFactory factory = YamlNodeFactory.createDefault();
 
