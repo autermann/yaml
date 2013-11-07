@@ -36,7 +36,7 @@ import com.github.autermann.snakeyaml.api.util.DecimalPrecision;
 
 public class YamlTest {
     public final Yaml YAML = new Yaml();
-    public final YamlNodeFactory factory = YamlNodeFactory.createDefault();
+    public final DefaultYamlNodeFactory factory = YamlNodeFactory.createDefault();
 
     @Rule
     public final ErrorCollector errors = new ErrorCollector();
@@ -97,19 +97,19 @@ public class YamlTest {
 
     @Test
     public void testDoubleNode() {
-        test(factory.setDecimalPrecision(DecimalPrecision.DOUBLE)
+        test(factory.withDecimalPrecision(DecimalPrecision.DOUBLE)
                 .doubleNode(42.42d));
     }
 
     @Test
     public void testFloatNode() {
-        test(factory.setDecimalPrecision(DecimalPrecision.FLOAT)
+        test(factory.withDecimalPrecision(DecimalPrecision.FLOAT)
                 .floatNode(42.42f));
     }
 
     @Test
     public void testBigDecimalNode() {
-        test(factory.setDecimalPrecision(DecimalPrecision.BIG_DECIMAL)
+        test(factory.withDecimalPrecision(DecimalPrecision.BIG_DECIMAL)
                 .bigDecimalNode(BigDecimal.valueOf(42.42d)));
     }
 

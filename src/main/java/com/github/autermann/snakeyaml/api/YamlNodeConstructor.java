@@ -119,18 +119,7 @@ public class YamlNodeConstructor extends SafeConstructor {
             } else if (v.equals("-.inf")) {
                 return nodeFactory.doubleNode(Double.NEGATIVE_INFINITY);
             }
-            switch (nodeFactory.getDecimalPrecision()) {
-                case BIG_DECIMAL:
-                    return nodeFactory.bigDecimalNode(new BigDecimal(value));
-                case DOUBLE:
-                    return nodeFactory.doubleNode(Double.valueOf(value));
-                case FLOAT:
-                    return nodeFactory.floatNode(Float.valueOf(value));
-                default:
-                    throw new Error("unknown DecimalPrecision: " +
-                                    nodeFactory.getDecimalPrecision());
-            }
-
+            return nodeFactory.bigDecimalNode(new BigDecimal(value));
         }
     }
 

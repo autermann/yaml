@@ -6,7 +6,7 @@ A [Jackson][jackson]-like API to create YAML nodes (based on [SnakeYAML][snakeya
 
 ### Creating nodes
 ```java
-YamlNodeFactory factory = YamlNodeFactory.getDefault();
+YamlNodeFactory factory = YamlNodeFactory.createDefault();
 YamlMappingNode mnode = factory.orderedMappingNode();
 mnode.put("hello", "world")
      .put("key", true)

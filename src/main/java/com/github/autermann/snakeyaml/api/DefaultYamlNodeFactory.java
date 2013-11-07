@@ -15,8 +15,11 @@
  */
 package com.github.autermann.snakeyaml.api;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.util.EnumMap;
 
 import org.joda.time.DateTime;
 
@@ -40,10 +43,20 @@ import com.github.autermann.snakeyaml.api.nodes.YamlSetNode;
 import com.github.autermann.snakeyaml.api.nodes.YamlShortNode;
 import com.github.autermann.snakeyaml.api.nodes.YamlTextNode;
 import com.github.autermann.snakeyaml.api.nodes.YamlTimeNode;
+import com.github.autermann.snakeyaml.api.util.DecimalPrecision;
+import com.google.common.base.Preconditions;
+import com.google.common.collect.Maps;
 
 public class DefaultYamlNodeFactory extends YamlNodeFactory {
+    private static final EnumMap<DecimalPrecision, DefaultYamlNodeFactory> factories
+            = Maps.newEnumMap(DecimalPrecision.class);
+    /**
+     * The {@link DecimalPrecision} of this factory.
+     */
+    private final DecimalPrecision decimalPrecision;
 
-    protected DefaultYamlNodeFactory() {
+    protected DefaultYamlNodeFactory(DecimalPrecision precision) {
+        this.decimalPrecision = Preconditions.checkNotNull(precision);
     }
 
     @Override
@@ -155,8 +168,42 @@ public class DefaultYamlNodeFactory extends YamlNodeFactory {
         return new YamlFloatNode(value);
     }
 
+    /**
+     * Sets the {@link DecimalPrecision} of this factory.
+     *
+     * Subclasses should override this method.
+     *
+     * @param decimalPrecision the {@link DecimalPrecision}
+     *
+     * @return a new {@code DefaultYamlNodeFactory}
+     *
+     */
+    public YamlNodeFactory withDecimalPrecision(
+            DecimalPrecision decimalPrecision) {
+        return create(decimalPrecision);
+    }
+
+    /**
+     * Gets the {@link DecimalPrecision} of this factory.
+     *
+     * @return the {@link DecimalPrecision}
+     */
+    public DecimalPrecision getDecimalPrecision() {
+        return decimalPrecision;
+    }
+
+    public static DefaultYamlNodeFactory create(DecimalPrecision precision) {
+        checkNotNull(precision);
+        DefaultYamlNodeFactory fac = factories.get(precision);
+        if (fac == null) {
+            factories.put(precision, fac
+                    = new DefaultYamlNodeFactory(precision));
+        }
+        return fac;
+    }
+
     public static DefaultYamlNodeFactory create() {
-        return new DefaultYamlNodeFactory();
+        return create(DecimalPrecision.BIG_DECIMAL);
     }
 
 }

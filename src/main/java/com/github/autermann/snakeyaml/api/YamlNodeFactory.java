@@ -15,8 +15,6 @@
  */
 package com.github.autermann.snakeyaml.api;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Date;
@@ -36,36 +34,9 @@ import com.github.autermann.snakeyaml.api.nodes.YamlSequenceNode;
 import com.github.autermann.snakeyaml.api.nodes.YamlSetNode;
 import com.github.autermann.snakeyaml.api.nodes.YamlTextNode;
 import com.github.autermann.snakeyaml.api.nodes.YamlTimeNode;
-import com.github.autermann.snakeyaml.api.util.DecimalPrecision;
 import com.google.common.base.Supplier;
 
 public abstract class YamlNodeFactory {
-
-    /**
-     * The {@link DecimalPrecision} of this factory.
-     */
-    private DecimalPrecision decimalPrecision = DecimalPrecision.BIG_DECIMAL;
-
-    /**
-     * Sets the {@link DecimalPrecision} of this factory.
-     *
-     * @param decimalPrecision the {@link DecimalPrecision}
-     *
-     * @return {@literal this}
-     */
-    public YamlNodeFactory setDecimalPrecision(DecimalPrecision decimalPrecision) {
-        this.decimalPrecision = checkNotNull(decimalPrecision);
-        return this;
-    }
-
-    /**
-     * Gets the {@link DecimalPrecision} of this factory.
-     *
-     * @return the {@link DecimalPrecision}
-     */
-    public DecimalPrecision getDecimalPrecision() {
-        return decimalPrecision;
-    }
 
     public AbstractYamlScalarNode<?> binaryNode(Byte[] value) {
         if (value == null) {
@@ -229,7 +200,7 @@ public abstract class YamlNodeFactory {
 
     public abstract YamlNullNode nullNode();
 
-    public static YamlNodeFactory createDefault() {
+    public static DefaultYamlNodeFactory createDefault() {
         return DefaultYamlNodeFactory.create();
     }
 

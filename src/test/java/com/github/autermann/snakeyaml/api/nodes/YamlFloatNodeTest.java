@@ -48,13 +48,13 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ErrorCollector;
 
-import com.github.autermann.snakeyaml.api.util.DecimalPrecision;
 import com.github.autermann.snakeyaml.api.YamlNode;
 import com.github.autermann.snakeyaml.api.YamlNodeFactory;
+import com.github.autermann.snakeyaml.api.util.DecimalPrecision;
 
 public class YamlFloatNodeTest {
 
-    public final YamlNodeFactory factory = YamlNodeFactory.createDefault().setDecimalPrecision(DecimalPrecision.FLOAT);
+    public final YamlNodeFactory factory = YamlNodeFactory.createDefault().withDecimalPrecision(DecimalPrecision.FLOAT);
 
     @Rule
     public final ErrorCollector errors = new ErrorCollector();

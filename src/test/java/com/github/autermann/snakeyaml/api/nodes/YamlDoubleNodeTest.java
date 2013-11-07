@@ -48,14 +48,14 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ErrorCollector;
 
-import com.github.autermann.snakeyaml.api.util.DecimalPrecision;
 import com.github.autermann.snakeyaml.api.YamlNode;
 import com.github.autermann.snakeyaml.api.YamlNodeFactory;
+import com.github.autermann.snakeyaml.api.util.DecimalPrecision;
 
 public class YamlDoubleNodeTest {
 
     public final YamlNodeFactory factory = YamlNodeFactory.createDefault()
-            .setDecimalPrecision(DecimalPrecision.DOUBLE);
+            .withDecimalPrecision(DecimalPrecision.DOUBLE);
 
     @Rule
     public final ErrorCollector errors = new ErrorCollector();
