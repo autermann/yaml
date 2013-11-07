@@ -24,7 +24,7 @@ import org.junit.rules.ErrorCollector;
 
 import com.github.autermann.snakeyaml.api.YamlNode;
 
-public class NodesMatcher extends ErrorCollector {
+public class YamlNodesMatcher extends ErrorCollector {
 
     public static <T> Matcher<T> noneOf(Matcher<? super T>... matchers) {
         return Matchers.not(Matchers.anyOf(matchers));

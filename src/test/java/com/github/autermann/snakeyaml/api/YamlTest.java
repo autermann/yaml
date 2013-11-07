@@ -15,10 +15,10 @@
  */
 package com.github.autermann.snakeyaml.api;
 
-import static com.github.autermann.snakeyaml.api.nodes.NodesMatcher.byteNode;
-import static com.github.autermann.snakeyaml.api.nodes.NodesMatcher.intNode;
-import static com.github.autermann.snakeyaml.api.nodes.NodesMatcher.longNode;
-import static com.github.autermann.snakeyaml.api.nodes.NodesMatcher.shortNode;
+import static com.github.autermann.snakeyaml.api.nodes.YamlNodesMatcher.byteNode;
+import static com.github.autermann.snakeyaml.api.nodes.YamlNodesMatcher.intNode;
+import static com.github.autermann.snakeyaml.api.nodes.YamlNodesMatcher.longNode;
+import static com.github.autermann.snakeyaml.api.nodes.YamlNodesMatcher.shortNode;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 
