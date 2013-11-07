@@ -111,7 +111,7 @@ public class YamlNodeConstructor extends SafeConstructor {
     private class YamlDecimalNodeConstruct extends AbstractScalarConstruct {
         @Override
         public AbstractYamlScalarNode<?> construct(String value) {
-            String v = value.toLowerCase().replaceAll("_", "");
+            String v = value.trim().toLowerCase().replaceAll("_", "");
             if (v.equals(".inf")) {
                 return nodeFactory.doubleNode(Double.POSITIVE_INFINITY);
             } else if (v.equals(".nan")) {

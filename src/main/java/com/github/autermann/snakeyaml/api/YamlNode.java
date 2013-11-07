@@ -44,6 +44,7 @@ import com.github.autermann.snakeyaml.api.nodes.YamlTextNode;
 import com.github.autermann.snakeyaml.api.nodes.YamlTimeNode;
 
 /**
+ * Interface for a generic YAML node.
  *
  * @author Christian Autermann
  */
