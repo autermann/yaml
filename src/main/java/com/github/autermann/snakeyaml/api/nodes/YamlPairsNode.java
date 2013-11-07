@@ -36,6 +36,12 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimaps;
 
+/**
+ * TODO JavaDoc
+ *
+ * @author Christian Autermann
+ */
+
 public class YamlPairsNode extends AbstractYamlMappingNode<YamlPairsNode> {
     private final ListMultimap<YamlNode, YamlNode> multiMap;
     private final List<Entry<YamlNode, YamlNode>> value;

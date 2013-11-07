@@ -31,6 +31,11 @@ import com.github.autermann.snakeyaml.api.YamlNodes;
 import com.google.common.base.Objects;
 import com.google.common.collect.Maps;
 
+/**
+ * TODO JavaDoc
+ *
+ * @author Christian Autermann
+ */
 public class YamlMappingNode extends AbstractYamlMappingNode<YamlMappingNode> {
     private final Map<YamlNode, YamlNode> nodes;
 

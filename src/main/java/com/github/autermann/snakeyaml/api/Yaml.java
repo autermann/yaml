@@ -36,6 +36,9 @@ import com.google.common.collect.UnmodifiableIterator;
  * @author Christian Autermann
  */
 public class Yaml {
+    /**
+     * The {@link org.yaml.snakeyaml.Yaml} delegate of this class.
+     */
     private final org.yaml.snakeyaml.Yaml delegate;
 
     /**
