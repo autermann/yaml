@@ -53,7 +53,7 @@ import com.github.autermann.snakeyaml.api.YamlNodeFactory;
 
 public class YamlLongNodeTest {
 
-    public final YamlNodeFactory factory = YamlNodeFactory.getDefault();
+    public final YamlNodeFactory factory = YamlNodeFactory.createDefault();
 
     @Rule
     public final ErrorCollector errors = new ErrorCollector();

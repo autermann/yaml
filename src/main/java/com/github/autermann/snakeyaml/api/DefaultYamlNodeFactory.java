@@ -43,10 +43,7 @@ import com.github.autermann.snakeyaml.api.nodes.YamlTimeNode;
 
 public class DefaultYamlNodeFactory extends YamlNodeFactory {
 
-    private static final DefaultYamlNodeFactory instance
-            = new DefaultYamlNodeFactory();
-
-    private DefaultYamlNodeFactory() {
+    protected DefaultYamlNodeFactory() {
     }
 
     @Override
@@ -158,8 +155,8 @@ public class DefaultYamlNodeFactory extends YamlNodeFactory {
         return new YamlFloatNode(value);
     }
 
-    public static DefaultYamlNodeFactory instance() {
-        return instance;
+    public static DefaultYamlNodeFactory create() {
+        return new DefaultYamlNodeFactory();
     }
 
 }

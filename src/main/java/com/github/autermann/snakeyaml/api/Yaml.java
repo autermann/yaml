@@ -34,7 +34,7 @@ public class Yaml {
     private final org.yaml.snakeyaml.Yaml delegate;
 
     public Yaml() {
-        this(new DumperOptions(), YamlNodeFactory.getDefault());
+        this(new DumperOptions(), YamlNodeFactory.createDefault());
     }
 
     public Yaml(YamlNodeFactory nodeFactory) {
@@ -42,7 +42,7 @@ public class Yaml {
     }
 
     public Yaml(DumperOptions dumperOptions) {
-        this(dumperOptions, YamlNodeFactory.getDefault());
+        this(dumperOptions, YamlNodeFactory.createDefault());
     }
 
     public Yaml(DumperOptions dumperOptions, YamlNodeFactory nodeFactory) {

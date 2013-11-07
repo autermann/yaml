@@ -36,7 +36,7 @@ import com.github.autermann.snakeyaml.api.util.DecimalPrecision;
 
 public class YamlTest {
     public final Yaml YAML = new Yaml();
-    public final YamlNodeFactory factory = YamlNodeFactory.getDefault();
+    public final YamlNodeFactory factory = YamlNodeFactory.createDefault();
 
     @Rule
     public final ErrorCollector errors = new ErrorCollector();

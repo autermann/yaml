@@ -54,7 +54,7 @@ import com.github.autermann.snakeyaml.api.YamlNodeFactory;
 
 public class YamlFloatNodeTest {
 
-    public final YamlNodeFactory factory = YamlNodeFactory.getDefault().setDecimalPrecision(DecimalPrecision.FLOAT);
+    public final YamlNodeFactory factory = YamlNodeFactory.createDefault().setDecimalPrecision(DecimalPrecision.FLOAT);
 
     @Rule
     public final ErrorCollector errors = new ErrorCollector();

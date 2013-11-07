@@ -55,7 +55,7 @@ import com.github.autermann.snakeyaml.api.YamlNodeFactory;
 
 public class YamlBigDecimalNodeTest {
 
-    public final YamlNodeFactory factory = YamlNodeFactory.getDefault();
+    public final YamlNodeFactory factory = YamlNodeFactory.createDefault();
 
     @Rule
     public final ErrorCollector errors = new ErrorCollector();

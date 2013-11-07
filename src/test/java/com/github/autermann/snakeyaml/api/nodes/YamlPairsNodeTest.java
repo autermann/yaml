@@ -56,7 +56,7 @@ import com.github.autermann.snakeyaml.api.YamlNode;
 import com.github.autermann.snakeyaml.api.YamlNodeFactory;
 
 public class YamlPairsNodeTest {
-    private final YamlNodeFactory factory = YamlNodeFactory.getDefault();
+    private final YamlNodeFactory factory = YamlNodeFactory.createDefault();
 
     @Rule
     public final ErrorCollector errors = new ErrorCollector();

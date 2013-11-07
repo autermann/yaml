@@ -46,11 +46,11 @@ public class YamlNodeConstructor extends SafeConstructor {
     private final BaseEncoding binaryEncoding;
 
     public YamlNodeConstructor() {
-        this(YamlNodeFactory.getDefault(), new DumperOptions());
+        this(YamlNodeFactory.createDefault(), new DumperOptions());
     }
 
     public YamlNodeConstructor(DumperOptions dumperOptions) {
-        this(YamlNodeFactory.getDefault(), dumperOptions);
+        this(YamlNodeFactory.createDefault(), dumperOptions);
     }
 
     public YamlNodeConstructor(YamlNodeFactory nodeFactory) {

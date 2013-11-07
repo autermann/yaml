@@ -51,7 +51,7 @@ public abstract class YamlNodeFactory {
      *
      * @param decimalPrecision the {@link DecimalPrecision}
      *
-     * @return {@code this}
+     * @return {@literal this}
      */
     public YamlNodeFactory setDecimalPrecision(DecimalPrecision decimalPrecision) {
         this.decimalPrecision = checkNotNull(decimalPrecision);
@@ -229,8 +229,8 @@ public abstract class YamlNodeFactory {
 
     public abstract YamlNullNode nullNode();
 
-    public static YamlNodeFactory getDefault() {
-        return DefaultYamlNodeFactory.instance();
+    public static YamlNodeFactory createDefault() {
+        return DefaultYamlNodeFactory.create();
     }
 
     private static class YamlPairsNodeSupplier

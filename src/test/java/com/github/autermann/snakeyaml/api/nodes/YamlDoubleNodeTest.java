@@ -54,7 +54,7 @@ import com.github.autermann.snakeyaml.api.YamlNodeFactory;
 
 public class YamlDoubleNodeTest {
 
-    public final YamlNodeFactory factory = YamlNodeFactory.getDefault()
+    public final YamlNodeFactory factory = YamlNodeFactory.createDefault()
             .setDecimalPrecision(DecimalPrecision.DOUBLE);
 
     @Rule
