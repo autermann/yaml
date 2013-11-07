@@ -26,12 +26,14 @@ import org.yaml.snakeyaml.DumperOptions;
 import org.yaml.snakeyaml.nodes.Tag;
 
 import com.github.autermann.snakeyaml.api.nodes.AbstractYamlNumberNode;
+import com.github.autermann.snakeyaml.api.nodes.YamlBigIntegerNode;
 import com.github.autermann.snakeyaml.api.nodes.YamlBinaryNode;
 import com.github.autermann.snakeyaml.api.nodes.YamlBooleanNode;
 import com.github.autermann.snakeyaml.api.nodes.YamlByteNode;
 import com.github.autermann.snakeyaml.api.nodes.YamlDecimalNode;
 import com.github.autermann.snakeyaml.api.nodes.YamlIntegerNode;
 import com.github.autermann.snakeyaml.api.nodes.YamlIntegralNode;
+import com.github.autermann.snakeyaml.api.nodes.YamlLongNode;
 import com.github.autermann.snakeyaml.api.nodes.YamlMappingNode;
 import com.github.autermann.snakeyaml.api.nodes.YamlMissingNode;
 import com.github.autermann.snakeyaml.api.nodes.YamlNullNode;

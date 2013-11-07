@@ -30,7 +30,7 @@ import com.github.autermann.snakeyaml.api.nodes.AbstractYamlScalarNode;
 public abstract class AbstractYamlScalarNodeConstruct extends AbstractYamlConstruct {
 
     /**
-     * Creates a new {@link AbstractScalarConstruct} backed by the specified
+     * Creates a new {@link AbstractYamlScalarNode} backed by the specified
      * {@link YamlNodeFactory} and {@link YamlNodeConstructor}.
      *
      * @param nodeFactory the node factory

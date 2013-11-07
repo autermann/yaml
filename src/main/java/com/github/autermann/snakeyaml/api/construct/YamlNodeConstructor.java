@@ -15,11 +15,8 @@
  */
 package com.github.autermann.snakeyaml.api.construct;
 
-import com.github.autermann.snakeyaml.api.YamlNodeFactory;
 import static com.google.common.base.Preconditions.checkNotNull;
 
-import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -27,37 +24,17 @@ import java.util.Set;
 import org.joda.time.format.DateTimeFormatter;
 import org.joda.time.format.ISODateTimeFormat;
 import org.yaml.snakeyaml.DumperOptions;
-import org.yaml.snakeyaml.constructor.AbstractConstruct;
 import org.yaml.snakeyaml.constructor.Construct;
 import org.yaml.snakeyaml.constructor.SafeConstructor;
 import org.yaml.snakeyaml.nodes.MappingNode;
 import org.yaml.snakeyaml.nodes.Node;
-import org.yaml.snakeyaml.nodes.NodeTuple;
 import org.yaml.snakeyaml.nodes.ScalarNode;
 import org.yaml.snakeyaml.nodes.SequenceNode;
 import org.yaml.snakeyaml.nodes.Tag;
 
-import com.github.autermann.snakeyaml.api.nodes.AbstractYamlMappingNode;
-import com.github.autermann.snakeyaml.api.nodes.AbstractYamlScalarNode;
-import com.github.autermann.snakeyaml.api.nodes.YamlBigDecimalNode;
-import com.github.autermann.snakeyaml.api.nodes.YamlBigIntegerNode;
-import com.github.autermann.snakeyaml.api.nodes.YamlBinaryNode;
-import com.github.autermann.snakeyaml.api.nodes.YamlBooleanNode;
-import com.github.autermann.snakeyaml.api.nodes.YamlByteNode;
-import com.github.autermann.snakeyaml.api.nodes.YamlDecimalNode;
-import com.github.autermann.snakeyaml.api.nodes.YamlDoubleNode;
-import com.github.autermann.snakeyaml.api.nodes.YamlFloatNode;
-import com.github.autermann.snakeyaml.api.nodes.YamlIntegerNode;
-import com.github.autermann.snakeyaml.api.nodes.YamlIntegralNode;
-import com.github.autermann.snakeyaml.api.nodes.YamlLongNode;
-import com.github.autermann.snakeyaml.api.nodes.YamlNullNode;
-import com.github.autermann.snakeyaml.api.nodes.YamlSequenceNode;
-import com.github.autermann.snakeyaml.api.nodes.YamlSetNode;
-import com.github.autermann.snakeyaml.api.nodes.YamlShortNode;
-import com.github.autermann.snakeyaml.api.nodes.YamlTextNode;
-import com.github.autermann.snakeyaml.api.nodes.YamlTimeNode;
-import com.github.autermann.snakeyaml.api.util.Numbers;
-import com.google.common.base.Supplier;
+import com.github.autermann.snakeyaml.api.Yaml;
+import com.github.autermann.snakeyaml.api.YamlNode;
+import com.github.autermann.snakeyaml.api.YamlNodeFactory;
 import com.google.common.io.BaseEncoding;
 
 /**
@@ -297,7 +274,7 @@ public class YamlNodeConstructor extends SafeConstructor {
      *
      * @return the constructed mapping
      *
-     * @see SafeConstructor#constructMapping(SequenceNode)
+     * @see SafeConstructor#constructMapping(MappingNode)
      */
     @Override
     public Map<Object, Object> constructMapping(MappingNode node) {
@@ -353,7 +330,7 @@ public class YamlNodeConstructor extends SafeConstructor {
      *
      * @return the constructed scalar
      *
-     * @see SafeConstructor#constructScalar(SequenceNode)
+     * @see SafeConstructor#constructScalar(ScalarNode)
      */
     @Override
     public Object constructScalar(ScalarNode node) {

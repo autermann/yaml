@@ -15,10 +15,11 @@
  */
 package com.github.autermann.snakeyaml.api.construct;
 
-import com.github.autermann.snakeyaml.api.YamlNodeFactory;
 import org.yaml.snakeyaml.constructor.AbstractConstruct;
 import org.yaml.snakeyaml.constructor.Construct;
 
+import com.github.autermann.snakeyaml.api.YamlNode;
+import com.github.autermann.snakeyaml.api.YamlNodeFactory;
 import com.google.common.base.Preconditions;
 
 /**
