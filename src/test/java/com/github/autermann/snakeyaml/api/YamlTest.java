@@ -15,21 +15,35 @@
  */
 package com.github.autermann.snakeyaml.api;
 
+import static com.github.autermann.snakeyaml.api.nodes.NodesMatcher.byteNode;
+import static com.github.autermann.snakeyaml.api.nodes.NodesMatcher.intNode;
+import static com.github.autermann.snakeyaml.api.nodes.NodesMatcher.longNode;
+import static com.github.autermann.snakeyaml.api.nodes.NodesMatcher.shortNode;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertThat;
 
+import java.math.BigInteger;
 import java.util.Random;
 
+import org.hamcrest.Matcher;
 import org.joda.time.DateTime;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ErrorCollector;
 
 public class YamlTest {
-    public static final Yaml YAML = new Yaml();
-    private final YamlNodeFactory factory = YamlNodeFactory.getDefault();
+    public final Yaml YAML = new Yaml();
+    public final YamlNodeFactory factory = YamlNodeFactory.getDefault();
+
+    @Rule
+    public final ErrorCollector errors = new ErrorCollector();
 
     public void test(YamlNode node) {
-        assertThat(YAML.load(YAML.dump(node)), is(equalTo(node)));
+        test(node, is(equalTo(node)));
+    }
+
+    public void test(YamlNode node, Matcher<YamlNode> matcher) {
+        errors.checkThat(YAML.load(YAML.dump(node)), matcher);
     }
 
     @Test
@@ -44,8 +58,38 @@ public class YamlTest {
     }
 
     @Test
+    public void testBigIntegerNode() {
+        test(factory.bigIntegerNode(BigInteger.valueOf(Long.MAX_VALUE).add(BigInteger.ONE)));
+        test(factory.bigIntegerNode(BigInteger.valueOf(Long.MAX_VALUE)), is(longNode()));
+        test(factory.bigIntegerNode(BigInteger.valueOf((long) Integer.MAX_VALUE)), is(intNode()));
+        test(factory.bigIntegerNode(BigInteger.valueOf((long) Short.MAX_VALUE)), is(shortNode()));
+        test(factory.bigIntegerNode(BigInteger.valueOf((long) Byte.MAX_VALUE)), is(byteNode()));
+    }
+
+    @Test
+    public void testLongNode() {
+        test(factory.longNode(Long.MAX_VALUE));
+        test(factory.longNode((long) Integer.MAX_VALUE), is(intNode()));
+        test(factory.longNode((long) Short.MAX_VALUE), is(shortNode()));
+        test(factory.longNode((long) Byte.MAX_VALUE), is(byteNode()));
+    }
+
+    @Test
     public void testIntegerNode() {
-        test(factory.intNode(42));
+        test(factory.intNode(Integer.MAX_VALUE));
+        test(factory.intNode((int) Short.MAX_VALUE), is(shortNode()));
+        test(factory.intNode((int) Byte.MAX_VALUE), is(byteNode()));
+    }
+
+    @Test
+    public void testShortNode() {
+        test(factory.shortNode(Short.MAX_VALUE));
+        test(factory.shortNode((short) Byte.MAX_VALUE), is(byteNode()));
+    }
+
+    @Test
+    public void testByteNode() {
+        test(factory.byteNode(Byte.MAX_VALUE));
     }
 
     @Test

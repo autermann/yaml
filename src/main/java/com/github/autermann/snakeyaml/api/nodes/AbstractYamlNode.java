@@ -125,6 +125,31 @@ public abstract class AbstractYamlNode implements YamlNode {
     }
 
     @Override
+    public boolean isBigInteger() {
+        return false;
+    }
+
+    @Override
+    public boolean isLong() {
+        return false;
+    }
+
+    @Override
+    public boolean isInt() {
+        return false;
+    }
+
+    @Override
+    public boolean isShort() {
+        return false;
+    }
+
+    @Override
+    public boolean isByte() {
+        return false;
+    }
+
+    @Override
     public boolean isText() {
         return false;
     }

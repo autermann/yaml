@@ -101,6 +101,56 @@ public class NodesMatcher extends ErrorCollector {
     }
 
     @Factory
+    public static Matcher<YamlNode> bigIntegerNode() {
+        return new NodeTypeMatcher("bigInteger") {
+            @Override
+            protected boolean matchesSafely(YamlNode item) {
+                return item.isBigInteger();
+            }
+        };
+    }
+
+    @Factory
+    public static Matcher<YamlNode> longNode() {
+        return new NodeTypeMatcher("long") {
+            @Override
+            protected boolean matchesSafely(YamlNode item) {
+                return item.isLong();
+            }
+        };
+    }
+
+    @Factory
+    public static Matcher<YamlNode> intNode() {
+        return new NodeTypeMatcher("int") {
+            @Override
+            protected boolean matchesSafely(YamlNode item) {
+                return item.isInt();
+            }
+        };
+    }
+
+    @Factory
+    public static Matcher<YamlNode> shortNode() {
+        return new NodeTypeMatcher("short") {
+            @Override
+            protected boolean matchesSafely(YamlNode item) {
+                return item.isShort();
+            }
+        };
+    }
+
+    @Factory
+    public static Matcher<YamlNode> byteNode() {
+        return new NodeTypeMatcher("byte") {
+            @Override
+            protected boolean matchesSafely(YamlNode item) {
+                return item.isByte();
+            }
+        };
+    }
+
+    @Factory
     public static Matcher<YamlNode> mappingNode() {
         return new NodeTypeMatcher("mapping") {
             @Override

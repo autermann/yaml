@@ -22,16 +22,20 @@ import java.util.Date;
 import org.joda.time.DateTime;
 
 import com.github.autermann.snakeyaml.api.nodes.AbstractYamlScalarNode;
+import com.github.autermann.snakeyaml.api.nodes.YamlBigIntegerNode;
 import com.github.autermann.snakeyaml.api.nodes.YamlBinaryNode;
 import com.github.autermann.snakeyaml.api.nodes.YamlBooleanNode;
+import com.github.autermann.snakeyaml.api.nodes.YamlByteNode;
 import com.github.autermann.snakeyaml.api.nodes.YamlDecimalNode;
-import com.github.autermann.snakeyaml.api.nodes.YamlIntegralNode;
+import com.github.autermann.snakeyaml.api.nodes.YamlIntegerNode;
+import com.github.autermann.snakeyaml.api.nodes.YamlLongNode;
 import com.github.autermann.snakeyaml.api.nodes.YamlMappingNode;
 import com.github.autermann.snakeyaml.api.nodes.YamlNullNode;
 import com.github.autermann.snakeyaml.api.nodes.YamlOrderedMappingNode;
 import com.github.autermann.snakeyaml.api.nodes.YamlPairsNode;
 import com.github.autermann.snakeyaml.api.nodes.YamlSequenceNode;
 import com.github.autermann.snakeyaml.api.nodes.YamlSetNode;
+import com.github.autermann.snakeyaml.api.nodes.YamlShortNode;
 import com.github.autermann.snakeyaml.api.nodes.YamlTextNode;
 import com.github.autermann.snakeyaml.api.nodes.YamlTimeNode;
 import com.google.common.base.Supplier;
@@ -70,9 +74,7 @@ public abstract class YamlNodeFactory {
         return byteNode(value.byteValue());
     }
 
-    public YamlIntegralNode byteNode(byte value) {
-        return longNode((long) value);
-    }
+    public abstract YamlByteNode byteNode(byte value);
 
     public AbstractYamlScalarNode<?> shortNode(Short value) {
         if (value == null) {
@@ -81,9 +83,7 @@ public abstract class YamlNodeFactory {
         return shortNode(value.shortValue());
     }
 
-    public YamlIntegralNode shortNode(short value) {
-        return longNode((long) value);
-    }
+    public abstract YamlShortNode shortNode(short value);
 
     public AbstractYamlScalarNode<?> intNode(Integer value) {
         if (value == null) {
@@ -92,9 +92,7 @@ public abstract class YamlNodeFactory {
         return intNode(value.intValue());
     }
 
-    public YamlIntegralNode intNode(int value) {
-        return longNode((long) value);
-    }
+    public abstract YamlIntegerNode intNode(int value);
 
     public AbstractYamlScalarNode<?> longNode(Long value) {
         if (value == null) {
@@ -103,15 +101,13 @@ public abstract class YamlNodeFactory {
         return longNode(value.longValue());
     }
 
-    public YamlIntegralNode longNode(long value) {
-        return createIntegralNode(BigInteger.valueOf(value));
-    }
+    public abstract YamlLongNode longNode(long value);
 
     public AbstractYamlScalarNode<?> bigIntegerNode(BigInteger value) {
         if (value == null) {
             return nullNode();
         }
-        return createIntegralNode(value);
+        return createBigIntegerNode(value);
     }
 
     public AbstractYamlScalarNode<?> floatNode(Float value) {
@@ -192,7 +188,7 @@ public abstract class YamlNodeFactory {
 
     protected abstract YamlDecimalNode createDecimalNode(BigDecimal value);
 
-    protected abstract YamlIntegralNode createIntegralNode(BigInteger value);
+    protected abstract YamlBigIntegerNode createBigIntegerNode(BigInteger value);
 
     protected abstract YamlBinaryNode createBinaryNode(byte[] value);
 

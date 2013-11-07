@@ -41,6 +41,8 @@ import static org.hamcrest.Matchers.not;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.Assert.assertThat;
 
+import java.math.BigInteger;
+
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ErrorCollector;
@@ -48,7 +50,8 @@ import org.junit.rules.ErrorCollector;
 import com.github.autermann.snakeyaml.api.YamlNode;
 import com.github.autermann.snakeyaml.api.YamlNodeFactory;
 
-public class YamlNullNodeTest {
+public class YamlBigIntegerTest {
+
     public final YamlNodeFactory factory = YamlNodeFactory.getDefault();
 
     @Rule
@@ -56,17 +59,18 @@ public class YamlNullNodeTest {
 
     @Test
     public void testType() {
-        YamlNode node = factory.nullNode();
+        YamlNode node = factory.bigIntegerNode(BigInteger
+                .valueOf(Long.MAX_VALUE).add(BigInteger.ONE));
         assertThat(node, is(notNullValue()));
         errors.checkThat(node, is(not(binaryNode())));
         errors.checkThat(node, is(not(booleanNode())));
         errors.checkThat(node, is(not(containerNode())));
         errors.checkThat(node, is(not(decimalNode())));
         errors.checkThat(node, is((existingNode())));
-        errors.checkThat(node, is(not(integralNode())));
+        errors.checkThat(node, is((integralNode())));
         errors.checkThat(node, is(not(mappingNode())));
-        errors.checkThat(node, is((nullNode())));
-        errors.checkThat(node, is(not(numberNode())));
+        errors.checkThat(node, is(not(nullNode())));
+        errors.checkThat(node, is((numberNode())));
         errors.checkThat(node, is(not(orderedMappingNode())));
         errors.checkThat(node, is(not(pairsNode())));
         errors.checkThat(node, is((scalarNode())));
@@ -74,10 +78,11 @@ public class YamlNullNodeTest {
         errors.checkThat(node, is(not(setNode())));
         errors.checkThat(node, is(not(textNode())));
         errors.checkThat(node, is(not(timeNode())));
-        errors.checkThat(node, is(not(bigIntegerNode())));
+        errors.checkThat(node, is((bigIntegerNode())));
         errors.checkThat(node, is(not(longNode())));
         errors.checkThat(node, is(not(intNode())));
         errors.checkThat(node, is(not(shortNode())));
         errors.checkThat(node, is(not(byteNode())));
     }
+
 }

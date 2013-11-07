@@ -15,12 +15,16 @@
  */
 package com.github.autermann.snakeyaml.api.nodes;
 
+import static com.github.autermann.snakeyaml.api.nodes.NodesMatcher.bigIntegerNode;
 import static com.github.autermann.snakeyaml.api.nodes.NodesMatcher.binaryNode;
 import static com.github.autermann.snakeyaml.api.nodes.NodesMatcher.booleanNode;
+import static com.github.autermann.snakeyaml.api.nodes.NodesMatcher.byteNode;
 import static com.github.autermann.snakeyaml.api.nodes.NodesMatcher.containerNode;
 import static com.github.autermann.snakeyaml.api.nodes.NodesMatcher.decimalNode;
 import static com.github.autermann.snakeyaml.api.nodes.NodesMatcher.existingNode;
+import static com.github.autermann.snakeyaml.api.nodes.NodesMatcher.intNode;
 import static com.github.autermann.snakeyaml.api.nodes.NodesMatcher.integralNode;
+import static com.github.autermann.snakeyaml.api.nodes.NodesMatcher.longNode;
 import static com.github.autermann.snakeyaml.api.nodes.NodesMatcher.mappingNode;
 import static com.github.autermann.snakeyaml.api.nodes.NodesMatcher.nullNode;
 import static com.github.autermann.snakeyaml.api.nodes.NodesMatcher.numberNode;
@@ -29,6 +33,7 @@ import static com.github.autermann.snakeyaml.api.nodes.NodesMatcher.pairsNode;
 import static com.github.autermann.snakeyaml.api.nodes.NodesMatcher.scalarNode;
 import static com.github.autermann.snakeyaml.api.nodes.NodesMatcher.sequenceNode;
 import static com.github.autermann.snakeyaml.api.nodes.NodesMatcher.setNode;
+import static com.github.autermann.snakeyaml.api.nodes.NodesMatcher.shortNode;
 import static com.github.autermann.snakeyaml.api.nodes.NodesMatcher.textNode;
 import static com.github.autermann.snakeyaml.api.nodes.NodesMatcher.timeNode;
 import static org.hamcrest.Matchers.is;
@@ -43,7 +48,7 @@ import org.junit.rules.ErrorCollector;
 import com.github.autermann.snakeyaml.api.YamlNode;
 import com.github.autermann.snakeyaml.api.YamlNodeFactory;
 
-public class YamlIntegralNodeTest {
+public class YamlLongNodeTest {
 
     public final YamlNodeFactory factory = YamlNodeFactory.getDefault();
 
@@ -52,7 +57,7 @@ public class YamlIntegralNodeTest {
 
     @Test
     public void testType() {
-        YamlNode node = factory.intNode(1);
+        YamlNode node = factory.longNode(Long.MAX_VALUE);
         assertThat(node, is(notNullValue()));
         errors.checkThat(node, is(not(binaryNode())));
         errors.checkThat(node, is(not(booleanNode())));
@@ -70,5 +75,11 @@ public class YamlIntegralNodeTest {
         errors.checkThat(node, is(not(setNode())));
         errors.checkThat(node, is(not(textNode())));
         errors.checkThat(node, is(not(timeNode())));
+        errors.checkThat(node, is((bigIntegerNode())));
+        errors.checkThat(node, is((longNode())));
+        errors.checkThat(node, is(not(intNode())));
+        errors.checkThat(node, is(not(shortNode())));
+        errors.checkThat(node, is(not(byteNode())));
     }
+
 }

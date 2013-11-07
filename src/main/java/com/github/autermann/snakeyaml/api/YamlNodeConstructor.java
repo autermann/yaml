@@ -36,6 +36,7 @@ import com.github.autermann.snakeyaml.api.nodes.AbstractYamlMappingNode;
 import com.github.autermann.snakeyaml.api.nodes.AbstractYamlScalarNode;
 import com.github.autermann.snakeyaml.api.nodes.YamlSequenceNode;
 import com.github.autermann.snakeyaml.api.nodes.YamlSetNode;
+import com.github.autermann.snakeyaml.api.util.Numbers;
 import com.google.common.base.Supplier;
 import com.google.common.io.BaseEncoding;
 
@@ -119,7 +120,18 @@ public class YamlNodeConstructor extends SafeConstructor {
     private class YamlIntegralConstruct extends AbstractScalarConstruct {
         @Override
         public AbstractYamlScalarNode<?> construct(String value) {
-            return nodeFactory.bigIntegerNode(new BigInteger(value));
+            BigInteger number = new BigInteger(value);
+            if (Numbers.fitsIntoByte(number)) {
+                return nodeFactory.byteNode(number.byteValue());
+            } else if (Numbers.fitsIntoShort(number)) {
+                return nodeFactory.shortNode(number.shortValue());
+            } else if (Numbers.fitsIntoInt(number)) {
+                return nodeFactory.intNode(number.intValue());
+            } else if (Numbers.fitsIntoLong(number)) {
+                return nodeFactory.longNode(number.longValue());
+            } else {
+                return nodeFactory.bigIntegerNode(number);
+            }
         }
     }
 

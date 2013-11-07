@@ -15,9 +15,6 @@
  */
 package com.github.autermann.snakeyaml.api.nodes;
 
-import java.math.BigDecimal;
-import java.math.BigInteger;
-
 import com.google.common.base.Objects;
 
 public abstract class AbstractYamlNumberNode extends AbstractYamlScalarNode<Number> {
@@ -28,83 +25,38 @@ public abstract class AbstractYamlNumberNode extends AbstractYamlScalarNode<Numb
     }
 
     @Override
-    public byte byteValue() {
+    public byte asByteValue(byte defaultValue) {
         return numberValue().byteValue();
     }
 
     @Override
-    public byte asByteValue(byte defaultValue) {
-        return byteValue();
-    }
-
-    @Override
-    public short shortValue() {
+    public short asShortValue(short defaultValue) {
         return numberValue().shortValue();
     }
 
     @Override
-    public short asShortValue(short defaultValue) {
-        return shortValue();
-    }
-
-    @Override
-    public int intValue() {
+    public int asIntValue(int defaultValue) {
         return numberValue().intValue();
     }
 
     @Override
-    public int asIntValue(int defaultValue) {
-        return intValue();
-    }
-
-    @Override
-    public long longValue() {
+    public long asLongValue(long defaultValue) {
         return numberValue().longValue();
     }
 
     @Override
-    public long asLongValue(long defaultValue) {
-        return longValue();
-    }
-
-    @Override
-    public float floatValue() {
+    public float asFloatValue(float defaultValue) {
         return numberValue().floatValue();
     }
 
     @Override
-    public float asFloatValue(float defaultValue) {
-        return floatValue();
-    }
-
-    @Override
-    public double doubleValue() {
-        return numberValue().doubleValue();
-    }
-
-    @Override
     public double asDoubleValue(double defaultValue) {
-        return doubleValue();
-    }
-
-    @Override
-    public BigDecimal asBigDecimalValue(BigDecimal defaultValue) {
-        return bigDecimalValue();
+        return numberValue().doubleValue();
     }
 
     @Override
     public Number asNumberValue(Number defaultValue) {
         return numberValue();
-    }
-
-    @Override
-    public BigInteger asBigIntegerValue(BigInteger defaultValue) {
-        return bigIntegerValue();
-    }
-
-    @Override
-    public String asTextValue(String defaultValue) {
-        return textValue();
     }
 
     @Override
@@ -125,7 +77,12 @@ public abstract class AbstractYamlNumberNode extends AbstractYamlScalarNode<Numb
     }
 
     @Override
-    public Number value() {
-        return numberValue();
+    public String asTextValue(String defaultValue) {
+        return value().toString();
+    }
+
+    @Override
+    public Number numberValue() {
+        return value();
     }
 }

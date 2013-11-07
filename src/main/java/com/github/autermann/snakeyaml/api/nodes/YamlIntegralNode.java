@@ -15,7 +15,6 @@
  */
 package com.github.autermann.snakeyaml.api.nodes;
 
-import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Date;
 
@@ -24,23 +23,12 @@ import org.yaml.snakeyaml.nodes.Tag;
 
 import com.github.autermann.snakeyaml.api.ReturningYamlNodeVisitor;
 import com.github.autermann.snakeyaml.api.YamlNodeVisitor;
-import com.google.common.base.Preconditions;
 
-public class YamlIntegralNode extends AbstractYamlNumberNode {
-    private final static BigInteger MIN_LONG = BigInteger.valueOf(Long.MIN_VALUE);
-    private final static BigInteger MAX_LONG = BigInteger.valueOf(Long.MAX_VALUE);
-
-    private final BigInteger value;
-
-    public YamlIntegralNode(BigInteger value) {
-        this.value = Preconditions.checkNotNull(value);
-    }
-
-    @Override
-    public BigInteger numberValue() {
-        return this.value;
-    }
-
+/**
+ *
+ * @author Christian Autermann
+ */
+public abstract class YamlIntegralNode extends AbstractYamlNumberNode {
     @Override
     public Tag tag() {
         return Tag.INT;
@@ -52,13 +40,33 @@ public class YamlIntegralNode extends AbstractYamlNumberNode {
     }
 
     @Override
-    public BigInteger bigIntegerValue() {
-        return numberValue();
+    public boolean isBigInteger() {
+        return true;
     }
 
     @Override
-    public BigDecimal bigDecimalValue() {
-        return new BigDecimal(numberValue());
+    public boolean isLong() {
+        return fitsIntoLong();
+    }
+
+    @Override
+    public boolean isInt() {
+        return fitsIntoInt();
+    }
+
+    @Override
+    public boolean isShort() {
+        return fitsIntoShort();
+    }
+
+    @Override
+    public boolean isByte() {
+        return fitsIntoByte();
+    }
+
+    @Override
+    public BigInteger bigIntegerValue() {
+        return BigInteger.valueOf(numberValue().longValue());
     }
 
     @Override
@@ -81,8 +89,57 @@ public class YamlIntegralNode extends AbstractYamlNumberNode {
         return fitsIntoLong() ? new DateTime(longValue()) : defaultValue;
     }
 
-    protected boolean fitsIntoLong() {
-        return value.compareTo(MIN_LONG) >= 0 &&
-               value.compareTo(MAX_LONG) >= 0;
+    @Override
+    public long asLongValue(long defaultValue) {
+        return fitsIntoLong() ? value().longValue() : defaultValue;
     }
+
+    @Override
+    public int asIntValue(int defaultValue) {
+        return fitsIntoInt() ? value().intValue() : defaultValue;
+    }
+
+    @Override
+    public short asShortValue(short defaultValue) {
+        return fitsIntoShort() ? value().shortValue() : defaultValue;
+    }
+
+    @Override
+    public byte asByteValue(byte defaultValue) {
+        return fitsIntoByte() ? value().byteValue() : defaultValue;
+    }
+
+    @Override
+    public BigInteger asBigIntegerValue(BigInteger defaultValue) {
+        return bigIntegerValue();
+    }
+
+    /**
+     * Checks if this {@code BigInteger} isInRange into a {@code long}.
+     *
+     * @return if the value is in range
+     */
+    public abstract boolean fitsIntoLong();
+
+    /**
+     * Checks if this {@code BigInteger} isInRange into a {@code int}.
+     *
+     * @return if the value is in range
+     */
+    public abstract boolean fitsIntoInt();
+
+    /**
+     * Checks if this {@code BigInteger} isInRange into a {@code byte}.
+     *
+     * @return if the value is in range
+     */
+    public abstract boolean fitsIntoByte();
+
+    /**
+     * Checks if this {@code BigInteger} isInRange into a {@code short}.
+     *
+     * @return if the value is in range
+     */
+    public abstract boolean fitsIntoShort();
+
 }

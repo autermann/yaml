@@ -15,49 +15,55 @@
  */
 package com.github.autermann.snakeyaml.api.nodes;
 
-import java.math.BigDecimal;
+public class YamlByteNode extends YamlIntegralNode {
+    private final byte value;
 
-import org.yaml.snakeyaml.nodes.Tag;
-
-import com.github.autermann.snakeyaml.api.ReturningYamlNodeVisitor;
-import com.github.autermann.snakeyaml.api.YamlNodeVisitor;
-import com.google.common.base.Preconditions;
-
-public class YamlDecimalNode extends AbstractYamlNumberNode {
-
-    private final BigDecimal value;
-
-    public YamlDecimalNode(BigDecimal value) {
-        this.value = Preconditions.checkNotNull(value);
+    public YamlByteNode(byte value) {
+        this.value = value;
     }
 
     @Override
-    public Tag tag() {
-        return Tag.FLOAT;
-    }
-
-    @Override
-    public boolean isDecimal() {
+    public boolean fitsIntoLong() {
         return true;
     }
 
     @Override
-    public BigDecimal bigDecimalValue() {
-        return value();
+    public boolean fitsIntoInt() {
+        return true;
     }
 
     @Override
-    public void accept(YamlNodeVisitor visitor) {
-        visitor.visit(this);
+    public boolean fitsIntoByte() {
+        return true;
     }
 
     @Override
-    public <T> T accept(ReturningYamlNodeVisitor<T> visitor) {
-        return visitor.visit(this);
+    public boolean fitsIntoShort() {
+        return true;
     }
 
     @Override
-    public BigDecimal value() {
+    public byte byteValue() {
+        return this.value;
+    }
+
+    @Override
+    public long longValue() {
+        return (long) this.value;
+    }
+
+    @Override
+    public int intValue() {
+        return (int) this.value;
+    }
+
+    @Override
+    public short shortValue() {
+        return (short) this.value;
+    }
+
+    @Override
+    public Byte value() {
         return this.value;
     }
 }

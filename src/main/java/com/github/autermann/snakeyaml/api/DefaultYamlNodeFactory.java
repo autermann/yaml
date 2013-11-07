@@ -20,16 +20,20 @@ import java.math.BigInteger;
 
 import org.joda.time.DateTime;
 
+import com.github.autermann.snakeyaml.api.nodes.YamlBigIntegerNode;
 import com.github.autermann.snakeyaml.api.nodes.YamlBinaryNode;
 import com.github.autermann.snakeyaml.api.nodes.YamlBooleanNode;
+import com.github.autermann.snakeyaml.api.nodes.YamlByteNode;
 import com.github.autermann.snakeyaml.api.nodes.YamlDecimalNode;
-import com.github.autermann.snakeyaml.api.nodes.YamlIntegralNode;
+import com.github.autermann.snakeyaml.api.nodes.YamlIntegerNode;
+import com.github.autermann.snakeyaml.api.nodes.YamlLongNode;
 import com.github.autermann.snakeyaml.api.nodes.YamlMappingNode;
 import com.github.autermann.snakeyaml.api.nodes.YamlNullNode;
 import com.github.autermann.snakeyaml.api.nodes.YamlOrderedMappingNode;
 import com.github.autermann.snakeyaml.api.nodes.YamlPairsNode;
 import com.github.autermann.snakeyaml.api.nodes.YamlSequenceNode;
 import com.github.autermann.snakeyaml.api.nodes.YamlSetNode;
+import com.github.autermann.snakeyaml.api.nodes.YamlShortNode;
 import com.github.autermann.snakeyaml.api.nodes.YamlTextNode;
 import com.github.autermann.snakeyaml.api.nodes.YamlTimeNode;
 
@@ -52,8 +56,48 @@ public class DefaultYamlNodeFactory extends YamlNodeFactory {
     }
 
     @Override
-    protected YamlIntegralNode createIntegralNode(BigInteger value) {
-        return new YamlIntegralNode(value);
+    protected YamlBigIntegerNode createBigIntegerNode(BigInteger value) {
+        return new YamlBigIntegerNode(value);
+    }
+
+    @Override
+    public YamlBooleanNode booleanNode(boolean value) {
+        return YamlBooleanNode.of(value);
+    }
+
+    @Override
+    protected YamlBinaryNode createBinaryNode(byte[] value) {
+        return new YamlBinaryNode(value);
+    }
+
+    @Override
+    public YamlNullNode nullNode() {
+        return YamlNullNode.instance();
+    }
+
+    @Override
+    protected YamlTimeNode createDateTimeNode(DateTime value) {
+        return new YamlTimeNode(value);
+    }
+
+    @Override
+    public YamlByteNode byteNode(byte value) {
+        return new YamlByteNode(value);
+    }
+
+    @Override
+    public YamlShortNode shortNode(short value) {
+        return new YamlShortNode(value);
+    }
+
+    @Override
+    public YamlIntegerNode intNode(int value) {
+        return new YamlIntegerNode(value);
+    }
+
+    @Override
+    public YamlLongNode longNode(long value) {
+        return new YamlLongNode(value);
     }
 
     @Override
@@ -79,26 +123,6 @@ public class DefaultYamlNodeFactory extends YamlNodeFactory {
     @Override
     public YamlSetNode setNode() {
         return new YamlSetNode(this);
-    }
-
-    @Override
-    public YamlBooleanNode booleanNode(boolean value) {
-        return YamlBooleanNode.of(value);
-    }
-
-    @Override
-    protected YamlBinaryNode createBinaryNode(byte[] value) {
-        return new YamlBinaryNode(value);
-    }
-
-    @Override
-    public YamlNullNode nullNode() {
-        return YamlNullNode.instance();
-    }
-
-    @Override
-    protected YamlTimeNode createDateTimeNode(DateTime value) {
-        return new YamlTimeNode(value);
     }
 
     public static DefaultYamlNodeFactory instance() {
