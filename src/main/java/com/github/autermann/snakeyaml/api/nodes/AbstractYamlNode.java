@@ -27,6 +27,12 @@ import org.yaml.snakeyaml.DumperOptions;
 import com.github.autermann.snakeyaml.api.Yaml;
 import com.github.autermann.snakeyaml.api.YamlNode;
 
+/**
+ * A abstract {@link YamlNode} offering default implementations for most
+ * methods.
+ *
+ * @author Christian Autermann
+ */
 public abstract class AbstractYamlNode implements YamlNode {
 
     @Override

@@ -21,8 +21,16 @@ import com.github.autermann.snakeyaml.api.ReturningYamlNodeVisitor;
 import com.github.autermann.snakeyaml.api.YamlNode;
 import com.github.autermann.snakeyaml.api.YamlNodeVisitor;
 
+/**
+ * A {@link YamlNode} representing a missing (non-existing) node.
+ *
+ * @author Christian Autermann
+ */
 public class YamlMissingNode extends AbstractYamlNode {
-    private static final YamlMissingNode instance = new YamlMissingNode();
+    /**
+     * The singleton instance.
+     */
+    private static final YamlMissingNode INSTANCE = new YamlMissingNode();
 
     @Override
     public String toString() {
@@ -64,8 +72,13 @@ public class YamlMissingNode extends AbstractYamlNode {
         return null;
     }
 
+    /**
+     * Gets the singleton missing node instance.
+     *
+     * @return the instance
+     */
     public static YamlMissingNode instance() {
-        return instance;
+        return INSTANCE;
     }
 
 }

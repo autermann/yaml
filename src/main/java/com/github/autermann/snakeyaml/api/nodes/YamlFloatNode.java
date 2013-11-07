@@ -17,9 +17,24 @@ package com.github.autermann.snakeyaml.api.nodes;
 
 import java.math.BigDecimal;
 
+import com.github.autermann.snakeyaml.api.YamlNode;
+
+/**
+ * A {@link YamlNode} for {@code float} values.
+ *
+ * @author Christian Autermann
+ */
 public class YamlFloatNode extends YamlDecimalNode {
+    /**
+     * The {@code float} value.
+     */
     private final float value;
 
+    /**
+     * Creates a new {@link YamlFloatNode}.
+     *
+     * @param value the value
+     */
     public YamlFloatNode(float value) {
         this.value = value;
     }

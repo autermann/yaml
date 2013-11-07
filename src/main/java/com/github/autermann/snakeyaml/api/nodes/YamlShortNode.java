@@ -17,11 +17,25 @@ package com.github.autermann.snakeyaml.api.nodes;
 
 import java.math.BigInteger;
 
+import com.github.autermann.snakeyaml.api.YamlNode;
 import com.github.autermann.snakeyaml.api.util.Numbers;
 
+/**
+ * A {@link YamlNode} for {@code short} values.
+ *
+ * @author Christian Autermann
+ */
 public class YamlShortNode extends YamlIntegralNode {
+    /**
+     * The {@code short} value.
+     */
     private final short value;
 
+    /**
+     * Creates a new {@link YamlShortNode}.
+     *
+     * @param value the value
+     */
     public YamlShortNode(short value) {
         this.value = value;
     }

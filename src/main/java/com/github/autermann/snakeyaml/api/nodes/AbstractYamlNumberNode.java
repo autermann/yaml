@@ -15,8 +15,14 @@
  */
 package com.github.autermann.snakeyaml.api.nodes;
 
+import com.github.autermann.snakeyaml.api.YamlNode;
 import com.google.common.base.Objects;
 
+/**
+ * A abstract {@link YamlNode} representing a {@link Number} value.
+ *
+ * @author Christian Autermann
+ */
 public abstract class AbstractYamlNumberNode extends AbstractYamlScalarNode<Number> {
 
     @Override

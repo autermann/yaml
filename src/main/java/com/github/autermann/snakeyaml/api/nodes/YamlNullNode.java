@@ -18,12 +18,27 @@ package com.github.autermann.snakeyaml.api.nodes;
 import org.yaml.snakeyaml.nodes.Tag;
 
 import com.github.autermann.snakeyaml.api.ReturningYamlNodeVisitor;
+import com.github.autermann.snakeyaml.api.YamlNode;
 import com.github.autermann.snakeyaml.api.YamlNodeVisitor;
 
+/**
+ * A {@link YamlNode} for {@literal null} values.
+ *
+ * @author Christian Autermann
+ */
 public class YamlNullNode extends AbstractYamlScalarNode<Object> {
-    private static final YamlNullNode instance = new YamlNullNode();
+    /**
+     * The singleton instance.
+     */
+    private static final YamlNullNode INSTANCE = new YamlNullNode();
+    /**
+     * The {@literal String} value for {@link YamlNullNode}s.
+     */
     private static final String TEXT_VALUE = "null";
 
+    /**
+     * Private constructor for singleton.
+     */
     private YamlNullNode() {
     }
 
@@ -67,8 +82,12 @@ public class YamlNullNode extends AbstractYamlScalarNode<Object> {
         return visitor.visit(this);
     }
 
-    @SuppressWarnings("unchecked")
+    /**
+     * Gets the singleton {@literal null} node instance.
+     *
+     * @return the instance
+     */
     public static YamlNullNode instance() {
-        return instance;
+        return INSTANCE;
     }
 }

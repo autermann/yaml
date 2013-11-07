@@ -15,6 +15,7 @@
  */
 package com.github.autermann.snakeyaml.api.nodes;
 
+import static com.google.common.base.Preconditions.checkNotNull;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Date;
@@ -24,13 +25,27 @@ import org.joda.time.format.ISODateTimeFormat;
 import org.yaml.snakeyaml.nodes.Tag;
 
 import com.github.autermann.snakeyaml.api.ReturningYamlNodeVisitor;
+import com.github.autermann.snakeyaml.api.YamlNode;
 import com.github.autermann.snakeyaml.api.YamlNodeVisitor;
 
+/**
+ * A {@link YamlNode} for {@link String} values.
+ *
+ * @author Christian Autermann
+ */
 public class YamlTextNode extends AbstractYamlScalarNode<String> {
+    /**
+     * The {@link String} value.
+     */
     private final String value;
 
+    /**
+     * Creates a new {@link YamlTextNode}.
+     *
+     * @param value the value
+     */
     public YamlTextNode(String value) {
-        this.value = value;
+        this.value = checkNotNull(value);
     }
 
     @Override

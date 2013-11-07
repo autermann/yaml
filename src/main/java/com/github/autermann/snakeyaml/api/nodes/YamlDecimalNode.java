@@ -20,8 +20,14 @@ import java.math.BigDecimal;
 import org.yaml.snakeyaml.nodes.Tag;
 
 import com.github.autermann.snakeyaml.api.ReturningYamlNodeVisitor;
+import com.github.autermann.snakeyaml.api.YamlNode;
 import com.github.autermann.snakeyaml.api.YamlNodeVisitor;
 
+/**
+ * A abstract {@link YamlNode} for decimal values.
+ *
+ * @author Christian Autermann
+ */
 public abstract class YamlDecimalNode extends AbstractYamlNumberNode {
 
     @Override

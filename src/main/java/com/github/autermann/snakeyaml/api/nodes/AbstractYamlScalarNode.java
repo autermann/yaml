@@ -17,6 +17,13 @@ package com.github.autermann.snakeyaml.api.nodes;
 
 import com.github.autermann.snakeyaml.api.YamlNode;
 
+/**
+ * Abstract {@link YamlNode} to represent a scalar node.
+ *
+ * @param <T> the value type
+ *
+ * @author Christian Autermann
+ */
 public abstract class AbstractYamlScalarNode<T> extends AbstractYamlNode {
 
     @Override

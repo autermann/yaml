@@ -25,9 +25,22 @@ import com.github.autermann.snakeyaml.api.YamlNodeFactory;
 import com.github.autermann.snakeyaml.api.YamlNodeVisitor;
 import com.google.common.collect.Lists;
 
+/**
+ * A {@link YamlNode} representing a {@code !!seq} sequence.
+ *
+ * @author Christian Autermann
+ */
 public class YamlSequenceNode extends AbstractYamlSequenceNode<YamlSequenceNode> {
+    /**
+     * The children of this node.
+     */
     private final List<YamlNode> nodes;
 
+    /**
+     * Creates a new {@link YamlSequenceNode}.
+     *
+     * @param factory the factory to create children
+     */
     public YamlSequenceNode(YamlNodeFactory factory) {
         super(factory);
         this.nodes = Lists.newArrayList();

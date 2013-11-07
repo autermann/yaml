@@ -22,9 +22,11 @@ import org.joda.time.DateTime;
 import org.yaml.snakeyaml.nodes.Tag;
 
 import com.github.autermann.snakeyaml.api.ReturningYamlNodeVisitor;
+import com.github.autermann.snakeyaml.api.YamlNode;
 import com.github.autermann.snakeyaml.api.YamlNodeVisitor;
 
 /**
+ * A abstract {@link YamlNode} for integral values.
  *
  * @author Christian Autermann
  */

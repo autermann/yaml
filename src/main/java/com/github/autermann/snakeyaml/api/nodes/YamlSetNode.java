@@ -27,12 +27,25 @@ import com.github.autermann.snakeyaml.api.YamlNodeVisitor;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
 
+/**
+ * A {@link YamlNode} for {@code !!set} mappings.
+ *
+ * @author Christian Autermann
+ */
 public class YamlSetNode extends AbstractYamlSequenceNode<YamlSetNode> {
+    /**
+     * The children of this node.
+     */
     private final LinkedHashSet<YamlNode> nodes;
 
+    /**
+     * Create a new {@link YamlSetNode}.
+     *
+     * @param factory the factory to create children
+     */
     public YamlSetNode(YamlNodeFactory factory) {
         super(factory);
-        this.nodes =  Sets.newLinkedHashSet();
+        this.nodes = Sets.newLinkedHashSet();
     }
 
     @Override

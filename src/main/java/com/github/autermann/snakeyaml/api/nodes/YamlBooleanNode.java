@@ -21,10 +21,22 @@ import java.math.BigInteger;
 import org.yaml.snakeyaml.nodes.Tag;
 
 import com.github.autermann.snakeyaml.api.ReturningYamlNodeVisitor;
+import com.github.autermann.snakeyaml.api.YamlNode;
 import com.github.autermann.snakeyaml.api.YamlNodeVisitor;
 
+/**
+ * A {@link YamlNode} for {@code boolean} values.
+ *
+ * @author Christian Autermann
+ */
 public abstract class YamlBooleanNode extends AbstractYamlScalarNode<Boolean> {
+    /**
+     * Singleton for {@code true}.
+     */
     private static final YamlBooleanNode TRUE = new TrueNode();
+    /**
+     * Singleton for {@code false}.
+     */
     private static final YamlBooleanNode FALSE = new FalseNode();
 
     @Override
@@ -36,7 +48,6 @@ public abstract class YamlBooleanNode extends AbstractYamlScalarNode<Boolean> {
     public boolean equals(Object o) {
         return o == this;
     }
-
 
     @Override
     public Tag tag() {
@@ -99,12 +110,26 @@ public abstract class YamlBooleanNode extends AbstractYamlScalarNode<Boolean> {
         return true;
     }
 
+    /**
+     * Gets the a instance of {@link YamlBooleanNode} for the supplied
+     * {@code boolean}.
+     *
+     * @param value the value
+     *
+     * @return the {@link YamlBooleanNode}
+     */
     public static YamlBooleanNode of(boolean value) {
         return value ? TRUE : FALSE;
     }
 
+    /**
+     * Implementation for {@code true}.
+     */
     private static class TrueNode extends YamlBooleanNode {
 
+        /**
+         * Private singleton constructor.
+         */
         private TrueNode() {
         }
 
@@ -169,8 +194,13 @@ public abstract class YamlBooleanNode extends AbstractYamlScalarNode<Boolean> {
         }
     }
 
+    /**
+     * Implementation for {@code false}.
+     */
     private static class FalseNode extends YamlBooleanNode {
-
+        /**
+         * Private singleton constructor.
+         */
         private FalseNode() {
         }
 

@@ -15,22 +15,54 @@
  */
 package com.github.autermann.snakeyaml.api.nodes;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
+import com.github.autermann.snakeyaml.api.YamlNode;
 import com.github.autermann.snakeyaml.api.YamlNodeFactory;
 
+/**
+ * A abstract {@link YamlNode} representing a container holding child nodes.
+ *
+ * @author Christian Autermann
+ */
 public abstract class AbstractYamlContainerNode extends AbstractYamlNode {
 
+    /**
+     * The {@link YamlNodeFactory} to create children with.
+     */
     private final YamlNodeFactory factory;
 
+    /**
+     * Creates a new {@link AbstractYamlContainerNode}.
+     *
+     * @param factory the factory to create children with
+     */
     public AbstractYamlContainerNode(YamlNodeFactory factory) {
-        this.factory = factory;
+        this.factory = checkNotNull(factory);
     }
 
+    /**
+     * Gets the {@link YamlNodeFactory} to create children with.
+     *
+     * @return the {@link YamlNodeFactory}
+     *
+     */
     public YamlNodeFactory getNodeFactory() {
         return factory;
     }
 
+    /**
+     * Gets the size of this container node.
+     *
+     * @return the size
+     */
     public abstract int size();
 
+    /**
+     * Checks if this container node is empty.
+     *
+     * @return {@code true} if it is empty, else {@code false}
+     */
     public abstract boolean isEmpty();
 
     @Override

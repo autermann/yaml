@@ -15,12 +15,26 @@
  */
 package com.github.autermann.snakeyaml.api.nodes;
 
+import com.github.autermann.snakeyaml.api.YamlNode;
 import com.github.autermann.snakeyaml.api.util.Numbers;
 
+/**
+ * A {@link YamlNode} for {@code long} values.
+ *
+ * @author Christian Autermann
+ */
 public class YamlLongNode extends YamlIntegralNode {
 
+    /**
+     * The {@code long} value.
+     */
     private final long value;
 
+    /**
+     * Creates a new {@link YamlLongNode}.
+     *
+     * @param value the value
+     */
     public YamlLongNode(long value) {
         this.value = value;
     }

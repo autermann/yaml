@@ -17,11 +17,25 @@ package com.github.autermann.snakeyaml.api.nodes;
 
 import java.math.BigDecimal;
 
+import com.github.autermann.snakeyaml.api.YamlNode;
 import com.google.common.base.Preconditions;
 
+/**
+ * A {@link YamlNode} for {@link BigDecimal}s.
+ *
+ * @author Christian Autermann
+ */
 public class YamlBigDecimalNode extends YamlDecimalNode {
+    /**
+     * The {@link BigDecimal} value.
+     */
     private final BigDecimal value;
 
+    /**
+     * Create a new {@link YamlBigDecimalNode}.
+     *
+     * @param value the value
+     */
     public YamlBigDecimalNode(BigDecimal value) {
         this.value = Preconditions.checkNotNull(value);
     }

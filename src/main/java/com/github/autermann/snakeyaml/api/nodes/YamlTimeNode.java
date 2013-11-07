@@ -26,13 +26,27 @@ import org.joda.time.format.ISODateTimeFormat;
 import org.yaml.snakeyaml.nodes.Tag;
 
 import com.github.autermann.snakeyaml.api.ReturningYamlNodeVisitor;
+import com.github.autermann.snakeyaml.api.YamlNode;
 import com.github.autermann.snakeyaml.api.YamlNodeVisitor;
 
+/**
+ * A {@link YamlNode} for {@link DateTime} values.
+ *
+ * @author Christian Autermann
+ */
 public class YamlTimeNode extends AbstractYamlScalarNode<DateTime> {
+    /**
+     * The {@link DateTime} value.
+     */
     private final DateTime value;
 
-    public YamlTimeNode(DateTime time) {
-        this.value = checkNotNull(time);
+    /**
+     * Creates a new {@link YamlTimeNode}.
+     *
+     * @param value the value
+     */
+    public YamlTimeNode(DateTime value) {
+        this.value = checkNotNull(value);
     }
 
     @Override

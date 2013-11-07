@@ -19,11 +19,25 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.math.BigInteger;
 
+import com.github.autermann.snakeyaml.api.YamlNode;
 import com.github.autermann.snakeyaml.api.util.Numbers;
 
+/**
+ * A {@link YamlNode} for {@link BigInteger}s.
+ *
+ * @author Christian Autermann
+ */
 public class YamlBigIntegerNode extends YamlIntegralNode {
+    /**
+     * The {@link BigInteger} value.
+     */
     private final BigInteger value;
 
+    /**
+     * Creates a new {@link YamlBigIntegerNode}.
+     *
+     * @param value the value
+     */
     public YamlBigIntegerNode(BigInteger value) {
         this.value = checkNotNull(value);
     }

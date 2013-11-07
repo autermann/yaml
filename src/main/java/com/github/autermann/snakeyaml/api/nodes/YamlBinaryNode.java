@@ -22,12 +22,26 @@ import java.util.Arrays;
 import org.yaml.snakeyaml.nodes.Tag;
 
 import com.github.autermann.snakeyaml.api.ReturningYamlNodeVisitor;
+import com.github.autermann.snakeyaml.api.YamlNode;
 import com.github.autermann.snakeyaml.api.YamlNodeVisitor;
 import com.google.common.io.BaseEncoding;
 
+/**
+ * A {@link YamlNode} for binary data.
+ *
+ * @author Christian Autermann
+ */
 public class YamlBinaryNode extends AbstractYamlScalarNode<byte[]> {
+    /**
+     * The binary value.
+     */
     private final byte[] value;
 
+    /**
+     * Creates a new {@link YamlBinaryNode}.
+     *
+     * @param value the value
+     */
     public YamlBinaryNode(byte[] value) {
         this.value = checkNotNull(value);
     }

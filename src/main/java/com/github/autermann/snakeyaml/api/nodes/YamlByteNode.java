@@ -15,9 +15,24 @@
  */
 package com.github.autermann.snakeyaml.api.nodes;
 
+import com.github.autermann.snakeyaml.api.YamlNode;
+
+/**
+ * A {@link YamlNode} for {@code byte} values.
+ *
+ * @author Christian Autermann
+ */
 public class YamlByteNode extends YamlIntegralNode {
+    /**
+     * The {@code byte} value.
+     */
     private final byte value;
 
+    /**
+     * Creates a new {@link YamlByteNode}.
+     *
+     * @param value the value
+     */
     public YamlByteNode(byte value) {
         this.value = value;
     }
