@@ -20,11 +20,6 @@ import java.math.BigInteger;
 
 import com.google.common.base.Objects;
 
-/**
- * TODO JavaDoc
- *
- * @author Christian Autermann <autermann@uni-muenster.de>
- */
 public abstract class AbstractYamlNumberNode extends AbstractYamlScalarNode<Number> {
 
     @Override

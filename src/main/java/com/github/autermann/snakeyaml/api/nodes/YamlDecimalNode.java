@@ -24,11 +24,6 @@ import com.github.autermann.snakeyaml.api.ReturningYamlNodeVisitor;
 import com.github.autermann.snakeyaml.api.YamlNodeVisitor;
 import com.google.common.base.Preconditions;
 
-/**
- * TODO JavaDoc
- *
- * @author Christian Autermann <autermann@uni-muenster.de>
- */
 public class YamlDecimalNode extends AbstractYamlNumberNode {
 
     private final BigDecimal value;

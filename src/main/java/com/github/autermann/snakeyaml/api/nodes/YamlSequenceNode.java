@@ -25,11 +25,6 @@ import com.github.autermann.snakeyaml.api.YamlNodeFactory;
 import com.github.autermann.snakeyaml.api.YamlNodeVisitor;
 import com.google.common.collect.Lists;
 
-/**
- * TODO JavaDoc
- *
- * @author Christian Autermann <autermann@uni-muenster.de>
- */
 public class YamlSequenceNode extends AbstractYamlSequenceNode<YamlSequenceNode> {
     private final List<YamlNode> nodes;
 

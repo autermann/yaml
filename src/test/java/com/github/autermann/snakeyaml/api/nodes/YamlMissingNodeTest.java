@@ -42,11 +42,6 @@ import org.junit.rules.ErrorCollector;
 
 import com.github.autermann.snakeyaml.api.YamlNode;
 
-/**
- * TODO JavaDoc
- *
- * @author Christian Autermann <autermann@uni-muenster.de>
- */
 public class YamlMissingNodeTest {
 
     @Rule

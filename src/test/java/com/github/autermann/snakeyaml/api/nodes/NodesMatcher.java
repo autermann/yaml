@@ -24,11 +24,6 @@ import org.junit.rules.ErrorCollector;
 
 import com.github.autermann.snakeyaml.api.YamlNode;
 
-/**
- * TODO JavaDoc
- *
- * @author Christian Autermann <autermann@uni-muenster.de>
- */
 public class NodesMatcher extends ErrorCollector {
 
     public static <T> Matcher<T> noneOf(Matcher<? super T>... matchers) {

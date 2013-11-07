@@ -52,11 +52,6 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 import com.google.common.io.BaseEncoding;
 
-/**
- * TODO JavaDoc
- *
- * @author Christian Autermann <autermann@uni-muenster.de>
- */
 public class YamlNodeRepresenter extends Representer {
 
     private final BaseEncoding binaryEncoding;

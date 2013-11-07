@@ -47,11 +47,6 @@ import org.junit.rules.ErrorCollector;
 import com.github.autermann.snakeyaml.api.YamlNode;
 import com.github.autermann.snakeyaml.api.YamlNodeFactory;
 
-/**
- * TODO JavaDoc
- *
- * @author Christian Autermann <autermann@uni-muenster.de>
- */
 public class YamlPairsNodeTest {
     private final YamlNodeFactory factory = YamlNodeFactory.getDefault();
 

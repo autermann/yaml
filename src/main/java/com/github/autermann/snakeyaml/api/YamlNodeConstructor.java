@@ -39,11 +39,6 @@ import com.github.autermann.snakeyaml.api.nodes.YamlSetNode;
 import com.google.common.base.Supplier;
 import com.google.common.io.BaseEncoding;
 
-/**
- * TODO JavaDoc
- *
- * @author Chrissetian Ausetermann <c.ausetermann@52norseth.org>
- */
 public class YamlNodeConstructor extends SafeConstructor {
     private final DateTimeFormatter timeEncoding;
     private final YamlNodeFactory nodeFactory;

@@ -21,11 +21,6 @@ import com.github.autermann.snakeyaml.api.YamlNode;
 import com.google.common.base.Supplier;
 import com.google.common.collect.Lists;
 
-/**
- * TODO JavaDoc
- *
- * @author Christian Autermann <autermann@uni-muenster.de>
- */
 public class LinkedListSupplier implements Supplier<List<?>> {
     private static final LinkedListSupplier INSTANCE = new LinkedListSupplier();
 

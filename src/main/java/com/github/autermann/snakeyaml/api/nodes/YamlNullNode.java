@@ -20,11 +20,6 @@ import org.yaml.snakeyaml.nodes.Tag;
 import com.github.autermann.snakeyaml.api.ReturningYamlNodeVisitor;
 import com.github.autermann.snakeyaml.api.YamlNodeVisitor;
 
-/**
- * TODO JavaDoc
- *
- * @author Christian Autermann <autermann@uni-muenster.de>
- */
 public class YamlNullNode extends AbstractYamlScalarNode<Object> {
     private static final YamlNullNode instance = new YamlNullNode();
     private static final String TEXT_VALUE = "null";

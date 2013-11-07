@@ -21,11 +21,6 @@ import com.github.autermann.snakeyaml.api.ReturningYamlNodeVisitor;
 import com.github.autermann.snakeyaml.api.YamlNode;
 import com.github.autermann.snakeyaml.api.YamlNodeVisitor;
 
-/**
- * TODO JavaDoc
- *
- * @author Christian Autermann <autermann@uni-muenster.de>
- */
 public class YamlMissingNode extends AbstractYamlNode {
     private static final YamlMissingNode instance = new YamlMissingNode();
 

@@ -27,11 +27,6 @@ import org.yaml.snakeyaml.DumperOptions;
 import com.github.autermann.snakeyaml.api.Yaml;
 import com.github.autermann.snakeyaml.api.YamlNode;
 
-/**
- * TODO JavaDoc
- *
- * @author Christian Autermann <autermann@uni-muenster.de>
- */
 public abstract class AbstractYamlNode implements YamlNode {
 
     @Override

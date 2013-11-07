@@ -29,11 +29,6 @@ import com.github.autermann.snakeyaml.api.YamlNodes;
 import com.google.common.base.Joiner;
 import com.google.common.collect.Iterators;
 
-/**
- * TODO JavaDoc
- *
- * @author Christian Autermann <autermann@uni-muenster.de>
- */
 public abstract class AbstractYamlSequenceNode<T extends AbstractYamlSequenceNode<T>>
         extends AbstractYamlContainerNode implements Iterable<YamlNode> {
     private static final Joiner JOINER = Joiner.on(", ");

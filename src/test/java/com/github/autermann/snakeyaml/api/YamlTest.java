@@ -24,13 +24,6 @@ import java.util.Random;
 import org.joda.time.DateTime;
 import org.junit.Test;
 
-
-
-/**
- * TODO JavaDoc
- *
- * @author Christian Autermann <autermann@uni-muenster.de>
- */
 public class YamlTest {
     public static final Yaml YAML = new Yaml();
     private final YamlNodeFactory factory = YamlNodeFactory.getDefault();

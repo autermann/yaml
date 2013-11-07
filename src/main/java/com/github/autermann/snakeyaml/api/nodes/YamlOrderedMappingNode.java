@@ -25,11 +25,6 @@ import com.github.autermann.snakeyaml.api.YamlNodeFactory;
 import com.github.autermann.snakeyaml.api.YamlNodeVisitor;
 import com.google.common.collect.Maps;
 
-/**
- * TODO JavaDoc
- *
- * @author Christian Autermann <autermann@uni-muenster.de>
- */
 public class YamlOrderedMappingNode extends YamlMappingNode {
 
     public YamlOrderedMappingNode(YamlNodeFactory factory) {

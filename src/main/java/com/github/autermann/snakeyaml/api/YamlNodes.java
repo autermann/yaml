@@ -20,11 +20,6 @@ import com.github.autermann.snakeyaml.api.nodes.YamlNullNode;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 
-/**
- * TODO JavaDoc
- *
- * @author Christian Autermann <autermann@uni-muenster.de>
- */
 public class YamlNodes {
 
     private YamlNodes() {

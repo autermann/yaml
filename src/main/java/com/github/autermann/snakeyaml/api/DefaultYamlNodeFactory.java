@@ -33,11 +33,6 @@ import com.github.autermann.snakeyaml.api.nodes.YamlSetNode;
 import com.github.autermann.snakeyaml.api.nodes.YamlTextNode;
 import com.github.autermann.snakeyaml.api.nodes.YamlTimeNode;
 
-/**
- * TODO JavaDoc
- *
- * @author Christian Autermann <autermann@uni-muenster.de>
- */
 public class DefaultYamlNodeFactory extends YamlNodeFactory {
 
     private static final DefaultYamlNodeFactory instance

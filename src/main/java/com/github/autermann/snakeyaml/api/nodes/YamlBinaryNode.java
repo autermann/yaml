@@ -25,11 +25,6 @@ import com.github.autermann.snakeyaml.api.ReturningYamlNodeVisitor;
 import com.github.autermann.snakeyaml.api.YamlNodeVisitor;
 import com.google.common.io.BaseEncoding;
 
-/**
- * TODO JavaDoc
- *
- * @author Christian Autermann <autermann@uni-muenster.de>
- */
 public class YamlBinaryNode extends AbstractYamlScalarNode<byte[]> {
     private final byte[] value;
 

@@ -36,11 +36,6 @@ import com.github.autermann.snakeyaml.api.nodes.YamlTextNode;
 import com.github.autermann.snakeyaml.api.nodes.YamlTimeNode;
 import com.google.common.base.Supplier;
 
-/**
- * TODO JavaDoc
- *
- * @author Christian Autermann <autermann@uni-muenster.de>
- */
 public abstract class YamlNodeFactory {
 
     public AbstractYamlScalarNode<?> binaryNode(Byte[] value) {

@@ -17,11 +17,6 @@ package com.github.autermann.snakeyaml.api.nodes;
 
 import com.github.autermann.snakeyaml.api.YamlNode;
 
-/**
- * TODO JavaDoc
- *
- * @author Christian Autermann <autermann@uni-muenster.de>
- */
 public abstract class AbstractYamlScalarNode<T> extends AbstractYamlNode {
 
     @Override

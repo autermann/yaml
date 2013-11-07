@@ -30,11 +30,6 @@ import com.github.autermann.snakeyaml.api.util.CastingFunction;
 import com.google.common.base.Charsets;
 import com.google.common.collect.Iterables;
 
-/**
- * TODO JavaDoc
- *
- * @author Christian Autermann <autermann@uni-muenster.de>
- */
 public class Yaml {
     protected final org.yaml.snakeyaml.Yaml delegate;
 

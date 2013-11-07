@@ -26,11 +26,6 @@ import org.yaml.snakeyaml.nodes.Tag;
 import com.github.autermann.snakeyaml.api.ReturningYamlNodeVisitor;
 import com.github.autermann.snakeyaml.api.YamlNodeVisitor;
 
-/**
- * TODO JavaDoc
- *
- * @author Christian Autermann <autermann@uni-muenster.de>
- */
 public class YamlTextNode extends AbstractYamlScalarNode<String> {
     private final String value;
 

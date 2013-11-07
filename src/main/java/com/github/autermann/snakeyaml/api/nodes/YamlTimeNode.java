@@ -28,11 +28,6 @@ import org.yaml.snakeyaml.nodes.Tag;
 import com.github.autermann.snakeyaml.api.ReturningYamlNodeVisitor;
 import com.github.autermann.snakeyaml.api.YamlNodeVisitor;
 
-/**
- * TODO JavaDoc
- *
- * @author Christian Autermann <autermann@uni-muenster.de>
- */
 public class YamlTimeNode extends AbstractYamlScalarNode<DateTime> {
     private final DateTime value;
 

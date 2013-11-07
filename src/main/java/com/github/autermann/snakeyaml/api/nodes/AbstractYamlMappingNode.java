@@ -27,12 +27,6 @@ import com.github.autermann.snakeyaml.api.YamlNodeFactory;
 import com.google.common.base.Joiner;
 import com.google.common.base.Joiner.MapJoiner;
 
-/**
- * TODO JavaDoc
- *
- * @author Christian Autermann <autermann@uni-muenster.de>
- * @param <T>
- */
 public abstract class AbstractYamlMappingNode<T extends AbstractYamlMappingNode<T>>
         extends AbstractYamlContainerNode {
     private static final MapJoiner JOINER = Joiner.on(", ")

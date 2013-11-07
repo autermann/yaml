@@ -27,11 +27,6 @@ import com.github.autermann.snakeyaml.api.YamlNodeVisitor;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
 
-/**
- * TODO JavaDoc
- *
- * @author Christian Autermann <autermann@uni-muenster.de>
- */
 public class YamlSetNode extends AbstractYamlSequenceNode<YamlSetNode> {
     private final LinkedHashSet<YamlNode> nodes;
 
