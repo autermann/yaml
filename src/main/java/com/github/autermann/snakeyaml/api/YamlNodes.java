@@ -20,8 +20,16 @@ import com.github.autermann.snakeyaml.api.nodes.YamlNullNode;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 
+/**
+ * Utility methods to handle {@link YamlNode}s.
+ *
+ * @author Christian Autermann
+ */
 public class YamlNodes {
 
+    /**
+     * Private constructor for utility class.
+     */
     private YamlNodes() {
     }
 
@@ -82,6 +90,9 @@ public class YamlNodes {
      * {@link Predicate} for {@link YamlNode}s that are not {@code null}.
      */
     private static class NotNullPredicate implements Predicate<YamlNode> {
+        /**
+         * The singleton instance.
+         */
         private static final NotNullPredicate INSTANCE
                 = new NotNullPredicate();
 
@@ -119,6 +130,9 @@ public class YamlNodes {
      * {@link Predicate} for {@link YamlNode}s that are not missing.
      */
     private static class NotMissingPredicate implements Predicate<YamlNode> {
+        /**
+         * The singleton instance.
+         */
         private static final NotMissingPredicate INSTANCE
                 = new NotMissingPredicate();
 

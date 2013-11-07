@@ -15,6 +15,7 @@
  */
 package com.github.autermann.snakeyaml.api;
 
+import com.github.autermann.snakeyaml.api.construct.YamlNodeConstructor;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.io.InputStream;
@@ -26,25 +27,47 @@ import java.util.Iterator;
 
 import org.yaml.snakeyaml.DumperOptions;
 
-import com.github.autermann.snakeyaml.api.util.CastingFunction;
 import com.google.common.base.Charsets;
-import com.google.common.collect.Iterables;
+import com.google.common.collect.UnmodifiableIterator;
 
 public class Yaml {
     private final org.yaml.snakeyaml.Yaml delegate;
 
+    /**
+     * Creates a new {@link Yaml} with default {@link DumperOptions} and
+     * {@link YamlNodeFactory}.
+     */
     public Yaml() {
         this(new DumperOptions(), YamlNodeFactory.createDefault());
     }
 
+    /**
+     * Creates a new {@link Yaml} with default {@link DumperOptions} and the
+     * supplied {@link YamlNodeFactory}.
+     *
+     * @param nodeFactory the node factory
+     */
     public Yaml(YamlNodeFactory nodeFactory) {
         this(new DumperOptions(), nodeFactory);
     }
 
+    /**
+     * Creates a new {@link Yaml} using a the default {@link YamlNodeFactory}
+     * and the supplied {@link DumperOptions}.
+     *
+     * @param dumperOptions the dumper options
+     */
     public Yaml(DumperOptions dumperOptions) {
         this(dumperOptions, YamlNodeFactory.createDefault());
     }
 
+    /**
+     * Creates a new {@link Yaml} using the supplied {@link YamlNodeFactory} and
+     * {@link DumperOptions}.
+     *
+     * @param dumperOptions the dumper options
+     * @param nodeFactory   the node factory
+     */
     public Yaml(DumperOptions dumperOptions, YamlNodeFactory nodeFactory) {
         checkNotNull(nodeFactory);
         checkNotNull(dumperOptions);
@@ -115,8 +138,25 @@ public class Yaml {
         return cast(getDelegate().loadAll(yaml));
     }
 
-    private Iterable<YamlNode> cast(Iterable<Object> nodes) {
-        return Iterables.transform(nodes, CastingFunction.<YamlNode>instance());
+    private Iterable<YamlNode> cast(final Iterable<Object> nodes) {
+        return new Iterable<YamlNode>() {
+            @Override
+            public Iterator<YamlNode> iterator() {
+                return new UnmodifiableIterator<YamlNode>() {
+                    private final Iterator<Object> iter = nodes.iterator();
+
+                    @Override
+                    public boolean hasNext() {
+                        return iter.hasNext();
+                    }
+
+                    @Override
+                    public YamlNode next() {
+                        return (YamlNode) iter.next();
+                    }
+                };
+            }
+        };
     }
 
     protected org.yaml.snakeyaml.Yaml getDelegate() {

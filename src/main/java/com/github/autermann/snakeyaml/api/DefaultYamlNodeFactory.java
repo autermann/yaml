@@ -55,6 +55,12 @@ public class DefaultYamlNodeFactory extends YamlNodeFactory {
      */
     private final DecimalPrecision decimalPrecision;
 
+    /**
+     * Creates a new {@code DefaultYamlNodeFactory} with the specified
+     * precision.
+     *
+     * @param precision the precision
+     */
     protected DefaultYamlNodeFactory(DecimalPrecision precision) {
         this.decimalPrecision = Preconditions.checkNotNull(precision);
     }
@@ -192,6 +198,14 @@ public class DefaultYamlNodeFactory extends YamlNodeFactory {
         return decimalPrecision;
     }
 
+    /**
+     * Creates a new {@link DefaultYamlNodeFactory} with the specified
+     * precision.
+     *
+     * @param precision the precision
+     *
+     * @return the factory
+     */
     public static DefaultYamlNodeFactory create(DecimalPrecision precision) {
         checkNotNull(precision);
         DefaultYamlNodeFactory fac = factories.get(precision);
@@ -202,6 +216,12 @@ public class DefaultYamlNodeFactory extends YamlNodeFactory {
         return fac;
     }
 
+    /**
+     * Creates a new {@link DefaultYamlNodeFactory} with the default precision
+     * {@link DecimalPrecision#BIG_DECIMAL}.
+     *
+     * @return the factory
+     */
     public static DefaultYamlNodeFactory create() {
         return create(DecimalPrecision.BIG_DECIMAL);
     }

@@ -142,7 +142,8 @@ public class YamlNodeRepresenter extends Representer {
         return bestStyle;
     }
 
-    private class YamlNodeRepresent extends AbstractReturningYamlNodeVisitor<Node>
+    private class YamlNodeRepresent
+            extends AbstractReturningYamlNodeVisitor<Node>
             implements Represent {
 
         @Override
