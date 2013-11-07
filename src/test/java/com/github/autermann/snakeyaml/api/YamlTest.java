@@ -97,14 +97,18 @@ public class YamlTest {
 
     @Test
     public void testDoubleNode() {
-        test(factory.withDecimalPrecision(DecimalPrecision.DOUBLE)
-                .doubleNode(42.42d));
+        YamlNodeFactory fac = factory.withDecimalPrecision(DecimalPrecision.DOUBLE);
+        YamlNode node = fac.doubleNode(42.42d);
+        Yaml yaml = new Yaml(fac);
+        errors.checkThat(yaml.load(yaml.dump(node)), is(equalTo(node)));
     }
 
     @Test
     public void testFloatNode() {
-        test(factory.withDecimalPrecision(DecimalPrecision.FLOAT)
-                .floatNode(42.42f));
+        YamlNodeFactory fac = factory.withDecimalPrecision(DecimalPrecision.FLOAT);
+        YamlNode node = fac.floatNode(42.42f);
+        Yaml yaml = new Yaml(fac);
+        errors.checkThat(yaml.load(yaml.dump(node)), is(equalTo(node)));
     }
 
     @Test
