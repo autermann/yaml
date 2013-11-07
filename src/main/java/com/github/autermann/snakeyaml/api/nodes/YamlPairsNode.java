@@ -17,6 +17,7 @@ package com.github.autermann.snakeyaml.api.nodes;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map.Entry;
@@ -31,21 +32,32 @@ import com.github.autermann.snakeyaml.api.YamlNodes;
 import com.github.autermann.snakeyaml.api.util.LinkedListSupplier;
 import com.google.common.base.Supplier;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Iterators;
 import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimaps;
 
 /**
- * TODO JavaDoc
+ * A {@link YamlNode} for {@code !!pairs} mappings.
  *
  * @author Christian Autermann
  */
-
 public class YamlPairsNode extends AbstractYamlMappingNode<YamlPairsNode> {
+    /**
+     * A {@link ListMultimap} to enable fast access to all values of a key.
+     */
     private final ListMultimap<YamlNode, YamlNode> multiMap;
+    /**
+     * A {@link List} of all entries to maintain insertion order.
+     */
     private final List<Entry<YamlNode, YamlNode>> value;
 
+    /**
+     * Creates a new {@link YamlPairsNode}.
+     *
+     * @param factory the factory to create children with
+     */
     public YamlPairsNode(YamlNodeFactory factory) {
         super(factory);
         LinkedHashMap<YamlNode, Collection<YamlNode>> map = Maps
@@ -76,51 +88,33 @@ public class YamlPairsNode extends AbstractYamlMappingNode<YamlPairsNode> {
         if (key == this || value == this) {
             throw new IllegalArgumentException("recursive structures are currently not supported");
         }
-        value().add(Maps.immutableEntry(key, value));
-        this.asMap().put(key, value);
+        this.value.add(Maps.immutableEntry(key, value));
+        this.multiMap.put(key, value);
         return this;
     }
 
     @Override
-    public boolean has(YamlNode key) {
-        return this.asMap().containsKey(key) && !get(key).isEmpty();
-    }
-
-    @Override
-    public boolean hasNotNull(YamlNode key) {
-        return has(key) && Iterables.any(get(key), YamlNodes.notNullOrMissing());
-    }
-
-    protected List<YamlNode> get(YamlNode key) {
-        return this.asMap().get(key);
-    }
-
-    protected List<Entry<YamlNode, YamlNode>> value() {
-        return this.value;
-    }
-
-    @Override
     public int size() {
-        return value().size();
+        return this.value.size();
     }
 
     @Override
     public boolean isEmpty() {
-        return value().isEmpty();
+        return this.value.isEmpty();
     }
 
     @Override
     public boolean equals(Object o) {
         if (o instanceof YamlPairsNode) {
             YamlPairsNode that = (YamlPairsNode) o;
-            return this.value().equals(that.value());
+            return this.value.equals(that.value);
         }
         return false;
     }
 
     @Override
     public int hashCode() {
-        return value().hashCode();
+        return this.value.hashCode();
     }
 
     @Override
@@ -135,7 +129,7 @@ public class YamlPairsNode extends AbstractYamlMappingNode<YamlPairsNode> {
 
     @Override
     public Collection<Entry<YamlNode, YamlNode>> entries() {
-        return Collections.unmodifiableCollection(value());
+        return Collections.unmodifiableCollection(this.value);
     }
 
     @Override
@@ -148,7 +142,28 @@ public class YamlPairsNode extends AbstractYamlMappingNode<YamlPairsNode> {
         return visitor.visit(this);
     }
 
-    protected ListMultimap<YamlNode, YamlNode> asMap() {
-        return multiMap;
+    @Override
+    public boolean has(YamlNode key) {
+        return this.multiMap.containsKey(key) && 
+               !this.multiMap.get(key).isEmpty();
+    }
+
+    @Override
+    public boolean hasNotNull(YamlNode key) {
+        return has(key) && Iterables.any(this.multiMap.get(key), YamlNodes.notNullOrMissing());
+    }
+
+    @Override
+    public YamlNode path(YamlNode key) {
+        List<YamlNode> nodes = this.multiMap.get(YamlNodes.nullToNode(key));
+        if (nodes == null) {
+            return YamlMissingNode.instance();
+        }
+        return getNodeFactory().sequenceNode().addAll(nodes);
+    }
+
+    @Override
+    public Iterator<YamlNode> iterator() {
+        return Iterators.unmodifiableIterator(this.multiMap.keySet().iterator());
     }
 }

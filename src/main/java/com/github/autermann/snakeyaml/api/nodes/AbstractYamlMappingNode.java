@@ -32,7 +32,6 @@ import com.google.common.base.Joiner.MapJoiner;
  *
  * @author Christian Autermann
  */
-
 public abstract class AbstractYamlMappingNode<T extends AbstractYamlMappingNode<T>>
         extends AbstractYamlContainerNode {
     private static final MapJoiner JOINER = Joiner.on(", ")
@@ -110,8 +109,8 @@ public abstract class AbstractYamlMappingNode<T extends AbstractYamlMappingNode<
         return putContainer(key, getNodeFactory().mappingNode());
     }
 
-    private <X extends AbstractYamlContainerNode> X putContainer(YamlNode key,
-                                                                 X value) {
+    private <X extends AbstractYamlContainerNode> X putContainer(
+            YamlNode key, X value) {
         put(key, value);
         return value;
     }
@@ -121,7 +120,7 @@ public abstract class AbstractYamlMappingNode<T extends AbstractYamlMappingNode<
     }
 
     public T putNull(YamlNode key) {
-        return putScalar(key, getNodeFactory().nullNode());
+        return put(key, getNodeFactory().nullNode());
     }
 
     public T put(String key, Boolean value) {
@@ -129,7 +128,7 @@ public abstract class AbstractYamlMappingNode<T extends AbstractYamlMappingNode<
     }
 
     public T put(YamlNode key, Boolean value) {
-        return putScalar(key, getNodeFactory().booleanNode(value));
+        return put(key, getNodeFactory().booleanNode(value));
     }
 
     public T put(String key, boolean value) {
@@ -137,7 +136,7 @@ public abstract class AbstractYamlMappingNode<T extends AbstractYamlMappingNode<
     }
 
     public T put(YamlNode key, boolean value) {
-        return putScalar(key, getNodeFactory().booleanNode(value));
+        return put(key, getNodeFactory().booleanNode(value));
     }
 
     public T put(String key, Byte[] value) {
@@ -145,7 +144,7 @@ public abstract class AbstractYamlMappingNode<T extends AbstractYamlMappingNode<
     }
 
     public T put(YamlNode key, Byte[] value) {
-        return putScalar(key, getNodeFactory().binaryNode(value));
+        return put(key, getNodeFactory().binaryNode(value));
     }
 
     public T put(String key, byte[] value) {
@@ -153,7 +152,7 @@ public abstract class AbstractYamlMappingNode<T extends AbstractYamlMappingNode<
     }
 
     public T put(YamlNode key, byte[] value) {
-        return putScalar(key, getNodeFactory().binaryNode(value));
+        return put(key, getNodeFactory().binaryNode(value));
     }
 
     public T put(String key, Byte value) {
@@ -161,7 +160,7 @@ public abstract class AbstractYamlMappingNode<T extends AbstractYamlMappingNode<
     }
 
     public T put(YamlNode key, Byte value) {
-        return putScalar(key, getNodeFactory().byteNode(value));
+        return put(key, getNodeFactory().byteNode(value));
     }
 
     public T put(String key, byte value) {
@@ -169,7 +168,7 @@ public abstract class AbstractYamlMappingNode<T extends AbstractYamlMappingNode<
     }
 
     public T put(YamlNode key, byte value) {
-        return putScalar(key, getNodeFactory().byteNode(value));
+        return put(key, getNodeFactory().byteNode(value));
     }
 
     public T put(String key, Short value) {
@@ -177,7 +176,7 @@ public abstract class AbstractYamlMappingNode<T extends AbstractYamlMappingNode<
     }
 
     public T put(YamlNode key, Short value) {
-        return putScalar(key, getNodeFactory().shortNode(value));
+        return put(key, getNodeFactory().shortNode(value));
     }
 
     public T put(String key, short value) {
@@ -185,7 +184,7 @@ public abstract class AbstractYamlMappingNode<T extends AbstractYamlMappingNode<
     }
 
     public T put(YamlNode key, short value) {
-        return putScalar(key, getNodeFactory().shortNode(value));
+        return put(key, getNodeFactory().shortNode(value));
     }
 
     public T put(String key, Integer value) {
@@ -193,7 +192,7 @@ public abstract class AbstractYamlMappingNode<T extends AbstractYamlMappingNode<
     }
 
     public T put(YamlNode key, Integer value) {
-        return putScalar(key, getNodeFactory().intNode(value));
+        return put(key, getNodeFactory().intNode(value));
     }
 
     public T put(String key, int value) {
@@ -201,7 +200,7 @@ public abstract class AbstractYamlMappingNode<T extends AbstractYamlMappingNode<
     }
 
     public T put(YamlNode key, int value) {
-        return putScalar(key, getNodeFactory().intNode(value));
+        return put(key, getNodeFactory().intNode(value));
     }
 
     public T put(String key, Long value) {
@@ -209,7 +208,7 @@ public abstract class AbstractYamlMappingNode<T extends AbstractYamlMappingNode<
     }
 
     public T put(YamlNode key, Long value) {
-        return putScalar(key, getNodeFactory().longNode(value));
+        return put(key, getNodeFactory().longNode(value));
     }
 
     public T put(String key, long value) {
@@ -217,7 +216,7 @@ public abstract class AbstractYamlMappingNode<T extends AbstractYamlMappingNode<
     }
 
     public T put(YamlNode key, long value) {
-        return putScalar(key, getNodeFactory().longNode(value));
+        return put(key, getNodeFactory().longNode(value));
     }
 
     public T put(String key, BigInteger value) {
@@ -225,7 +224,7 @@ public abstract class AbstractYamlMappingNode<T extends AbstractYamlMappingNode<
     }
 
     public T put(YamlNode key, BigInteger value) {
-        return putScalar(key, getNodeFactory().bigIntegerNode(value));
+        return put(key, getNodeFactory().bigIntegerNode(value));
     }
 
     public T put(String key, Float value) {
@@ -233,7 +232,7 @@ public abstract class AbstractYamlMappingNode<T extends AbstractYamlMappingNode<
     }
 
     public T put(YamlNode key, Float value) {
-        return putScalar(key, getNodeFactory().floatNode(value));
+        return put(key, getNodeFactory().floatNode(value));
     }
 
     public T put(String key, float value) {
@@ -241,7 +240,7 @@ public abstract class AbstractYamlMappingNode<T extends AbstractYamlMappingNode<
     }
 
     public T put(YamlNode key, float value) {
-        return putScalar(key, getNodeFactory().floatNode(value));
+        return put(key, getNodeFactory().floatNode(value));
     }
 
     public T put(String key, Double value) {
@@ -249,7 +248,7 @@ public abstract class AbstractYamlMappingNode<T extends AbstractYamlMappingNode<
     }
 
     public T put(YamlNode key, Double value) {
-        return putScalar(key, getNodeFactory().doubleNode(value));
+        return put(key, getNodeFactory().doubleNode(value));
     }
 
     public T put(String key, double value) {
@@ -257,7 +256,7 @@ public abstract class AbstractYamlMappingNode<T extends AbstractYamlMappingNode<
     }
 
     public T put(YamlNode key, double value) {
-        return putScalar(key, getNodeFactory().doubleNode(value));
+        return put(key, getNodeFactory().doubleNode(value));
     }
 
     public T put(String key, BigDecimal value) {
@@ -265,7 +264,7 @@ public abstract class AbstractYamlMappingNode<T extends AbstractYamlMappingNode<
     }
 
     public T put(YamlNode key, BigDecimal value) {
-        return putScalar(key, getNodeFactory().bigDecimalNode(value));
+        return put(key, getNodeFactory().bigDecimalNode(value));
     }
 
     public T put(String key, String value) {
@@ -273,7 +272,7 @@ public abstract class AbstractYamlMappingNode<T extends AbstractYamlMappingNode<
     }
 
     public T put(YamlNode key, String value) {
-        return putScalar(key, getNodeFactory().textNode(value));
+        return put(key, getNodeFactory().textNode(value));
     }
 
     public T put(String key, DateTime value) {
@@ -281,7 +280,7 @@ public abstract class AbstractYamlMappingNode<T extends AbstractYamlMappingNode<
     }
 
     public T put(YamlNode key, DateTime value) {
-        return putScalar(key, getNodeFactory().dateTimeNode(value));
+        return put(key, getNodeFactory().dateTimeNode(value));
     }
 
     public T put(String key, Date value) {
@@ -289,21 +288,7 @@ public abstract class AbstractYamlMappingNode<T extends AbstractYamlMappingNode<
     }
 
     public T put(YamlNode key, Date value) {
-        return putScalar(key, getNodeFactory().dateTimeNode(value));
-    }
-
-    @SuppressWarnings("unchecked")
-    private T putScalar(YamlNode key, AbstractYamlScalarNode<?> value) {
-        put(key, value);
-        return (T) this;
-    }
-
-    public boolean has(String key) {
-        return has(getNodeFactory().textNode(key));
-    }
-
-    public boolean hasNotNull(String key) {
-        return hasNotNull(getNodeFactory().textNode(key));
+        return put(key, getNodeFactory().dateTimeNode(value));
     }
 
     @Override
@@ -315,11 +300,50 @@ public abstract class AbstractYamlMappingNode<T extends AbstractYamlMappingNode<
         return builder.append("]").toString();
     }
 
+    @Override
+    public boolean has(int key) {
+        return has(getNodeFactory().intNode(key));
+    }
+
+    @Override
+    public boolean has(String key) {
+        return has(getNodeFactory().textNode(key));
+    }
+
+    @Override
+    public boolean hasNotNull(int key) {
+        return hasNotNull(getNodeFactory().intNode(key));
+    }
+
+    @Override
+    public boolean hasNotNull(String key) {
+        return hasNotNull(getNodeFactory().textNode(key));
+    }
+
+    @Override
+    public YamlNode path(int i) {
+        return path(getNodeFactory().intNode(i));
+    }
+
+    @Override
+    public YamlNode path(String key) {
+        return path(getNodeFactory().textNode(key));
+    }
+
+    /**
+     * Add the {@code key}/{@code value} pair to this mapping.
+     *
+     * @param key   the key
+     * @param value the value
+     *
+     * @return {@code this}
+     */
     public abstract T put(YamlNode key, YamlNode value);
 
-    public abstract boolean has(YamlNode key);
-
-    public abstract boolean hasNotNull(YamlNode key);
-
+    /**
+     * Gets the entries of this mapping.
+     *
+     * @return the entries
+     */
     public abstract Iterable<Entry<YamlNode, YamlNode>> entries();
 }

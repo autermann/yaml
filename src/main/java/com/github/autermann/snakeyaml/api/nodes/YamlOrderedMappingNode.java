@@ -26,13 +26,17 @@ import com.github.autermann.snakeyaml.api.YamlNodeVisitor;
 import com.google.common.collect.Maps;
 
 /**
- * TODO JavaDoc
+ * A {@link YamlNode} for {@code !!omap} mappings.
  *
  * @author Christian Autermann
  */
-
 public class YamlOrderedMappingNode extends YamlMappingNode {
 
+    /**
+     * Creates a new {@link YamlOrderedMappingNode}.
+     *
+     * @param factory the factory to create children with
+     */
     public YamlOrderedMappingNode(YamlNodeFactory factory) {
         super(factory, Maps.<YamlNode, YamlNode>newLinkedHashMap());
     }
@@ -57,8 +61,7 @@ public class YamlOrderedMappingNode extends YamlMappingNode {
     public <T extends YamlNode> T copy() {
         YamlOrderedMappingNode copy = getNodeFactory().orderedMappingNode();
         for (Entry<YamlNode, YamlNode> e : entries()) {
-            copy.put(e.getKey().copy(),
-                     e.getValue().copy());
+            copy.put(e.getKey().copy(), e.getValue().copy());
         }
         return (T) copy;
     }
@@ -72,5 +75,4 @@ public class YamlOrderedMappingNode extends YamlMappingNode {
     public <T> T accept(ReturningYamlNodeVisitor<T> visitor) {
         return visitor.visit(this);
     }
-
 }

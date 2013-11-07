@@ -18,6 +18,7 @@ package com.github.autermann.snakeyaml.api.nodes;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -29,22 +30,37 @@ import com.github.autermann.snakeyaml.api.YamlNodeFactory;
 import com.github.autermann.snakeyaml.api.YamlNodeVisitor;
 import com.github.autermann.snakeyaml.api.YamlNodes;
 import com.google.common.base.Objects;
+import com.google.common.collect.Iterators;
 import com.google.common.collect.Maps;
 
 /**
- * TODO JavaDoc
+ * A {@link YamlNode} for {@literal !!map} mappings.
  *
  * @author Christian Autermann
  */
 public class YamlMappingNode extends AbstractYamlMappingNode<YamlMappingNode> {
-    private final Map<YamlNode, YamlNode> nodes;
+    /**
+     * The children of this mapping.
+     */
+    private final Map<YamlNode, YamlNode> value;
 
+    /**
+     * Creates a new {@link YamlMappingNode} with the specified backing map.
+     *
+     * @param factory the factory to create children with
+     * @param nodes   the backing map
+     */
     protected YamlMappingNode(YamlNodeFactory factory,
                               Map<YamlNode, YamlNode> nodes) {
         super(factory);
-        this.nodes = checkNotNull(nodes);
+        this.value = checkNotNull(nodes);
     }
 
+    /**
+     * Creates a new {@link YamlMappingNode}.
+     *
+     * @param factory the factory to create children with
+     */
     public YamlMappingNode(YamlNodeFactory factory) {
         this(factory, Maps.<YamlNode, YamlNode>newHashMap());
     }
@@ -55,35 +71,8 @@ public class YamlMappingNode extends AbstractYamlMappingNode<YamlMappingNode> {
         if (key == this || value == this) {
             throw new IllegalArgumentException("recursive structures are currently not supported");
         }
-        value().put(YamlNodes.nullToNode(key), YamlNodes.nullToNode(value));
+        this.value.put(YamlNodes.nullToNode(key), YamlNodes.nullToNode(value));
         return this;
-    }
-
-    @Override
-    public boolean has(YamlNode key) {
-        return value().containsKey(YamlNodes.nullToNode(key));
-    }
-
-    @Override
-    public boolean hasNotNull(YamlNode key) {
-        YamlNode k = YamlNodes.nullToNode(key);
-        return has(k) && !value().get(k).isNull();
-    }
-
-    public YamlNode get(String key) {
-        return get(getNodeFactory().textNode(key));
-    }
-
-    public YamlNode get(YamlNode key) {
-        return value().get(YamlNodes.nullToNode(key));
-    }
-
-    public YamlNode path(String key) {
-        return path(getNodeFactory().textNode(key));
-    }
-
-    public YamlNode path(YamlNode key) {
-        return YamlNodes.nullToMissing(get(YamlNodes.nullToNode(key)));
     }
 
     @Override
@@ -103,13 +92,13 @@ public class YamlMappingNode extends AbstractYamlMappingNode<YamlMappingNode> {
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(value());
+        return Objects.hashCode(this.value);
     }
 
     @Override
     public boolean equals(Object o) {
         return o instanceof YamlMappingNode &&
-               value().equals(((YamlMappingNode) o).value());
+               this.value.equals(((YamlMappingNode) o).value);
     }
 
     @Override
@@ -122,23 +111,19 @@ public class YamlMappingNode extends AbstractYamlMappingNode<YamlMappingNode> {
         return (T) copy;
     }
 
-    protected Map<YamlNode, YamlNode> value() {
-        return nodes;
-    }
-
     @Override
     public int size() {
-        return value().size();
+        return this.value.size();
     }
 
     @Override
     public boolean isEmpty() {
-        return value().isEmpty();
+        return this.value.isEmpty();
     }
 
     @Override
     public Collection<Entry<YamlNode, YamlNode>> entries() {
-        return value().entrySet();
+        return this.value.entrySet();
     }
 
     @Override
@@ -149,5 +134,16 @@ public class YamlMappingNode extends AbstractYamlMappingNode<YamlMappingNode> {
     @Override
     public <T> T accept(ReturningYamlNodeVisitor<T> visitor) {
         return visitor.visit(this);
+    }
+
+    @Override
+    public YamlNode path(YamlNode key) {
+        return YamlNodes
+                .nullToMissing(this.value.get(YamlNodes.nullToNode(key)));
+    }
+
+    @Override
+    public Iterator<YamlNode> iterator() {
+        return Iterators.unmodifiableIterator(this.value.keySet().iterator());
     }
 }

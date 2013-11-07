@@ -24,7 +24,6 @@ import com.github.autermann.snakeyaml.api.ReturningYamlNodeVisitor;
 import com.github.autermann.snakeyaml.api.YamlNode;
 import com.github.autermann.snakeyaml.api.YamlNodeFactory;
 import com.github.autermann.snakeyaml.api.YamlNodeVisitor;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
 
 /**
@@ -88,19 +87,4 @@ public class YamlSetNode extends AbstractYamlSequenceNode<YamlSetNode> {
         return visitor.visit(this);
     }
 
-    @Override
-    public YamlNode path(int i) {
-        if (i < 0 || i >= size()) {
-            return YamlMissingNode.instance();
-        }
-        return Iterables.get(value(), i);
-    }
-
-    @Override
-    public YamlNode get(int i) {
-        if (i < 0 || i >= size()) {
-            throw new IndexOutOfBoundsException();
-        }
-        return Iterables.get(value(), i);
-    }
 }

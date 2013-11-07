@@ -85,18 +85,4 @@ public class YamlSequenceNode extends AbstractYamlSequenceNode<YamlSequenceNode>
     public <T> T accept(ReturningYamlNodeVisitor<T> visitor) {
         return visitor.visit(this);
     }
-
-    @Override
-    public YamlNode path(int index) {
-        if (index < 0 || index >= size()) {
-            return YamlMissingNode.instance();
-        }
-        return value().get(index);
-    }
-
-    @Override
-    public YamlNode get(int index) {
-        return value().get(index);
-    }
-
 }

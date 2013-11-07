@@ -20,12 +20,14 @@ import java.io.Writer;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Date;
+import java.util.Iterator;
 
 import org.joda.time.DateTime;
 import org.yaml.snakeyaml.DumperOptions;
 
 import com.github.autermann.snakeyaml.api.Yaml;
 import com.github.autermann.snakeyaml.api.YamlNode;
+import com.google.common.collect.Iterators;
 
 /**
  * A abstract {@link YamlNode} offering default implementations for most
@@ -436,6 +438,81 @@ public abstract class AbstractYamlNode implements YamlNode {
     }
 
     @Override
+    public boolean isEmpty() {
+        return true;
+    }
+
+    @Override
+    public int size() {
+        return 0;
+    }
+
+    @Override
+    public YamlNode path(int key) {
+        return YamlMissingNode.instance();
+    }
+
+    @Override
+    public YamlNode get(int key) {
+        return null;
+    }
+
+    @Override
+    public YamlNode get(String key) {
+        return null;
+    }
+
+    @Override
+    public YamlNode get(YamlNode key) {
+        return null;
+    }
+
+    @Override
+    public YamlNode path(String key) {
+        return YamlMissingNode.instance();
+    }
+
+    @Override
+    public YamlNode path(YamlNode key) {
+        return YamlMissingNode.instance();
+    }
+
+    @Override
+    public boolean has(int key) {
+        return false;
+    }
+
+    @Override
+    public boolean has(String key) {
+        return false;
+    }
+
+    @Override
+    public boolean has(YamlNode key) {
+        return false;
+    }
+
+    @Override
+    public boolean hasNotNull(int key) {
+        return false;
+    }
+
+    @Override
+    public boolean hasNotNull(String key) {
+        return false;
+    }
+
+    @Override
+    public boolean hasNotNull(YamlNode key) {
+        return false;
+    }
+
+    @Override
+    public Iterator<YamlNode> iterator() {
+        return Iterators.<YamlNode>singletonIterator(this);
+    }
+
+    @Override
     public abstract boolean equals(Object o);
 
     @Override
@@ -443,5 +520,4 @@ public abstract class AbstractYamlNode implements YamlNode {
 
     @Override
     public abstract String toString();
-
 }

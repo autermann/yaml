@@ -50,7 +50,7 @@ import com.github.autermann.snakeyaml.api.nodes.YamlTimeNode;
  *
  * @author Christian Autermann
  */
-public interface YamlNode {
+public interface YamlNode extends Iterable<YamlNode> {
     /**
      * The default value returned by {@link #booleanValue()} and
      * {@link  #asBooleanValue()}: {@value}.
@@ -850,6 +850,145 @@ public interface YamlNode {
      * @see #isTime()
      */
     Date dateValue();
+
+    /**
+     * Gets the size of this node if it is a container node.
+     *
+     * @return the size
+     *
+     * @see #isContainer()
+     */
+    int size();
+
+    /**
+     * Checks if this container node is empty if it is a container node.
+     *
+     * @return {@code true} if it is empty, else {@code false}
+     *
+     * * @see #isContainer()
+     */
+    boolean isEmpty();
+
+    /**
+     * Get the {@link YamlNode} at the specified position or with the specified
+     * key. If it does not exist {@code null} is returned.
+     *
+     * @param key the key or index
+     *
+     * @return the {@link YamlNode} with the specified index or key, or
+     *         {@code null}
+     */
+    YamlNode get(int key);
+
+    /**
+     * Get the {@link YamlNode} with the specified key. If it does not exist
+     * {@code null} is returned.
+     *
+     * @param key the key or index
+     *
+     * @return the {@link YamlNode} with the specified key, or {@code null}
+     */
+    YamlNode get(String key);
+
+    /**
+     * Get the {@link YamlNode} with the specified key. If it does not exist
+     * {@code null} is returned.
+     *
+     * @param key the key or index
+     *
+     * @return the {@link YamlNode} with the specified key, or {@code null}
+     */
+    YamlNode get(YamlNode key);
+
+    /**
+     * Get the {@link YamlNode} at the specified position or with the specified
+     * key. If it does not exist a {@link YamlMissingNode} is returned.
+     *
+     * @param key the key or index
+     *
+     * @return the {@link YamlNode} with the specified index or key, or a
+     *         {@link YamlMissingNode}.
+     */
+    YamlNode path(int key);
+
+    /**
+     * Get the {@link YamlNode} with the specified key. If it does not exist a
+     * {@link YamlMissingNode} is returned.
+     *
+     * @param key the key or index
+     *
+     * @return the {@link YamlNode} with the specified key, or a
+     *         {@link YamlMissingNode}.
+     */
+    YamlNode path(String key);
+
+    /**
+     * Get the {@link YamlNode} with the specified key. If it does not exist a
+     * {@link YamlMissingNode} is returned.
+     *
+     * @param key the key or index
+     *
+     * @return the {@link YamlNode} with the specified key, or a
+     *         {@link YamlMissingNode}.
+     */
+    YamlNode path(YamlNode key);
+
+    /**
+     * Checks if a {@link YamlNode} with the specified key or index exists.
+     *
+     * @param key the key or index
+     *
+     * @return {@code true} if the node exists, else {@code false}
+     */
+    boolean has(int key);
+
+    /**
+     * Checks if a {@link YamlNode} with the specified key exists.
+     *
+     * @param key the key
+     *
+     * @return {@code true} if the node exists, else {@code false}
+     */
+    boolean has(String key);
+
+    /**
+     * Checks if a {@link YamlNode} with the specified key exists.
+     *
+     * @param key the key
+     *
+     * @return {@code true} if the node exists, else {@code false}
+     */
+    boolean has(YamlNode key);
+
+    /**
+     * Checks if a {@link YamlNode} with the specified key or index exists and
+     * is not a {@link YamlNullNode}.
+     *
+     * @param key the key or index
+     *
+     * @return {@code true} if the node exists, else {@code false}
+     */
+    boolean hasNotNull(int key);
+
+    /**
+     * Checks if a {@link YamlNode} with the specified key exists and is not a
+     * {@link YamlNullNode}.
+     *
+     * @param key the key
+     *
+     * @return {@code true} if the node exists, else {@code false}
+     */
+    boolean hasNotNull(String key);
+
+    /**
+     * Checks if a {@link YamlNode} with the specified key exists and is not a
+     * {@link YamlNullNode}.
+     *
+     * @param key the key
+     *
+     * @return {@code true} if the node exists, else {@code false}
+     */
+    boolean hasNotNull(YamlNode key);
 
     /**
      * Create a (deep) copy of this node.

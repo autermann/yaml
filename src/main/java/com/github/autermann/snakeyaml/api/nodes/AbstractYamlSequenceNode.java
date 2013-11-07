@@ -27,6 +27,7 @@ import com.github.autermann.snakeyaml.api.YamlNode;
 import com.github.autermann.snakeyaml.api.YamlNodeFactory;
 import com.github.autermann.snakeyaml.api.YamlNodes;
 import com.google.common.base.Joiner;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Iterators;
 
 /**
@@ -35,7 +36,7 @@ import com.google.common.collect.Iterators;
  * @author Christian Autermann
  */
 public abstract class AbstractYamlSequenceNode<T extends AbstractYamlSequenceNode<T>>
-        extends AbstractYamlContainerNode implements Iterable<YamlNode> {
+        extends AbstractYamlContainerNode {
     private static final Joiner JOINER = Joiner.on(", ");
 
     public AbstractYamlSequenceNode(YamlNodeFactory factory) {
@@ -64,6 +65,22 @@ public abstract class AbstractYamlSequenceNode<T extends AbstractYamlSequenceNod
             throw new IllegalArgumentException("recursive structures are currently not supported");
         }
         value().add(YamlNodes.nullToNode(node));
+        return (T) this;
+    }
+
+    @SuppressWarnings("unchecked")
+    public T addAll(YamlNode... nodes) {
+        for (YamlNode node : nodes) {
+            add(node);
+        }
+        return (T) this;
+    }
+
+    @SuppressWarnings("unchecked")
+    public T addAll(Iterable<? extends YamlNode> nodes) {
+        for (YamlNode node : nodes) {
+            add(node);
+        }
         return (T) this;
     }
 
@@ -199,9 +216,28 @@ public abstract class AbstractYamlSequenceNode<T extends AbstractYamlSequenceNod
         return JOINER.appendTo(builder, value()).append("]").toString();
     }
 
-    public abstract YamlNode path(int i);
+    @Override
+    public YamlNode path(String key) {
+        return path(getNodeFactory().textNode(key));
+    }
 
-    public abstract YamlNode get(int i);
+    @Override
+    public YamlNode path(YamlNode key) {
+        return path(YamlNodes.nullToNode(key).asIntValue(-1));
+    }
 
+    @Override
+    public YamlNode path(int index) {
+        if (index < 0 || index >= size()) {
+            return YamlMissingNode.instance();
+        }
+        return Iterables.get(value(), index);
+    }
+
+    /**
+     * Gets the backing collection of this node.
+     *
+     * @return the backing collection
+     */
     public abstract Collection<YamlNode> value();
 }
