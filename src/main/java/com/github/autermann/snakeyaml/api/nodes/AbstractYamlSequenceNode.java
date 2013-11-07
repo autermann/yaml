@@ -31,14 +31,24 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Iterators;
 
 /**
- * TODO JavaDoc
+ * A abstract {@link YamlNode} for sequences.
+ *
+ * @param <T> the concrete type of this class
  *
  * @author Christian Autermann
  */
 public abstract class AbstractYamlSequenceNode<T extends AbstractYamlSequenceNode<T>>
         extends AbstractYamlContainerNode {
+    /**
+     * The {@link Joiner} used in {@link #toString()}.
+     */
     private static final Joiner JOINER = Joiner.on(", ");
 
+    /**
+     * Creates a new {@link AbstractYamlSequenceNode}
+     *
+     * @param factory
+     */
     public AbstractYamlSequenceNode(YamlNodeFactory factory) {
         super(factory);
     }
@@ -58,141 +68,347 @@ public abstract class AbstractYamlSequenceNode<T extends AbstractYamlSequenceNod
         return value().isEmpty();
     }
 
+    /**
+     * Adds the specified value to this sequence.
+     *
+     * @param value the value
+     *
+     * @return {@literal this}
+     */
     @SuppressWarnings("unchecked")
-    public T add(YamlNode node) {
+    public T add(YamlNode value) {
         // small protected adding this to a collection added to this still works
-        if (node == this) {
+        if (value == this) {
             throw new IllegalArgumentException("recursive structures are currently not supported");
         }
-        value().add(YamlNodes.nullToNode(node));
+        value().add(YamlNodes.nullToNode(value));
         return (T) this;
     }
 
+    /**
+     * Adds all specified values to this sequence.
+     *
+     * @param values the values
+     *
+     * @return {@literal this}
+     */
     @SuppressWarnings("unchecked")
-    public T addAll(YamlNode... nodes) {
-        for (YamlNode node : nodes) {
-            add(node);
+    public T addAll(YamlNode... values) {
+        for (YamlNode value : values) {
+            add(value);
         }
         return (T) this;
     }
 
+    /**
+     * Adds all specified values to this sequence.
+     *
+     * @param values the values
+     *
+     * @return {@literal this}
+     */
     @SuppressWarnings("unchecked")
-    public T addAll(Iterable<? extends YamlNode> nodes) {
-        for (YamlNode node : nodes) {
-            add(node);
+    public T addAll(Iterable<? extends YamlNode> values) {
+        for (YamlNode value : values) {
+            add(value);
         }
         return (T) this;
     }
 
+    /**
+     * Adds a container to this sequence and returns the added value.
+     *
+     * @param <X>  the container type
+     * @param node the container
+     *
+     * @return the added container
+     */
     private <X extends AbstractYamlContainerNode> X addContainer(X node) {
         add(node);
         return node;
     }
 
+    /**
+     * Adds a {@link YamlOrderedMappingNode} to this sequence.
+     *
+     * @return the added value
+     */
     public YamlOrderedMappingNode addOrderedMapping() {
         return addContainer(getNodeFactory().orderedMappingNode());
     }
 
+    /**
+     * Adds a {@link YamlPairsNode} to this sequence.
+     *
+     * @return the added value
+     */
     public YamlPairsNode addPairs() {
         return addContainer(getNodeFactory().pairsNode());
     }
 
+    /**
+     * Adds a {@link YamlSequenceNode} to this sequence.
+     *
+     * @return the added value
+     */
     public YamlSequenceNode addSequence() {
         return addContainer(getNodeFactory().sequenceNode());
     }
 
+    /**
+     * Adds a {@link YamlSetNode} to this sequence.
+     *
+     * @return the added value
+     */
     public YamlSetNode addSet() {
         return addContainer(getNodeFactory().setNode());
     }
 
+    /**
+     * Adds a {@link YamlMappingNode} to this sequence.
+     *
+     * @return the added value
+     */
     public YamlMappingNode addMapping() {
         return addContainer(getNodeFactory().mappingNode());
     }
 
+    /**
+     * Adds a {@link YamlNullNode} to this sequence.
+     *
+     * @return {@literal this}
+     */
     public T addNull() {
         return add(getNodeFactory().nullNode());
     }
 
+    /**
+     * Adds the specified value to this sequence.
+     *
+     * @param value the value
+     *
+     * @return {@literal this}
+     */
     public T add(Boolean value) {
         return add(getNodeFactory().booleanNode(value));
     }
 
+    /**
+     * Adds the specified value to this sequence.
+     *
+     * @param value the value
+     *
+     * @return {@literal this}
+     */
     public T add(boolean value) {
         return add(getNodeFactory().booleanNode(value));
     }
 
+    /**
+     * Adds the specified value to this sequence.
+     *
+     * @param value the value
+     *
+     * @return {@literal this}
+     */
     public T add(Byte[] value) {
         return add(getNodeFactory().binaryNode(value));
     }
 
+    /**
+     * Adds the specified value to this sequence.
+     *
+     * @param value the value
+     *
+     * @return {@literal this}
+     */
     public T add(byte[] value) {
         return add(getNodeFactory().binaryNode(value));
     }
 
+    /**
+     * Adds the specified value to this sequence.
+     *
+     * @param value the value
+     *
+     * @return {@literal this}
+     */
     public T add(Byte value) {
         return add(getNodeFactory().byteNode(value));
     }
 
+    /**
+     * Adds the specified value to this sequence.
+     *
+     * @param value the value
+     *
+     * @return {@literal this}
+     */
     public T add(byte value) {
         return add(getNodeFactory().byteNode(value));
     }
 
+    /**
+     * Adds the specified value to this sequence.
+     *
+     * @param value the value
+     *
+     * @return {@literal this}
+     */
     public T add(Short value) {
         return add(getNodeFactory().shortNode(value));
     }
 
+    /**
+     * Adds the specified value to this sequence.
+     *
+     * @param value the value
+     *
+     * @return {@literal this}
+     */
     public T add(short value) {
         return add(getNodeFactory().shortNode(value));
     }
 
+    /**
+     * Adds the specified value to this sequence.
+     *
+     * @param value the value
+     *
+     * @return {@literal this}
+     */
     public T add(Integer value) {
         return add(getNodeFactory().intNode(value));
     }
 
+    /**
+     * Adds the specified value to this sequence.
+     *
+     * @param value the value
+     *
+     * @return {@literal this}
+     */
     public T add(int value) {
         return add(getNodeFactory().intNode(value));
     }
 
+    /**
+     * Adds the specified value to this sequence.
+     *
+     * @param value the value
+     *
+     * @return {@literal this}
+     */
     public T add(Long value) {
         return add(getNodeFactory().longNode(value));
     }
 
+    /**
+     * Adds the specified value to this sequence.
+     *
+     * @param value the value
+     *
+     * @return {@literal this}
+     */
     public T add(long value) {
         return add(getNodeFactory().longNode(value));
     }
 
+    /**
+     * Adds the specified value to this sequence.
+     *
+     * @param value the value
+     *
+     * @return {@literal this}
+     */
     public T add(BigInteger value) {
         return add(getNodeFactory().bigIntegerNode(value));
     }
 
+    /**
+     * Adds the specified value to this sequence.
+     *
+     * @param value the value
+     *
+     * @return {@literal this}
+     */
     public T add(Float value) {
         return add(getNodeFactory().floatNode(value));
     }
 
+    /**
+     * Adds the specified value to this sequence.
+     *
+     * @param value the value
+     *
+     * @return {@literal this}
+     */
     public T add(float value) {
         return add(getNodeFactory().floatNode(value));
     }
 
+    /**
+     * Adds the specified value to this sequence.
+     *
+     * @param value the value
+     *
+     * @return {@literal this}
+     */
     public T add(Double value) {
         return add(getNodeFactory().doubleNode(value));
     }
 
+    /**
+     * Adds the specified value to this sequence.
+     *
+     * @param value the value
+     *
+     * @return {@literal this}
+     */
     public T add(double value) {
         return add(getNodeFactory().doubleNode(value));
     }
 
+    /**
+     * Adds the specified value to this sequence.
+     *
+     * @param value the value
+     *
+     * @return {@literal this}
+     */
     public T add(BigDecimal value) {
         return add(getNodeFactory().bigDecimalNode(value));
     }
 
+    /**
+     * Adds the specified value to this sequence.
+     *
+     * @param value the value
+     *
+     * @return {@literal this}
+     */
     public T add(String value) {
         return add(getNodeFactory().textNode(value));
     }
 
+    /**
+     * Adds the specified value to this sequence.
+     *
+     * @param value the value
+     *
+     * @return {@literal this}
+     */
     public T add(Date value) {
         return add(getNodeFactory().dateTimeNode(value));
     }
 
+    /**
+     * Adds the specified value to this sequence.
+     *
+     * @param value the value
+     *
+     * @return {@literal this}
+     */
     public T add(DateTime value) {
         return add(getNodeFactory().dateTimeNode(value));
     }
@@ -235,7 +451,7 @@ public abstract class AbstractYamlSequenceNode<T extends AbstractYamlSequenceNod
     }
 
     /**
-     * Gets the backing collection of this node.
+     * Gets the backing collection of this value.
      *
      * @return the backing collection
      */
