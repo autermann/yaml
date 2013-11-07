@@ -113,8 +113,7 @@ public abstract class AbstractReturningYamlNodeVisitor<T>
      *
      * @return the returned value
      */
-    protected T visitMapping(
-            AbstractYamlMappingNode<?> node) {
+    protected T visitMapping(AbstractYamlMappingNode<?> node) {
         return null;
     }
 
@@ -125,8 +124,7 @@ public abstract class AbstractReturningYamlNodeVisitor<T>
      *
      * @return the returned value
      */
-    protected T visitSequence(
-            AbstractYamlSequenceNode<?> node) {
+    protected T visitSequence(AbstractYamlSequenceNode<?> node) {
         return null;
     }
 
@@ -137,8 +135,7 @@ public abstract class AbstractReturningYamlNodeVisitor<T>
      *
      * @return the returned value
      */
-    protected T visitScalar(
-            AbstractYamlScalarNode<?> node) {
+    protected T visitScalar(AbstractYamlScalarNode<?> node) {
         return null;
     }
 

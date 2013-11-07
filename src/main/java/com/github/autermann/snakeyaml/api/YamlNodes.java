@@ -30,26 +30,62 @@ public class YamlNodes {
     private YamlNodes() {
     }
 
+    /**
+     * Checks if {@code value} is {@code null} and returns {@code value} or a
+     * instance of {@link YamlNullNode}.
+     *
+     * @param value the node to test
+     *
+     * @return {@code value} if not {@code null}, else a {@link YamlNullNode}
+     */
     public static YamlNode nullToNode(YamlNode value) {
         return value == null ? YamlNullNode.instance() : value;
     }
 
+    /**
+     * Checks if {@code value} is {@code null} and returns {@code value} or a
+     * instance of {@link YamlMissingNode}.
+     *
+     * @param value the node to test
+     *
+     * @return {@code value} if not {@code null}, else a {@link YamlMissingNode}
+     */
     public static YamlNode nullToMissing(YamlNode value) {
         return value == null ? YamlMissingNode.instance() : value;
     }
 
+    /**
+     * Creates a {@link Predicate} for {@link YamlNode}s that are not
+     * {@code null}.
+     *
+     * @return the predicate
+     */
     public static Predicate<YamlNode> notNull() {
         return NotNullPredicate.instance();
     }
 
+    /**
+     * Creates a {@link Predicate} for {@link YamlNode}s that are not missing.
+     *
+     * @return the predicate
+     */
     public static Predicate<YamlNode> notMissing() {
         return NotMissingPredicate.instance();
     }
 
+    /**
+     * Creates a {@link Predicate} for {@link YamlNode}s that are not
+     * {@code null} or missing.
+     *
+     * @return the predicate
+     */
     public static Predicate<YamlNode> notNullOrMissing() {
         return Predicates.and(notNull(), notMissing());
     }
 
+    /**
+     * {@link Predicate} for {@link YamlNode}s that are not {@code null}.
+     */
     private static class NotNullPredicate implements Predicate<YamlNode> {
         private static final NotNullPredicate INSTANCE
                 = new NotNullPredicate();
@@ -74,11 +110,19 @@ public class YamlNodes {
             return System.identityHashCode(this);
         }
 
+        /**
+         * Gets the singleton instance.
+         *
+         * @return the instance
+         */
         public static NotNullPredicate instance() {
             return INSTANCE;
         }
     }
 
+    /**
+     * {@link Predicate} for {@link YamlNode}s that are not missing.
+     */
     private static class NotMissingPredicate implements Predicate<YamlNode> {
         private static final NotMissingPredicate INSTANCE
                 = new NotMissingPredicate();
@@ -103,6 +147,11 @@ public class YamlNodes {
             return System.identityHashCode(this);
         }
 
+        /**
+         * Gets the singleton instance.
+         *
+         * @return the instance
+         */
         public static NotMissingPredicate instance() {
             return INSTANCE;
         }
