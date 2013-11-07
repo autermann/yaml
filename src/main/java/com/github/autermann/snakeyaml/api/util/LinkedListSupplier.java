@@ -15,23 +15,42 @@
  */
 package com.github.autermann.snakeyaml.api.util;
 
+import java.util.LinkedList;
 import java.util.List;
 
-import com.github.autermann.snakeyaml.api.YamlNode;
 import com.google.common.base.Supplier;
 import com.google.common.collect.Lists;
 
+/**
+ * {@link Supplier} for {@link LinkedList}s.
+ *
+ * @author Christian Autermann
+ */
 public class LinkedListSupplier implements Supplier<List<?>> {
+    /**
+     * The singleton instance.
+     */
     private static final LinkedListSupplier INSTANCE = new LinkedListSupplier();
 
+    /**
+     * Private constructor for singleton.
+     */
     private LinkedListSupplier() {
     }
 
     @Override
-    public List<YamlNode> get() {
+    public List<?> get() {
         return Lists.newLinkedList();
     }
 
+    /**
+     * Get a instance of {@link LinkedListSupplier} for the specified element
+     * type.
+     *
+     * @param <T> the element type
+     *
+     * @return a list supplier
+     */
     @SuppressWarnings(value = "unchecked")
     public static <T> Supplier<List<T>> instance() {
         Object o = INSTANCE;

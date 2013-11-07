@@ -47,7 +47,15 @@ import com.github.autermann.snakeyaml.api.util.DecimalPrecision;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Maps;
 
+/**
+ * Default implementation of {@link YamlNodeFactory}.
+ *
+ * @author Christian Autermann
+ */
 public class DefaultYamlNodeFactory extends YamlNodeFactory {
+    /**
+     * Created {@link DecimalPrecision} specific instances.
+     */
     private static final EnumMap<DecimalPrecision, DefaultYamlNodeFactory> factories
             = Maps.newEnumMap(DecimalPrecision.class);
     /**

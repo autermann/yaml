@@ -13,16 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.autermann.snakeyaml.api;
+package com.github.autermann.snakeyaml.api.util;
 
-import com.github.autermann.snakeyaml.api.nodes.YamlPairsNode;
+import com.github.autermann.snakeyaml.api.YamlNodeFactory;
+import com.github.autermann.snakeyaml.api.nodes.YamlMappingNode;
+import com.google.common.base.Preconditions;
 import com.google.common.base.Supplier;
 
 /**
- * A {@link Supplier} for {@link YamlPairsNode}s backed by a
+ * A {@link Supplier} for {@link YamlMappingNode}s backed by a
  * {@link YamlNodeFactory}.
  */
-class YamlPairsNodeSupplier implements Supplier<YamlPairsNode> {
+public class YamlMappingNodeSupplier implements Supplier<YamlMappingNode> {
 
     /**
      * The backing factory.
@@ -30,18 +32,18 @@ class YamlPairsNodeSupplier implements Supplier<YamlPairsNode> {
     private final YamlNodeFactory factory;
 
     /**
-     * Creates a new {@link  YamlPairsNodeSupplier} for the supplied
+     * Creates a new {@link  YamlMappingNodeSupplier} for the supplied
      * factory.
      *
      * @param factory the factory to use
      */
-    YamlPairsNodeSupplier(YamlNodeFactory factory) {
-        this.factory = factory;
+    public YamlMappingNodeSupplier(YamlNodeFactory factory) {
+        this.factory = Preconditions.checkNotNull(factory);
     }
 
     @Override
-    public YamlPairsNode get() {
-        return factory.pairsNode();
+    public YamlMappingNode get() {
+        return factory.mappingNode();
     }
 
 }

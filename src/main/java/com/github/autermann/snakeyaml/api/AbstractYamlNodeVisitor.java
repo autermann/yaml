@@ -108,6 +108,7 @@ public abstract class AbstractYamlNodeVisitor implements YamlNodeVisitor {
      * @param node the node to visit
      */
     protected void visitMapping(AbstractYamlMappingNode<?> node) {
+        // no-op
     }
 
     /**
@@ -116,6 +117,7 @@ public abstract class AbstractYamlNodeVisitor implements YamlNodeVisitor {
      * @param node the node to visit
      */
     protected void visitSequence(AbstractYamlSequenceNode<?> node) {
+        // no-op
     }
 
     /**
@@ -124,6 +126,7 @@ public abstract class AbstractYamlNodeVisitor implements YamlNodeVisitor {
      * @param node the node to visit
      */
     protected void visitScalar(AbstractYamlScalarNode<?> node) {
+        // no-op
     }
 
 }

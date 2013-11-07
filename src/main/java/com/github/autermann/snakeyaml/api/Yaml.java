@@ -15,7 +15,6 @@
  */
 package com.github.autermann.snakeyaml.api;
 
-import com.github.autermann.snakeyaml.api.construct.YamlNodeConstructor;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.io.InputStream;
@@ -27,9 +26,15 @@ import java.util.Iterator;
 
 import org.yaml.snakeyaml.DumperOptions;
 
+import com.github.autermann.snakeyaml.api.construct.YamlNodeConstructor;
 import com.google.common.base.Charsets;
 import com.google.common.collect.UnmodifiableIterator;
 
+/**
+ * Replacement for {@link org.yaml.snakeyaml.Yaml}.
+ *
+ * @author Christian Autermann
+ */
 public class Yaml {
     private final org.yaml.snakeyaml.Yaml delegate;
 
@@ -77,67 +82,203 @@ public class Yaml {
                 dumperOptions);
     }
 
+    /**
+     * Dumps {@code data} into a {@code String}.
+     *
+     * @param data the data
+     *
+     * @return the string representation
+     *
+     * @see org.yaml.snakeyaml.Yaml#dump(Object)
+     */
     public String dump(YamlNode data) {
         return getDelegate().dump(data);
     }
 
+    /**
+     * Dumps {@code data} into a {@code Writer}.
+     *
+     * @param data   the data
+     * @param output the writer
+     *
+     * @see org.yaml.snakeyaml.Yaml#dump(Object, Writer)
+     */
     public void dump(YamlNode data, Writer output) {
         getDelegate().dump(data, output);
     }
 
+    /**
+     * Dumps {@code data} into a {@code OutputStream} using a {@code UTF-8}
+     * encoding.
+     *
+     * @param data   the data
+     * @param output the output stream
+     *
+     */
     public void dump(YamlNode data, OutputStream output) {
         getDelegate().dump(data, new OutputStreamWriter(output, Charsets.UTF_8));
     }
 
+    /**
+     * Dumps {@code data} into a {@code String}.
+     *
+     * @param data the data
+     *
+     * @return the string representation
+     *
+     * @see org.yaml.snakeyaml.Yaml#dumpAll(Iterator)
+     */
     public String dumpAll(Iterator<? extends YamlNode> data) {
         return getDelegate().dumpAll(data);
     }
 
+    /**
+     * Dumps {@code data} into a {@code Writer}.
+     *
+     * @param data   the data
+     * @param output the writer
+     *
+     * @see org.yaml.snakeyaml.Yaml#dumpAll(Iterator, Writer)
+     */
     public void dumpAll(Iterator<? extends YamlNode> data, Writer output) {
         getDelegate().dumpAll(data, output);
     }
 
+    /**
+     * Dumps {@code data} into a {@code OutputStream} using a {@code UTF-8}
+     * encoding.
+     *
+     * @param data   the data
+     * @param output the output stream
+     *
+     */
     public void dumpAll(Iterator<? extends YamlNode> data, OutputStream output) {
         getDelegate()
                 .dumpAll(data, new OutputStreamWriter(output, Charsets.UTF_8));
     }
 
+    /**
+     * Dumps {@code data} into a {@code String}.
+     *
+     * @param data the data
+     *
+     * @return the string representation
+     *
+     * @see org.yaml.snakeyaml.Yaml#dumpAll(Iterator)
+     */
     public String dumpAll(Iterable<? extends YamlNode> data) {
         return dumpAll(data.iterator());
     }
 
+    /**
+     * Dumps {@code data} into a {@code Writer}.
+     *
+     * @param data   the data
+     * @param output the writer
+     *
+     * @see org.yaml.snakeyaml.Yaml#dumpAll(Iterator, Writer)
+     */
     public void dumpAll(Iterable<? extends YamlNode> data, Writer output) {
         dumpAll(data.iterator(), output);
     }
 
+    /**
+     * Dumps {@code data} into a {@code OutputStream} using a {@code UTF-8}
+     * encoding.
+     *
+     * @param data   the data
+     * @param output the output stream
+     *
+     */
     public void dumpAll(Iterable<? extends YamlNode> data, OutputStream output) {
         dumpAll(data.iterator(), output);
     }
 
+    /**
+     * Loads the string representation into a {@link YamlNode}.
+     *
+     * @param yaml the string
+     *
+     * @return the {@link YamlNode}
+     *
+     * @see org.yaml.snakeyaml.Yaml#load(String)
+     */
     public YamlNode load(String yaml) {
         return (YamlNode) getDelegate().load(yaml);
     }
 
+    /**
+     * Loads the string representation into a {@link YamlNode}.
+     *
+     * @param io the input stream
+     *
+     * @return the {@link YamlNode}
+     *
+     * @see org.yaml.snakeyaml.Yaml#load(InputStream)
+     */
     public YamlNode load(InputStream io) {
         return (YamlNode) getDelegate().load(io);
     }
 
+    /**
+     * Loads the string representation into a {@link YamlNode}.
+     *
+     * @param io the reader
+     *
+     * @return the {@link YamlNode}
+     *
+     * @see org.yaml.snakeyaml.Yaml#load(Reader)
+     */
     public YamlNode load(Reader io) {
         return (YamlNode) getDelegate().load(io);
     }
 
+    /**
+     * Loads the string representations into {@link YamlNode}s.
+     *
+     * @param yaml the reader
+     *
+     * @return the {@link YamlNode}s
+     *
+     * @see org.yaml.snakeyaml.Yaml#loadAll(Reader)
+     */
     public Iterable<YamlNode> loadAll(Reader yaml) {
         return cast(getDelegate().loadAll(yaml));
     }
 
+    /**
+     * Loads the string representations into {@link YamlNode}s.
+     *
+     * @param yaml the string
+     *
+     * @return the {@link YamlNode}s
+     *
+     * @see org.yaml.snakeyaml.Yaml#loadAll(String)
+     */
     public Iterable<YamlNode> loadAll(String yaml) {
         return cast(getDelegate().loadAll(yaml));
     }
 
+    /**
+     * Loads the string representations into {@link YamlNode}s.
+     *
+     * @param yaml the input stream
+     *
+     * @return the {@link YamlNode}s
+     *
+     * @see org.yaml.snakeyaml.Yaml#loadAll(InputStream)
+     */
     public Iterable<YamlNode> loadAll(InputStream yaml) {
         return cast(getDelegate().loadAll(yaml));
     }
 
+    /**
+     * Transforms a {@code Iterable<Object>} into a {@code Iterable<YamlNode>}.
+     *
+     * @param nodes the {@link YamlNode}s as {@code Object}s
+     *
+     * @return the {@link YamlNode}s
+     */
     private Iterable<YamlNode> cast(final Iterable<Object> nodes) {
         return new Iterable<YamlNode>() {
             @Override
@@ -159,6 +300,11 @@ public class Yaml {
         };
     }
 
+    /**
+     * Get the delegate of this class.
+     *
+     * @return the {@link org.yaml.snakeyaml.Yaml} delegate
+     */
     protected org.yaml.snakeyaml.Yaml getDelegate() {
         return delegate;
     }

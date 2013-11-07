@@ -43,6 +43,9 @@ import com.github.autermann.snakeyaml.api.nodes.YamlSetNode;
 import com.github.autermann.snakeyaml.api.nodes.YamlShortNode;
 import com.github.autermann.snakeyaml.api.nodes.YamlTextNode;
 import com.github.autermann.snakeyaml.api.nodes.YamlTimeNode;
+import com.github.autermann.snakeyaml.api.util.YamlMappingNodeSupplier;
+import com.github.autermann.snakeyaml.api.util.YamlOrderedMappingNodeSupplier;
+import com.github.autermann.snakeyaml.api.util.YamlPairsNodeSupplier;
 import com.google.common.base.Supplier;
 
 /**

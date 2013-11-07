@@ -13,16 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.autermann.snakeyaml.api;
+package com.github.autermann.snakeyaml.api.util;
 
-import com.github.autermann.snakeyaml.api.nodes.YamlMappingNode;
+import com.github.autermann.snakeyaml.api.YamlNodeFactory;
+import com.github.autermann.snakeyaml.api.nodes.YamlOrderedMappingNode;
+import com.google.common.base.Preconditions;
 import com.google.common.base.Supplier;
 
 /**
- * A {@link Supplier} for {@link YamlMappingNode}s backed by a
+ * A {@link Supplier} for {@link YamlOrderedMappingNode}s backed by a
  * {@link YamlNodeFactory}.
  */
-class YamlMappingNodeSupplier implements Supplier<YamlMappingNode> {
+public class YamlOrderedMappingNodeSupplier implements Supplier<YamlOrderedMappingNode> {
 
     /**
      * The backing factory.
@@ -30,18 +32,18 @@ class YamlMappingNodeSupplier implements Supplier<YamlMappingNode> {
     private final YamlNodeFactory factory;
 
     /**
-     * Creates a new {@link  YamlMappingNodeSupplier} for the supplied
+     * Creates a new {@link  YamlOrderedMappingNodeSupplier} for the supplied
      * factory.
      *
      * @param factory the factory to use
      */
-    YamlMappingNodeSupplier(YamlNodeFactory factory) {
-        this.factory = factory;
+    public YamlOrderedMappingNodeSupplier(YamlNodeFactory factory) {
+        this.factory = Preconditions.checkNotNull(factory);
     }
 
     @Override
-    public YamlMappingNode get() {
-        return factory.mappingNode();
+    public YamlOrderedMappingNode get() {
+        return factory.orderedMappingNode();
     }
 
 }

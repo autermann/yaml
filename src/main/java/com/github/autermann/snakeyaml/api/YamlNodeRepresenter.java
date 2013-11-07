@@ -58,15 +58,34 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 import com.google.common.io.BaseEncoding;
 
+/**
+ * {@link Representer} for {@link YamlNode}s.
+ *
+ * @author Christian Autermann
+ */
 public class YamlNodeRepresenter extends Representer {
 
+    /**
+     * The encoding used for {@link YamlBinaryNode}s.
+     */
     private final BaseEncoding binaryEncoding;
+    /**
+     * The encoding used for {@link YamlTimeNode}s.
+     */
     private final DateTimeFormatter timeEncoding;
 
+    /**
+     * Creates a new represent using default {@link DumperOptions}.
+     */
     public YamlNodeRepresenter() {
         this(new DumperOptions());
     }
 
+    /**
+     * Creates a new representer using the supplied {@link DumperOptions}.
+     *
+     * @param options the dumper options
+     */
     public YamlNodeRepresenter(DumperOptions options) {
         checkNotNull(options);
         this.timeEncoding = ISODateTimeFormat.dateTime();
@@ -95,15 +114,38 @@ public class YamlNodeRepresenter extends Representer {
         register(YamlNode.class, represent);
     }
 
+    /**
+     * Register the {@link Represent} in {@link #representers} and
+     * {@link #multiRepresenters}.
+     *
+     * @param type      the type to register for
+     * @param represent the represent
+     */
     private void register(Class<? extends YamlNode> type, Represent represent) {
         this.representers.put(type, represent);
         this.multiRepresenters.put(type, represent);
     }
 
+    /**
+     * Delegate the representation of {@code value}.
+     *
+     * @param value the value to represent
+     *
+     * @return the representation created by the delegate
+     */
     private Node delegate(Object value) {
         return representData(value);
     }
 
+    /**
+     * Delegate the representation of {@code value} and apply the specified
+     * {@link Tag}
+     *
+     * @param tag   the tag
+     * @param value the value to represent
+     *
+     * @return the representation created by the delegate
+     */
     private Node delegate(Tag tag, Object value) {
         Preconditions.checkNotNull(tag);
         Node node = delegate(value);
@@ -111,7 +153,16 @@ public class YamlNodeRepresenter extends Representer {
         return node;
     }
 
-    private Node delegate(Tag tag, Iterable<Entry<YamlNode, YamlNode>> mapping) {
+    /**
+     * Create a {@link MappingNode} from the specified entries and tag.
+     *
+     * @param tag     the tag
+     * @param mapping the entries
+     *
+     * @return the mapping node
+     */
+    private MappingNode delegate(Tag tag,
+                                 Iterable<Entry<YamlNode, YamlNode>> mapping) {
         List<NodeTuple> value = Lists.newLinkedList();
         MappingNode node = new MappingNode(tag, value, null);
         representedObjects.put(objectToRepresent, node);
@@ -132,6 +183,14 @@ public class YamlNodeRepresenter extends Representer {
         return node;
     }
 
+    /**
+     * Gets the best style for the supplied node.
+     *
+     * @param node      the node to check
+     * @param bestStyle the current best style
+     *
+     * @return the new best style
+     */
     private boolean bestStyle(Node node, boolean bestStyle) {
         if (node instanceof ScalarNode) {
             ScalarNode scalar = (ScalarNode) node;
@@ -142,6 +201,9 @@ public class YamlNodeRepresenter extends Representer {
         return bestStyle;
     }
 
+    /**
+     * Representing visitor to represent {@link YamlNode}s.
+     */
     private class YamlNodeRepresent
             extends AbstractReturningYamlNodeVisitor<Node>
             implements Represent {
