@@ -80,6 +80,15 @@
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-release-plugin</artifactId>
+                    <version>2.3.2</version>
+                    <configuration>
+                        <tagNameFormat>@{groupId}-@{artifactId}-@{version}</tagNameFormat>
+                        <pushChanges>false</pushChanges>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
                     <version>3.1</version>
                     <configuration>
@@ -96,26 +105,30 @@
                     <artifactId>maven-javadoc-plugin</artifactId>
                     <version>2.9.1</version>
                     <configuration>
+                        <links>
+                            <link>http://docs.guava-libraries.googlecode.com/git-history/v15.0/javadoc/</link>
+                            <link>http://www.joda.org/joda-time/apidocs/</link>
+                        </links>
                         <show>private</show>
                         <!--
-                            <doclet>org.umlgraph.doclet.UmlGraphDoc</doclet>
-                            <docletArtifact>
-                                <groupId>org.umlgraph</groupId>
-                                <artifactId>umlgraph</artifactId>
-                                <version>5.6.6</version>
-                            </docletArtifact>
-                            <additionalparam>
-                                -all
-                                -quiet
-                                -qualify
-                                -hide java.*
-                                -collpackages java.util.*
-                                -postfixpackage
-                                -nodefontsize 9
-                                -nodefontpackagesize 7
-                                -outputencoding utf8
-                            </additionalparam>
-                        -->
+                        <doclet>org.umlgraph.doclet.UmlGraphDoc</doclet>
+                        <docletArtifact>
+                            <groupId>org.umlgraph</groupId>
+                            <artifactId>umlgraph</artifactId>
+                            <version>5.6.6</version>
+                        </docletArtifact>
+                        <additionalparam>
+                            -all
+                            -quiet
+                            -qualify
+                            -hide java.*
+                            -collpackages java.util.*
+                            -postfixpackage
+                            -nodefontsize 9
+                            -nodefontpackagesize 7
+                            -outputencoding utf8
+                        </additionalparam>
+						-->
                     </configuration>
                 </plugin>
                 <plugin>
