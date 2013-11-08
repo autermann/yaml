@@ -1,13 +1,13 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.github.autermann</groupId>
-    <artifactId>snakeyaml-api</artifactId>
+    <artifactId>yaml</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>jar</packaging>
-    <name>snakeyaml-api</name>
-    <url>https://github.com/autermann/snakeyaml-api</url>
+    <name>YAML API</name>
+    <url>https://github.com/autermann/yaml-api</url>
     <inceptionYear>2013</inceptionYear>
-    <description>A Jackson-like API to create YAML nodes (based on SnakeYAML).</description>
+    <description>A Jackson-like API to create YAML nodes (based on SnakeYAML)</description>
     <licenses>
         <license>
             <name>Apache License, Version 2.0</name>
@@ -22,17 +22,17 @@
         </developer>
     </developers>
     <scm>
-        <connection>scm:git:https://github.com/autermann/snakeyaml-api.git</connection>
-        <developerConnection>scm:git:https://github.com/autermann/snakeyaml-api.git</developerConnection>
-        <url>https://github.com/autermann/snakeyaml-api</url>
+        <connection>scm:git:https://github.com/autermann/yaml-api.git</connection>
+        <developerConnection>scm:git:https://github.com/autermann/yaml-api.git</developerConnection>
+        <url>https://github.com/autermann/yaml-api</url>
     </scm>
     <issueManagement>
         <system>GitHub Issue Management</system>
-        <url>https://github.com/autermann/snakeyaml-api/issues</url>
+        <url>https://github.com/autermann/yaml-api/issues</url>
     </issueManagement>
     <ciManagement>
         <system>Travis CI</system>
-        <url>https://travis-ci.org/autermann/snakeyaml-api</url>
+        <url>https://travis-ci.org/autermann/yaml-api</url>
     </ciManagement>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
