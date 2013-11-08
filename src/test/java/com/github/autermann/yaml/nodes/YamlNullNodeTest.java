@@ -15,75 +15,101 @@
  */
 package com.github.autermann.yaml.nodes;
 
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.bigDecimalNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.bigIntegerNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.binaryNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.booleanNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.byteNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.containerNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.decimalNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.doubleNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.existingNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.floatNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.intNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.integralNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.longNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.mapNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.nullNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.numberNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.orderedMapNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.pairsNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.scalarNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.sequenceNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.setNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.shortNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.textNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.timeNode;
 import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.not;
 import static org.hamcrest.Matchers.notNullValue;
+import static org.hamcrest.Matchers.nullValue;
 import static org.junit.Assert.assertThat;
 
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ErrorCollector;
+import org.yaml.snakeyaml.nodes.Tag;
 
-import com.github.autermann.yaml.YamlNode;
-import com.github.autermann.yaml.YamlNodeFactory;
+/**
+ * Tests for {@link YamlNullNode}.
+ *
+ * @author Christian Autermann
+ */
+public class YamlNullNodeTest extends AbstractYamlNodeTest {
+    @Override
+    public void testIsScalar() {
+        assertThat(instance().isScalar(), is(true));
+    }
 
-public class YamlNullNodeTest {
-    public final YamlNodeFactory factory = YamlNodeFactory.createDefault();
+    @Override
+    public void testAsTextValue_0args() {
+        assertThat(instance().asTextValue(), is("null"));
+    }
 
-    @Rule
-    public final ErrorCollector errors = new ErrorCollector();
+    @Override
+    public void testAsTextValue_String() {
+        errors.checkThat(instance().asTextValue("asdf"), is("null"));
+        errors.checkThat(instance().asTextValue(""), is("null"));
+        errors.checkThat(instance().asTextValue(null), is("null"));
+    }
+
+    @Override
+    public void testTag() {
+        assertThat(instance().tag(), is(Tag.NULL));
+    }
+
+    @Override
+    public void testHashCode() {
+        assertThat(instance().hashCode(),
+                   is(instance().hashCode()));
+    }
+
+    @Override
+    public void testEquals() {
+        assertThat(instance(), is(instance()));
+    }
 
     @Test
-    public void testType() {
-        YamlNode node = factory.nullNode();
-        assertThat(node, is(notNullValue()));
-        errors.checkThat(node, is(not(binaryNode())));
-        errors.checkThat(node, is(not(booleanNode())));
-        errors.checkThat(node, is(not(containerNode())));
-        errors.checkThat(node, is(not(decimalNode())));
-        errors.checkThat(node, is((existingNode())));
-        errors.checkThat(node, is(not(integralNode())));
-        errors.checkThat(node, is(not(mapNode())));
-        errors.checkThat(node, is((nullNode())));
-        errors.checkThat(node, is(not(numberNode())));
-        errors.checkThat(node, is(not(orderedMapNode())));
-        errors.checkThat(node, is(not(pairsNode())));
-        errors.checkThat(node, is((scalarNode())));
-        errors.checkThat(node, is(not(sequenceNode())));
-        errors.checkThat(node, is(not(setNode())));
-        errors.checkThat(node, is(not(textNode())));
-        errors.checkThat(node, is(not(timeNode())));
-        errors.checkThat(node, is(not(bigIntegerNode())));
-        errors.checkThat(node, is(not(longNode())));
-        errors.checkThat(node, is(not(intNode())));
-        errors.checkThat(node, is(not(shortNode())));
-        errors.checkThat(node, is(not(byteNode())));
-        errors.checkThat(node, is(not(bigDecimalNode())));
-        errors.checkThat(node, is(not(doubleNode())));
-        errors.checkThat(node, is(not(floatNode())));
+    @Override
+    public void testIsNull() {
+        assertThat(instance().isNull(), is(true));
+    }
+
+    @Test
+    public void testValue() {
+        assertThat(instance().value(), is(nullValue()));
+    }
+
+    /**
+     * Test for {@link YamlNullNode#instance() }.
+     */
+    @Test
+    public void testInstance() {
+        assertThat(instance(), is(notNullValue()));
+        assertThat(instance(), is(instance()));
+        assertThat(instance() == instance(), is(true));
+    }
+
+    @Override
+    public void testToString() {
+        assertThat(instance().toString(), is("null"));
+    }
+
+    @Override
+    protected YamlNullNode instance() {
+        return YamlNullNode.instance();
+    }
+
+    @Override
+    protected FailingReturningYamlNodeVisitor returningVisitor() {
+        return new FailingReturningYamlNodeVisitor() {
+            @Override
+            public Void visit(YamlNullNode node) {
+                return hasVisited(true);
+            }
+        };
+    }
+
+    @Override
+    protected FailingYamlNodeVisitor visitor() {
+        return new FailingYamlNodeVisitor() {
+            @Override
+            public void visit(YamlNullNode node) {
+                hasVisited(true);
+            }
+        };
     }
 }

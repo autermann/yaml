@@ -15,6 +15,7 @@
  */
 package com.github.autermann.yaml;
 
+import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.util.List;
@@ -210,7 +211,9 @@ public class YamlNodeRepresenter extends Representer {
 
         @Override
         public Node representData(Object data) {
-            return ((YamlNode) data).accept(this);
+            YamlNode node = (YamlNode) data;
+            checkArgument(node.exists());
+            return node.accept(this);
         }
 
         @Override

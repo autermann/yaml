@@ -15,74 +15,138 @@
  */
 package com.github.autermann.yaml.nodes;
 
-
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.bigDecimalNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.bigIntegerNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.binaryNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.booleanNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.byteNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.containerNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.decimalNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.doubleNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.existingNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.floatNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.intNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.integralNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.longNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.mapNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.nullNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.numberNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.orderedMapNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.pairsNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.scalarNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.sequenceNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.setNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.shortNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.textNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.timeNode;
 import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.not;
 import static org.hamcrest.Matchers.notNullValue;
+import static org.hamcrest.Matchers.nullValue;
 import static org.junit.Assert.assertThat;
 
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ErrorCollector;
 
-import com.github.autermann.yaml.YamlNode;
+/**
+ * Tests for {@link YamlMissingNode}.
+ *
+ * @author Christian Autermann
+ */
+public class YamlMissingNodeTest extends AbstractYamlNodeTest {
 
-public class YamlMissingNodeTest {
+    @Override
+    public void testToString() {
+        assertThat(instance().toString(), is(""));
+    }
 
-    @Rule
-    public final ErrorCollector errors = new ErrorCollector();
+    @Override
+    public void testEquals() {
+        assertThat(instance(), is(instance()));
+    }
 
+    @Override
+    public void testHashCode() {
+        assertThat(instance().hashCode(),
+                   is(instance().hashCode()));
+    }
+
+    @Override
+    public void testExists() {
+        assertThat(instance().exists(), is(false));
+    }
+
+    @Override
+    public void testTag() {
+        assertThat(instance().tag(), is(nullValue()));
+    }
+
+    /**
+     * Test for {@link YamlMissingNode#instance() }.
+     */
     @Test
-    public void testType() {
-        YamlNode node = YamlMissingNode.instance();
-        assertThat(node, is(notNullValue()));
-        errors.checkThat(node, is(not(binaryNode())));
-        errors.checkThat(node, is(not(booleanNode())));
-        errors.checkThat(node, is(not(containerNode())));
-        errors.checkThat(node, is(not(decimalNode())));
-        errors.checkThat(node, is(not(existingNode())));
-        errors.checkThat(node, is(not(integralNode())));
-        errors.checkThat(node, is(not(mapNode())));
-        errors.checkThat(node, is(not(nullNode())));
-        errors.checkThat(node, is(not(numberNode())));
-        errors.checkThat(node, is(not(orderedMapNode())));
-        errors.checkThat(node, is(not(pairsNode())));
-        errors.checkThat(node, is(not(scalarNode())));
-        errors.checkThat(node, is(not(sequenceNode())));
-        errors.checkThat(node, is(not(setNode())));
-        errors.checkThat(node, is(not(textNode())));
-        errors.checkThat(node, is(not(timeNode())));
-        errors.checkThat(node, is(not(bigIntegerNode())));
-        errors.checkThat(node, is(not(longNode())));
-        errors.checkThat(node, is(not(intNode())));
-        errors.checkThat(node, is(not(shortNode())));
-        errors.checkThat(node, is(not(byteNode())));
-        errors.checkThat(node, is(not(bigDecimalNode())));
-        errors.checkThat(node, is(not(doubleNode())));
-        errors.checkThat(node, is(not(floatNode())));
+    public void testInstance() {
+        assertThat(instance(), is(notNullValue()));
+        assertThat(instance(), is(instance()));
+        assertThat(instance() == instance(), is(true));
+    }
+
+    @Override
+    protected YamlMissingNode instance() {
+        return YamlMissingNode.instance();
+    }
+
+    @Override
+    protected FailingReturningYamlNodeVisitor returningVisitor() {
+        FailingReturningYamlNodeVisitor v
+                = new FailingReturningYamlNodeVisitor() {
+                };
+        v.hasVisited(true);
+        return v;
+    }
+
+    @Override
+    protected FailingYamlNodeVisitor visitor() {
+        FailingYamlNodeVisitor v
+                = new FailingYamlNodeVisitor() {
+                };
+        v.hasVisited(true);
+        return v;
+    }
+
+    @Override
+    public void testDump_0args() {
+        thrown.expect(IllegalArgumentException.class);
+        super.testDump_0args();
+    }
+
+    @Override
+    public void testDump_DumperOptions() {
+        // this node can't be dumped
+        thrown.expect(IllegalArgumentException.class);
+        super.testDump_DumperOptions();
+    }
+
+    @Override
+    public void testDump_OutputStream() {
+        // this node can't be dumped
+        thrown.expect(IllegalArgumentException.class);
+        super.testDump_OutputStream();
+    }
+
+    @Override
+    public void testDump_OutputStream_DumperOptions() {
+        // this node can't be dumped
+        thrown.expect(IllegalArgumentException.class);
+        super.testDump_OutputStream_DumperOptions();
+    }
+
+    @Override
+    public void testDump_OutputStream_Yaml() {
+        // this node can't be dumped
+        thrown.expect(IllegalArgumentException.class);
+        super.testDump_OutputStream_Yaml();
+    }
+
+    @Override
+    public void testDump_Writer() {
+        // this node can't be dumped
+        thrown.expect(IllegalArgumentException.class);
+        super.testDump_Writer();
+    }
+
+    @Override
+    public void testDump_Writer_DumperOptions() {
+        // this node can't be dumped
+        thrown.expect(IllegalArgumentException.class);
+        super.testDump_Writer_DumperOptions();
+    }
+
+    @Override
+    public void testDump_Writer_Yaml() {
+        // this node can't be dumped
+        thrown.expect(IllegalArgumentException.class);
+        super.testDump_Writer_Yaml();
+    }
+
+    @Override
+    public void testDump_Yaml() {
+        // this node can't be dumped
+        thrown.expect(IllegalArgumentException.class);
+        super.testDump_Yaml();
     }
 }

@@ -27,7 +27,7 @@ import com.github.autermann.yaml.YamlNode;
 public class YamlNodesMatcher extends ErrorCollector {
 
     public static <T> Matcher<T> noneOf(Matcher<? super T>... matchers) {
-        return Matchers.not(Matchers.anyOf(matchers));
+        return Matchers.<T>not(Matchers.<T>anyOf(matchers));
     }
 
     @Factory

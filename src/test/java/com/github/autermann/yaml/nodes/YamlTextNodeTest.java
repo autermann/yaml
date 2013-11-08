@@ -15,76 +15,151 @@
  */
 package com.github.autermann.yaml.nodes;
 
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.bigDecimalNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.bigIntegerNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.binaryNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.booleanNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.byteNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.containerNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.decimalNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.doubleNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.existingNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.floatNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.intNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.integralNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.longNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.mapNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.nullNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.numberNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.orderedMapNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.pairsNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.scalarNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.sequenceNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.setNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.shortNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.textNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.timeNode;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
-import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.Assert.assertThat;
 
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ErrorCollector;
+import java.util.UUID;
+
+import org.yaml.snakeyaml.nodes.Tag;
 
 import com.github.autermann.yaml.YamlNode;
-import com.github.autermann.yaml.YamlNodeFactory;
 
-public class YamlTextNodeTest {
+/**
+ * Tests for {@link YamlTextNode}.
+ *
+ * @author Christian Autermann
+ */
+public class YamlTextNodeTest extends AbstractYamlNodeTest {
 
-    public final YamlNodeFactory factory = YamlNodeFactory.createDefault();
+    @Override
+    public void testToString() {
+        YamlTextNode n = instance();
+        errors.checkThat(new YamlTextNode("").toString(), is(""));
+        errors.checkThat(n.toString(), is(n.textValue()));
+    }
 
-    @Rule
-    public final ErrorCollector errors = new ErrorCollector();
+    @Override
+    public void testEquals() {
+        String s1 = UUID.randomUUID().toString();
+        String s2 = UUID.randomUUID().toString();
+        errors.checkThat(new YamlTextNode(s1), is(new YamlTextNode(s1)));
+        errors.checkThat(new YamlTextNode(s2), is(new YamlTextNode(s2)));
+        errors.checkThat(new YamlTextNode(s1), is(not(new YamlTextNode(s2))));
+    }
 
-    @Test
-    public void testType() {
-        YamlNode node = factory.textNode("asdf");
-        assertThat(node, is(notNullValue()));
-        errors.checkThat(node, is(not(binaryNode())));
-        errors.checkThat(node, is(not(booleanNode())));
-        errors.checkThat(node, is(not(containerNode())));
-        errors.checkThat(node, is(not(decimalNode())));
-        errors.checkThat(node, is((existingNode())));
-        errors.checkThat(node, is(not(integralNode())));
-        errors.checkThat(node, is(not(mapNode())));
-        errors.checkThat(node, is(not(nullNode())));
-        errors.checkThat(node, is(not(numberNode())));
-        errors.checkThat(node, is(not(orderedMapNode())));
-        errors.checkThat(node, is(not(pairsNode())));
-        errors.checkThat(node, is((scalarNode())));
-        errors.checkThat(node, is(not(sequenceNode())));
-        errors.checkThat(node, is(not(setNode())));
-        errors.checkThat(node, is((textNode())));
-        errors.checkThat(node, is(not(timeNode())));
-        errors.checkThat(node, is(not(bigIntegerNode())));
-        errors.checkThat(node, is(not(longNode())));
-        errors.checkThat(node, is(not(intNode())));
-        errors.checkThat(node, is(not(shortNode())));
-        errors.checkThat(node, is(not(byteNode())));
-        errors.checkThat(node, is(not(bigDecimalNode())));
-        errors.checkThat(node, is(not(doubleNode())));
-        errors.checkThat(node, is(not(floatNode())));
+    @Override
+    public void testHashCode() {
+        String s1 = UUID.randomUUID().toString();
+        String s2 = UUID.randomUUID().toString();
+        errors.checkThat(new YamlTextNode(s1).hashCode(),
+                         is(new YamlTextNode(s1).hashCode()));
+        errors.checkThat(new YamlTextNode(s2).hashCode(),
+                         is(new YamlTextNode(s2).hashCode()));
+        errors.checkThat(new YamlTextNode(s1).hashCode(),
+                         is(not(new YamlTextNode(s2).hashCode())));
+    }
+
+    @Override
+    public void testTag() {
+        assertThat(instance().tag(), is(Tag.STR));
+    }
+
+    @Override
+    protected YamlTextNode instance() {
+        return new YamlTextNode(UUID.randomUUID().toString());
+    }
+
+    @Override
+    protected FailingReturningYamlNodeVisitor returningVisitor() {
+        return new FailingReturningYamlNodeVisitor() {
+
+            @Override
+            public Void visit(YamlTextNode node) {
+                return hasVisited(true);
+            }
+
+        };
+    }
+
+    @Override
+    protected FailingYamlNodeVisitor visitor() {
+        return new FailingYamlNodeVisitor() {
+
+            @Override
+            public void visit(YamlTextNode node) {
+                hasVisited(true);
+            }
+
+        };
+    }
+
+    @Override
+    public void testAsTextValue_0args() {
+        YamlTextNode node = instance();
+        assertThat(node.asTextValue(), is(node.textValue()));
+    }
+
+    @Override
+    public void testAsTextValue_String() {
+        YamlTextNode node = instance();
+        errors.checkThat(node.asTextValue(""), is(node.textValue()));
+        errors.checkThat(node.asTextValue("adsf"), is(node.textValue()));
+        errors.checkThat(node.asTextValue("null"), is(node.textValue()));
+    }
+
+    @Override
+    public void testTextValue() {
+        String value = UUID.randomUUID().toString();
+        YamlNode node = new YamlTextNode(value);
+        assertThat(node.textValue(), is(value));
+    }
+
+    @Override
+    public void testAsBinaryValue_0args() {
+        YamlNode node = instance();
+        errors.checkThat(node.asBinaryValue(), is(node.textValue().getBytes()));
+    }
+
+    @Override
+    public void testAsBinaryValue_byteArr() {
+        YamlNode node = instance();
+        errors.checkThat(node.asBinaryValue(null),
+                         is(node.textValue().getBytes()));
+        errors.checkThat(node.asBinaryValue(new byte[0]),
+                         is(node.textValue().getBytes()));
+        errors.checkThat(node.asBinaryValue(new byte[] { 1, 2, 3 }),
+                         is(node.textValue().getBytes()));
+    }
+
+    @Override
+    public void testIsScalar() {
+        assertThat(instance().isScalar(), is(true));
+    }
+
+    @Override
+    public void testIsText() {
+        assertThat(instance().isText(), is(true));
+    }
+
+    @Override
+    public void testAsBooleanValue_0args() {
+        YamlTextNode t = new YamlTextNode("true");
+        YamlTextNode f = new YamlTextNode("false");
+        errors.checkThat(t.asBooleanValue(), is(true));
+        errors.checkThat(f.asBooleanValue(), is(false));
+        errors.checkThat(instance().asBooleanValue(), is(false));
+    }
+
+    @Override
+    public void testAsBooleanValue_boolean() {
+        YamlTextNode t = new YamlTextNode("true");
+        YamlTextNode f = new YamlTextNode("false");
+        errors.checkThat(t.asBooleanValue(true), is(true));
+        errors.checkThat(t.asBooleanValue(true), is(true));
+        errors.checkThat(f.asBooleanValue(true), is(false));
+        errors.checkThat(f.asBooleanValue(false), is(false));
+        errors.checkThat(instance().asBooleanValue(true), is(false));
+        errors.checkThat(instance().asBooleanValue(false), is(false));
     }
 }
