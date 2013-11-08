@@ -6,8 +6,8 @@
     <packaging>jar</packaging>
     <name>snakeyaml-api</name>
     <url>https://github.com/autermann/snakeyaml-api</url>
-    <inceptionYear>2012</inceptionYear>
-    <description>Provides the ability to run MATLAB functions remotely.</description>
+    <inceptionYear>2013</inceptionYear>
+    <description>A Jackson-like API to create YAML nodes (based on SnakeYAML).</description>
     <licenses>
         <license>
             <name>Apache License, Version 2.0</name>
