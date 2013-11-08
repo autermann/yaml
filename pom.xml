@@ -22,20 +22,21 @@
         </developer>
     </developers>
     <scm>
-        <connection>scm:git:${project.url}.git</connection>
-        <developerConnection>scm:git:${project.url}.git</developerConnection>
-        <url>${project.url}</url>
+        <connection>scm:git:https://github.com/autermann/snakeyaml-api.git</connection>
+        <developerConnection>scm:git:https://github.com/autermann/snakeyaml-api.git</developerConnection>
+        <url>https://github.com/autermann/snakeyaml-api</url>
     </scm>
     <issueManagement>
         <system>GitHub Issue Management</system>
-        <url>${project.url}/issues</url>
+        <url>https://github.com/autermann/snakeyaml-api/issues</url>
     </issueManagement>
     <ciManagement>
         <system>Travis CI</system>
-        <url>https://travis-ci.org/autermann/${project.artifcatId}</url>
+        <url>https://travis-ci.org/autermann/snakeyaml-api</url>
     </ciManagement>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.scm.gitexe.sign_tags>true</maven.scm.gitexe.sign_tags>
     </properties>
     <dependencies>
         <dependency>
