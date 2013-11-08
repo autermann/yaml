@@ -106,7 +106,7 @@
                 <version>1.9.0</version>
                 <configuration>
                     <aggregate>true</aggregate>
-                    <header>misc/license-header.txt</header>
+					<header>src/main/misc/license-header.txt</header>
                     <includes>
                         <include>**/*.java</include>
                     </includes>
