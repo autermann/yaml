@@ -1,4 +1,4 @@
-# snakeyaml-api [![Build Status](https://travis-ci.org/autermann/snakeyaml-api.png?branch=master)](https://travis-ci.org/autermann/snakeyaml-api)
+# YAML API [![Build Status](https://travis-ci.org/autermann/yaml.png?branch=master)](https://travis-ci.org/autermann/yaml)
 
 A [Jackson][jackson]-like API to create YAML nodes (based on [SnakeYAML][snakeyaml]).
 
@@ -7,7 +7,7 @@ A [Jackson][jackson]-like API to create YAML nodes (based on [SnakeYAML][snakeya
 ### Creating nodes
 ```java
 YamlNodeFactory factory = YamlNodeFactory.createDefault();
-YamlMappingNode mnode = factory.orderedMappingNode();
+YamlMapNode mnode = factory.orderedMapNode();
 mnode.put("hello", "world")
      .put("key", true)
      .put("integer", 2)
