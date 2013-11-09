@@ -15,76 +15,160 @@
  */
 package com.github.autermann.yaml.nodes;
 
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.bigDecimalNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.bigIntegerNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.binaryNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.booleanNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.byteNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.containerNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.decimalNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.doubleNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.existingNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.floatNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.intNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.integralNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.longNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.mapNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.nullNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.numberNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.orderedMapNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.pairsNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.scalarNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.sequenceNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.setNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.shortNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.textNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.timeNode;
+import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
-import static org.hamcrest.Matchers.notNullValue;
-import static org.junit.Assert.assertThat;
 
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ErrorCollector;
+import java.util.Arrays;
+import java.util.Random;
+
+import org.yaml.snakeyaml.nodes.Tag;
 
 import com.github.autermann.yaml.YamlNode;
-import com.github.autermann.yaml.YamlNodeFactory;
+import com.google.common.io.BaseEncoding;
 
-public class YamlBinaryNodeTest {
+/**
+ * Test for {@link YamlBinaryNode}s.
+ *
+ * @author Christian Autermann
+ */
+public class YamlBinaryNodeTest extends AbstractYamlNodeTest {
+    /**
+     * The random to fill the byte arrays.
+     */
+    private final Random random = new Random();
 
-    public final YamlNodeFactory factory = YamlNodeFactory.createDefault();
+    @Override
+    public void testToString() {
+        YamlBinaryNode node = instance();
+        errors.checkThat(node.toString(), is(base64(node)));
+    }
 
-    @Rule
-    public final ErrorCollector errors = new ErrorCollector();
+    @Override
+    public void testIsBinary() {
+        errors.checkThat(instance().isBinary(), is(true));
+    }
 
-    @Test
-    public void testType() {
-        YamlNode node = factory.binaryNode(new byte[0]);
-        assertThat(node, is(notNullValue()));
-        errors.checkThat(node, is((binaryNode())));
-        errors.checkThat(node, is(not(booleanNode())));
-        errors.checkThat(node, is(not(containerNode())));
-        errors.checkThat(node, is(not(decimalNode())));
-        errors.checkThat(node, is((existingNode())));
-        errors.checkThat(node, is(not(integralNode())));
-        errors.checkThat(node, is(not(mapNode())));
-        errors.checkThat(node, is(not(nullNode())));
-        errors.checkThat(node, is(not(numberNode())));
-        errors.checkThat(node, is(not(orderedMapNode())));
-        errors.checkThat(node, is(not(pairsNode())));
-        errors.checkThat(node, is((scalarNode())));
-        errors.checkThat(node, is(not(sequenceNode())));
-        errors.checkThat(node, is(not(setNode())));
-        errors.checkThat(node, is(not(textNode())));
-        errors.checkThat(node, is(not(timeNode())));
-        errors.checkThat(node, is(not(bigIntegerNode())));
-        errors.checkThat(node, is(not(longNode())));
-        errors.checkThat(node, is(not(intNode())));
-        errors.checkThat(node, is(not(shortNode())));
-        errors.checkThat(node, is(not(byteNode())));
-        errors.checkThat(node, is(not(bigDecimalNode())));
-        errors.checkThat(node, is(not(doubleNode())));
-        errors.checkThat(node, is(not(floatNode())));
+    @Override
+    public void testIsScalar() {
+        errors.checkThat(instance().isScalar(), is(true));
+    }
+
+    @Override
+    public void testBinaryValue() {
+        byte[] bytes = randomBytes();
+        YamlBinaryNode i = new YamlBinaryNode(bytes);
+        errors.checkThat(i.binaryValue(), is(bytes));
+    }
+
+    @Override
+    public void testAsBinaryValue_0args() {
+        byte[] bytes = randomBytes();
+        YamlBinaryNode i = new YamlBinaryNode(bytes);
+        errors.checkThat(i.asBinaryValue(), is(bytes));
+    }
+
+    @Override
+    public void testAsBinaryValue_byteArr() {
+        byte[] bytes = randomBytes();
+        YamlBinaryNode i = new YamlBinaryNode(bytes);
+        errors.checkThat(i.asBinaryValue(null), is(bytes));
+        errors.checkThat(i.asBinaryValue(new byte[0]), is(bytes));
+        errors.checkThat(i.asBinaryValue(randomBytes()), is(bytes));
+    }
+
+    /**
+     * Test {@code null} in {@link YamlBinaryNode} constructor.
+     */
+    public void testNullConstructor() {
+        thrown.expect(NullPointerException.class);
+        new YamlBinaryNode(null);
+    }
+
+    @Override
+    public void testAsTextValue_0args() {
+        YamlBinaryNode node = instance();
+        errors.checkThat(node.asTextValue(), is(base64(node)));
+    }
+
+    @Override
+    public void testAsTextValue_String() {
+        YamlBinaryNode node = instance();
+        errors.checkThat(node.asTextValue(""), is(base64(node)));
+        errors.checkThat(node.asTextValue("asdf"), is(base64(node)));
+        errors.checkThat(node.asTextValue(null), is(base64(node)));
+    }
+
+    @Override
+    public void testEquals() {
+        byte[] bytes = randomBytes();
+        byte[] copy = Arrays.copyOf(bytes, bytes.length);
+        errors.checkThat(new YamlBinaryNode(bytes),
+                         is(equalTo(new YamlBinaryNode(copy))));
+        errors.checkThat((YamlNode) new YamlBinaryNode(bytes),
+                         is(not(equalTo((YamlNode) factory
+                .binaryNode((byte[]) null)))));
+        copy[0] = (byte) -copy[0];
+        errors.checkThat(new YamlBinaryNode(bytes),
+                         is(not(equalTo(new YamlBinaryNode(copy)))));
+    }
+
+    @Override
+    public void testHashCode() {
+        YamlBinaryNode i = instance();
+        errors.checkThat(i.hashCode(), is(Arrays.hashCode(i.binaryValue())));
+    }
+
+    @Override
+    public void testTag() {
+        errors.checkThat(instance().tag(), is(Tag.BINARY));
+    }
+
+    @Override
+    protected YamlBinaryNode instance() {
+        byte[] bytes = randomBytes();
+        return new YamlBinaryNode(bytes);
+    }
+
+    @Override
+    protected FailingReturningYamlNodeVisitor returningVisitor() {
+        return new FailingReturningYamlNodeVisitor() {
+            @Override
+            public Void visit(YamlBinaryNode node) {
+                return hasVisited(true);
+            }
+        };
+    }
+
+    @Override
+    protected FailingYamlNodeVisitor visitor() {
+        return new FailingYamlNodeVisitor() {
+            @Override
+            public void visit(YamlBinaryNode node) {
+                hasVisited(true);
+            }
+        };
+    }
+
+    /**
+     * Generates a random byte array.
+     *
+     * @return the random bytes
+     */
+    protected byte[] randomBytes() {
+        byte[] bytes = new byte[random.nextInt(128)];
+        random.nextBytes(bytes);
+        return bytes;
+    }
+
+    /**
+     * Encodes a binary node as a base 64 encoded string.
+     *
+     * @param node the node
+     *
+     * @return the base 64 encoded bytes
+     */
+    private String base64(YamlBinaryNode node) {
+        return BaseEncoding.base64().encode(node.binaryValue());
     }
 }
