@@ -990,45 +990,45 @@ public abstract class AbstractYamlNodeTest {
     @Test
     public void testPath_YamlNode() {
         YamlNodeFactory f = YamlNodeFactory.createDefault();
-        errors.checkThat(instance().get(f.bigDecimalNode(BigDecimal.ZERO)),
+        errors.checkThat(instance().path(f.bigDecimalNode(BigDecimal.ZERO)),
                          is(not(existingNode())));
-        errors.checkThat(instance().get(f.bigIntegerNode(BigInteger.ZERO)),
+        errors.checkThat(instance().path(f.bigIntegerNode(BigInteger.ZERO)),
                          is(not(existingNode())));
-        errors.checkThat(instance().get(f.binaryNode(new byte[0])),
+        errors.checkThat(instance().path(f.binaryNode(new byte[0])),
                          is(not(existingNode())));
-        errors.checkThat(instance().get(f.booleanNode(true)),
+        errors.checkThat(instance().path(f.booleanNode(true)),
                          is(not(existingNode())));
-        errors.checkThat(instance().get(f.byteNode((byte) 0)),
+        errors.checkThat(instance().path(f.byteNode((byte) 0)),
                          is(not(existingNode())));
-        errors.checkThat(instance().get(f.dateTimeNode(new Date())),
+        errors.checkThat(instance().path(f.dateTimeNode(new Date())),
                          is(not(existingNode())));
-        errors.checkThat(instance().get(f.dateTimeNode(DateTime.now())),
+        errors.checkThat(instance().path(f.dateTimeNode(DateTime.now())),
                          is(not(existingNode())));
-        errors.checkThat(instance().get(f.doubleNode(0)),
+        errors.checkThat(instance().path(f.doubleNode(0)),
                          is(not(existingNode())));
-        errors.checkThat(instance().get(f.floatNode(0)),
+        errors.checkThat(instance().path(f.floatNode(0)),
                          is(not(existingNode())));
-        errors.checkThat(instance().get(f.intNode(0)),
+        errors.checkThat(instance().path(f.intNode(0)),
                          is(not(existingNode())));
-        errors.checkThat(instance().get(f.longNode(0)),
+        errors.checkThat(instance().path(f.longNode(0)),
                          is(not(existingNode())));
-        errors.checkThat(instance().get(f.mapNode()),
+        errors.checkThat(instance().path(f.mapNode()),
                          is(not(existingNode())));
-        errors.checkThat(instance().get(f.nullNode()),
+        errors.checkThat(instance().path(f.nullNode()),
                          is(not(existingNode())));
-        errors.checkThat(instance().get(f.orderedMapNode()),
+        errors.checkThat(instance().path(f.orderedMapNode()),
                          is(not(existingNode())));
-        errors.checkThat(instance().get(f.pairsNode()),
+        errors.checkThat(instance().path(f.pairsNode()),
                          is(not(existingNode())));
-        errors.checkThat(instance().get(f.sequenceNode()),
+        errors.checkThat(instance().path(f.sequenceNode()),
                          is(not(existingNode())));
-        errors.checkThat(instance().get(f.setNode()),
+        errors.checkThat(instance().path(f.setNode()),
                          is(not(existingNode())));
-        errors.checkThat(instance().get(f.shortNode((short) 0)),
+        errors.checkThat(instance().path(f.shortNode((short) 0)),
                          is(not(existingNode())));
-        errors.checkThat(instance().get(f.textNode("")),
+        errors.checkThat(instance().path(f.textNode("")),
                          is(not(existingNode())));
-        errors.checkThat(instance().get(f.textNode("asdf")),
+        errors.checkThat(instance().path(f.textNode("asdf")),
                          is(not(existingNode())));
     }
 
