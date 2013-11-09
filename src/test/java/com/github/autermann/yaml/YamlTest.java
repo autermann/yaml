@@ -67,6 +67,11 @@ public class YamlTest {
         test(factory.bigIntegerNode(BigInteger.valueOf((long) Integer.MAX_VALUE)), is(intNode()));
         test(factory.bigIntegerNode(BigInteger.valueOf((long) Short.MAX_VALUE)), is(shortNode()));
         test(factory.bigIntegerNode(BigInteger.valueOf((long) Byte.MAX_VALUE)), is(byteNode()));
+        test(factory.bigIntegerNode(BigInteger.valueOf(Long.MIN_VALUE).subtract(BigInteger.ONE)));
+        test(factory.bigIntegerNode(BigInteger.valueOf(Long.MIN_VALUE)), is(longNode()));
+        test(factory.bigIntegerNode(BigInteger.valueOf((long) Integer.MIN_VALUE)), is(intNode()));
+        test(factory.bigIntegerNode(BigInteger.valueOf((long) Short.MIN_VALUE)), is(shortNode()));
+        test(factory.bigIntegerNode(BigInteger.valueOf((long) Byte.MIN_VALUE)), is(byteNode()));
     }
 
     @Test
@@ -75,6 +80,9 @@ public class YamlTest {
         test(factory.longNode((long) Integer.MAX_VALUE), is(intNode()));
         test(factory.longNode((long) Short.MAX_VALUE), is(shortNode()));
         test(factory.longNode((long) Byte.MAX_VALUE), is(byteNode()));
+        test(factory.longNode((long) Integer.MIN_VALUE), is(intNode()));
+        test(factory.longNode((long) Short.MIN_VALUE), is(shortNode()));
+        test(factory.longNode((long) Byte.MIN_VALUE), is(byteNode()));
     }
 
     @Test
@@ -82,12 +90,15 @@ public class YamlTest {
         test(factory.intNode(Integer.MAX_VALUE));
         test(factory.intNode((int) Short.MAX_VALUE), is(shortNode()));
         test(factory.intNode((int) Byte.MAX_VALUE), is(byteNode()));
+        test(factory.intNode((int) Short.MIN_VALUE), is(shortNode()));
+        test(factory.intNode((int) Byte.MIN_VALUE), is(byteNode()));
     }
 
     @Test
     public void testShortNode() {
         test(factory.shortNode(Short.MAX_VALUE));
         test(factory.shortNode((short) Byte.MAX_VALUE), is(byteNode()));
+        test(factory.shortNode((short) Byte.MIN_VALUE), is(byteNode()));
     }
 
     @Test
@@ -100,6 +111,12 @@ public class YamlTest {
         YamlNodeFactory fac = factory.withDecimalPrecision(DecimalPrecision.DOUBLE);
         YamlNode node = fac.doubleNode(42.42d);
         Yaml yaml = new Yaml(fac);
+        errors.checkThat(yaml.load(yaml.dump(node)), is(equalTo(node)));
+        node = fac.doubleNode(Double.NaN);
+        errors.checkThat(yaml.load(yaml.dump(node)), is(equalTo(node)));
+        node = fac.doubleNode(Double.NEGATIVE_INFINITY);
+        errors.checkThat(yaml.load(yaml.dump(node)), is(equalTo(node)));
+        node = fac.doubleNode(Double.POSITIVE_INFINITY);
         errors.checkThat(yaml.load(yaml.dump(node)), is(equalTo(node)));
     }
 

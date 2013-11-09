@@ -16,11 +16,14 @@
 package com.github.autermann.yaml.nodes;
 
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.not;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.hamcrest.Matchers.nullValue;
 import static org.junit.Assert.assertThat;
 
 import org.junit.Test;
+
+import com.github.autermann.yaml.YamlNode;
 
 /**
  * Tests for {@link YamlMissingNode}.
@@ -36,7 +39,11 @@ public class YamlMissingNodeTest extends AbstractYamlNodeTest {
 
     @Override
     public void testEquals() {
-        assertThat(instance(), is(instance()));
+        errors.checkThat(instance(), is(instance()));
+        errors.checkThat(instance(), is(notNullValue()));
+        errors.checkThat((YamlNode)instance(),
+                         is(not((YamlNode)YamlNullNode.instance())));
+
     }
 
     @Override
