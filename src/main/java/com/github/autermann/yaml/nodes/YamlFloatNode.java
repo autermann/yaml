@@ -17,10 +17,9 @@ package com.github.autermann.yaml.nodes;
 
 import java.math.BigDecimal;
 
-import com.github.autermann.yaml.YamlNode;
 
 /**
- * A {@link YamlNode} for {@code float} values.
+ * A {@link com.github.autermann.yaml.YamlNode} for {@code float} values.
  *
  * @author Christian Autermann
  */

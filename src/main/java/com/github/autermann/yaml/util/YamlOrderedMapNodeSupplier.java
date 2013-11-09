@@ -24,7 +24,8 @@ import com.google.common.base.Supplier;
  * A {@link Supplier} for {@link YamlOrderedMapNode}s backed by a
  * {@link YamlNodeFactory}.
  */
-public class YamlOrderedMapNodeSupplier implements Supplier<YamlOrderedMapNode> {
+public class YamlOrderedMapNodeSupplier
+        implements Supplier<YamlOrderedMapNode> {
 
     /**
      * The backing factory.

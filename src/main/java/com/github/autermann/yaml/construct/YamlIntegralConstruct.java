@@ -15,26 +15,21 @@
  */
 package com.github.autermann.yaml.construct;
 
-import com.github.autermann.yaml.YamlNodeFactory;
 import java.math.BigInteger;
 
+import com.github.autermann.yaml.YamlNodeFactory;
 import com.github.autermann.yaml.nodes.AbstractYamlScalarNode;
-import com.github.autermann.yaml.nodes.YamlBigIntegerNode;
-import com.github.autermann.yaml.nodes.YamlByteNode;
-import com.github.autermann.yaml.nodes.YamlIntegerNode;
-import com.github.autermann.yaml.nodes.YamlIntegralNode;
-import com.github.autermann.yaml.nodes.YamlLongNode;
-import com.github.autermann.yaml.nodes.YamlShortNode;
 import com.github.autermann.yaml.util.Numbers;
 
 /**
- * Constructs a {@link YamlIntegralNode} from a scalar node.
+ * Constructs a {@link com.github.autermann.yaml.nodes.YamlIntegralNode} from a
+ * scalar node.
  *
- * @see YamlByteNode
- * @see YamlShortNode
- * @see YamlIntegerNode
- * @see YamlLongNode
- * @see YamlBigIntegerNode
+ * @see com.github.autermann.yaml.nodes.YamlByteNode
+ * @see com.github.autermann.yaml.nodes.YamlShortNode
+ * @see com.github.autermann.yaml.nodes.YamlIntegerNode
+ * @see com.github.autermann.yaml.nodes.YamlLongNode
+ * @see com.github.autermann.yaml.nodes.YamlBigIntegerNode
  */
 public class YamlIntegralConstruct extends AbstractYamlScalarNodeConstruct {
 

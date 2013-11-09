@@ -15,8 +15,6 @@
  */
 package com.github.autermann.yaml.util;
 
-import java.math.BigDecimal;
-
 /**
  * Precision of floating point numbers.
  *
@@ -24,7 +22,7 @@ import java.math.BigDecimal;
  */
 public enum DecimalPrecision {
     /**
-     * Represent floating point numbers as {@link BigDecimal}.
+     * Represent floating point numbers as {@link java.math.BigDecimal}.
      */
     BIG_DECIMAL,
     /**

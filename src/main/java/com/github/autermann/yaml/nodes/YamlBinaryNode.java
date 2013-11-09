@@ -22,12 +22,11 @@ import java.util.Arrays;
 import org.yaml.snakeyaml.nodes.Tag;
 
 import com.github.autermann.yaml.ReturningYamlNodeVisitor;
-import com.github.autermann.yaml.YamlNode;
 import com.github.autermann.yaml.YamlNodeVisitor;
 import com.google.common.io.BaseEncoding;
 
 /**
- * A {@link YamlNode} for binary data.
+ * A {@link com.github.autermann.yaml.YamlNode} for binary data.
  *
  * @author Christian Autermann
  */

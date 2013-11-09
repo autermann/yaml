@@ -26,11 +26,17 @@ import com.github.autermann.yaml.YamlNodeVisitor;
  *
  * @author Christian Autermann
  */
-public class YamlMissingNode extends AbstractYamlNode {
+public final class YamlMissingNode extends AbstractYamlNode {
     /**
      * The singleton instance.
      */
     private static final YamlMissingNode INSTANCE = new YamlMissingNode();
+
+    /**
+     * Private constructor for singleton.
+     */
+    private YamlMissingNode() {
+    }
 
     @Override
     public String toString() {

@@ -20,11 +20,14 @@ import java.math.BigDecimal;
 import org.yaml.snakeyaml.nodes.Tag;
 
 import com.github.autermann.yaml.ReturningYamlNodeVisitor;
-import com.github.autermann.yaml.YamlNode;
 import com.github.autermann.yaml.YamlNodeVisitor;
 
 /**
- * A abstract {@link YamlNode} for decimal values.
+ * A abstract {@link com.github.autermann.yaml.YamlNode} for decimal values.
+ *
+ * @see com.github.autermann.yaml.nodes.YamlBigDecimalNode
+ * @see com.github.autermann.yaml.nodes.YamlDoubleNode
+ * @see com.github.autermann.yaml.nodes.YamlFloatNode
  *
  * @author Christian Autermann
  */

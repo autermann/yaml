@@ -17,19 +17,19 @@ package com.github.autermann.yaml.construct;
 
 import com.github.autermann.yaml.YamlNodeFactory;
 import com.github.autermann.yaml.nodes.AbstractYamlScalarNode;
-import com.github.autermann.yaml.nodes.YamlBinaryNode;
 import com.google.common.base.Preconditions;
 import com.google.common.io.BaseEncoding;
 
 /**
- * Constructs a {@link YamlBinaryNode} from a scalar node.
+ * Constructs a {@link com.github.autermann.yaml.nodes.YamlBinaryNode} from a
+ * scalar node.
  */
 public class YamlBinaryNodeConstruct extends AbstractYamlScalarNodeConstruct {
 
     /**
-     * The encoding for {@link YamlBinaryNode}s.
+     * The encoding for {@link com.github.autermann.yaml.nodes.YamlBinaryNode}s.
      */
-    final BaseEncoding binaryEncoding;
+    private final BaseEncoding binaryEncoding;
 
     /**
      * Creates a new {@link YamlBinaryNodeConstruct}.

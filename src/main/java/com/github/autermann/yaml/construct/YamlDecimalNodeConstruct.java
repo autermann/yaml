@@ -15,21 +15,18 @@
  */
 package com.github.autermann.yaml.construct;
 
-import com.github.autermann.yaml.YamlNodeFactory;
 import java.math.BigDecimal;
 
+import com.github.autermann.yaml.YamlNodeFactory;
 import com.github.autermann.yaml.nodes.AbstractYamlScalarNode;
-import com.github.autermann.yaml.nodes.YamlBigDecimalNode;
-import com.github.autermann.yaml.nodes.YamlDecimalNode;
-import com.github.autermann.yaml.nodes.YamlDoubleNode;
-import com.github.autermann.yaml.nodes.YamlFloatNode;
 
 /**
- * Constructs a {@link YamlDecimalNode} from a scalar node.
+ * Constructs a {@link com.github.autermann.yaml.nodes.YamlDecimalNode} from a
+ * scalar node.
  *
- * @see YamlBigDecimalNode
- * @see YamlDoubleNode
- * @see YamlFloatNode
+ * @see com.github.autermann.yaml.nodes.YamlBigDecimalNode
+ * @see com.github.autermann.yaml.nodes.YamlDoubleNode
+ * @see com.github.autermann.yaml.nodes.YamlFloatNode
  */
 public class YamlDecimalNodeConstruct extends AbstractYamlScalarNodeConstruct {
 

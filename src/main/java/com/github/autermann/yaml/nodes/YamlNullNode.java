@@ -18,15 +18,14 @@ package com.github.autermann.yaml.nodes;
 import org.yaml.snakeyaml.nodes.Tag;
 
 import com.github.autermann.yaml.ReturningYamlNodeVisitor;
-import com.github.autermann.yaml.YamlNode;
 import com.github.autermann.yaml.YamlNodeVisitor;
 
 /**
- * A {@link YamlNode} for {@code null} values.
+ * A {@link com.github.autermann.yaml.YamlNode} for {@code null} values.
  *
  * @author Christian Autermann
  */
-public class YamlNullNode extends AbstractYamlScalarNode<Object> {
+public final class YamlNullNode extends AbstractYamlScalarNode<Object> {
     /**
      * The singleton instance.
      */

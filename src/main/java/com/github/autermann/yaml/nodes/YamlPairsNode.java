@@ -144,7 +144,7 @@ public class YamlPairsNode extends AbstractYamlMappingNode<YamlPairsNode> {
 
     @Override
     public boolean has(YamlNode key) {
-        return this.multiMap.containsKey(key) && 
+        return this.multiMap.containsKey(key) &&
                !this.multiMap.get(key).isEmpty();
     }
 

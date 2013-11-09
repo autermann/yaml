@@ -17,10 +17,10 @@ package com.github.autermann.yaml.construct;
 
 import com.github.autermann.yaml.YamlNodeFactory;
 import com.github.autermann.yaml.nodes.AbstractYamlScalarNode;
-import com.github.autermann.yaml.nodes.YamlTextNode;
 
 /**
- * Constructs a {@link YamlTextNode} from a scalar node.
+ * Constructs a {@link com.github.autermann.yaml.nodes.YamlTextNode} from a
+ * scalar node.
  */
 public class YamlTextNodeConstruct extends AbstractYamlScalarNodeConstruct {
 

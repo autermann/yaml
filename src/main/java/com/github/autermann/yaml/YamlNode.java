@@ -25,25 +25,11 @@ import org.joda.time.DateTime;
 import org.yaml.snakeyaml.DumperOptions;
 import org.yaml.snakeyaml.nodes.Tag;
 
-import com.github.autermann.yaml.nodes.AbstractYamlNumberNode;
-import com.github.autermann.yaml.nodes.YamlBigIntegerNode;
-import com.github.autermann.yaml.nodes.YamlBinaryNode;
-import com.github.autermann.yaml.nodes.YamlBooleanNode;
-import com.github.autermann.yaml.nodes.YamlByteNode;
-import com.github.autermann.yaml.nodes.YamlDecimalNode;
-import com.github.autermann.yaml.nodes.YamlIntegerNode;
-import com.github.autermann.yaml.nodes.YamlIntegralNode;
-import com.github.autermann.yaml.nodes.YamlLongNode;
 import com.github.autermann.yaml.nodes.YamlMapNode;
-import com.github.autermann.yaml.nodes.YamlMissingNode;
-import com.github.autermann.yaml.nodes.YamlNullNode;
 import com.github.autermann.yaml.nodes.YamlOrderedMapNode;
 import com.github.autermann.yaml.nodes.YamlPairsNode;
 import com.github.autermann.yaml.nodes.YamlSequenceNode;
 import com.github.autermann.yaml.nodes.YamlSetNode;
-import com.github.autermann.yaml.nodes.YamlShortNode;
-import com.github.autermann.yaml.nodes.YamlTextNode;
-import com.github.autermann.yaml.nodes.YamlTimeNode;
 
 /**
  * Interface for a generic YAML node.
@@ -75,7 +61,7 @@ public interface YamlNode extends Iterable<YamlNode> {
      * The default value returned by {@link #longValue()} and
      * {@link  #asLongValue()}: {@value}.
      */
-    long DEFAULT_LONG_VALUE = 0l;
+    long DEFAULT_LONG_VALUE = 0L;
     /**
      * The default value returned by {@link #floatValue()} and
      * {@link  #asFloatValue()}: {@value}.
@@ -96,35 +82,10 @@ public interface YamlNode extends Iterable<YamlNode> {
      * {@link  #asBigIntegerValue()}: {@link BigInteger#ZERO}.
      */
     BigInteger DEFAULT_BIG_INTEGER_VALUE = BigInteger.ZERO;
-    /**
-     * The default value returned by {@link #binaryValue()} and
-     * {@link  #asBinaryValue()}: {@code null}.
-     */
-    byte[] DEFAULT_BINARY_VALUE = null;
-    /**
-     * The default value returned by {@link #numberValue()} and
-     * {@link  #asNumberValue()}: {@code null}.
-     */
-    Number DEFAULT_NUMBER_VALUE = null;
-    /**
-     * The default value returned by {@link #textValue()} and
-     * {@link  #asTextValue()}: {@code null}.
-     */
-    String DEFAULT_TEXT_VALUE = null;
-    /**
-     * The default value returned by {@link #dateTimeValue()} and
-     * {@link  #asDateTimeValue()}: {@code null}.
-     */
-    DateTime DEFAULT_DATE_TIME_VALUE = null;
-    /**
-     * The default value returned by {@link #dateValue()} and
-     * {@link  #asDateValue()}: {@code null}.
-     */
-    Date DEFAULT_DATE_VALUE = null;
 
     /**
      * Checks if this node does not exists (if it is not a
-     * {@link YamlMissingNode}.
+     * {@link com.github.autermann.yaml.nodes.YamlIntegerNode}.
      *
      * @return if this node exists
      */
@@ -206,7 +167,7 @@ public interface YamlNode extends Iterable<YamlNode> {
      *
      * @return if this is a binary node
      *
-     * @see YamlBinaryNode
+     * @see com.github.autermann.yaml.nodes.YamlBinaryNode
      * @see #binaryValue()
      */
     boolean isBinary();
@@ -216,7 +177,7 @@ public interface YamlNode extends Iterable<YamlNode> {
      *
      * @return if this is a {@code boolean} node
      *
-     * @see YamlBooleanNode
+     * @see com.github.autermann.yaml.nodes.YamlBooleanNode
      * @see #booleanValue()
      */
     boolean isBoolean();
@@ -226,7 +187,7 @@ public interface YamlNode extends Iterable<YamlNode> {
      *
      * @return if this is a {@code null} node
      *
-     * @see YamlNullNode
+     * @see com.github.autermann.yaml.nodes.YamlNullNode
      *
      */
     boolean isNull();
@@ -236,7 +197,7 @@ public interface YamlNode extends Iterable<YamlNode> {
      *
      * @return if this is a number node
      *
-     * @see AbstractYamlNumberNode
+     * @see com.github.autermann.yaml.nodes.AbstractYamlNumberNode
      * @see #numberValue()
      */
     boolean isNumber();
@@ -246,7 +207,7 @@ public interface YamlNode extends Iterable<YamlNode> {
      *
      * @return if this is a decimal node
      *
-     * @see YamlDecimalNode
+     * @see com.github.autermann.yaml.nodes.YamlDecimalNode
      * @see #bigDecimalValue()
      * @see #doubleValue()
      * @see #floatValue()
@@ -288,12 +249,12 @@ public interface YamlNode extends Iterable<YamlNode> {
      *
      * @return if this is a integral node
      *
-     * @see YamlIntegralNode
-     * @see YamlBigIntegerNode
-     * @see YamlLongNode
-     * @see YamlIntegerNode
-     * @see YamlShortNode
-     * @see YamlByteNode
+     * @see com.github.autermann.yaml.nodes.YamlIntegralNode
+     * @see com.github.autermann.yaml.nodes.YamlBigIntegerNode
+     * @see com.github.autermann.yaml.nodes.YamlLongNode
+     * @see com.github.autermann.yaml.nodes.YamlIntegerNode
+     * @see com.github.autermann.yaml.nodes.YamlShortNode
+     * @see com.github.autermann.yaml.nodes.YamlByteNode
      */
     boolean isIntegral();
 
@@ -358,7 +319,7 @@ public interface YamlNode extends Iterable<YamlNode> {
      *
      * @return if this a text node
      *
-     * @see YamlTextNode
+     * @see com.github.autermann.yaml.nodes.YamlTextNode
      * @see #textValue()
      */
     boolean isText();
@@ -368,7 +329,7 @@ public interface YamlNode extends Iterable<YamlNode> {
      *
      * @return if this is a time node
      *
-     * @see YamlTimeNode
+     * @see com.github.autermann.yaml.nodes.YamlTimeNode
      * @see #dateTimeValue()
      * @see #dateValue()
      */
@@ -902,34 +863,35 @@ public interface YamlNode extends Iterable<YamlNode> {
 
     /**
      * Get the {@link YamlNode} at the specified position or with the specified
-     * key. If it does not exist a {@link YamlMissingNode} is returned.
+     * key. If it does not exist a
+     * {@link com.github.autermann.yaml.nodes.YamlIntegerNode} is returned.
      *
      * @param key the key or index
      *
      * @return the {@link YamlNode} with the specified index or key, or a
-     *         {@link YamlMissingNode}.
+     *         {@link com.github.autermann.yaml.nodes.YamlIntegerNode}.
      */
     YamlNode path(int key);
 
     /**
      * Get the {@link YamlNode} with the specified key. If it does not exist a
-     * {@link YamlMissingNode} is returned.
+     * {@link com.github.autermann.yaml.nodes.YamlIntegerNode} is returned.
      *
      * @param key the key or index
      *
      * @return the {@link YamlNode} with the specified key, or a
-     *         {@link YamlMissingNode}.
+     *         {@link com.github.autermann.yaml.nodes.YamlIntegerNode}.
      */
     YamlNode path(String key);
 
     /**
      * Get the {@link YamlNode} with the specified key. If it does not exist a
-     * {@link YamlMissingNode} is returned.
+     * {@link com.github.autermann.yaml.nodes.YamlIntegerNode} is returned.
      *
      * @param key the key or index
      *
      * @return the {@link YamlNode} with the specified key, or a
-     *         {@link YamlMissingNode}.
+     *         {@link com.github.autermann.yaml.nodes.YamlIntegerNode}.
      */
     YamlNode path(YamlNode key);
 
@@ -962,7 +924,7 @@ public interface YamlNode extends Iterable<YamlNode> {
 
     /**
      * Checks if a {@link YamlNode} with the specified key or index exists and
-     * is not a {@link YamlNullNode}.
+     * is not a {@link com.github.autermann.yaml.nodes.YamlNullNode}.
      *
      * @param key the key or index
      *
@@ -972,7 +934,7 @@ public interface YamlNode extends Iterable<YamlNode> {
 
     /**
      * Checks if a {@link YamlNode} with the specified key exists and is not a
-     * {@link YamlNullNode}.
+     * {@link com.github.autermann.yaml.nodes.YamlNullNode}.
      *
      * @param key the key
      *
@@ -982,7 +944,7 @@ public interface YamlNode extends Iterable<YamlNode> {
 
     /**
      * Checks if a {@link YamlNode} with the specified key exists and is not a
-     * {@link YamlNullNode}.
+     * {@link com.github.autermann.yaml.nodes.YamlNullNode}.
      *
      * @param key the key
      *

@@ -60,38 +60,38 @@ public abstract class AbstractYamlContainerNode extends AbstractYamlNode {
 
     @Override
     public YamlNode get(int index) {
-        YamlNode v = path(index);
-        return v.exists() ? v : null;
+        YamlNode node = path(index);
+        return node.exists() ? node : null;
     }
 
     @Override
     public YamlNode get(YamlNode key) {
-        YamlNode v = path(key);
-        return v.exists() ? v : null;
+        YamlNode node = path(key);
+        return node.exists() ? node : null;
     }
 
     @Override
     public YamlNode get(String key) {
-        YamlNode v = path(key);
-        return v.exists() ? v : null;
+        YamlNode node = path(key);
+        return node.exists() ? node : null;
     }
 
     @Override
     public boolean hasNotNull(String key) {
-        YamlNode v = path(key);
-        return v.exists() && !v.isNull();
+        YamlNode node = path(key);
+        return node.exists() && !node.isNull();
     }
 
     @Override
     public boolean hasNotNull(YamlNode key) {
-        YamlNode v = path(key);
-        return v.exists() && !v.isNull();
+        YamlNode node = path(key);
+        return node.exists() && !node.isNull();
     }
 
     @Override
     public boolean hasNotNull(int key) {
-        YamlNode v = path(key);
-        return v.exists() && !v.isNull();
+        YamlNode node = path(key);
+        return node.exists() && !node.isNull();
     }
 
     @Override

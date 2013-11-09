@@ -26,11 +26,10 @@ import org.joda.time.format.ISODateTimeFormat;
 import org.yaml.snakeyaml.nodes.Tag;
 
 import com.github.autermann.yaml.ReturningYamlNodeVisitor;
-import com.github.autermann.yaml.YamlNode;
 import com.github.autermann.yaml.YamlNodeVisitor;
 
 /**
- * A {@link YamlNode} for {@link DateTime} values.
+ * A {@link com.github.autermann.yaml.YamlNode} for {@link DateTime} values.
  *
  * @author Christian Autermann
  */

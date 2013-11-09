@@ -32,20 +32,18 @@ import org.yaml.snakeyaml.nodes.ScalarNode;
 import org.yaml.snakeyaml.nodes.SequenceNode;
 import org.yaml.snakeyaml.nodes.Tag;
 
-import com.github.autermann.yaml.Yaml;
-import com.github.autermann.yaml.YamlNode;
 import com.github.autermann.yaml.YamlNodeFactory;
 import com.google.common.io.BaseEncoding;
 
 /**
- * Constructor for {@link YamlNode} classes.
+ * Constructor for {@link com.github.autermann.yaml.YamlNode} classes.
  *
  * @author Christian Autermann
  */
 public class YamlNodeConstructor extends SafeConstructor {
     /**
-     * The dumper options the {@link Yaml} associated with this constructor is
-     * using.
+     * The dumper options the {@link com.github.autermann.yaml.Yaml} associated
+     * with this constructor is using.
      */
     private final DumperOptions options;
     /**

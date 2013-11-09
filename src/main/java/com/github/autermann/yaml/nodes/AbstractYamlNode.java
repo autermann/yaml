@@ -244,7 +244,7 @@ public abstract class AbstractYamlNode implements YamlNode {
 
     @Override
     public byte[] asBinaryValue() {
-        return asBinaryValue(DEFAULT_BINARY_VALUE);
+        return asBinaryValue(null);
     }
 
     @Override
@@ -254,7 +254,7 @@ public abstract class AbstractYamlNode implements YamlNode {
 
     @Override
     public byte[] binaryValue() {
-        return DEFAULT_BINARY_VALUE;
+        return null;
     }
 
     @Override
@@ -319,7 +319,7 @@ public abstract class AbstractYamlNode implements YamlNode {
 
     @Override
     public Number asNumberValue() {
-        return asNumberValue(DEFAULT_NUMBER_VALUE);
+        return asNumberValue(null);
     }
 
     @Override
@@ -329,7 +329,7 @@ public abstract class AbstractYamlNode implements YamlNode {
 
     @Override
     public Number numberValue() {
-        return DEFAULT_NUMBER_VALUE;
+        return null;
     }
 
     @Override
@@ -349,7 +349,7 @@ public abstract class AbstractYamlNode implements YamlNode {
 
     @Override
     public String asTextValue() {
-        return asTextValue(DEFAULT_TEXT_VALUE);
+        return asTextValue(null);
     }
 
     @Override
@@ -359,12 +359,12 @@ public abstract class AbstractYamlNode implements YamlNode {
 
     @Override
     public String textValue() {
-        return DEFAULT_TEXT_VALUE;
+        return null;
     }
 
     @Override
     public DateTime asDateTimeValue() {
-        return asDateTimeValue(DEFAULT_DATE_TIME_VALUE);
+        return asDateTimeValue(null);
     }
 
     @Override
@@ -374,12 +374,12 @@ public abstract class AbstractYamlNode implements YamlNode {
 
     @Override
     public DateTime dateTimeValue() {
-        return DEFAULT_DATE_TIME_VALUE;
+        return null;
     }
 
     @Override
     public Date asDateValue() {
-        return asDateValue(DEFAULT_DATE_VALUE);
+        return asDateValue(null);
     }
 
     @Override
@@ -389,7 +389,7 @@ public abstract class AbstractYamlNode implements YamlNode {
 
     @Override
     public Date dateValue() {
-        return DEFAULT_DATE_VALUE;
+        return null;
     }
 
     @Override

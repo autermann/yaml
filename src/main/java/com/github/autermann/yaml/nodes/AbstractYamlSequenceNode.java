@@ -45,9 +45,9 @@ public abstract class AbstractYamlSequenceNode<T extends AbstractYamlSequenceNod
     private static final Joiner JOINER = Joiner.on(", ");
 
     /**
-     * Creates a new {@link AbstractYamlSequenceNode}
+     * Creates a new {@link AbstractYamlSequenceNode}.
      *
-     * @param factory
+     * @param factory the factory to create children with
      */
     public AbstractYamlSequenceNode(YamlNodeFactory factory) {
         super(factory);
@@ -77,7 +77,7 @@ public abstract class AbstractYamlSequenceNode<T extends AbstractYamlSequenceNod
      */
     @SuppressWarnings("unchecked")
     public T add(YamlNode value) {
-        // small protected adding this to a collection added to this still works
+        // small protection: adding this to a collection added to this still works
         if (value == this) {
             throw new IllegalArgumentException("recursive structures are currently not supported");
         }

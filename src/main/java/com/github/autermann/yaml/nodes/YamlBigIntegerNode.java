@@ -19,11 +19,10 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.math.BigInteger;
 
-import com.github.autermann.yaml.YamlNode;
 import com.github.autermann.yaml.util.Numbers;
 
 /**
- * A {@link YamlNode} for {@link BigInteger}s.
+ * A {@link com.github.autermann.yaml.YamlNode} for {@link BigInteger}s.
  *
  * @author Christian Autermann
  */

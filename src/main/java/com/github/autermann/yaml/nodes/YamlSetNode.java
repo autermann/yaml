@@ -86,5 +86,4 @@ public class YamlSetNode extends AbstractYamlSequenceNode<YamlSetNode> {
     public <T> T accept(ReturningYamlNodeVisitor<T> visitor) {
         return visitor.visit(this);
     }
-
 }

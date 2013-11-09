@@ -16,14 +16,13 @@
 package com.github.autermann.yaml.construct;
 
 import org.yaml.snakeyaml.constructor.AbstractConstruct;
-import org.yaml.snakeyaml.constructor.Construct;
 
-import com.github.autermann.yaml.YamlNode;
 import com.github.autermann.yaml.YamlNodeFactory;
 import com.google.common.base.Preconditions;
 
 /**
- * {@link Construct} to construct {@link YamlNode}s using
+ * {@link org.yaml.snakeyaml.constructor.Construct} to construct
+ * {@link com.github.autermann.yaml.YamlNode}s using
  * {@link YamlNodeConstructor} and {@link YamlNodeFactory} delegates.
  */
 public abstract class AbstractYamlConstruct extends AbstractConstruct {

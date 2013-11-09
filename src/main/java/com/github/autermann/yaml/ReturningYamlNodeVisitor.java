@@ -31,7 +31,7 @@ import com.github.autermann.yaml.nodes.YamlTimeNode;
 /**
  * A returning visitor for {@link YamlNode}s.
  *
- * @param <>> the returned type
+ * @param <T> the returned type
  *
  * @see YamlNodeVisitor
  * @see AbstractReturningYamlNodeVisitor

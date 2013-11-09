@@ -17,10 +17,10 @@ package com.github.autermann.yaml.construct;
 
 import com.github.autermann.yaml.YamlNodeFactory;
 import com.github.autermann.yaml.nodes.AbstractYamlScalarNode;
-import com.github.autermann.yaml.nodes.YamlBooleanNode;
 
 /**
- * Constructs a {@link YamlBooleanNode} from a scalar node.
+ * Constructs a {@link com.github.autermann.yaml.nodes.YamlBooleanNode} from a
+ * scalar node.
  */
 public class YamlBooleanNodeConstruct extends AbstractYamlScalarNodeConstruct {
 

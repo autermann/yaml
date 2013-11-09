@@ -15,12 +15,12 @@
  */
 package com.github.autermann.yaml.construct;
 
-import com.github.autermann.yaml.YamlNode;
-import com.github.autermann.yaml.YamlNodeFactory;
 import org.yaml.snakeyaml.nodes.MappingNode;
 import org.yaml.snakeyaml.nodes.Node;
 import org.yaml.snakeyaml.nodes.NodeTuple;
 
+import com.github.autermann.yaml.YamlNode;
+import com.github.autermann.yaml.YamlNodeFactory;
 import com.github.autermann.yaml.nodes.AbstractYamlMappingNode;
 import com.google.common.base.Supplier;
 
@@ -32,7 +32,7 @@ public class YamlMappingNodeConstruct extends AbstractYamlConstruct {
     /**
      * A supplier for {@link AbstractYamlMappingNode} instances.
      */
-    final Supplier<? extends AbstractYamlMappingNode<?>> supplier;
+    private final Supplier<? extends AbstractYamlMappingNode<?>> supplier;
 
     /**
      * Creates a new {@link YamlMappingNodeConstruct} using
@@ -43,9 +43,10 @@ public class YamlMappingNodeConstruct extends AbstractYamlConstruct {
      * @param delegate    the delegate
      * @param supplier    the supplier
      */
-    YamlMappingNodeConstruct(YamlNodeFactory nodeFactory,
-                             YamlNodeConstructor delegate,
-                             Supplier<? extends AbstractYamlMappingNode<?>> supplier) {
+    YamlMappingNodeConstruct(
+            YamlNodeFactory nodeFactory,
+            YamlNodeConstructor delegate,
+            Supplier<? extends AbstractYamlMappingNode<?>> supplier) {
         super(nodeFactory, delegate);
         this.supplier = supplier;
     }
@@ -55,9 +56,10 @@ public class YamlMappingNodeConstruct extends AbstractYamlConstruct {
         AbstractYamlMappingNode<?> mapping = supplier.get();
         MappingNode mnode = (MappingNode) node;
         for (NodeTuple tuple : mnode.getValue()) {
-            mapping.put((YamlNode) getDelegate()
-                    .constructObject(tuple.getKeyNode()), (YamlNode) getDelegate()
-                    .constructObject(tuple.getValueNode()));
+            Node key = tuple.getKeyNode();
+            Node value = tuple.getValueNode();
+            mapping.put((YamlNode) getDelegate().constructObject(key),
+                        (YamlNode) getDelegate().constructObject(value));
         }
         return mapping;
     }

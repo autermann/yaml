@@ -15,16 +15,15 @@
  */
 package com.github.autermann.yaml.construct;
 
-import org.yaml.snakeyaml.constructor.Construct;
 import org.yaml.snakeyaml.nodes.Node;
 import org.yaml.snakeyaml.nodes.ScalarNode;
 
-import com.github.autermann.yaml.YamlNode;
 import com.github.autermann.yaml.YamlNodeFactory;
 import com.github.autermann.yaml.nodes.AbstractYamlScalarNode;
 
 /**
- * {@link Construct} to construct {@link AbstractYamlScalarNode}s from
+ * {@link org.yaml.snakeyaml.constructor.Construct} to construct
+ * {@link AbstractYamlScalarNode}s from
  * string scalar nodes.
  */
 public abstract class AbstractYamlScalarNodeConstruct extends AbstractYamlConstruct {
@@ -47,11 +46,12 @@ public abstract class AbstractYamlScalarNodeConstruct extends AbstractYamlConstr
     }
 
     /**
-     * Construct a {@link YamlNode} from the specified scalar value.
+     * Construct a {@link com.github.autermann.yaml.YamlNode} from the specified
+     * scalar value.
      *
      * @param value the value of the scalar
      *
-     * @return the {@link YamlNode}
+     * @return the {@link com.github.autermann.yaml.YamlNode}
      */
     protected abstract AbstractYamlScalarNode<?> construct(String value);
 

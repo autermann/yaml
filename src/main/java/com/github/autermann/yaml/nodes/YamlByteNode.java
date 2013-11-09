@@ -15,10 +15,8 @@
  */
 package com.github.autermann.yaml.nodes;
 
-import com.github.autermann.yaml.YamlNode;
-
 /**
- * A {@link YamlNode} for {@code byte} values.
+ * A {@link com.github.autermann.yaml.YamlNode} for {@code byte} values.
  *
  * @author Christian Autermann
  */

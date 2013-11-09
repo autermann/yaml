@@ -17,11 +17,10 @@ package com.github.autermann.yaml.nodes;
 
 import java.math.BigDecimal;
 
-import com.github.autermann.yaml.YamlNode;
 import com.google.common.base.Preconditions;
 
 /**
- * A {@link YamlNode} for {@link BigDecimal}s.
+ * A {@link com.github.autermann.yaml.YamlNode} for {@link BigDecimal}s.
  *
  * @author Christian Autermann
  */

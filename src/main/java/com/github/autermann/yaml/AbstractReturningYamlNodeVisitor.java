@@ -41,7 +41,7 @@ import com.github.autermann.yaml.nodes.YamlTimeNode;
  * <li>{@link #visitSequence(AbstractYamlSequenceNode)}</li>
  * </ul>
  *
- * @param <>> the returned type
+ * @param <T> the returned type
  */
 public abstract class AbstractReturningYamlNodeVisitor<T>
         implements ReturningYamlNodeVisitor<T> {

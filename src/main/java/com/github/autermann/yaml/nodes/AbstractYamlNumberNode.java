@@ -15,11 +15,11 @@
  */
 package com.github.autermann.yaml.nodes;
 
-import com.github.autermann.yaml.YamlNode;
 import com.google.common.base.Objects;
 
 /**
- * A abstract {@link YamlNode} representing a {@link Number} value.
+ * A abstract {@link com.github.autermann.yaml.YamlNode} representing a
+ * {@link Number} value.
  *
  * @author Christian Autermann
  */

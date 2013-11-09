@@ -16,6 +16,7 @@
 package com.github.autermann.yaml.nodes;
 
 import static com.google.common.base.Preconditions.checkNotNull;
+
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Date;
@@ -25,11 +26,11 @@ import org.joda.time.format.ISODateTimeFormat;
 import org.yaml.snakeyaml.nodes.Tag;
 
 import com.github.autermann.yaml.ReturningYamlNodeVisitor;
-import com.github.autermann.yaml.YamlNode;
 import com.github.autermann.yaml.YamlNodeVisitor;
+import com.google.common.base.Charsets;
 
 /**
- * A {@link YamlNode} for {@link String} values.
+ * A {@link com.github.autermann.yaml.YamlNode} for {@link String} values.
  *
  * @author Christian Autermann
  */
@@ -124,7 +125,7 @@ public class YamlTextNode extends AbstractYamlScalarNode<String> {
 
     @Override
     public byte[] asBinaryValue(byte[] defaultValue) {
-        return textValue().getBytes();
+        return textValue().getBytes(Charsets.UTF_8);
     }
 
     @Override

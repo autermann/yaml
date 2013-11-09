@@ -15,18 +15,17 @@
  */
 package com.github.autermann.yaml.util;
 
-import java.util.LinkedList;
 import java.util.List;
 
 import com.google.common.base.Supplier;
 import com.google.common.collect.Lists;
 
 /**
- * {@link Supplier} for {@link LinkedList}s.
+ * {@link Supplier} for {@link java.util.LinkedList}s.
  *
  * @author Christian Autermann
  */
-public class LinkedListSupplier implements Supplier<List<?>> {
+public final class LinkedListSupplier implements Supplier<List<?>> {
     /**
      * The singleton instance.
      */

@@ -56,7 +56,7 @@ public class DefaultYamlNodeFactory extends YamlNodeFactory {
     /**
      * Created {@link DecimalPrecision} specific instances.
      */
-    private static final EnumMap<DecimalPrecision, DefaultYamlNodeFactory> factories
+    private static final EnumMap<DecimalPrecision, DefaultYamlNodeFactory> FACTORIES
             = Maps.newEnumMap(DecimalPrecision.class);
     /**
      * The {@link DecimalPrecision} of this factory.
@@ -216,9 +216,9 @@ public class DefaultYamlNodeFactory extends YamlNodeFactory {
      */
     public static DefaultYamlNodeFactory create(DecimalPrecision precision) {
         checkNotNull(precision);
-        DefaultYamlNodeFactory fac = factories.get(precision);
+        DefaultYamlNodeFactory fac = FACTORIES.get(precision);
         if (fac == null) {
-            factories.put(precision, fac
+            FACTORIES.put(precision, fac
                     = new DefaultYamlNodeFactory(precision));
         }
         return fac;

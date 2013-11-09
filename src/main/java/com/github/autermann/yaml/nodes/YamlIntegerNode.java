@@ -15,11 +15,10 @@
  */
 package com.github.autermann.yaml.nodes;
 
-import com.github.autermann.yaml.YamlNode;
 import com.github.autermann.yaml.util.Numbers;
 
 /**
- * A {@link YamlNode} for {@code int} values.
+ * A {@link com.github.autermann.yaml.YamlNode} for {@code int} values.
  *
  * @author Christian Autermann
  */

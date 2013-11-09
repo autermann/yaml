@@ -17,11 +17,10 @@ package com.github.autermann.yaml.nodes;
 
 import java.math.BigInteger;
 
-import com.github.autermann.yaml.YamlNode;
 import com.github.autermann.yaml.util.Numbers;
 
 /**
- * A {@link YamlNode} for {@code short} values.
+ * A {@link com.github.autermann.yaml.YamlNode} for {@code short} values.
  *
  * @author Christian Autermann
  */

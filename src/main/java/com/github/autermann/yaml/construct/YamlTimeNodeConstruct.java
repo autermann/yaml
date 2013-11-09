@@ -15,22 +15,22 @@
  */
 package com.github.autermann.yaml.construct;
 
-import com.github.autermann.yaml.YamlNodeFactory;
 import org.joda.time.format.DateTimeFormatter;
 
+import com.github.autermann.yaml.YamlNodeFactory;
 import com.github.autermann.yaml.nodes.AbstractYamlScalarNode;
-import com.github.autermann.yaml.nodes.YamlTimeNode;
 import com.google.common.base.Preconditions;
 
 /**
- * Constructs a {@link YamlTimeNode} from a scalar node.
+ * Constructs a {@link com.github.autermann.yaml.nodes.YamlTimeNode} from a
+ * scalar node.
  */
 public class YamlTimeNodeConstruct extends AbstractYamlScalarNodeConstruct {
 
     /**
-     * The encoding for {@link YamlTimeNode}s.
+     * The encoding for {@link com.github.autermann.yaml.nodes.YamlTimeNode}s.
      */
-    final DateTimeFormatter timeEncoding;
+    private final DateTimeFormatter timeEncoding;
 
     /**
      * Creates a new {@link YamlTimeNodeConstruct}.

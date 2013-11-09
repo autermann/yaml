@@ -24,7 +24,7 @@ import java.math.BigInteger;
  *
  * @author Christian Autermann
  */
-public class Numbers {
+public final class Numbers {
     /**
      * Minimal {@code long} as {@code BigInteger}.
      */
