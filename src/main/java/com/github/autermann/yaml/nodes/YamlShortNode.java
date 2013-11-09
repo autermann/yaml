@@ -21,13 +21,13 @@ import com.github.autermann.yaml.YamlNode;
 import com.github.autermann.yaml.util.Numbers;
 
 /**
- * A {@link YamlNode} for {@literal short} values.
+ * A {@link YamlNode} for {@code short} values.
  *
  * @author Christian Autermann
  */
 public class YamlShortNode extends YamlIntegralNode {
     /**
-     * The {@literal short} value.
+     * The {@code short} value.
      */
     private final short value;
 

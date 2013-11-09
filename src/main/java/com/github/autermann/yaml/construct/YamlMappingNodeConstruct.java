@@ -36,7 +36,7 @@ public class YamlMappingNodeConstruct extends AbstractYamlConstruct {
 
     /**
      * Creates a new {@link YamlMappingNodeConstruct} using
-     * {@literal supplier}
+     * {@code supplier}
      * to create concrete instances.
      *
      * @param nodeFactory the node factory

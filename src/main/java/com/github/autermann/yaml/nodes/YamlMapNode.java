@@ -34,7 +34,7 @@ import com.google.common.collect.Iterators;
 import com.google.common.collect.Maps;
 
 /**
- * A {@link YamlNode} for {@literal !!map} mappings.
+ * A {@link YamlNode} for {@code !!map} mappings.
  *
  * @author Christian Autermann
  */

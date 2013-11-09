@@ -57,8 +57,8 @@ import com.google.common.base.Supplier;
 public abstract class YamlNodeFactory {
 
     /**
-     * Creates a new {@link YamlBinaryNode} from the specified {@literal value}. If
-     * {@literal value} is {@literal null} a {@link YamlNullNode} is returned.
+     * Creates a new {@link YamlBinaryNode} from the specified {@code value}. If
+     * {@code value} is {@code null} a {@link YamlNullNode} is returned.
      *
      * @param value the value of the node
      *
@@ -76,8 +76,8 @@ public abstract class YamlNodeFactory {
     }
 
     /**
-     * Creates a new {@link YamlBinaryNode} from the specified {@literal value}. If
-     * {@literal value} is {@literal null} a {@link YamlNullNode} is returned.
+     * Creates a new {@link YamlBinaryNode} from the specified {@code value}. If
+     * {@code value} is {@code null} a {@link YamlNullNode} is returned.
      *
      * @param value the value of the node
      *
@@ -91,8 +91,8 @@ public abstract class YamlNodeFactory {
     }
 
     /**
-     * Creates a new {@link YamlBooleanNode} from the specified {@literal value}.
-     * If {@literal value} is {@literal null} a {@link YamlNullNode} is returned.
+     * Creates a new {@link YamlBooleanNode} from the specified {@code value}.
+     * If {@code value} is {@code null} a {@link YamlNullNode} is returned.
      *
      * @param value the value of the node
      *
@@ -106,8 +106,8 @@ public abstract class YamlNodeFactory {
     }
 
     /**
-     * Creates a new {@link YamlByteNode} from the specified {@literal value}. If
-     * {@literal value} is {@literal null} a {@link YamlNullNode} is returned.
+     * Creates a new {@link YamlByteNode} from the specified {@code value}. If
+     * {@code value} is {@code null} a {@link YamlNullNode} is returned.
      *
      * @param value the value of the node
      *
@@ -121,8 +121,8 @@ public abstract class YamlNodeFactory {
     }
 
     /**
-     * Creates a new {@link YamlShortNode} from the specified {@literal value}. If
-     * {@literal value} is {@literal null} a {@link YamlNullNode} is returned.
+     * Creates a new {@link YamlShortNode} from the specified {@code value}. If
+     * {@code value} is {@code null} a {@link YamlNullNode} is returned.
      *
      * @param value the value of the node
      *
@@ -136,8 +136,8 @@ public abstract class YamlNodeFactory {
     }
 
     /**
-     * Creates a new {@link YamlIntegerNode} from the specified {@literal value}.
-     * If @code value} is {@literal null} a {@link YamlNullNode} is returned.
+     * Creates a new {@link YamlIntegerNode} from the specified {@code value}.
+     * If @code value} is {@code null} a {@link YamlNullNode} is returned.
      *
      * @param value the value of the node
      *
@@ -151,8 +151,8 @@ public abstract class YamlNodeFactory {
     }
 
     /**
-     * Creates a new {@link YamlLongNode} from the specified {@literal value}. If
-     * {@literal value} is {@literal null} a {@link YamlNullNode} is returned.
+     * Creates a new {@link YamlLongNode} from the specified {@code value}. If
+     * {@code value} is {@code null} a {@link YamlNullNode} is returned.
      *
      * @param value the value of the node
      *
@@ -167,7 +167,7 @@ public abstract class YamlNodeFactory {
 
     /**
      * Creates a new {@link YamlBigIntegerNode} from the specified
-     * {@literal value}. If {@literal value} is {@literal null} a {@link YamlNullNode} is
+     * {@code value}. If {@code value} is {@code null} a {@link YamlNullNode} is
      * returned.
      *
      * @param value the value of the node
@@ -182,8 +182,8 @@ public abstract class YamlNodeFactory {
     }
 
     /**
-     * Creates a new {@link YamlFloatNode} from the specified {@literal value}. If
-     * {@literal value} is {@literal null} a {@link YamlNullNode} is returned.
+     * Creates a new {@link YamlFloatNode} from the specified {@code value}. If
+     * {@code value} is {@code null} a {@link YamlNullNode} is returned.
      *
      * @param value the value of the node
      *
@@ -197,8 +197,8 @@ public abstract class YamlNodeFactory {
     }
 
     /**
-     * Creates a new {@link YamlDoubleNode} from the specified {@literal value}. If
-     * {@literal value} is {@literal null} a {@link YamlNullNode} is returned.
+     * Creates a new {@link YamlDoubleNode} from the specified {@code value}. If
+     * {@code value} is {@code null} a {@link YamlNullNode} is returned.
      *
      * @param value the value of the node
      *
@@ -213,7 +213,7 @@ public abstract class YamlNodeFactory {
 
     /**
      * Creates a new {@link YamlBigDecimalNode} from the specified
-     * {@literal value}. If {@literal value} is {@literal null} a {@link YamlNullNode} is
+     * {@code value}. If {@code value} is {@code null} a {@link YamlNullNode} is
      * returned.
      *
      * @param value the value of the node
@@ -228,8 +228,8 @@ public abstract class YamlNodeFactory {
     }
 
     /**
-     * Creates a new {@link YamlTextNode} from the specified {@literal value}. If
-     * {@literal value} is {@literal null} a {@link YamlNullNode} is returned.
+     * Creates a new {@link YamlTextNode} from the specified {@code value}. If
+     * {@code value} is {@code null} a {@link YamlNullNode} is returned.
      *
      * @param value the value of the node
      *
@@ -243,8 +243,8 @@ public abstract class YamlNodeFactory {
     }
 
     /**
-     * Creates a new {@link YamlTimeNode} from the specified {@literal value}. If
-     * {@literal value} is {@literal null} a {@link YamlNullNode} is returned.
+     * Creates a new {@link YamlTimeNode} from the specified {@code value}. If
+     * {@code value} is {@code null} a {@link YamlNullNode} is returned.
      *
      * @param value the value of the node
      *
@@ -258,8 +258,8 @@ public abstract class YamlNodeFactory {
     }
 
     /**
-     * Creates a new {@link YamlTimeNode} from the specified {@literal value}. If
-     * {@literal value} is {@literal null} a {@link YamlNullNode} is returned.
+     * Creates a new {@link YamlTimeNode} from the specified {@code value}. If
+     * {@code value} is {@code null} a {@link YamlNullNode} is returned.
      *
      * @param value the value of the node
      *
@@ -329,7 +329,7 @@ public abstract class YamlNodeFactory {
     /**
      * Creates a new {@link YamlTextNode}.
      *
-     * @param value the value of the new node (never {@literal null})
+     * @param value the value of the new node (never {@code null})
      *
      * @return the {@link YamlTextNode}
      */
@@ -338,7 +338,7 @@ public abstract class YamlNodeFactory {
     /**
      * Creates a new {@link YamlBigDecimalNode}.
      *
-     * @param value the value of the new node (never {@literal null})
+     * @param value the value of the new node (never {@code null})
      *
      * @return the {@link YamlBigDecimalNode}
      */
@@ -347,7 +347,7 @@ public abstract class YamlNodeFactory {
     /**
      * Creates a new {@link YamlBigIntegerNode}.
      *
-     * @param value the value of the new node (never {@literal null})
+     * @param value the value of the new node (never {@code null})
      *
      * @return the {@link YamlBigIntegerNode}
      */
@@ -356,7 +356,7 @@ public abstract class YamlNodeFactory {
     /**
      * Creates a new {@link YamlBinaryNode}.
      *
-     * @param value the value of the new node (never {@literal null})
+     * @param value the value of the new node (never {@code null})
      *
      * @return the {@link YamlBinaryNode}
      */
@@ -365,7 +365,7 @@ public abstract class YamlNodeFactory {
     /**
      * Creates a new {@link YamlTimeNode}.
      *
-     * @param value the value of the new node (never {@literal null})
+     * @param value the value of the new node (never {@code null})
      *
      * @return the {@link YamlTimeNode}
      */

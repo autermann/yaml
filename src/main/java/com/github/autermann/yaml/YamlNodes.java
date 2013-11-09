@@ -34,24 +34,24 @@ public class YamlNodes {
     }
 
     /**
-     * Checks if {@literal value} is {@literal null} and returns {@literal value} or a
+     * Checks if {@code value} is {@code null} and returns {@code value} or a
      * instance of {@link YamlNullNode}.
      *
      * @param value the node to test
      *
-     * @return {@literal value} if not {@literal null}, else a {@link YamlNullNode}
+     * @return {@code value} if not {@code null}, else a {@link YamlNullNode}
      */
     public static YamlNode nullToNode(YamlNode value) {
         return value == null ? YamlNullNode.instance() : value;
     }
 
     /**
-     * Checks if {@literal value} is {@literal null} and returns {@literal value} or a
+     * Checks if {@code value} is {@code null} and returns {@code value} or a
      * instance of {@link YamlMissingNode}.
      *
      * @param value the node to test
      *
-     * @return {@literal value} if not {@literal null}, else a {@link YamlMissingNode}
+     * @return {@code value} if not {@code null}, else a {@link YamlMissingNode}
      */
     public static YamlNode nullToMissing(YamlNode value) {
         return value == null ? YamlMissingNode.instance() : value;
@@ -59,7 +59,7 @@ public class YamlNodes {
 
     /**
      * Creates a {@link Predicate} for {@link YamlNode}s that are not
-     * {@literal null}.
+     * {@code null}.
      *
      * @return the predicate
      */
@@ -78,7 +78,7 @@ public class YamlNodes {
 
     /**
      * Creates a {@link Predicate} for {@link YamlNode}s that are not
-     * {@literal null} or missing.
+     * {@code null} or missing.
      *
      * @return the predicate
      */
@@ -87,7 +87,7 @@ public class YamlNodes {
     }
 
     /**
-     * {@link Predicate} for {@link YamlNode}s that are not {@literal null}.
+     * {@link Predicate} for {@link YamlNode}s that are not {@code null}.
      */
     private static class NotNullPredicate implements Predicate<YamlNode> {
         /**

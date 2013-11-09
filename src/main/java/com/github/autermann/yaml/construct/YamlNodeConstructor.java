@@ -96,7 +96,7 @@ public class YamlNodeConstructor extends SafeConstructor {
     }
 
     /**
-     * Register the {@literal Construct}s of this {@literal Constructor}.
+     * Register the {@code Construct}s of this {@code Constructor}.
      */
     private void register() {
         this.yamlConstructors.put(Tag.MAP, mapConstruct());
@@ -114,7 +114,7 @@ public class YamlNodeConstructor extends SafeConstructor {
     }
 
     /**
-     * Creates a new {@link Construct} for {@literal !!set}.
+     * Creates a new {@link Construct} for {@code !!set}.
      *
      * @return the construct
      */
@@ -123,7 +123,7 @@ public class YamlNodeConstructor extends SafeConstructor {
     }
 
     /**
-     * Creates a new {@link Construct} for {@literal !!timestamp}.
+     * Creates a new {@link Construct} for {@code !!timestamp}.
      *
      * @return the construct
      */
@@ -133,7 +133,7 @@ public class YamlNodeConstructor extends SafeConstructor {
     }
 
     /**
-     * Creates a new {@link Construct} for {@literal !!str}.
+     * Creates a new {@link Construct} for {@code !!str}.
      *
      * @return the construct
      */
@@ -142,7 +142,7 @@ public class YamlNodeConstructor extends SafeConstructor {
     }
 
     /**
-     * Creates a new {@link Construct} for {@literal !!null}.
+     * Creates a new {@link Construct} for {@code !!null}.
      *
      * @return the construct
      */
@@ -151,7 +151,7 @@ public class YamlNodeConstructor extends SafeConstructor {
     }
 
     /**
-     * Creates a new {@link Construct} for {@literal !!int}.
+     * Creates a new {@link Construct} for {@code !!int}.
      *
      * @return the construct
      */
@@ -160,7 +160,7 @@ public class YamlNodeConstructor extends SafeConstructor {
     }
 
     /**
-     * Creates a new {@link Construct} for {@literal !!float}.
+     * Creates a new {@link Construct} for {@code !!float}.
      *
      * @return the construct
      */
@@ -169,7 +169,7 @@ public class YamlNodeConstructor extends SafeConstructor {
     }
 
     /**
-     * Creates a new {@link Construct} for {@literal !!bool}.
+     * Creates a new {@link Construct} for {@code !!bool}.
      *
      * @return the construct
      */
@@ -178,7 +178,7 @@ public class YamlNodeConstructor extends SafeConstructor {
     }
 
     /**
-     * Creates a new {@link Construct} for {@literal !!binary}.
+     * Creates a new {@link Construct} for {@code !!binary}.
      *
      * @return the construct
      */
@@ -191,7 +191,7 @@ public class YamlNodeConstructor extends SafeConstructor {
     }
 
     /**
-     * Creates a new {@link Construct} for {@literal !!seq}.
+     * Creates a new {@link Construct} for {@code !!seq}.
      *
      * @return the construct
      */
@@ -200,7 +200,7 @@ public class YamlNodeConstructor extends SafeConstructor {
     }
 
     /**
-     * Creates a new {@link Construct} for {@literal !!pairs}.
+     * Creates a new {@link Construct} for {@code !!pairs}.
      *
      * @return the construct
      */
@@ -210,7 +210,7 @@ public class YamlNodeConstructor extends SafeConstructor {
     }
 
     /**
-     * Creates a new {@link Construct} for {@literal !!omap}.
+     * Creates a new {@link Construct} for {@code !!omap}.
      *
      * @return the construct
      */
@@ -221,7 +221,7 @@ public class YamlNodeConstructor extends SafeConstructor {
     }
 
     /**
-     * Creates a new {@link Construct} for {@literal !!map}.
+     * Creates a new {@link Construct} for {@code !!map}.
      *
      * @return the construct
      */

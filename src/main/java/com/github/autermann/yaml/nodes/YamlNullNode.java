@@ -22,7 +22,7 @@ import com.github.autermann.yaml.YamlNode;
 import com.github.autermann.yaml.YamlNodeVisitor;
 
 /**
- * A {@link YamlNode} for {@literal null} values.
+ * A {@link YamlNode} for {@code null} values.
  *
  * @author Christian Autermann
  */
@@ -32,7 +32,7 @@ public class YamlNullNode extends AbstractYamlScalarNode<Object> {
      */
     private static final YamlNullNode INSTANCE = new YamlNullNode();
     /**
-     * The {@literal String} value for {@link YamlNullNode}s.
+     * The {@code String} value for {@link YamlNullNode}s.
      */
     private static final String TEXT_VALUE = "null";
 
@@ -83,7 +83,7 @@ public class YamlNullNode extends AbstractYamlScalarNode<Object> {
     }
 
     /**
-     * Gets the singleton {@literal null} node instance.
+     * Gets the singleton {@code null} node instance.
      *
      * @return the instance
      */

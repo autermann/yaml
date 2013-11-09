@@ -117,28 +117,28 @@ public abstract class YamlIntegralNode extends AbstractYamlNumberNode {
     }
 
     /**
-     * Checks if this {@literal BigInteger} isInRange into a {@literal long}.
+     * Checks if this {@code BigInteger} isInRange into a {@code long}.
      *
      * @return if the value is in range
      */
     public abstract boolean fitsIntoLong();
 
     /**
-     * Checks if this {@literal BigInteger} isInRange into a {@literal int}.
+     * Checks if this {@code BigInteger} isInRange into a {@code int}.
      *
      * @return if the value is in range
      */
     public abstract boolean fitsIntoInt();
 
     /**
-     * Checks if this {@literal BigInteger} isInRange into a {@literal byte}.
+     * Checks if this {@code BigInteger} isInRange into a {@code byte}.
      *
      * @return if the value is in range
      */
     public abstract boolean fitsIntoByte();
 
     /**
-     * Checks if this {@literal BigInteger} isInRange into a {@literal short}.
+     * Checks if this {@code BigInteger} isInRange into a {@code short}.
      *
      * @return if the value is in range
      */

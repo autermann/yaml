@@ -27,7 +27,7 @@ import com.github.autermann.yaml.YamlNodeVisitor;
 import com.google.common.collect.Sets;
 
 /**
- * A {@link YamlNode} for {@literal !!set} mappings.
+ * A {@link YamlNode} for {@code !!set} mappings.
  *
  * @author Christian Autermann
  */

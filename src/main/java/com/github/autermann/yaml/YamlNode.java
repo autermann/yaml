@@ -98,27 +98,27 @@ public interface YamlNode extends Iterable<YamlNode> {
     BigInteger DEFAULT_BIG_INTEGER_VALUE = BigInteger.ZERO;
     /**
      * The default value returned by {@link #binaryValue()} and
-     * {@link  #asBinaryValue()}: {@literal null}.
+     * {@link  #asBinaryValue()}: {@code null}.
      */
     byte[] DEFAULT_BINARY_VALUE = null;
     /**
      * The default value returned by {@link #numberValue()} and
-     * {@link  #asNumberValue()}: {@literal null}.
+     * {@link  #asNumberValue()}: {@code null}.
      */
     Number DEFAULT_NUMBER_VALUE = null;
     /**
      * The default value returned by {@link #textValue()} and
-     * {@link  #asTextValue()}: {@literal null}.
+     * {@link  #asTextValue()}: {@code null}.
      */
     String DEFAULT_TEXT_VALUE = null;
     /**
      * The default value returned by {@link #dateTimeValue()} and
-     * {@link  #asDateTimeValue()}: {@literal null}.
+     * {@link  #asDateTimeValue()}: {@code null}.
      */
     DateTime DEFAULT_DATE_TIME_VALUE = null;
     /**
      * The default value returned by {@link #dateValue()} and
-     * {@link  #asDateValue()}: {@literal null}.
+     * {@link  #asDateValue()}: {@code null}.
      */
     Date DEFAULT_DATE_VALUE = null;
 
@@ -212,9 +212,9 @@ public interface YamlNode extends Iterable<YamlNode> {
     boolean isBinary();
 
     /**
-     * Checks if this node is a {@literal boolean} node.
+     * Checks if this node is a {@code boolean} node.
      *
-     * @return if this is a {@literal boolean} node
+     * @return if this is a {@code boolean} node
      *
      * @see YamlBooleanNode
      * @see #booleanValue()
@@ -222,9 +222,9 @@ public interface YamlNode extends Iterable<YamlNode> {
     boolean isBoolean();
 
     /**
-     * Checks if this node is a {@literal null} node.
+     * Checks if this node is a {@code null} node.
      *
-     * @return if this is a {@literal null} node
+     * @return if this is a {@code null} node
      *
      * @see YamlNullNode
      *
@@ -254,9 +254,9 @@ public interface YamlNode extends Iterable<YamlNode> {
     boolean isDecimal();
 
     /**
-     * Checks if this node is {@literal float} node.
+     * Checks if this node is {@code float} node.
      *
-     * @return if this is a {@literal float} node
+     * @return if this is a {@code float} node
      *
      * @see #floatValue()
      * @see #doubleValue()
@@ -265,9 +265,9 @@ public interface YamlNode extends Iterable<YamlNode> {
     boolean isFloat();
 
     /**
-     * Checks if this node is {@literal double} node.
+     * Checks if this node is {@code double} node.
      *
-     * @return if this is a {@literal double} node
+     * @return if this is a {@code double} node
      *
      * @see #doubleValue()
      * @see #bigDecimalValue()
@@ -275,9 +275,9 @@ public interface YamlNode extends Iterable<YamlNode> {
     boolean isDouble();
 
     /**
-     * Checks if this node is {@literal BigDecimal} node.
+     * Checks if this node is {@code BigDecimal} node.
      *
-     * @return if this is a {@literal BigDecimal} node
+     * @return if this is a {@code BigDecimal} node
      *
      * @see #bigDecimalValue()
      */
@@ -298,18 +298,18 @@ public interface YamlNode extends Iterable<YamlNode> {
     boolean isIntegral();
 
     /**
-     * Checks if this node is {@literal byte} node.
+     * Checks if this node is {@code byte} node.
      *
-     * @return if this is a {@literal byte} node
+     * @return if this is a {@code byte} node
      *
      * @see #bigIntegerValue()
      */
     boolean isBigInteger();
 
     /**
-     * Checks if this node is {@literal long} node.
+     * Checks if this node is {@code long} node.
      *
-     * @return if this is a {@literal long} node
+     * @return if this is a {@code long} node
      *
      * @see #bigIntegerValue()
      * @see #longValue()
@@ -318,9 +318,9 @@ public interface YamlNode extends Iterable<YamlNode> {
     boolean isLong();
 
     /**
-     * Checks if this node is {@literal int} node.
+     * Checks if this node is {@code int} node.
      *
-     * @return if this is a {@literal int} node
+     * @return if this is a {@code int} node
      *
      * @see #bigIntegerValue()
      * @see #longValue()
@@ -329,9 +329,9 @@ public interface YamlNode extends Iterable<YamlNode> {
     boolean isInt();
 
     /**
-     * Checks if this node is {@literal short} node.
+     * Checks if this node is {@code short} node.
      *
-     * @return if this is a {@literal short} node
+     * @return if this is a {@code short} node
      *
      * @see #bigIntegerValue()
      * @see #longValue()
@@ -341,9 +341,9 @@ public interface YamlNode extends Iterable<YamlNode> {
     boolean isShort();
 
     /**
-     * Checks if this node is {@literal byte} node.
+     * Checks if this node is {@code byte} node.
      *
-     * @return if this is a {@literal byte} node
+     * @return if this is a {@code byte} node
      *
      * @see #bigIntegerValue()
      * @see #longValue()
@@ -377,7 +377,7 @@ public interface YamlNode extends Iterable<YamlNode> {
     /**
      * Converts this node into a {@link YamlMapNode} if applicable.
      *
-     * @return a mapping node or {@literal null}
+     * @return a mapping node or {@code null}
      *
      * @see #isMap()
      * @see YamlMapNode
@@ -387,7 +387,7 @@ public interface YamlNode extends Iterable<YamlNode> {
     /**
      * Converts this node into a {@link YamlMapNode} if applicable.
      *
-     * @return a mapping node or {@literal null}
+     * @return a mapping node or {@code null}
      *
      * @see #isOrderedMap()
      * @see YamlOrderedMapNode
@@ -397,7 +397,7 @@ public interface YamlNode extends Iterable<YamlNode> {
     /**
      * Converts this node into a {@link YamlPairsNode} if applicable.
      *
-     * @return a pairs node or {@literal null}
+     * @return a pairs node or {@code null}
      *
      * @see #isPairs()
      * @see YamlPairsNode
@@ -407,7 +407,7 @@ public interface YamlNode extends Iterable<YamlNode> {
     /**
      * Converts this node into a {@link YamlSequenceNode} if applicable.
      *
-     * @return a sequence node or {@literal null}
+     * @return a sequence node or {@code null}
      *
      * @see #isSequence()
      * @see YamlSequenceNode
@@ -417,7 +417,7 @@ public interface YamlNode extends Iterable<YamlNode> {
     /**
      * Converts this node into a {@link YamlSetNode} if applicable.
      *
-     * @return a set node or {@literal null}
+     * @return a set node or {@code null}
      *
      * @see #isSet()
      * @see YamlSetNode
@@ -425,339 +425,339 @@ public interface YamlNode extends Iterable<YamlNode> {
     YamlSetNode asSet();
 
     /**
-     * Tries to convert the value of this node to a {@literal BigDecimal}. Returns
+     * Tries to convert the value of this node to a {@code BigDecimal}. Returns
      * {@link BigDecimal#ZERO} if this node can not be converted to a
-     * {@literal BigDecimal}.
+     * {@code BigDecimal}.
      *
-     * @return the {@literal BigDecimal} or {@link BigDecimal#ZERO}
+     * @return the {@code BigDecimal} or {@link BigDecimal#ZERO}
      */
     BigDecimal asBigDecimalValue();
 
     /**
-     * Tries to convert the value of this node to a {@literal BigDecimal}. Returns
-     * {@literal defaultValue} if this node can not be converted to a
-     * {@literal BigDecimal}.
+     * Tries to convert the value of this node to a {@code BigDecimal}. Returns
+     * {@code defaultValue} if this node can not be converted to a
+     * {@code BigDecimal}.
      *
      * @param defaultValue the default value to return if this node can not be
      *                     converted
      *
-     * @return the {@literal BigDecimal} or {@literal defaultValue}
+     * @return the {@code BigDecimal} or {@code defaultValue}
      */
     BigDecimal asBigDecimalValue(BigDecimal defaultValue);
 
     /**
-     * Returns the {@literal BigDecimal} value of this node or
+     * Returns the {@code BigDecimal} value of this node or
      * {@link BigDecimal#ZERO} if this is not a BigDecimal node.
      *
-     * @return the {@literal BigDecimal} or {@link BigDecimal#ZERO}
+     * @return the {@code BigDecimal} or {@link BigDecimal#ZERO}
      *
      * @see #isDecimal()
      */
     BigDecimal bigDecimalValue();
 
     /**
-     * Tries to convert the value of this node to a {@literal BigInteger}. Returns
+     * Tries to convert the value of this node to a {@code BigInteger}. Returns
      * {@link BigInteger#ZERO} if this node can not be converted to a
-     * {@literal BigInteger}.
+     * {@code BigInteger}.
      *
-     * @return the {@literal BigInteger} or {@link BigInteger#ZERO}
+     * @return the {@code BigInteger} or {@link BigInteger#ZERO}
      */
     BigInteger asBigIntegerValue();
 
     /**
-     * Tries to convert the value of this node to a {@literal BigInteger}. Returns
-     * {@literal defaultValue} if this node can not be converted to a
-     * {@literal BigInteger}.
+     * Tries to convert the value of this node to a {@code BigInteger}. Returns
+     * {@code defaultValue} if this node can not be converted to a
+     * {@code BigInteger}.
      *
      * @param defaultValue the default value to return if this node can not be
      *                     converted
      *
-     * @return the {@literal BigInteger} or {@literal defaultValue}
+     * @return the {@code BigInteger} or {@code defaultValue}
      */
     BigInteger asBigIntegerValue(BigInteger defaultValue);
 
     /**
-     * Returns the {@literal BigInteger} value of this node or
+     * Returns the {@code BigInteger} value of this node or
      * {@link BigInteger#ZERO} if this is not a BigInteger node.
      *
-     * @return the {@literal BigInteger} or {@link BigInteger#ZERO}
+     * @return the {@code BigInteger} or {@link BigInteger#ZERO}
      *
      * @see #isIntegral()
      */
     BigInteger bigIntegerValue();
 
     /**
-     * Tries to convert the value of this node to a {@literal boolean}. Returns
+     * Tries to convert the value of this node to a {@code boolean}. Returns
      * {@value #DEFAULT_BOOLEAN_VALUE} if this node can not be converted to a
-     * {@literal boolean}.
+     * {@code boolean}.
      *
-     * @return the {@literal boolean} or {@value #DEFAULT_BOOLEAN_VALUE}
+     * @return the {@code boolean} or {@value #DEFAULT_BOOLEAN_VALUE}
      */
     boolean asBooleanValue();
 
     /**
-     * Tries to convert the value of this node to a {@literal boolean}. Returns
-     * {@literal defaultValue} if this node can not be converted to a
-     * {@literal boolean}.
+     * Tries to convert the value of this node to a {@code boolean}. Returns
+     * {@code defaultValue} if this node can not be converted to a
+     * {@code boolean}.
      *
      * @param defaultValue the default value to return if this node can not be
      *                     converted
      *
-     * @return the {@literal boolean} or {@literal defaultValue}
+     * @return the {@code boolean} or {@code defaultValue}
      */
     boolean asBooleanValue(boolean defaultValue);
 
     /**
-     * Returns the {@literal boolean} value of this node or
+     * Returns the {@code boolean} value of this node or
      * {@value #DEFAULT_BOOLEAN_VALUE} if this is not a boolean node.
      *
-     * @return the {@literal boolean} or {@value #DEFAULT_BOOLEAN_VALUE}
+     * @return the {@code boolean} or {@value #DEFAULT_BOOLEAN_VALUE}
      *
      * @see #isBoolean()
      */
     boolean booleanValue();
 
     /**
-     * Tries to convert the value of this node to a {@literal byte}. Returns
+     * Tries to convert the value of this node to a {@code byte}. Returns
      * {@value #DEFAULT_BYTE_VALUE} if this node can not be converted to a
-     * {@literal byte}.
+     * {@code byte}.
      *
-     * @return the {@literal byte} or {@value #DEFAULT_BYTE_VALUE}
+     * @return the {@code byte} or {@value #DEFAULT_BYTE_VALUE}
      */
     byte asByteValue();
 
     /**
-     * Tries to convert the value of this node to a {@literal byte}. Returns
-     * {@literal defaultValue} if this node can not be converted to a
-     * {@literal byte}.
+     * Tries to convert the value of this node to a {@code byte}. Returns
+     * {@code defaultValue} if this node can not be converted to a
+     * {@code byte}.
      *
      * @param defaultValue the default value to return if this node can not be
      *                     converted
      *
-     * @return the {@literal byte} or {@literal defaultValue}
+     * @return the {@code byte} or {@code defaultValue}
      */
     byte asByteValue(byte defaultValue);
 
     /**
-     * Returns the {@literal byte} value of this node or
+     * Returns the {@code byte} value of this node or
      * {@value #DEFAULT_BYTE_VALUE} if this is not a byte node.
      *
-     * @return the {@literal byte} or {@value #DEFAULT_BYTE_VALUE}
+     * @return the {@code byte} or {@value #DEFAULT_BYTE_VALUE}
      *
      * @see #isIntegral()
      */
     byte byteValue();
 
     /**
-     * Tries to convert the value of this node to a {@literal byte[]}. Returns
-     * {@literal null} if this node can not be converted to a {@literal byte[]}.
+     * Tries to convert the value of this node to a {@code byte[]}. Returns
+     * {@code null} if this node can not be converted to a {@code byte[]}.
      *
-     * @return the {@literal byte[]} or {@literal null}
+     * @return the {@code byte[]} or {@code null}
      */
     byte[] asBinaryValue();
 
     /**
-     * Tries to convert the value of this node to a {@literal byte[]}. Returns
-     * {@literal defaultValue} if this node can not be converted to a
-     * {@literal byte[]}.
+     * Tries to convert the value of this node to a {@code byte[]}. Returns
+     * {@code defaultValue} if this node can not be converted to a
+     * {@code byte[]}.
      *
      * @param defaultValue the default value to return if this node can not be
      *                     converted
      *
-     * @return the {@literal byte[]} or {@literal defaultValue}
+     * @return the {@code byte[]} or {@code defaultValue}
      */
     byte[] asBinaryValue(byte[] defaultValue);
 
     /**
-     * Returns the {@literal byte[]} value of this node or {@literal null} if this is
+     * Returns the {@code byte[]} value of this node or {@code null} if this is
      * not a binary node.
      *
-     * @return the {@literal byte[]} or {@literal null}
+     * @return the {@code byte[]} or {@code null}
      *
      * @see #isBinary()
      */
     byte[] binaryValue();
 
     /**
-     * Tries to convert the value of this node to a {@literal double}. Returns
+     * Tries to convert the value of this node to a {@code double}. Returns
      * {@value #DEFAULT_DOUBLE_VALUE} if this node can not be converted to a
-     * {@literal double}.
+     * {@code double}.
      *
-     * @return the {@literal double} or {@value #DEFAULT_DOUBLE_VALUE}
+     * @return the {@code double} or {@value #DEFAULT_DOUBLE_VALUE}
      */
     double asDoubleValue();
 
     /**
-     * Tries to convert the value of this node to a {@literal double}. Returns
-     * {@literal defaultValue} if this node can not be converted to a
-     * {@literal double}.
+     * Tries to convert the value of this node to a {@code double}. Returns
+     * {@code defaultValue} if this node can not be converted to a
+     * {@code double}.
      *
      * @param defaultValue the default value to return if this node can not be
      *                     converted
      *
-     * @return the {@literal double} or {@literal defaultValue}
+     * @return the {@code double} or {@code defaultValue}
      */
     double asDoubleValue(double defaultValue);
 
     /**
-     * Returns the {@literal double} value of this node or
+     * Returns the {@code double} value of this node or
      * {@value #DEFAULT_DOUBLE_VALUE} if this is not a double node.
      *
-     * @return the {@literal double} or {@value #DEFAULT_DOUBLE_VALUE}
+     * @return the {@code double} or {@value #DEFAULT_DOUBLE_VALUE}
      *
      * @see #isDecimal()
      */
     double doubleValue();
 
     /**
-     * Tries to convert the value of this node to a {@literal float}. Returns
+     * Tries to convert the value of this node to a {@code float}. Returns
      * {@value #DEFAULT_FLOAT_VALUE} if this node can not be converted to a
-     * {@literal float}.
+     * {@code float}.
      *
-     * @return the {@literal float} or {@value #DEFAULT_FLOAT_VALUE}
+     * @return the {@code float} or {@value #DEFAULT_FLOAT_VALUE}
      */
     float asFloatValue();
 
     /**
-     * Tries to convert the value of this node to a {@literal float}. Returns
-     * {@literal defaultValue} if this node can not be converted to a
-     * {@literal float}.
+     * Tries to convert the value of this node to a {@code float}. Returns
+     * {@code defaultValue} if this node can not be converted to a
+     * {@code float}.
      *
      * @param defaultValue the default value to return if this node can not be
      *                     converted
      *
-     * @return the {@literal float} or {@literal defaultValue}
+     * @return the {@code float} or {@code defaultValue}
      */
     float asFloatValue(float defaultValue);
 
     /**
-     * Returns the {@literal float} value of this node or
+     * Returns the {@code float} value of this node or
      * {@value #DEFAULT_FLOAT_VALUE} if this is not a float node.
      *
-     * @return the {@literal float} or {@value #DEFAULT_FLOAT_VALUE}
+     * @return the {@code float} or {@value #DEFAULT_FLOAT_VALUE}
      *
      * @see #isDecimal()
      */
     float floatValue();
 
     /**
-     * Tries to convert the value of this node to a {@literal int}. Returns
+     * Tries to convert the value of this node to a {@code int}. Returns
      * {@value #DEFAULT_INTEGER_VALUE} if this node can not be converted to a
-     * {@literal int}.
+     * {@code int}.
      *
-     * @return the {@literal int} or {@value #DEFAULT_INTEGER_VALUE}
+     * @return the {@code int} or {@value #DEFAULT_INTEGER_VALUE}
      */
     int asIntValue();
 
     /**
-     * Tries to convert the value of this node to a {@literal int}. Returns
-     * {@literal defaultValue} if this node can not be converted to a
-     * {@literal int}.
+     * Tries to convert the value of this node to a {@code int}. Returns
+     * {@code defaultValue} if this node can not be converted to a
+     * {@code int}.
      *
      * @param defaultValue the default value to return if this node can not be
      *                     converted
      *
-     * @return the {@literal int} or {@literal defaultValue}
+     * @return the {@code int} or {@code defaultValue}
      */
     int asIntValue(int defaultValue);
 
     /**
-     * Returns the {@literal int} value of this node or
+     * Returns the {@code int} value of this node or
      * {@value #DEFAULT_INTEGER_VALUE} if this is not a integer node.
      *
-     * @return the {@literal int} or {@value #DEFAULT_INTEGER_VALUE}
+     * @return the {@code int} or {@value #DEFAULT_INTEGER_VALUE}
      *
      * @see #isIntegral()
      */
     int intValue();
 
     /**
-     * Tries to convert the value of this node to a {@literal long}. Returns
+     * Tries to convert the value of this node to a {@code long}. Returns
      * {@value #DEFAULT_LONG_VALUE} if this node can not be converted to a
-     * {@literal long}.
+     * {@code long}.
      *
-     * @return the {@literal long} or {@value #DEFAULT_LONG_VALUE}
+     * @return the {@code long} or {@value #DEFAULT_LONG_VALUE}
      */
     long asLongValue();
 
     /**
-     * Tries to convert the value of this node to a {@literal long}. Returns
-     * {@literal defaultValue} if this node can not be converted to a
-     * {@literal long}.
+     * Tries to convert the value of this node to a {@code long}. Returns
+     * {@code defaultValue} if this node can not be converted to a
+     * {@code long}.
      *
      * @param defaultValue the default value to return if this node can not be
      *                     converted
      *
-     * @return the {@literal long} or {@literal defaultValue}
+     * @return the {@code long} or {@code defaultValue}
      */
     long asLongValue(long defaultValue);
 
     /**
-     * Returns the {@literal long} value of this node or
+     * Returns the {@code long} value of this node or
      * {@value #DEFAULT_LONG_VALUE} if this is not a long node.
      *
-     * @return the {@literal long} or {@value #DEFAULT_LONG_VALUE}
+     * @return the {@code long} or {@value #DEFAULT_LONG_VALUE}
      *
      * @see #isIntegral()
      */
     long longValue();
 
     /**
-     * Tries to convert the value of this node to a {@literal Number}. Returns
-     * {@literal null} if this node can not be converted to a {@literal Number}.
+     * Tries to convert the value of this node to a {@code Number}. Returns
+     * {@code null} if this node can not be converted to a {@code Number}.
      *
-     * @return the {@literal Number} or {@literal null}
+     * @return the {@code Number} or {@code null}
      */
     Number asNumberValue();
 
     /**
-     * Tries to convert the value of this node to a {@literal Number}. Returns
-     * {@literal defaultValue} if this node can not be converted to a
-     * {@literal Number}.
+     * Tries to convert the value of this node to a {@code Number}. Returns
+     * {@code defaultValue} if this node can not be converted to a
+     * {@code Number}.
      *
      * @param defaultValue the default value to return if this node can not be
      *                     converted
      *
-     * @return the {@literal Number} or {@literal defaultValue}
+     * @return the {@code Number} or {@code defaultValue}
      */
     Number asNumberValue(Number defaultValue);
 
     /**
-     * Returns the {@literal Number} value of this node or {@literal null} if this is
+     * Returns the {@code Number} value of this node or {@code null} if this is
      * not a numerical node.
      *
-     * @return the {@literal Number} or {@literal null}
+     * @return the {@code Number} or {@code null}
      *
      * @see #isNumber()
      */
     Number numberValue();
 
     /**
-     * Tries to convert the value of this node to a {@literal short}. Returns
+     * Tries to convert the value of this node to a {@code short}. Returns
      * {@value #DEFAULT_SHORT_VALUE} if this node can not be converted to a
-     * {@literal short}.
+     * {@code short}.
      *
-     * @return the {@literal short} or {@value #DEFAULT_SHORT_VALUE}
+     * @return the {@code short} or {@value #DEFAULT_SHORT_VALUE}
      */
     short asShortValue();
 
     /**
-     * Tries to convert the value of this node to a {@literal short}. Returns
-     * {@literal defaultValue} if this node can not be converted to a
-     * {@literal short}.
+     * Tries to convert the value of this node to a {@code short}. Returns
+     * {@code defaultValue} if this node can not be converted to a
+     * {@code short}.
      *
      * @param defaultValue the default value to return if this node can not be
      *                     converted
      *
-     * @return the {@literal short} or {@literal defaultValue}
+     * @return the {@code short} or {@code defaultValue}
      */
     short asShortValue(short defaultValue);
 
     /**
-     * Returns the {@literal short} value of this node or
+     * Returns the {@code short} value of this node or
      * {@value #DEFAULT_SHORT_VALUE} if this is not a short node.
      *
-     * @return the {@literal short} or {@value #DEFAULT_SHORT_VALUE}
+     * @return the {@code short} or {@value #DEFAULT_SHORT_VALUE}
      *
      * @see #isIntegral()
      */
@@ -765,29 +765,29 @@ public interface YamlNode extends Iterable<YamlNode> {
 
     /**
      * Tries to convert the value of this node to a {@link String}. Returns
-     * {@literal null} if this node can not be converted to a {@literal String}.
+     * {@code null} if this node can not be converted to a {@code String}.
      *
-     * @return the {@literal String} or {@literal null}
+     * @return the {@code String} or {@code null}
      */
     String asTextValue();
 
     /**
-     * Tries to convert the value of this node to a {@literal String}. Returns
-     * {@literal defaultValue} if this node can not be converted to a
-     * {@literal String}.
+     * Tries to convert the value of this node to a {@code String}. Returns
+     * {@code defaultValue} if this node can not be converted to a
+     * {@code String}.
      *
      * @param defaultValue the default value to return if this node can not be
      *                     converted
      *
-     * @return the {@literal String} or {@literal defaultValue}
+     * @return the {@code String} or {@code defaultValue}
      */
     String asTextValue(String defaultValue);
 
     /**
-     * Returns the {@link String} value of this node or {@literal null} if this is
+     * Returns the {@link String} value of this node or {@code null} if this is
      * not a text node.
      *
-     * @return the {@literal String} or {@literal null}
+     * @return the {@code String} or {@code null}
      *
      * @see #isText()
      */
@@ -795,29 +795,29 @@ public interface YamlNode extends Iterable<YamlNode> {
 
     /**
      * Tries to convert the value of this node to a {@link DateTime}. Returns
-     * {@literal null} if this node can not be converted to a
-     * {@literal DateTime}.
+     * {@code null} if this node can not be converted to a
+     * {@code DateTime}.
      *
-     * @return the {@literal DateTime} or {@literal null}
+     * @return the {@code DateTime} or {@code null}
      */
     DateTime asDateTimeValue();
 
     /**
      * Tries to convert the value of this node to a {@link DateTime}. Returns
-     * {@literal defaultValue} if this node can not be converted to a
-     * {@literal DateTime}.
+     * {@code defaultValue} if this node can not be converted to a
+     * {@code DateTime}.
      *
      * @param defaultValue the default value if this node can not be converted
      *
-     * @return the {@literal DateTime} or {@literal defaultValue}
+     * @return the {@code DateTime} or {@code defaultValue}
      */
     DateTime asDateTimeValue(DateTime defaultValue);
 
     /**
-     * Returns the {@link DateTime} value of this node or {@literal null} if this
+     * Returns the {@link DateTime} value of this node or {@code null} if this
      * is not a time node.
      *
-     * @return the {@literal DateTime} or {@literal null}
+     * @return the {@code DateTime} or {@code null}
      *
      * @see #isTime()
      */
@@ -825,27 +825,27 @@ public interface YamlNode extends Iterable<YamlNode> {
 
     /**
      * Tries to convert the value of this node to a {@link Date}. Returns
-     * {@literal null} if this node can not be converted to a {@literal Date}.
+     * {@code null} if this node can not be converted to a {@code Date}.
      *
-     * @return the {@literal Date} or {@literal null}
+     * @return the {@code Date} or {@code null}
      */
     Date asDateValue();
 
     /**
      * Tries to convert the value of this node to a {@link Date}. Returns
-     * {@literal defaultValue} if this node can not be converted to a {@literal Date}.
+     * {@code defaultValue} if this node can not be converted to a {@code Date}.
      *
      * @param defaultValue the default value if this node can not be converted
      *
-     * @return the {@literal Date} or {@literal defaultValue}
+     * @return the {@code Date} or {@code defaultValue}
      */
     Date asDateValue(Date defaultValue);
 
     /**
-     * Returns the {@link Date} value of this node or {@literal null} if this is
+     * Returns the {@link Date} value of this node or {@code null} if this is
      * not a time node.
      *
-     * @return the {@literal Date} or {@literal null}
+     * @return the {@code Date} or {@code null}
      *
      * @see #isTime()
      */
@@ -863,7 +863,7 @@ public interface YamlNode extends Iterable<YamlNode> {
     /**
      * Checks if this container node is empty if it is a container node.
      *
-     * @return {@literal true} if it is empty, else {@literal false}
+     * @return {@code true} if it is empty, else {@code false}
      *
      * * @see #isContainer()
      */
@@ -871,32 +871,32 @@ public interface YamlNode extends Iterable<YamlNode> {
 
     /**
      * Get the {@link YamlNode} at the specified position or with the specified
-     * key. If it does not exist {@literal null} is returned.
+     * key. If it does not exist {@code null} is returned.
      *
      * @param key the key or index
      *
      * @return the {@link YamlNode} with the specified index or key, or
-     *         {@literal null}
+     *         {@code null}
      */
     YamlNode get(int key);
 
     /**
      * Get the {@link YamlNode} with the specified key. If it does not exist
-     * {@literal null} is returned.
+     * {@code null} is returned.
      *
      * @param key the key or index
      *
-     * @return the {@link YamlNode} with the specified key, or {@literal null}
+     * @return the {@link YamlNode} with the specified key, or {@code null}
      */
     YamlNode get(String key);
 
     /**
      * Get the {@link YamlNode} with the specified key. If it does not exist
-     * {@literal null} is returned.
+     * {@code null} is returned.
      *
      * @param key the key or index
      *
-     * @return the {@link YamlNode} with the specified key, or {@literal null}
+     * @return the {@link YamlNode} with the specified key, or {@code null}
      */
     YamlNode get(YamlNode key);
 
@@ -938,7 +938,7 @@ public interface YamlNode extends Iterable<YamlNode> {
      *
      * @param key the key or index
      *
-     * @return {@literal true} if the node exists, else {@literal false}
+     * @return {@code true} if the node exists, else {@code false}
      */
     boolean has(int key);
 
@@ -947,7 +947,7 @@ public interface YamlNode extends Iterable<YamlNode> {
      *
      * @param key the key
      *
-     * @return {@literal true} if the node exists, else {@literal false}
+     * @return {@code true} if the node exists, else {@code false}
      */
     boolean has(String key);
 
@@ -956,7 +956,7 @@ public interface YamlNode extends Iterable<YamlNode> {
      *
      * @param key the key
      *
-     * @return {@literal true} if the node exists, else {@literal false}
+     * @return {@code true} if the node exists, else {@code false}
      */
     boolean has(YamlNode key);
 
@@ -966,7 +966,7 @@ public interface YamlNode extends Iterable<YamlNode> {
      *
      * @param key the key or index
      *
-     * @return {@literal true} if the node exists, else {@literal false}
+     * @return {@code true} if the node exists, else {@code false}
      */
     boolean hasNotNull(int key);
 
@@ -976,7 +976,7 @@ public interface YamlNode extends Iterable<YamlNode> {
      *
      * @param key the key
      *
-     * @return {@literal true} if the node exists, else {@literal false}
+     * @return {@code true} if the node exists, else {@code false}
      */
     boolean hasNotNull(String key);
 
@@ -986,7 +986,7 @@ public interface YamlNode extends Iterable<YamlNode> {
      *
      * @param key the key
      *
-     * @return {@literal true} if the node exists, else {@literal false}
+     * @return {@code true} if the node exists, else {@code false}
      */
     boolean hasNotNull(YamlNode key);
 
@@ -1002,7 +1002,7 @@ public interface YamlNode extends Iterable<YamlNode> {
     /**
      * Lets a visitor visit this node.
      *
-     * @param visitor the non-{@literal null} visitor
+     * @param visitor the non-{@code null} visitor
      *
      * @see YamlNodeVisitor
      * @see #accept(ReturningYamlNodeVisitor)
@@ -1013,7 +1013,7 @@ public interface YamlNode extends Iterable<YamlNode> {
      * Lets a visitor visit this node.
      *
      * @param <T>     the return type of the visitor
-     * @param visitor the non-{@literal null} visitor
+     * @param visitor the non-{@code null} visitor
      *
      * @return the returned value of the visitor
      *
@@ -1089,7 +1089,7 @@ public interface YamlNode extends Iterable<YamlNode> {
 
     /**
      * Dumps this node to a string using the supplied {@link Yaml}. This is
-     * equivalent to {@literal yaml.dump(this)}.
+     * equivalent to {@code yaml.dump(this)}.
      *
      * @param yaml the {@link Yaml}
      *
@@ -1099,7 +1099,7 @@ public interface YamlNode extends Iterable<YamlNode> {
 
     /**
      * Dumps this node to a writer using the supplied {@link Yaml}. This is
-     * equivalent to {@literal yaml.dump(this, output)}.
+     * equivalent to {@code yaml.dump(this, output)}.
      *
      * @param output the writer
      * @param yaml   the {@link Yaml}
@@ -1108,7 +1108,7 @@ public interface YamlNode extends Iterable<YamlNode> {
 
     /**
      * Dumps this node to a output stream using the supplied {@link Yaml}. This
-     * is equivalent to {@literal yaml.dump(this, output)}.
+     * is equivalent to {@code yaml.dump(this, output)}.
      *
      * @param output the output stream
      * @param yaml   the {@link Yaml}

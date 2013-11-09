@@ -53,19 +53,19 @@ public abstract class AbstractYamlMappingNode<T extends AbstractYamlMappingNode<
     }
 
     /**
-     * Adds the specified {@literal key}/{@literal value} pair to this mapping.
+     * Adds the specified {@code key}/{@code value} pair to this mapping.
      *
      * @param key   the key
      * @param value the value
      *
-     * @return {@literal this}
+     * @return {@code this}
      */
     public T put(String key, YamlNode value) {
         return put(getNodeFactory().textNode(key), value);
     }
 
     /**
-     * Adds a {@link YamlOrderedMapNode} under the specified {@literal key}.
+     * Adds a {@link YamlOrderedMapNode} under the specified {@code key}.
      *
      * @param key the key
      *
@@ -76,7 +76,7 @@ public abstract class AbstractYamlMappingNode<T extends AbstractYamlMappingNode<
     }
 
     /**
-     * Adds a {@link YamlPairsNode} under the specified {@literal key}.
+     * Adds a {@link YamlPairsNode} under the specified {@code key}.
      *
      * @param key the key
      *
@@ -87,7 +87,7 @@ public abstract class AbstractYamlMappingNode<T extends AbstractYamlMappingNode<
     }
 
     /**
-     * Adds a {@link YamlSequenceNode} under the specified {@literal key}.
+     * Adds a {@link YamlSequenceNode} under the specified {@code key}.
      *
      * @param key the key
      *
@@ -98,7 +98,7 @@ public abstract class AbstractYamlMappingNode<T extends AbstractYamlMappingNode<
     }
 
     /**
-     * Adds a {@link YamlSequenceNode} under the specified {@literal key}.
+     * Adds a {@link YamlSequenceNode} under the specified {@code key}.
      *
      * @param key the key
      *
@@ -109,7 +109,7 @@ public abstract class AbstractYamlMappingNode<T extends AbstractYamlMappingNode<
     }
 
     /**
-     * Adds a {@link YamlSequenceNode} under the specified {@literal key}.
+     * Adds a {@link YamlSequenceNode} under the specified {@code key}.
      *
      * @param key the key
      *
@@ -120,7 +120,7 @@ public abstract class AbstractYamlMappingNode<T extends AbstractYamlMappingNode<
     }
 
     /**
-     * Adds a {@link YamlSetNode} under the specified {@literal key}.
+     * Adds a {@link YamlSetNode} under the specified {@code key}.
      *
      * @param key the key
      *
@@ -131,7 +131,7 @@ public abstract class AbstractYamlMappingNode<T extends AbstractYamlMappingNode<
     }
 
     /**
-     * Adds a {@link YamlMapNode} under the specified {@literal key}.
+     * Adds a {@link YamlMapNode} under the specified {@code key}.
      *
      * @param key the key
      *
@@ -142,7 +142,7 @@ public abstract class AbstractYamlMappingNode<T extends AbstractYamlMappingNode<
     }
 
     /**
-     * Adds a {@link YamlMapNode} under the specified {@literal key}.
+     * Adds a {@link YamlMapNode} under the specified {@code key}.
      *
      * @param key the key
      *
@@ -153,7 +153,7 @@ public abstract class AbstractYamlMappingNode<T extends AbstractYamlMappingNode<
     }
 
     /**
-     * Adds a {@link YamlOrderedMapNode} under the specified {@literal key}.
+     * Adds a {@link YamlOrderedMapNode} under the specified {@code key}.
      *
      * @param key the key
      *
@@ -164,7 +164,7 @@ public abstract class AbstractYamlMappingNode<T extends AbstractYamlMappingNode<
     }
 
     /**
-     * Adds a {@link YamlPairsNode} under the specified {@literal key}.
+     * Adds a {@link YamlPairsNode} under the specified {@code key}.
      *
      * @param key the key
      *
@@ -175,7 +175,7 @@ public abstract class AbstractYamlMappingNode<T extends AbstractYamlMappingNode<
     }
 
     /**
-     * Adds a {@link YamlSequenceNode} under the specified {@literal key}.
+     * Adds a {@link YamlSequenceNode} under the specified {@code key}.
      *
      * @param key the key
      *
@@ -186,7 +186,7 @@ public abstract class AbstractYamlMappingNode<T extends AbstractYamlMappingNode<
     }
 
     /**
-     * Adds a {@link YamlSequenceNode} under the specified {@literal key}.
+     * Adds a {@link YamlSequenceNode} under the specified {@code key}.
      *
      * @param key the key
      *
@@ -197,7 +197,7 @@ public abstract class AbstractYamlMappingNode<T extends AbstractYamlMappingNode<
     }
 
     /**
-     * Adds a {@link YamlSequenceNode} under the specified {@literal key}.
+     * Adds a {@link YamlSequenceNode} under the specified {@code key}.
      *
      * @param key the key
      *
@@ -208,7 +208,7 @@ public abstract class AbstractYamlMappingNode<T extends AbstractYamlMappingNode<
     }
 
     /**
-     * Adds a {@link YamlSetNode} under the specified {@literal key}.
+     * Adds a {@link YamlSetNode} under the specified {@code key}.
      *
      * @param key the key
      *
@@ -219,7 +219,7 @@ public abstract class AbstractYamlMappingNode<T extends AbstractYamlMappingNode<
     }
 
     /**
-     * Adds a {@link YamlMapNode} under the specified {@literal key}.
+     * Adds a {@link YamlMapNode} under the specified {@code key}.
      *
      * @param key the key
      *
@@ -230,7 +230,7 @@ public abstract class AbstractYamlMappingNode<T extends AbstractYamlMappingNode<
     }
 
     /**
-     * Adds a {@link YamlMapNode} under the specified {@literal key}.
+     * Adds a {@link YamlMapNode} under the specified {@code key}.
      *
      * @param key the key
      *
@@ -242,13 +242,13 @@ public abstract class AbstractYamlMappingNode<T extends AbstractYamlMappingNode<
 
     /**
      * Puts the specified container under the specified key and return
-     * {@literal this}.
+     * {@code this}.
      *
      * @param <X>   the container type
      * @param key   the key
      * @param value the container
      *
-     * @return {@literal this}
+     * @return {@code this}
      */
     private <X extends AbstractYamlContainerNode> X putContainer(
             YamlNode key, X value) {
@@ -257,526 +257,526 @@ public abstract class AbstractYamlMappingNode<T extends AbstractYamlMappingNode<
     }
 
     /**
-     * Adds a {@literal null} value under the specified {@literal key}.
+     * Adds a {@code null} value under the specified {@code key}.
      *
      * @param key the key
      *
-     * @return {@literal this}
+     * @return {@code this}
      */
     public T putNull(String key) {
         return putNull(getNodeFactory().textNode(key));
     }
 
     /**
-     * Adds a {@literal null} value under the specified {@literal key}.
+     * Adds a {@code null} value under the specified {@code key}.
      *
      * @param key the key
      *
-     * @return {@literal this}
+     * @return {@code this}
      */
     public T putNull(YamlNode key) {
         return put(key, getNodeFactory().nullNode());
     }
 
     /**
-     * Adds the specified {@literal key}/{@literal value} pair to this mapping.
+     * Adds the specified {@code key}/{@code value} pair to this mapping.
      *
      * @param key   the key
      * @param value the value
      *
-     * @return {@literal this}
+     * @return {@code this}
      */
     public T put(String key, Boolean value) {
         return put(getNodeFactory().textNode(key), value);
     }
 
     /**
-     * Adds the specified {@literal key}/{@literal value} pair to this mapping.
+     * Adds the specified {@code key}/{@code value} pair to this mapping.
      *
      * @param key   the key
      * @param value the value
      *
-     * @return {@literal this}
+     * @return {@code this}
      */
     public T put(YamlNode key, Boolean value) {
         return put(key, getNodeFactory().booleanNode(value));
     }
 
     /**
-     * Adds the specified {@literal key}/{@literal value} pair to this mapping.
+     * Adds the specified {@code key}/{@code value} pair to this mapping.
      *
      * @param key   the key
      * @param value the value
      *
-     * @return {@literal this}
+     * @return {@code this}
      */
     public T put(String key, boolean value) {
         return put(getNodeFactory().textNode(key), value);
     }
 
     /**
-     * Adds the specified {@literal key}/{@literal value} pair to this mapping.
+     * Adds the specified {@code key}/{@code value} pair to this mapping.
      *
      * @param key   the key
      * @param value the value
      *
-     * @return {@literal this}
+     * @return {@code this}
      */
     public T put(YamlNode key, boolean value) {
         return put(key, getNodeFactory().booleanNode(value));
     }
 
     /**
-     * Adds the specified {@literal key}/{@literal value} pair to this mapping.
+     * Adds the specified {@code key}/{@code value} pair to this mapping.
      *
      * @param key   the key
      * @param value the value
      *
-     * @return {@literal this}
+     * @return {@code this}
      */
     public T put(String key, Byte[] value) {
         return put(getNodeFactory().textNode(key), value);
     }
 
     /**
-     * Adds the specified {@literal key}/{@literal value} pair to this mapping.
+     * Adds the specified {@code key}/{@code value} pair to this mapping.
      *
      * @param key   the key
      * @param value the value
      *
-     * @return {@literal this}
+     * @return {@code this}
      */
     public T put(YamlNode key, Byte[] value) {
         return put(key, getNodeFactory().binaryNode(value));
     }
 
     /**
-     * Adds the specified {@literal key}/{@literal value} pair to this mapping.
+     * Adds the specified {@code key}/{@code value} pair to this mapping.
      *
      * @param key   the key
      * @param value the value
      *
-     * @return {@literal this}
+     * @return {@code this}
      */
     public T put(String key, byte[] value) {
         return put(getNodeFactory().textNode(key), value);
     }
 
     /**
-     * Adds the specified {@literal key}/{@literal value} pair to this mapping.
+     * Adds the specified {@code key}/{@code value} pair to this mapping.
      *
      * @param key   the key
      * @param value the value
      *
-     * @return {@literal this}
+     * @return {@code this}
      */
     public T put(YamlNode key, byte[] value) {
         return put(key, getNodeFactory().binaryNode(value));
     }
 
     /**
-     * Adds the specified {@literal key}/{@literal value} pair to this mapping.
+     * Adds the specified {@code key}/{@code value} pair to this mapping.
      *
      * @param key   the key
      * @param value the value
      *
-     * @return {@literal this}
+     * @return {@code this}
      */
     public T put(String key, Byte value) {
         return put(getNodeFactory().textNode(key), value);
     }
 
     /**
-     * Adds the specified {@literal key}/{@literal value} pair to this mapping.
+     * Adds the specified {@code key}/{@code value} pair to this mapping.
      *
      * @param key   the key
      * @param value the value
      *
-     * @return {@literal this}
+     * @return {@code this}
      */
     public T put(YamlNode key, Byte value) {
         return put(key, getNodeFactory().byteNode(value));
     }
 
     /**
-     * Adds the specified {@literal key}/{@literal value} pair to this mapping.
+     * Adds the specified {@code key}/{@code value} pair to this mapping.
      *
      * @param key   the key
      * @param value the value
      *
-     * @return {@literal this}
+     * @return {@code this}
      */
     public T put(String key, byte value) {
         return put(getNodeFactory().textNode(key), value);
     }
 
     /**
-     * Adds the specified {@literal key}/{@literal value} pair to this mapping.
+     * Adds the specified {@code key}/{@code value} pair to this mapping.
      *
      * @param key   the key
      * @param value the value
      *
-     * @return {@literal this}
+     * @return {@code this}
      */
     public T put(YamlNode key, byte value) {
         return put(key, getNodeFactory().byteNode(value));
     }
 
     /**
-     * Adds the specified {@literal key}/{@literal value} pair to this mapping.
+     * Adds the specified {@code key}/{@code value} pair to this mapping.
      *
      * @param key   the key
      * @param value the value
      *
-     * @return {@literal this}
+     * @return {@code this}
      */
     public T put(String key, Short value) {
         return put(getNodeFactory().textNode(key), value);
     }
 
     /**
-     * Adds the specified {@literal key}/{@literal value} pair to this mapping.
+     * Adds the specified {@code key}/{@code value} pair to this mapping.
      *
      * @param key   the key
      * @param value the value
      *
-     * @return {@literal this}
+     * @return {@code this}
      */
     public T put(YamlNode key, Short value) {
         return put(key, getNodeFactory().shortNode(value));
     }
 
     /**
-     * Adds the specified {@literal key}/{@literal value} pair to this mapping.
+     * Adds the specified {@code key}/{@code value} pair to this mapping.
      *
      * @param key   the key
      * @param value the value
      *
-     * @return {@literal this}
+     * @return {@code this}
      */
     public T put(String key, short value) {
         return put(getNodeFactory().textNode(key), value);
     }
 
     /**
-     * Adds the specified {@literal key}/{@literal value} pair to this mapping.
+     * Adds the specified {@code key}/{@code value} pair to this mapping.
      *
      * @param key   the key
      * @param value the value
      *
-     * @return {@literal this}
+     * @return {@code this}
      */
     public T put(YamlNode key, short value) {
         return put(key, getNodeFactory().shortNode(value));
     }
 
     /**
-     * Adds the specified {@literal key}/{@literal value} pair to this mapping.
+     * Adds the specified {@code key}/{@code value} pair to this mapping.
      *
      * @param key   the key
      * @param value the value
      *
-     * @return {@literal this}
+     * @return {@code this}
      */
     public T put(String key, Integer value) {
         return put(getNodeFactory().textNode(key), value);
     }
 
     /**
-     * Adds the specified {@literal key}/{@literal value} pair to this mapping.
+     * Adds the specified {@code key}/{@code value} pair to this mapping.
      *
      * @param key   the key
      * @param value the value
      *
-     * @return {@literal this}
+     * @return {@code this}
      */
     public T put(YamlNode key, Integer value) {
         return put(key, getNodeFactory().intNode(value));
     }
 
     /**
-     * Adds the specified {@literal key}/{@literal value} pair to this mapping.
+     * Adds the specified {@code key}/{@code value} pair to this mapping.
      *
      * @param key   the key
      * @param value the value
      *
-     * @return {@literal this}
+     * @return {@code this}
      */
     public T put(String key, int value) {
         return put(getNodeFactory().textNode(key), value);
     }
 
     /**
-     * Adds the specified {@literal key}/{@literal value} pair to this mapping.
+     * Adds the specified {@code key}/{@code value} pair to this mapping.
      *
      * @param key   the key
      * @param value the value
      *
-     * @return {@literal this}
+     * @return {@code this}
      */
     public T put(YamlNode key, int value) {
         return put(key, getNodeFactory().intNode(value));
     }
 
     /**
-     * Adds the specified {@literal key}/{@literal value} pair to this mapping.
+     * Adds the specified {@code key}/{@code value} pair to this mapping.
      *
      * @param key   the key
      * @param value the value
      *
-     * @return {@literal this}
+     * @return {@code this}
      */
     public T put(String key, Long value) {
         return put(getNodeFactory().textNode(key), value);
     }
 
     /**
-     * Adds the specified {@literal key}/{@literal value} pair to this mapping.
+     * Adds the specified {@code key}/{@code value} pair to this mapping.
      *
      * @param key   the key
      * @param value the value
      *
-     * @return {@literal this}
+     * @return {@code this}
      */
     public T put(YamlNode key, Long value) {
         return put(key, getNodeFactory().longNode(value));
     }
 
     /**
-     * Adds the specified {@literal key}/{@literal value} pair to this mapping.
+     * Adds the specified {@code key}/{@code value} pair to this mapping.
      *
      * @param key   the key
      * @param value the value
      *
-     * @return {@literal this}
+     * @return {@code this}
      */
     public T put(String key, long value) {
         return put(getNodeFactory().textNode(key), value);
     }
 
     /**
-     * Adds the specified {@literal key}/{@literal value} pair to this mapping.
+     * Adds the specified {@code key}/{@code value} pair to this mapping.
      *
      * @param key   the key
      * @param value the value
      *
-     * @return {@literal this}
+     * @return {@code this}
      */
     public T put(YamlNode key, long value) {
         return put(key, getNodeFactory().longNode(value));
     }
 
     /**
-     * Adds the specified {@literal key}/{@literal value} pair to this mapping.
+     * Adds the specified {@code key}/{@code value} pair to this mapping.
      *
      * @param key   the key
      * @param value the value
      *
-     * @return {@literal this}
+     * @return {@code this}
      */
     public T put(String key, BigInteger value) {
         return put(getNodeFactory().textNode(key), value);
     }
 
     /**
-     * Adds the specified {@literal key}/{@literal value} pair to this mapping.
+     * Adds the specified {@code key}/{@code value} pair to this mapping.
      *
      * @param key   the key
      * @param value the value
      *
-     * @return {@literal this}
+     * @return {@code this}
      */
     public T put(YamlNode key, BigInteger value) {
         return put(key, getNodeFactory().bigIntegerNode(value));
     }
 
     /**
-     * Adds the specified {@literal key}/{@literal value} pair to this mapping.
+     * Adds the specified {@code key}/{@code value} pair to this mapping.
      *
      * @param key   the key
      * @param value the value
      *
-     * @return {@literal this}
+     * @return {@code this}
      */
     public T put(String key, Float value) {
         return put(getNodeFactory().textNode(key), value);
     }
 
     /**
-     * Adds the specified {@literal key}/{@literal value} pair to this mapping.
+     * Adds the specified {@code key}/{@code value} pair to this mapping.
      *
      * @param key   the key
      * @param value the value
      *
-     * @return {@literal this}
+     * @return {@code this}
      */
     public T put(YamlNode key, Float value) {
         return put(key, getNodeFactory().floatNode(value));
     }
 
     /**
-     * Adds the specified {@literal key}/{@literal value} pair to this mapping.
+     * Adds the specified {@code key}/{@code value} pair to this mapping.
      *
      * @param key   the key
      * @param value the value
      *
-     * @return {@literal this}
+     * @return {@code this}
      */
     public T put(String key, float value) {
         return put(getNodeFactory().textNode(key), value);
     }
 
     /**
-     * Adds the specified {@literal key}/{@literal value} pair to this mapping.
+     * Adds the specified {@code key}/{@code value} pair to this mapping.
      *
      * @param key   the key
      * @param value the value
      *
-     * @return {@literal this}
+     * @return {@code this}
      */
     public T put(YamlNode key, float value) {
         return put(key, getNodeFactory().floatNode(value));
     }
 
     /**
-     * Adds the specified {@literal key}/{@literal value} pair to this mapping.
+     * Adds the specified {@code key}/{@code value} pair to this mapping.
      *
      * @param key   the key
      * @param value the value
      *
-     * @return {@literal this}
+     * @return {@code this}
      */
     public T put(String key, Double value) {
         return put(getNodeFactory().textNode(key), value);
     }
 
     /**
-     * Adds the specified {@literal key}/{@literal value} pair to this mapping.
+     * Adds the specified {@code key}/{@code value} pair to this mapping.
      *
      * @param key   the key
      * @param value the value
      *
-     * @return {@literal this}
+     * @return {@code this}
      */
     public T put(YamlNode key, Double value) {
         return put(key, getNodeFactory().doubleNode(value));
     }
 
     /**
-     * Adds the specified {@literal key}/{@literal value} pair to this mapping.
+     * Adds the specified {@code key}/{@code value} pair to this mapping.
      *
      * @param key   the key
      * @param value the value
      *
-     * @return {@literal this}
+     * @return {@code this}
      */
     public T put(String key, double value) {
         return put(getNodeFactory().textNode(key), value);
     }
 
     /**
-     * Adds the specified {@literal key}/{@literal value} pair to this mapping.
+     * Adds the specified {@code key}/{@code value} pair to this mapping.
      *
      * @param key   the key
      * @param value the value
      *
-     * @return {@literal this}
+     * @return {@code this}
      */
     public T put(YamlNode key, double value) {
         return put(key, getNodeFactory().doubleNode(value));
     }
 
     /**
-     * Adds the specified {@literal key}/{@literal value} pair to this mapping.
+     * Adds the specified {@code key}/{@code value} pair to this mapping.
      *
      * @param key   the key
      * @param value the value
      *
-     * @return {@literal this}
+     * @return {@code this}
      */
     public T put(String key, BigDecimal value) {
         return put(getNodeFactory().textNode(key), value);
     }
 
     /**
-     * Adds the specified {@literal key}/{@literal value} pair to this mapping.
+     * Adds the specified {@code key}/{@code value} pair to this mapping.
      *
      * @param key   the key
      * @param value the value
      *
-     * @return {@literal this}
+     * @return {@code this}
      */
     public T put(YamlNode key, BigDecimal value) {
         return put(key, getNodeFactory().bigDecimalNode(value));
     }
 
     /**
-     * Adds the specified {@literal key}/{@literal value} pair to this mapping.
+     * Adds the specified {@code key}/{@code value} pair to this mapping.
      *
      * @param key   the key
      * @param value the value
      *
-     * @return {@literal this}
+     * @return {@code this}
      */
     public T put(String key, String value) {
         return put(getNodeFactory().textNode(key), value);
     }
 
     /**
-     * Adds the specified {@literal key}/{@literal value} pair to this mapping.
+     * Adds the specified {@code key}/{@code value} pair to this mapping.
      *
      * @param key   the key
      * @param value the value
      *
-     * @return {@literal this}
+     * @return {@code this}
      */
     public T put(YamlNode key, String value) {
         return put(key, getNodeFactory().textNode(value));
     }
 
     /**
-     * Adds the specified {@literal key}/{@literal value} pair to this mapping.
+     * Adds the specified {@code key}/{@code value} pair to this mapping.
      *
      * @param key   the key
      * @param value the value
      *
-     * @return {@literal this}
+     * @return {@code this}
      */
     public T put(String key, DateTime value) {
         return put(getNodeFactory().textNode(key), value);
     }
 
     /**
-     * Adds the specified {@literal key}/{@literal value} pair to this mapping.
+     * Adds the specified {@code key}/{@code value} pair to this mapping.
      *
      * @param key   the key
      * @param value the value
      *
-     * @return {@literal this}
+     * @return {@code this}
      */
     public T put(YamlNode key, DateTime value) {
         return put(key, getNodeFactory().dateTimeNode(value));
     }
 
     /**
-     * Adds the specified {@literal key}/{@literal value} pair to this mapping.
+     * Adds the specified {@code key}/{@code value} pair to this mapping.
      *
      * @param key   the key
      * @param value the value
      *
-     * @return {@literal this}
+     * @return {@code this}
      */
     public T put(String key, Date value) {
         return put(getNodeFactory().textNode(key), value);
     }
 
     /**
-     * Adds the specified {@literal key}/{@literal value} pair to this mapping.
+     * Adds the specified {@code key}/{@code value} pair to this mapping.
      *
      * @param key   the key
      * @param value the value
      *
-     * @return {@literal this}
+     * @return {@code this}
      */
     public T put(YamlNode key, Date value) {
         return put(key, getNodeFactory().dateTimeNode(value));
@@ -822,12 +822,12 @@ public abstract class AbstractYamlMappingNode<T extends AbstractYamlMappingNode<
     }
 
     /**
-     * Add the {@literal key}/{@literal value} pair to this mapping.
+     * Add the {@code key}/{@code value} pair to this mapping.
      *
      * @param key   the key
      * @param value the value
      *
-     * @return {@literal this}
+     * @return {@code this}
      */
     public abstract T put(YamlNode key, YamlNode value);
 

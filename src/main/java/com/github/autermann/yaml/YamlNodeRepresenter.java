@@ -128,7 +128,7 @@ public class YamlNodeRepresenter extends Representer {
     }
 
     /**
-     * Delegate the representation of {@literal value}.
+     * Delegate the representation of {@code value}.
      *
      * @param value the value to represent
      *
@@ -139,7 +139,7 @@ public class YamlNodeRepresenter extends Representer {
     }
 
     /**
-     * Delegate the representation of {@literal value} and apply the specified
+     * Delegate the representation of {@code value} and apply the specified
      * {@link Tag}
      *
      * @param tag   the tag

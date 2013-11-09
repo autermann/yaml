@@ -64,7 +64,7 @@ public class DefaultYamlNodeFactory extends YamlNodeFactory {
     private final DecimalPrecision decimalPrecision;
 
     /**
-     * Creates a new {@literal DefaultYamlNodeFactory} with the specified
+     * Creates a new {@code DefaultYamlNodeFactory} with the specified
      * precision.
      *
      * @param precision the precision
@@ -189,7 +189,7 @@ public class DefaultYamlNodeFactory extends YamlNodeFactory {
      *
      * @param decimalPrecision the {@link DecimalPrecision}
      *
-     * @return a new {@literal DefaultYamlNodeFactory}
+     * @return a new {@code DefaultYamlNodeFactory}
      *
      */
     public YamlNodeFactory withDecimalPrecision(

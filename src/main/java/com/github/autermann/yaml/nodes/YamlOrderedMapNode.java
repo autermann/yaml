@@ -26,7 +26,7 @@ import com.github.autermann.yaml.YamlNodeVisitor;
 import com.google.common.collect.Maps;
 
 /**
- * A {@link YamlNode} for {@literal !!omap} mappings.
+ * A {@link YamlNode} for {@code !!omap} mappings.
  *
  * @author Christian Autermann
  */

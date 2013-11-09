@@ -73,7 +73,7 @@ public abstract class AbstractYamlSequenceNode<T extends AbstractYamlSequenceNod
      *
      * @param value the value
      *
-     * @return {@literal this}
+     * @return {@code this}
      */
     @SuppressWarnings("unchecked")
     public T add(YamlNode value) {
@@ -90,7 +90,7 @@ public abstract class AbstractYamlSequenceNode<T extends AbstractYamlSequenceNod
      *
      * @param values the values
      *
-     * @return {@literal this}
+     * @return {@code this}
      */
     @SuppressWarnings("unchecked")
     public T addAll(YamlNode... values) {
@@ -105,7 +105,7 @@ public abstract class AbstractYamlSequenceNode<T extends AbstractYamlSequenceNod
      *
      * @param values the values
      *
-     * @return {@literal this}
+     * @return {@code this}
      */
     @SuppressWarnings("unchecked")
     public T addAll(Iterable<? extends YamlNode> values) {
@@ -176,7 +176,7 @@ public abstract class AbstractYamlSequenceNode<T extends AbstractYamlSequenceNod
     /**
      * Adds a {@link YamlNullNode} to this sequence.
      *
-     * @return {@literal this}
+     * @return {@code this}
      */
     public T addNull() {
         return add(getNodeFactory().nullNode());
@@ -187,7 +187,7 @@ public abstract class AbstractYamlSequenceNode<T extends AbstractYamlSequenceNod
      *
      * @param value the value
      *
-     * @return {@literal this}
+     * @return {@code this}
      */
     public T add(Boolean value) {
         return add(getNodeFactory().booleanNode(value));
@@ -198,7 +198,7 @@ public abstract class AbstractYamlSequenceNode<T extends AbstractYamlSequenceNod
      *
      * @param value the value
      *
-     * @return {@literal this}
+     * @return {@code this}
      */
     public T add(boolean value) {
         return add(getNodeFactory().booleanNode(value));
@@ -209,7 +209,7 @@ public abstract class AbstractYamlSequenceNode<T extends AbstractYamlSequenceNod
      *
      * @param value the value
      *
-     * @return {@literal this}
+     * @return {@code this}
      */
     public T add(Byte[] value) {
         return add(getNodeFactory().binaryNode(value));
@@ -220,7 +220,7 @@ public abstract class AbstractYamlSequenceNode<T extends AbstractYamlSequenceNod
      *
      * @param value the value
      *
-     * @return {@literal this}
+     * @return {@code this}
      */
     public T add(byte[] value) {
         return add(getNodeFactory().binaryNode(value));
@@ -231,7 +231,7 @@ public abstract class AbstractYamlSequenceNode<T extends AbstractYamlSequenceNod
      *
      * @param value the value
      *
-     * @return {@literal this}
+     * @return {@code this}
      */
     public T add(Byte value) {
         return add(getNodeFactory().byteNode(value));
@@ -242,7 +242,7 @@ public abstract class AbstractYamlSequenceNode<T extends AbstractYamlSequenceNod
      *
      * @param value the value
      *
-     * @return {@literal this}
+     * @return {@code this}
      */
     public T add(byte value) {
         return add(getNodeFactory().byteNode(value));
@@ -253,7 +253,7 @@ public abstract class AbstractYamlSequenceNode<T extends AbstractYamlSequenceNod
      *
      * @param value the value
      *
-     * @return {@literal this}
+     * @return {@code this}
      */
     public T add(Short value) {
         return add(getNodeFactory().shortNode(value));
@@ -264,7 +264,7 @@ public abstract class AbstractYamlSequenceNode<T extends AbstractYamlSequenceNod
      *
      * @param value the value
      *
-     * @return {@literal this}
+     * @return {@code this}
      */
     public T add(short value) {
         return add(getNodeFactory().shortNode(value));
@@ -275,7 +275,7 @@ public abstract class AbstractYamlSequenceNode<T extends AbstractYamlSequenceNod
      *
      * @param value the value
      *
-     * @return {@literal this}
+     * @return {@code this}
      */
     public T add(Integer value) {
         return add(getNodeFactory().intNode(value));
@@ -286,7 +286,7 @@ public abstract class AbstractYamlSequenceNode<T extends AbstractYamlSequenceNod
      *
      * @param value the value
      *
-     * @return {@literal this}
+     * @return {@code this}
      */
     public T add(int value) {
         return add(getNodeFactory().intNode(value));
@@ -297,7 +297,7 @@ public abstract class AbstractYamlSequenceNode<T extends AbstractYamlSequenceNod
      *
      * @param value the value
      *
-     * @return {@literal this}
+     * @return {@code this}
      */
     public T add(Long value) {
         return add(getNodeFactory().longNode(value));
@@ -308,7 +308,7 @@ public abstract class AbstractYamlSequenceNode<T extends AbstractYamlSequenceNod
      *
      * @param value the value
      *
-     * @return {@literal this}
+     * @return {@code this}
      */
     public T add(long value) {
         return add(getNodeFactory().longNode(value));
@@ -319,7 +319,7 @@ public abstract class AbstractYamlSequenceNode<T extends AbstractYamlSequenceNod
      *
      * @param value the value
      *
-     * @return {@literal this}
+     * @return {@code this}
      */
     public T add(BigInteger value) {
         return add(getNodeFactory().bigIntegerNode(value));
@@ -330,7 +330,7 @@ public abstract class AbstractYamlSequenceNode<T extends AbstractYamlSequenceNod
      *
      * @param value the value
      *
-     * @return {@literal this}
+     * @return {@code this}
      */
     public T add(Float value) {
         return add(getNodeFactory().floatNode(value));
@@ -341,7 +341,7 @@ public abstract class AbstractYamlSequenceNode<T extends AbstractYamlSequenceNod
      *
      * @param value the value
      *
-     * @return {@literal this}
+     * @return {@code this}
      */
     public T add(float value) {
         return add(getNodeFactory().floatNode(value));
@@ -352,7 +352,7 @@ public abstract class AbstractYamlSequenceNode<T extends AbstractYamlSequenceNod
      *
      * @param value the value
      *
-     * @return {@literal this}
+     * @return {@code this}
      */
     public T add(Double value) {
         return add(getNodeFactory().doubleNode(value));
@@ -363,7 +363,7 @@ public abstract class AbstractYamlSequenceNode<T extends AbstractYamlSequenceNod
      *
      * @param value the value
      *
-     * @return {@literal this}
+     * @return {@code this}
      */
     public T add(double value) {
         return add(getNodeFactory().doubleNode(value));
@@ -374,7 +374,7 @@ public abstract class AbstractYamlSequenceNode<T extends AbstractYamlSequenceNod
      *
      * @param value the value
      *
-     * @return {@literal this}
+     * @return {@code this}
      */
     public T add(BigDecimal value) {
         return add(getNodeFactory().bigDecimalNode(value));
@@ -385,7 +385,7 @@ public abstract class AbstractYamlSequenceNode<T extends AbstractYamlSequenceNod
      *
      * @param value the value
      *
-     * @return {@literal this}
+     * @return {@code this}
      */
     public T add(String value) {
         return add(getNodeFactory().textNode(value));
@@ -396,7 +396,7 @@ public abstract class AbstractYamlSequenceNode<T extends AbstractYamlSequenceNod
      *
      * @param value the value
      *
-     * @return {@literal this}
+     * @return {@code this}
      */
     public T add(Date value) {
         return add(getNodeFactory().dateTimeNode(value));
@@ -407,7 +407,7 @@ public abstract class AbstractYamlSequenceNode<T extends AbstractYamlSequenceNod
      *
      * @param value the value
      *
-     * @return {@literal this}
+     * @return {@code this}
      */
     public T add(DateTime value) {
         return add(getNodeFactory().dateTimeNode(value));

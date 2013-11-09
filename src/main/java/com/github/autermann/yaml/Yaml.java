@@ -86,7 +86,7 @@ public class Yaml {
     }
 
     /**
-     * Dumps {@literal data} into a {@literal String}.
+     * Dumps {@code data} into a {@code String}.
      *
      * @param data the data
      *
@@ -99,7 +99,7 @@ public class Yaml {
     }
 
     /**
-     * Dumps {@literal data} into a {@literal Writer}.
+     * Dumps {@code data} into a {@code Writer}.
      *
      * @param data   the data
      * @param output the writer
@@ -111,7 +111,7 @@ public class Yaml {
     }
 
     /**
-     * Dumps {@literal data} into a {@literal OutputStream} using a {@literal UTF-8}
+     * Dumps {@code data} into a {@code OutputStream} using a {@code UTF-8}
      * encoding.
      *
      * @param data   the data
@@ -123,7 +123,7 @@ public class Yaml {
     }
 
     /**
-     * Dumps {@literal data} into a {@literal String}.
+     * Dumps {@code data} into a {@code String}.
      *
      * @param data the data
      *
@@ -136,7 +136,7 @@ public class Yaml {
     }
 
     /**
-     * Dumps {@literal data} into a {@literal Writer}.
+     * Dumps {@code data} into a {@code Writer}.
      *
      * @param data   the data
      * @param output the writer
@@ -148,7 +148,7 @@ public class Yaml {
     }
 
     /**
-     * Dumps {@literal data} into a {@literal OutputStream} using a {@literal UTF-8}
+     * Dumps {@code data} into a {@code OutputStream} using a {@code UTF-8}
      * encoding.
      *
      * @param data   the data
@@ -161,7 +161,7 @@ public class Yaml {
     }
 
     /**
-     * Dumps {@literal data} into a {@literal String}.
+     * Dumps {@code data} into a {@code String}.
      *
      * @param data the data
      *
@@ -174,7 +174,7 @@ public class Yaml {
     }
 
     /**
-     * Dumps {@literal data} into a {@literal Writer}.
+     * Dumps {@code data} into a {@code Writer}.
      *
      * @param data   the data
      * @param output the writer
@@ -186,7 +186,7 @@ public class Yaml {
     }
 
     /**
-     * Dumps {@literal data} into a {@literal OutputStream} using a {@literal UTF-8}
+     * Dumps {@code data} into a {@code OutputStream} using a {@code UTF-8}
      * encoding.
      *
      * @param data   the data
@@ -276,9 +276,9 @@ public class Yaml {
     }
 
     /**
-     * Transforms a {@literal Iterable<Object>} into a {@literal Iterable<YamlNode>}.
+     * Transforms a {@code Iterable<Object>} into a {@code Iterable<YamlNode>}.
      *
-     * @param nodes the {@link YamlNode}s as {@literal Object}s
+     * @param nodes the {@link YamlNode}s as {@code Object}s
      *
      * @return the {@link YamlNode}s
      */

@@ -26,7 +26,7 @@ import com.github.autermann.yaml.YamlNodeVisitor;
 import com.google.common.collect.Lists;
 
 /**
- * A {@link YamlNode} representing a {@literal !!seq} sequence.
+ * A {@link YamlNode} representing a {@code !!seq} sequence.
  *
  * @author Christian Autermann
  */

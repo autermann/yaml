@@ -39,7 +39,7 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Multimaps;
 
 /**
- * A {@link YamlNode} for {@literal !!pairs} mappings.
+ * A {@link YamlNode} for {@code !!pairs} mappings.
  *
  * @author Christian Autermann
  */
