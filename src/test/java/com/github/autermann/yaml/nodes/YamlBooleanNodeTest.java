@@ -15,76 +15,60 @@
  */
 package com.github.autermann.yaml.nodes;
 
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.bigDecimalNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.bigIntegerNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.binaryNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.booleanNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.byteNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.containerNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.decimalNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.doubleNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.existingNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.floatNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.intNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.integralNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.longNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.mapNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.nullNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.numberNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.orderedMapNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.pairsNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.scalarNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.sequenceNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.setNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.shortNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.textNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.timeNode;
 import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.not;
-import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.Assert.assertThat;
 
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ErrorCollector;
+import org.yaml.snakeyaml.nodes.Tag;
 
 import com.github.autermann.yaml.YamlNode;
-import com.github.autermann.yaml.YamlNodeFactory;
 
-public class YamlBooleanNodeTest {
+/**
+ * Tests for {@link YamlBooleanNode}s.
+ *
+ * @author Christian Autermann
+ */
+public abstract class YamlBooleanNodeTest extends AbstractYamlNodeTest {
 
-    public final YamlNodeFactory factory = YamlNodeFactory.createDefault();
+    @Override
+    public void testHashCode() {
+        YamlNode node = instance();
+        assertThat(instance().hashCode(),
+                   is(Boolean.valueOf(node.booleanValue()).hashCode()));
+    }
 
-    @Rule
-    public final ErrorCollector errors = new ErrorCollector();
+    @Override
+    public void testTag() {
+        assertThat(instance().tag(), is(Tag.BOOL));
+    }
 
-    @Test
-    public void testType() {
-        YamlNode node = factory.booleanNode(true);
-        assertThat(node, is(notNullValue()));
-        errors.checkThat(node, is(not(binaryNode())));
-        errors.checkThat(node, is((booleanNode())));
-        errors.checkThat(node, is(not(containerNode())));
-        errors.checkThat(node, is(not(decimalNode())));
-        errors.checkThat(node, is((existingNode())));
-        errors.checkThat(node, is(not(integralNode())));
-        errors.checkThat(node, is(not(mapNode())));
-        errors.checkThat(node, is(not(nullNode())));
-        errors.checkThat(node, is(not(numberNode())));
-        errors.checkThat(node, is(not(orderedMapNode())));
-        errors.checkThat(node, is(not(pairsNode())));
-        errors.checkThat(node, is((scalarNode())));
-        errors.checkThat(node, is(not(sequenceNode())));
-        errors.checkThat(node, is(not(setNode())));
-        errors.checkThat(node, is(not(textNode())));
-        errors.checkThat(node, is(not(timeNode())));
-        errors.checkThat(node, is(not(bigIntegerNode())));
-        errors.checkThat(node, is(not(longNode())));
-        errors.checkThat(node, is(not(intNode())));
-        errors.checkThat(node, is(not(shortNode())));
-        errors.checkThat(node, is(not(byteNode())));
-        errors.checkThat(node, is(not(bigDecimalNode())));
-        errors.checkThat(node, is(not(doubleNode())));
-        errors.checkThat(node, is(not(floatNode())));
+    @Override
+    protected FailingReturningYamlNodeVisitor returningVisitor() {
+        return new FailingReturningYamlNodeVisitor() {
+            @Override
+            public Void visit(YamlBooleanNode node) {
+                return hasVisited(true);
+            }
+
+        };
+    }
+
+    @Override
+    protected FailingYamlNodeVisitor visitor() {
+        return new FailingYamlNodeVisitor() {
+            @Override
+            public void visit(YamlBooleanNode node) {
+                hasVisited(true);
+            }
+        };
+    }
+
+    @Override
+    public void testIsBoolean() {
+        assertThat(instance().isBoolean(), is(true));
+    }
+
+    @Override
+    public void testIsScalar() {
+        assertThat(instance().isScalar(), is(true));
     }
 }
