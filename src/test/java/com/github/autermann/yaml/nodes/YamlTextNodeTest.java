@@ -17,10 +17,14 @@ package com.github.autermann.yaml.nodes;
 
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
-import static org.junit.Assert.assertThat;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.UUID;
 
+import org.joda.time.DateTime;
+import org.joda.time.format.ISODateTimeFormat;
+import org.junit.Test;
 import org.yaml.snakeyaml.nodes.Tag;
 
 import com.github.autermann.yaml.YamlNode;
@@ -31,6 +35,14 @@ import com.github.autermann.yaml.YamlNode;
  * @author Christian Autermann
  */
 public class YamlTextNodeTest extends AbstractYamlScalarNodeTest {
+
+    /**
+     * Tests for {@literal null} in constructor.
+     */
+    public void testConstructorNull() {
+        thrown.expect(NullPointerException.class);
+        new YamlTextNode(null);
+    }
 
     @Override
     public void testToString() {
@@ -46,6 +58,9 @@ public class YamlTextNodeTest extends AbstractYamlScalarNodeTest {
         errors.checkThat(new YamlTextNode(s1), is(new YamlTextNode(s1)));
         errors.checkThat(new YamlTextNode(s2), is(new YamlTextNode(s2)));
         errors.checkThat(new YamlTextNode(s1), is(not(new YamlTextNode(s2))));
+        errors.checkThat(new YamlTextNode(s1).equals(null), is(false));
+        errors.checkThat(new YamlTextNode(s1),
+                         is(not((YamlNode) factory.arrayNode())));
     }
 
     @Override
@@ -62,7 +77,7 @@ public class YamlTextNodeTest extends AbstractYamlScalarNodeTest {
 
     @Override
     public void testTag() {
-        assertThat(instance().tag(), is(Tag.STR));
+        errors.checkThat(instance().tag(), is(Tag.STR));
     }
 
     @Override
@@ -97,7 +112,7 @@ public class YamlTextNodeTest extends AbstractYamlScalarNodeTest {
     @Override
     public void testAsTextValue_0args() {
         YamlTextNode node = instance();
-        assertThat(node.asTextValue(), is(node.textValue()));
+        errors.checkThat(node.asTextValue(), is(node.textValue()));
     }
 
     @Override
@@ -112,7 +127,7 @@ public class YamlTextNodeTest extends AbstractYamlScalarNodeTest {
     public void testTextValue() {
         String value = UUID.randomUUID().toString();
         YamlNode node = new YamlTextNode(value);
-        assertThat(node.textValue(), is(value));
+        errors.checkThat(node.textValue(), is(value));
     }
 
     @Override
@@ -134,12 +149,12 @@ public class YamlTextNodeTest extends AbstractYamlScalarNodeTest {
 
     @Override
     public void testIsScalar() {
-        assertThat(instance().isScalar(), is(true));
+        errors.checkThat(instance().isScalar(), is(true));
     }
 
     @Override
     public void testIsText() {
-        assertThat(instance().isText(), is(true));
+        errors.checkThat(instance().isText(), is(true));
     }
 
     @Override
@@ -166,6 +181,108 @@ public class YamlTextNodeTest extends AbstractYamlScalarNodeTest {
     @Override
     public void testValue() {
         YamlTextNode v = instance();
-        assertThat(v.value(), is(v.textValue()));
+        errors.checkThat(v.value(), is(v.textValue()));
     }
+
+    /**
+     * Further tests for {@link YamlTextNode#asByteValue() }.
+     */
+    @Test
+    public void testAsByteValue() {
+        errors.checkThat(new YamlTextNode(Byte.toString(Byte.MIN_VALUE))
+                .asByteValue(), is(Byte.MIN_VALUE));
+    }
+
+    /**
+     * Further tests for {@link YamlTextNode#asShortValue() }.
+     */
+    @Test
+    public void testAsShortValue() {
+        errors.checkThat(new YamlTextNode(Short.toString(Short.MIN_VALUE))
+                .asShortValue(), is(Short.MIN_VALUE));
+    }
+
+    /**
+     * Further tests for {@link YamlTextNode#asIntValue() }.
+     */
+    @Test
+    public void testAsIntValue() {
+        errors.checkThat(new YamlTextNode(Integer.toString(Integer.MIN_VALUE))
+                .asIntValue(), is(Integer.MIN_VALUE));
+    }
+
+    /**
+     * Further tests for {@link YamlTextNode#asLongValue() }.
+     */
+    @Test
+    public void testAsLongValue() {
+        errors.checkThat(new YamlTextNode(Long.toString(Long.MIN_VALUE))
+                .asLongValue(), is(Long.MIN_VALUE));
+    }
+
+    /**
+     * Further tests for {@link YamlTextNode#asFloatValue() }.
+     */
+    @Test
+    public void testAsFloatValue() {
+        errors.checkThat(new YamlTextNode(Float.toString(Float.MIN_VALUE))
+                .asFloatValue(), is(Float.MIN_VALUE));
+    }
+
+    /**
+     * Further tests for {@link YamlTextNode#asDoubleValue() }.
+     */
+    @Test
+    public void testAsDoubleValue() {
+        errors.checkThat(new YamlTextNode(Double.toString(Double.MIN_VALUE))
+                .asDoubleValue(), is(Double.MIN_VALUE));
+    }
+
+    /**
+     * Further tests for {@link YamlTextNode#asBigIntegerValue() }.
+     */
+    @Test
+    public void testAsBigIntegerValue() {
+        errors.checkThat(new YamlTextNode(BigInteger.TEN.toString())
+                .asBigIntegerValue(), is(BigInteger.TEN));
+    }
+
+    /**
+     * Further tests for {@link YamlTextNode#asBigDecimalValue() }.
+     */
+    @Test
+    public void testAsBigDecimalValue() {
+        errors.checkThat(new YamlTextNode(BigDecimal.TEN.toString())
+                .asBigDecimalValue(), is(BigDecimal.TEN));
+    }
+
+    /**
+     * Further tests for {@link YamlTextNode#asDateValue() }.
+     */
+    @Test
+    public void testAsDateValue() {
+        DateTime d = DateTime.now();
+        errors.checkThat(new YamlTextNode(ISODateTimeFormat.dateTime().print(d))
+                .asDateValue(), is(d.toDate()));
+    }
+
+    /**
+     * Further tests for {@link YamlTextNode#asDateTimeValue() }.
+     */
+    @Test
+    public void testAsDateTimeValue() {
+        DateTime d = DateTime.now();
+        errors.checkThat(new YamlTextNode(ISODateTimeFormat.dateTime().print(d))
+                .asDateTimeValue(), is(d));
+    }
+
+    /**
+     * Further tests for {@link YamlTextNode#asBooleanValue() }.
+     */
+    @Test
+    public void testAsBooleanValue() {
+        errors.checkThat(new YamlTextNode("true").asBooleanValue(), is(true));
+        errors.checkThat(new YamlTextNode("false").asBooleanValue(), is(false));
+    }
+
 }
