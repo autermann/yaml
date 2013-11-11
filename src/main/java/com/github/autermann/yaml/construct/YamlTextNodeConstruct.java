@@ -16,13 +16,13 @@
 package com.github.autermann.yaml.construct;
 
 import com.github.autermann.yaml.YamlNodeFactory;
-import com.github.autermann.yaml.nodes.AbstractYamlScalarNode;
+import com.github.autermann.yaml.nodes.YamlScalarNode;
 
 /**
  * Constructs a {@link com.github.autermann.yaml.nodes.YamlTextNode} from a
  * scalar node.
  */
-public class YamlTextNodeConstruct extends AbstractYamlScalarNodeConstruct {
+public class YamlTextNodeConstruct extends YamlScalarNodeConstruct {
 
     /**
      * Creates a new {@link YamlTextNodeConstruct}.
@@ -36,7 +36,7 @@ public class YamlTextNodeConstruct extends AbstractYamlScalarNodeConstruct {
     }
 
     @Override
-    public AbstractYamlScalarNode construct(String value) {
+    public YamlScalarNode construct(String value) {
         return getNodeFactory().textNode(value);
     }
 

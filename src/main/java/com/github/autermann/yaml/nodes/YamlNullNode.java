@@ -25,7 +25,7 @@ import com.github.autermann.yaml.YamlNodeVisitor;
  *
  * @author Christian Autermann
  */
-public final class YamlNullNode extends AbstractYamlScalarNode {
+public final class YamlNullNode extends YamlScalarNode {
     /**
      * The singleton instance.
      */

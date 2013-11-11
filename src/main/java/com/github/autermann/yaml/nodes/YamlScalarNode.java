@@ -22,7 +22,7 @@ import com.github.autermann.yaml.YamlNode;
  *
  * @author Christian Autermann
  */
-public abstract class AbstractYamlScalarNode extends AbstractYamlNode {
+public abstract class YamlScalarNode extends YamlBaseNode {
 
     @Override
     public boolean isScalar() {

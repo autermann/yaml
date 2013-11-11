@@ -42,7 +42,7 @@ public abstract class FailingYamlNodeVisitor implements YamlNodeVisitor {
     }
 
     @Override
-    public void visit(YamlSequenceNode node) {
+    public void visit(YamlSeqNode node) {
         throw new AssertionError("Wrong node visited");
     }
 

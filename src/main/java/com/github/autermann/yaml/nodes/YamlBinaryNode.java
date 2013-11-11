@@ -30,7 +30,7 @@ import com.google.common.io.BaseEncoding;
  *
  * @author Christian Autermann
  */
-public class YamlBinaryNode extends AbstractYamlScalarNode {
+public class YamlBinaryNode extends YamlScalarNode {
     /**
      * The binary value.
      */

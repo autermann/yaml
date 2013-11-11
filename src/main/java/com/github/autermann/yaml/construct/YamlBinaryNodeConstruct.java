@@ -16,7 +16,7 @@
 package com.github.autermann.yaml.construct;
 
 import com.github.autermann.yaml.YamlNodeFactory;
-import com.github.autermann.yaml.nodes.AbstractYamlScalarNode;
+import com.github.autermann.yaml.nodes.YamlScalarNode;
 import com.google.common.base.Preconditions;
 import com.google.common.io.BaseEncoding;
 
@@ -24,7 +24,7 @@ import com.google.common.io.BaseEncoding;
  * Constructs a {@link com.github.autermann.yaml.nodes.YamlBinaryNode} from a
  * scalar node.
  */
-public class YamlBinaryNodeConstruct extends AbstractYamlScalarNodeConstruct {
+public class YamlBinaryNodeConstruct extends YamlScalarNodeConstruct {
 
     /**
      * The encoding for {@link com.github.autermann.yaml.nodes.YamlBinaryNode}s.
@@ -46,7 +46,7 @@ public class YamlBinaryNodeConstruct extends AbstractYamlScalarNodeConstruct {
     }
 
     @Override
-    protected AbstractYamlScalarNode construct(String value) {
+    protected YamlScalarNode construct(String value) {
         return getNodeFactory().binaryNode(binaryEncoding.decode(value));
     }
 

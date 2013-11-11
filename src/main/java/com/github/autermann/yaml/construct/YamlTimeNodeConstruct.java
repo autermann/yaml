@@ -18,14 +18,14 @@ package com.github.autermann.yaml.construct;
 import org.joda.time.format.DateTimeFormatter;
 
 import com.github.autermann.yaml.YamlNodeFactory;
-import com.github.autermann.yaml.nodes.AbstractYamlScalarNode;
+import com.github.autermann.yaml.nodes.YamlScalarNode;
 import com.google.common.base.Preconditions;
 
 /**
  * Constructs a {@link com.github.autermann.yaml.nodes.YamlTimeNode} from a
  * scalar node.
  */
-public class YamlTimeNodeConstruct extends AbstractYamlScalarNodeConstruct {
+public class YamlTimeNodeConstruct extends YamlScalarNodeConstruct {
 
     /**
      * The encoding for {@link com.github.autermann.yaml.nodes.YamlTimeNode}s.
@@ -47,7 +47,7 @@ public class YamlTimeNodeConstruct extends AbstractYamlScalarNodeConstruct {
     }
 
     @Override
-    protected AbstractYamlScalarNode construct(String value) {
+    protected YamlScalarNode construct(String value) {
         return getNodeFactory().dateTimeNode(timeEncoding.parseDateTime(value));
     }
 

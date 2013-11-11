@@ -16,13 +16,13 @@
 package com.github.autermann.yaml.construct;
 
 import com.github.autermann.yaml.YamlNodeFactory;
-import com.github.autermann.yaml.nodes.AbstractYamlScalarNode;
+import com.github.autermann.yaml.nodes.YamlScalarNode;
 
 /**
  * Constructs a {@link com.github.autermann.yaml.nodes.YamlBooleanNode} from a
  * scalar node.
  */
-public class YamlBooleanNodeConstruct extends AbstractYamlScalarNodeConstruct {
+public class YamlBooleanNodeConstruct extends YamlScalarNodeConstruct {
 
     /**
      * Creates a new {@link YamlBooleanNodeConstruct}.
@@ -36,7 +36,7 @@ public class YamlBooleanNodeConstruct extends AbstractYamlScalarNodeConstruct {
     }
 
     @Override
-    public AbstractYamlScalarNode construct(String value) {
+    public YamlScalarNode construct(String value) {
         return getNodeFactory().booleanNode(Boolean.valueOf(value));
     }
 

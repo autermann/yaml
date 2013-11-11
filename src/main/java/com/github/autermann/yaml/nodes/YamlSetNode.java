@@ -31,7 +31,7 @@ import com.google.common.collect.Sets;
  *
  * @author Christian Autermann
  */
-public class YamlSetNode extends AbstractYamlSequenceNode<YamlSetNode> {
+public class YamlSetNode extends YamlSequenceNode<YamlSetNode> {
     /**
      * The children of this node.
      */

@@ -15,17 +15,17 @@
  */
 package com.github.autermann.yaml;
 
-import com.github.autermann.yaml.nodes.AbstractYamlMappingNode;
-import com.github.autermann.yaml.nodes.AbstractYamlScalarNode;
-import com.github.autermann.yaml.nodes.AbstractYamlSequenceNode;
 import com.github.autermann.yaml.nodes.YamlBinaryNode;
 import com.github.autermann.yaml.nodes.YamlBooleanNode;
 import com.github.autermann.yaml.nodes.YamlDecimalNode;
 import com.github.autermann.yaml.nodes.YamlIntegralNode;
 import com.github.autermann.yaml.nodes.YamlMapNode;
+import com.github.autermann.yaml.nodes.YamlMappingNode;
 import com.github.autermann.yaml.nodes.YamlNullNode;
 import com.github.autermann.yaml.nodes.YamlOrderedMapNode;
 import com.github.autermann.yaml.nodes.YamlPairsNode;
+import com.github.autermann.yaml.nodes.YamlScalarNode;
+import com.github.autermann.yaml.nodes.YamlSeqNode;
 import com.github.autermann.yaml.nodes.YamlSequenceNode;
 import com.github.autermann.yaml.nodes.YamlSetNode;
 import com.github.autermann.yaml.nodes.YamlTextNode;
@@ -35,9 +35,9 @@ import com.github.autermann.yaml.nodes.YamlTimeNode;
  * Abstract {@link YamlNodeVisitor} implementation to allow smaller
  * implementations. Per default implementations will delegate to one of
  * <ul>
- * <li>{@link #visitMapping(AbstractYamlMappingNode)}</li>
- * <li>{@link #visitScalar(AbstractYamlScalarNode)}</li>
- * <li>{@link #visitSequence(AbstractYamlSequenceNode)}</li>
+ * <li>{@link #visitMapping(YamlMappingNode)}</li>
+ * <li>{@link #visitScalar(YamlScalarNode)}</li>
+ * <li>{@link #visitSequence(YamlSequenceNode)}</li>
  * </ul>
  */
 public abstract class AbstractYamlNodeVisitor implements YamlNodeVisitor {
@@ -58,7 +58,7 @@ public abstract class AbstractYamlNodeVisitor implements YamlNodeVisitor {
     }
 
     @Override
-    public void visit(YamlSequenceNode node) {
+    public void visit(YamlSeqNode node) {
         visitSequence(node);
     }
 
@@ -107,7 +107,7 @@ public abstract class AbstractYamlNodeVisitor implements YamlNodeVisitor {
      *
      * @param node the node to visit
      */
-    protected void visitMapping(AbstractYamlMappingNode<?> node) {
+    protected void visitMapping(YamlMappingNode<?> node) {
         // no-op
     }
 
@@ -116,7 +116,7 @@ public abstract class AbstractYamlNodeVisitor implements YamlNodeVisitor {
      *
      * @param node the node to visit
      */
-    protected void visitSequence(AbstractYamlSequenceNode<?> node) {
+    protected void visitSequence(YamlSequenceNode<?> node) {
         // no-op
     }
 
@@ -125,7 +125,7 @@ public abstract class AbstractYamlNodeVisitor implements YamlNodeVisitor {
      *
      * @param node the node to visit
      */
-    protected void visitScalar(AbstractYamlScalarNode node) {
+    protected void visitScalar(YamlScalarNode node) {
         // no-op
     }
 

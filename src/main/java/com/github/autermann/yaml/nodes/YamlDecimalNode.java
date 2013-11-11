@@ -31,7 +31,7 @@ import com.github.autermann.yaml.YamlNodeVisitor;
  *
  * @author Christian Autermann
  */
-public abstract class YamlDecimalNode extends AbstractYamlNumberNode {
+public abstract class YamlDecimalNode extends YamlNumberNode {
 
     @Override
     public Tag tag() {

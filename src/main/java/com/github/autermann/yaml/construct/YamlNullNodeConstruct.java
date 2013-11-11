@@ -16,13 +16,13 @@
 package com.github.autermann.yaml.construct;
 
 import com.github.autermann.yaml.YamlNodeFactory;
-import com.github.autermann.yaml.nodes.AbstractYamlScalarNode;
+import com.github.autermann.yaml.nodes.YamlScalarNode;
 
 /**
  * Constructs a {@link com.github.autermann.yaml.nodes.YamlNullNode} from a
  * scalar node.
  */
-public class YamlNullNodeConstruct extends AbstractYamlScalarNodeConstruct {
+public class YamlNullNodeConstruct extends YamlScalarNodeConstruct {
 
     /**
      * Creates a new {@link YamlNullNodeConstruct}.
@@ -36,7 +36,7 @@ public class YamlNullNodeConstruct extends AbstractYamlScalarNodeConstruct {
     }
 
     @Override
-    public AbstractYamlScalarNode construct(String value) {
+    public YamlScalarNode construct(String value) {
         return getNodeFactory().nullNode();
     }
 

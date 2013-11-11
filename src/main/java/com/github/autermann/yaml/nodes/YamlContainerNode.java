@@ -27,7 +27,7 @@ import com.github.autermann.yaml.YamlNodeFactory;
  *
  * @author Christian Autermann
  */
-public abstract class AbstractYamlContainerNode extends AbstractYamlNode {
+public abstract class YamlContainerNode extends YamlBaseNode {
 
     /**
      * The {@link YamlNodeFactory} to create children with.
@@ -35,11 +35,11 @@ public abstract class AbstractYamlContainerNode extends AbstractYamlNode {
     private final YamlNodeFactory factory;
 
     /**
-     * Creates a new {@link AbstractYamlContainerNode}.
+     * Creates a new {@link YamlContainerNode}.
      *
      * @param factory the factory to create children with
      */
-    public AbstractYamlContainerNode(YamlNodeFactory factory) {
+    public YamlContainerNode(YamlNodeFactory factory) {
         this.factory = checkNotNull(factory);
     }
 

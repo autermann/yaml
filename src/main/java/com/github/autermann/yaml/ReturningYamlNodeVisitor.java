@@ -23,7 +23,7 @@ import com.github.autermann.yaml.nodes.YamlMapNode;
 import com.github.autermann.yaml.nodes.YamlNullNode;
 import com.github.autermann.yaml.nodes.YamlOrderedMapNode;
 import com.github.autermann.yaml.nodes.YamlPairsNode;
-import com.github.autermann.yaml.nodes.YamlSequenceNode;
+import com.github.autermann.yaml.nodes.YamlSeqNode;
 import com.github.autermann.yaml.nodes.YamlSetNode;
 import com.github.autermann.yaml.nodes.YamlTextNode;
 import com.github.autermann.yaml.nodes.YamlTimeNode;
@@ -31,7 +31,7 @@ import com.github.autermann.yaml.nodes.YamlTimeNode;
 /**
  * A returning visitor for {@link YamlNode}s.
  *
- * @param <T> the returned type
+ * @param <>> the returned type
  *
  * @see YamlNodeVisitor
  * @see AbstractReturningYamlNodeVisitor
@@ -66,13 +66,13 @@ public interface ReturningYamlNodeVisitor<T> {
     T visit(YamlPairsNode node);
 
     /**
-     * Visit a {@link YamlSequenceNode}.
+     * Visit a {@link YamlSeqNode}.
      *
      * @param node the node to visit
      *
      * @return the returned value
      */
-    T visit(YamlSequenceNode node);
+    T visit(YamlSeqNode node);
 
     /**
      * Visit a {@link YamlSetNode}.

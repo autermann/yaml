@@ -34,9 +34,9 @@ import org.yaml.snakeyaml.nodes.Tag;
 import org.yaml.snakeyaml.representer.Represent;
 import org.yaml.snakeyaml.representer.Representer;
 
-import com.github.autermann.yaml.nodes.AbstractYamlMappingNode;
-import com.github.autermann.yaml.nodes.AbstractYamlScalarNode;
-import com.github.autermann.yaml.nodes.AbstractYamlSequenceNode;
+import com.github.autermann.yaml.nodes.YamlMappingNode;
+import com.github.autermann.yaml.nodes.YamlScalarNode;
+import com.github.autermann.yaml.nodes.YamlSequenceNode;
 import com.github.autermann.yaml.nodes.YamlBigDecimalNode;
 import com.github.autermann.yaml.nodes.YamlBigIntegerNode;
 import com.github.autermann.yaml.nodes.YamlBinaryNode;
@@ -50,7 +50,7 @@ import com.github.autermann.yaml.nodes.YamlMapNode;
 import com.github.autermann.yaml.nodes.YamlNullNode;
 import com.github.autermann.yaml.nodes.YamlOrderedMapNode;
 import com.github.autermann.yaml.nodes.YamlPairsNode;
-import com.github.autermann.yaml.nodes.YamlSequenceNode;
+import com.github.autermann.yaml.nodes.YamlSeqNode;
 import com.github.autermann.yaml.nodes.YamlSetNode;
 import com.github.autermann.yaml.nodes.YamlShortNode;
 import com.github.autermann.yaml.nodes.YamlTextNode;
@@ -110,7 +110,7 @@ public class YamlNodeRepresenter extends Representer {
         register(YamlOrderedMapNode.class, represent);
         register(YamlPairsNode.class, represent);
         register(YamlMapNode.class, represent);
-        register(YamlSequenceNode.class, represent);
+        register(YamlSeqNode.class, represent);
         register(YamlSetNode.class, represent);
         register(YamlNode.class, represent);
     }
@@ -217,17 +217,17 @@ public class YamlNodeRepresenter extends Representer {
         }
 
         @Override
-        protected Node visitMapping(AbstractYamlMappingNode<?> node) {
+        protected Node visitMapping(YamlMappingNode<?> node) {
             return delegate(node.tag(), node.entries());
         }
 
         @Override
-        protected Node visitSequence(AbstractYamlSequenceNode<?> node) {
+        protected Node visitSequence(YamlSequenceNode<?> node) {
             return delegate(node.tag(), node.value());
         }
 
         @Override
-        protected Node visitScalar(AbstractYamlScalarNode node) {
+        protected Node visitScalar(YamlScalarNode node) {
             return delegate(node.tag(), node.value());
         }
 

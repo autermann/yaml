@@ -15,76 +15,74 @@
  */
 package com.github.autermann.yaml.nodes;
 
+import java.util.List;
+
 import org.yaml.snakeyaml.nodes.Tag;
 
 import com.github.autermann.yaml.ReturningYamlNodeVisitor;
 import com.github.autermann.yaml.YamlNode;
+import com.github.autermann.yaml.YamlNodeFactory;
 import com.github.autermann.yaml.YamlNodeVisitor;
+import com.google.common.collect.Lists;
 
 /**
- * A {@link YamlNode} representing a missing (non-existing) node.
+ * A {@link YamlNode} representing a {@code !!seq} sequence.
  *
  * @author Christian Autermann
  */
-public final class YamlMissingNode extends YamlBaseNode {
+public class YamlSeqNode extends YamlSequenceNode<YamlSeqNode> {
     /**
-     * The singleton instance.
+     * The children of this node.
      */
-    private static final YamlMissingNode INSTANCE = new YamlMissingNode();
+    private final List<YamlNode> nodes;
 
     /**
-     * Private constructor for singleton.
+     * Creates a new {@link YamlSequenceNode}.
+     *
+     * @param factory the factory to create children
      */
-    private YamlMissingNode() {
+    public YamlSeqNode(YamlNodeFactory factory) {
+        super(factory);
+        this.nodes = Lists.newArrayList();
     }
 
     @Override
-    public String toString() {
-        return "";
+    public boolean isSequence() {
+        return true;
     }
 
     @Override
-    public boolean equals(Object o) {
-        return (o == this);
-    }
-
-    @Override
-    public int hashCode() {
-        return System.identityHashCode(this);
-    }
-
-    @Override
-    public boolean exists() {
-        return false;
+    public YamlSeqNode asSequence() {
+        return this;
     }
 
     @Override
     public Tag tag() {
-        return null;
+        return Tag.SEQ;
+    }
+
+    @Override
+    public List<YamlNode> value() {
+        return nodes;
     }
 
     @Override
     @SuppressWarnings("unchecked")
     public <T extends YamlNode> T copy() {
-        return (T) this;
+        YamlSeqNode copy = getNodeFactory().sequenceNode();
+        for (YamlNode node : this) {
+            copy.add(node.copy());
+        }
+        return (T) copy;
     }
 
     @Override
     public void accept(YamlNodeVisitor visitor) {
+        visitor.visit(this);
     }
 
     @Override
     public <T> T accept(ReturningYamlNodeVisitor<T> visitor) {
-        return null;
+        return visitor.visit(this);
     }
-
-    /**
-     * Gets the singleton missing node instance.
-     *
-     * @return the instance
-     */
-    public static YamlMissingNode instance() {
-        return INSTANCE;
-    }
-
 }

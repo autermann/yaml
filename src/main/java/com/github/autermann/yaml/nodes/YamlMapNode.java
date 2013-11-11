@@ -38,7 +38,7 @@ import com.google.common.collect.Maps;
  *
  * @author Christian Autermann
  */
-public class YamlMapNode extends AbstractYamlMappingNode<YamlMapNode> {
+public class YamlMapNode extends YamlMappingNode<YamlMapNode> {
     /**
      * The children of this mapping.
      */

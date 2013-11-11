@@ -23,7 +23,7 @@ import com.github.autermann.yaml.nodes.YamlMapNode;
 import com.github.autermann.yaml.nodes.YamlNullNode;
 import com.github.autermann.yaml.nodes.YamlOrderedMapNode;
 import com.github.autermann.yaml.nodes.YamlPairsNode;
-import com.github.autermann.yaml.nodes.YamlSequenceNode;
+import com.github.autermann.yaml.nodes.YamlSeqNode;
 import com.github.autermann.yaml.nodes.YamlSetNode;
 import com.github.autermann.yaml.nodes.YamlTextNode;
 import com.github.autermann.yaml.nodes.YamlTimeNode;
@@ -58,11 +58,11 @@ public interface YamlNodeVisitor {
     void visit(YamlPairsNode node);
 
     /**
-     * Visit a {@link YamlSequenceNode}.
+     * Visit a {@link YamlSeqNode}.
      *
      * @param node the node to visit
      */
-    void visit(YamlSequenceNode node);
+    void visit(YamlSeqNode node);
 
     /**
      * Visit a {@link YamlSetNode}.

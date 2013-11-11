@@ -25,7 +25,7 @@ import com.google.common.base.Preconditions;
  * {@link com.github.autermann.yaml.YamlNode}s using
  * {@link YamlNodeConstructor} and {@link YamlNodeFactory} delegates.
  */
-public abstract class AbstractYamlConstruct extends AbstractConstruct {
+public abstract class YamlConstruct extends AbstractConstruct {
 
     /**
      * The {@link YamlNodeFactory} to delegate to.
@@ -37,13 +37,13 @@ public abstract class AbstractYamlConstruct extends AbstractConstruct {
     private final YamlNodeConstructor delegate;
 
     /**
-     * Creates a new {@link AbstractYamlConstruct} backed by the specified
+     * Creates a new {@link YamlConstruct} backed by the specified
      * {@link YamlNodeFactory} and {@link YamlNodeConstructor}.
      *
      * @param nodeFactory the node factory
      * @param delegate    the delegate
      */
-    protected AbstractYamlConstruct(YamlNodeFactory nodeFactory,
+    protected YamlConstruct(YamlNodeFactory nodeFactory,
                                     YamlNodeConstructor delegate) {
         this.nodeFactory = Preconditions.checkNotNull(nodeFactory);
         this.delegate = Preconditions.checkNotNull(delegate);

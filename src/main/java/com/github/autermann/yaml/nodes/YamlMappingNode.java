@@ -33,10 +33,9 @@ import com.google.common.base.Joiner.MapJoiner;
  * @param <T> the concrete type of this node
  *
  * @author Christian Autermann
- *
  */
-public abstract class AbstractYamlMappingNode<T extends AbstractYamlMappingNode<T>>
-        extends AbstractYamlContainerNode {
+public abstract class YamlMappingNode<T extends YamlMappingNode<T>>
+        extends YamlContainerNode {
     /**
      * The {@link MapJoiner} used in the {@link #toString()} method.
      */
@@ -44,11 +43,11 @@ public abstract class AbstractYamlMappingNode<T extends AbstractYamlMappingNode<
             .withKeyValueSeparator("=");
 
     /**
-     * Creates a new {@link AbstractYamlMappingNode}.
+     * Creates a new {@link YamlMappingNode}.
      *
      * @param nodeFactory the node factory to create children with
      */
-    public AbstractYamlMappingNode(YamlNodeFactory nodeFactory) {
+    public YamlMappingNode(YamlNodeFactory nodeFactory) {
         super(nodeFactory);
     }
 
@@ -87,35 +86,35 @@ public abstract class AbstractYamlMappingNode<T extends AbstractYamlMappingNode<
     }
 
     /**
-     * Adds a {@link YamlSequenceNode} under the specified {@code key}.
+     * Adds a {@link YamlSeqNode} under the specified {@code key}.
      *
      * @param key the key
      *
      * @return the created node
      */
-    public YamlSequenceNode putArray(String key) {
+    public YamlSeqNode putArray(String key) {
         return putSequence(key);
     }
 
     /**
-     * Adds a {@link YamlSequenceNode} under the specified {@code key}.
+     * Adds a {@link YamlSeqNode} under the specified {@code key}.
      *
      * @param key the key
      *
      * @return the created node
      */
-    public YamlSequenceNode putList(String key) {
+    public YamlSeqNode putList(String key) {
         return putSequence(key);
     }
 
     /**
-     * Adds a {@link YamlSequenceNode} under the specified {@code key}.
+     * Adds a {@link YamlSeqNode} under the specified {@code key}.
      *
      * @param key the key
      *
      * @return the created node
      */
-    public YamlSequenceNode putSequence(String key) {
+    public YamlSeqNode putSequence(String key) {
         return putSequence(getNodeFactory().textNode(key));
     }
 
@@ -175,35 +174,35 @@ public abstract class AbstractYamlMappingNode<T extends AbstractYamlMappingNode<
     }
 
     /**
-     * Adds a {@link YamlSequenceNode} under the specified {@code key}.
+     * Adds a {@link YamlSeqNode} under the specified {@code key}.
      *
      * @param key the key
      *
      * @return the created node
      */
-    public YamlSequenceNode putArray(YamlNode key) {
+    public YamlSeqNode putArray(YamlNode key) {
         return putSequence(key);
     }
 
     /**
-     * Adds a {@link YamlSequenceNode} under the specified {@code key}.
+     * Adds a {@link YamlSeqNode} under the specified {@code key}.
      *
      * @param key the key
      *
      * @return the created node
      */
-    public YamlSequenceNode putList(YamlNode key) {
+    public YamlSeqNode putList(YamlNode key) {
         return putSequence(key);
     }
 
     /**
-     * Adds a {@link YamlSequenceNode} under the specified {@code key}.
+     * Adds a {@link YamlSeqNode} under the specified {@code key}.
      *
      * @param key the key
      *
      * @return the created node
      */
-    public YamlSequenceNode putSequence(YamlNode key) {
+    public YamlSeqNode putSequence(YamlNode key) {
         return putContainer(key, getNodeFactory().sequenceNode());
     }
 
@@ -250,7 +249,7 @@ public abstract class AbstractYamlMappingNode<T extends AbstractYamlMappingNode<
      *
      * @return {@code this}
      */
-    private <X extends AbstractYamlContainerNode> X putContainer(
+    private <X extends YamlContainerNode> X putContainer(
             YamlNode key, X value) {
         put(key, value);
         return value;

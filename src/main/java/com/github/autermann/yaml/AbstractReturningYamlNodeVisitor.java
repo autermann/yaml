@@ -15,17 +15,17 @@
  */
 package com.github.autermann.yaml;
 
-import com.github.autermann.yaml.nodes.AbstractYamlMappingNode;
-import com.github.autermann.yaml.nodes.AbstractYamlScalarNode;
-import com.github.autermann.yaml.nodes.AbstractYamlSequenceNode;
 import com.github.autermann.yaml.nodes.YamlBinaryNode;
 import com.github.autermann.yaml.nodes.YamlBooleanNode;
 import com.github.autermann.yaml.nodes.YamlDecimalNode;
 import com.github.autermann.yaml.nodes.YamlIntegralNode;
 import com.github.autermann.yaml.nodes.YamlMapNode;
+import com.github.autermann.yaml.nodes.YamlMappingNode;
 import com.github.autermann.yaml.nodes.YamlNullNode;
 import com.github.autermann.yaml.nodes.YamlOrderedMapNode;
 import com.github.autermann.yaml.nodes.YamlPairsNode;
+import com.github.autermann.yaml.nodes.YamlScalarNode;
+import com.github.autermann.yaml.nodes.YamlSeqNode;
 import com.github.autermann.yaml.nodes.YamlSequenceNode;
 import com.github.autermann.yaml.nodes.YamlSetNode;
 import com.github.autermann.yaml.nodes.YamlTextNode;
@@ -36,9 +36,9 @@ import com.github.autermann.yaml.nodes.YamlTimeNode;
  * implementations. Per default implementations will return null and
  * delegate to one of
  * <ul>
- * <li>{@link #visitMapping(AbstractYamlMappingNode)}</li>
- * <li>{@link #visitScalar(AbstractYamlScalarNode)}</li>
- * <li>{@link #visitSequence(AbstractYamlSequenceNode)}</li>
+ * <li>{@link #visitMapping(YamlMappingNode)}</li>
+ * <li>{@link #visitScalar(YamlScalarNode)}</li>
+ * <li>{@link #visitSequence(YamlSequenceNode)}</li>
  * </ul>
  *
  * @param <T> the returned type
@@ -62,7 +62,7 @@ public abstract class AbstractReturningYamlNodeVisitor<T>
     }
 
     @Override
-    public T visit(YamlSequenceNode node) {
+    public T visit(YamlSeqNode node) {
         return visitSequence(node);
     }
 
@@ -113,7 +113,7 @@ public abstract class AbstractReturningYamlNodeVisitor<T>
      *
      * @return the returned value
      */
-    protected T visitMapping(AbstractYamlMappingNode<?> node) {
+    protected T visitMapping(YamlMappingNode<?> node) {
         return null;
     }
 
@@ -124,7 +124,7 @@ public abstract class AbstractReturningYamlNodeVisitor<T>
      *
      * @return the returned value
      */
-    protected T visitSequence(AbstractYamlSequenceNode<?> node) {
+    protected T visitSequence(YamlSequenceNode<?> node) {
         return null;
     }
 
@@ -135,7 +135,7 @@ public abstract class AbstractReturningYamlNodeVisitor<T>
      *
      * @return the returned value
      */
-    protected T visitScalar(AbstractYamlScalarNode node) {
+    protected T visitScalar(YamlScalarNode node) {
         return null;
     }
 

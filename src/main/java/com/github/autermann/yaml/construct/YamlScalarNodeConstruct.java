@@ -19,23 +19,23 @@ import org.yaml.snakeyaml.nodes.Node;
 import org.yaml.snakeyaml.nodes.ScalarNode;
 
 import com.github.autermann.yaml.YamlNodeFactory;
-import com.github.autermann.yaml.nodes.AbstractYamlScalarNode;
+import com.github.autermann.yaml.nodes.YamlScalarNode;
 
 /**
  * {@link org.yaml.snakeyaml.constructor.Construct} to construct
- * {@link AbstractYamlScalarNode}s from
+ * {@link YamlScalarNode}s from
  * string scalar nodes.
  */
-public abstract class AbstractYamlScalarNodeConstruct extends AbstractYamlConstruct {
+public abstract class YamlScalarNodeConstruct extends YamlConstruct {
 
     /**
-     * Creates a new {@link AbstractYamlScalarNode} backed by the specified
+     * Creates a new {@link YamlScalarNode} backed by the specified
      * {@link YamlNodeFactory} and {@link YamlNodeConstructor}.
      *
      * @param nodeFactory the node factory
      * @param delegate    the delegate
      */
-    public AbstractYamlScalarNodeConstruct(YamlNodeFactory nodeFactory,
+    public YamlScalarNodeConstruct(YamlNodeFactory nodeFactory,
                                            YamlNodeConstructor delegate) {
         super(nodeFactory, delegate);
     }
@@ -53,6 +53,6 @@ public abstract class AbstractYamlScalarNodeConstruct extends AbstractYamlConstr
      *
      * @return the {@link com.github.autermann.yaml.YamlNode}
      */
-    protected abstract AbstractYamlScalarNode construct(String value);
+    protected abstract YamlScalarNode construct(String value);
 
 }

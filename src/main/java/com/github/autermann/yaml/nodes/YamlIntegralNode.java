@@ -29,7 +29,7 @@ import com.github.autermann.yaml.YamlNodeVisitor;
  *
  * @author Christian Autermann
  */
-public abstract class YamlIntegralNode extends AbstractYamlNumberNode {
+public abstract class YamlIntegralNode extends YamlNumberNode {
     @Override
     public Tag tag() {
         return Tag.INT;

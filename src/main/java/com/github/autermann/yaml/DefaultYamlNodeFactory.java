@@ -38,7 +38,7 @@ import com.github.autermann.yaml.nodes.YamlMapNode;
 import com.github.autermann.yaml.nodes.YamlNullNode;
 import com.github.autermann.yaml.nodes.YamlOrderedMapNode;
 import com.github.autermann.yaml.nodes.YamlPairsNode;
-import com.github.autermann.yaml.nodes.YamlSequenceNode;
+import com.github.autermann.yaml.nodes.YamlSeqNode;
 import com.github.autermann.yaml.nodes.YamlSetNode;
 import com.github.autermann.yaml.nodes.YamlShortNode;
 import com.github.autermann.yaml.nodes.YamlTextNode;
@@ -139,8 +139,8 @@ public class DefaultYamlNodeFactory extends YamlNodeFactory {
     }
 
     @Override
-    public YamlSequenceNode sequenceNode() {
-        return new YamlSequenceNode(this);
+    public YamlSeqNode sequenceNode() {
+        return new YamlSeqNode(this);
     }
 
     @Override

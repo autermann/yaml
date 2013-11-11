@@ -18,7 +18,7 @@ package com.github.autermann.yaml.construct;
 import java.math.BigDecimal;
 
 import com.github.autermann.yaml.YamlNodeFactory;
-import com.github.autermann.yaml.nodes.AbstractYamlScalarNode;
+import com.github.autermann.yaml.nodes.YamlScalarNode;
 
 /**
  * Constructs a {@link com.github.autermann.yaml.nodes.YamlDecimalNode} from a
@@ -28,7 +28,7 @@ import com.github.autermann.yaml.nodes.AbstractYamlScalarNode;
  * @see com.github.autermann.yaml.nodes.YamlDoubleNode
  * @see com.github.autermann.yaml.nodes.YamlFloatNode
  */
-public class YamlDecimalNodeConstruct extends AbstractYamlScalarNodeConstruct {
+public class YamlDecimalNodeConstruct extends YamlScalarNodeConstruct {
 
     /**
      * Creates a new {@link YamlDecimalNodeConstruct}.
@@ -42,7 +42,7 @@ public class YamlDecimalNodeConstruct extends AbstractYamlScalarNodeConstruct {
     }
 
     @Override
-    public AbstractYamlScalarNode construct(String value) {
+    public YamlScalarNode construct(String value) {
         String v = value.trim().toLowerCase().replaceAll("_", "");
         if (v.equals(".inf")) {
             return getNodeFactory().doubleNode(Double.POSITIVE_INFINITY);

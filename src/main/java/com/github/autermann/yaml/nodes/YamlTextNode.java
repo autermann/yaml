@@ -34,7 +34,7 @@ import com.google.common.base.Charsets;
  *
  * @author Christian Autermann
  */
-public class YamlTextNode extends AbstractYamlScalarNode {
+public class YamlTextNode extends YamlScalarNode {
     /**
      * The {@link String} value.
      */

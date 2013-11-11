@@ -42,7 +42,7 @@ public abstract class FailingReturningYamlNodeVisitor
     }
 
     @Override
-    public Void visit(YamlSequenceNode node) {
+    public Void visit(YamlSeqNode node) {
         throw new AssertionError("Wrong node visited");
     }
 

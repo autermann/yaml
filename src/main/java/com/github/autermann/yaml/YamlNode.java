@@ -28,7 +28,7 @@ import org.yaml.snakeyaml.nodes.Tag;
 import com.github.autermann.yaml.nodes.YamlMapNode;
 import com.github.autermann.yaml.nodes.YamlOrderedMapNode;
 import com.github.autermann.yaml.nodes.YamlPairsNode;
-import com.github.autermann.yaml.nodes.YamlSequenceNode;
+import com.github.autermann.yaml.nodes.YamlSeqNode;
 import com.github.autermann.yaml.nodes.YamlSetNode;
 
 /**
@@ -96,7 +96,7 @@ public interface YamlNode extends Iterable<YamlNode> {
      *
      * @return if this is a container node
      *
-     * @see YamlSequenceNode
+     * @see YamlSeqNode
      * @see YamlSetNode
      * @see YamlMapNode
      * @see YamlOrderedMapNode
@@ -140,7 +140,7 @@ public interface YamlNode extends Iterable<YamlNode> {
      *
      * @return if this is a sequence node
      *
-     * @see YamlSequenceNode
+     * @see YamlSeqNode
      * @see #asSequence()
      */
     boolean isSequence();
@@ -197,7 +197,7 @@ public interface YamlNode extends Iterable<YamlNode> {
      *
      * @return if this is a number node
      *
-     * @see com.github.autermann.yaml.nodes.AbstractYamlNumberNode
+     * @see com.github.autermann.yaml.nodes.YamlNumberNode
      * @see #numberValue()
      */
     boolean isNumber();
@@ -366,14 +366,14 @@ public interface YamlNode extends Iterable<YamlNode> {
     YamlPairsNode asPairs();
 
     /**
-     * Converts this node into a {@link YamlSequenceNode} if applicable.
+     * Converts this node into a {@link YamlSeqNode} if applicable.
      *
      * @return a sequence node or {@code null}
      *
      * @see #isSequence()
-     * @see YamlSequenceNode
+     * @see YamlSeqNode
      */
-    YamlSequenceNode asSequence();
+    YamlSeqNode asSequence();
 
     /**
      * Converts this node into a {@link YamlSetNode} if applicable.

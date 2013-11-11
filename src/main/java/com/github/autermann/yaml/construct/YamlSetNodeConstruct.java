@@ -25,7 +25,7 @@ import com.github.autermann.yaml.nodes.YamlSetNode;
 /**
  * Constructs a {@link YamlSetNode} from a mapping node.
  */
-public class YamlSetNodeConstruct extends AbstractYamlConstruct {
+public class YamlSetNodeConstruct extends YamlConstruct {
 
     /**
      * Creates a new {@link YamlSetNodeConstruct}.

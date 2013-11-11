@@ -21,18 +21,18 @@ import org.yaml.snakeyaml.nodes.NodeTuple;
 
 import com.github.autermann.yaml.YamlNode;
 import com.github.autermann.yaml.YamlNodeFactory;
-import com.github.autermann.yaml.nodes.AbstractYamlMappingNode;
+import com.github.autermann.yaml.nodes.YamlMappingNode;
 import com.google.common.base.Supplier;
 
 /**
- * Constructs a {@link AbstractYamlMappingNode} from a mapping node.
+ * Constructs a {@link YamlMappingNode} from a mapping node.
  */
-public class YamlMappingNodeConstruct extends AbstractYamlConstruct {
+public class YamlMappingNodeConstruct extends YamlConstruct {
 
     /**
-     * A supplier for {@link AbstractYamlMappingNode} instances.
+     * A supplier for {@link YamlMappingNode} instances.
      */
-    private final Supplier<? extends AbstractYamlMappingNode<?>> supplier;
+    private final Supplier<? extends YamlMappingNode<?>> supplier;
 
     /**
      * Creates a new {@link YamlMappingNodeConstruct} using
@@ -46,14 +46,14 @@ public class YamlMappingNodeConstruct extends AbstractYamlConstruct {
     YamlMappingNodeConstruct(
             YamlNodeFactory nodeFactory,
             YamlNodeConstructor delegate,
-            Supplier<? extends AbstractYamlMappingNode<?>> supplier) {
+            Supplier<? extends YamlMappingNode<?>> supplier) {
         super(nodeFactory, delegate);
         this.supplier = supplier;
     }
 
     @Override
     public YamlNode construct(Node node) {
-        AbstractYamlMappingNode<?> mapping = supplier.get();
+        YamlMappingNode<?> mapping = supplier.get();
         MappingNode mnode = (MappingNode) node;
         for (NodeTuple tuple : mnode.getValue()) {
             Node key = tuple.getKeyNode();

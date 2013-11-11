@@ -368,11 +368,11 @@ public class YamlByteNodeTest extends AbstractYamlNodeTest {
     }
 
     /**
-     * Creates a {@literal byte} that is different from {@literal b}.
+     * Creates a {@code byte} that is different from {@code b}.
      *
-     * @param b the {@literal byte}
+     * @param b the {@code byte}
      *
-     * @return a {@literal byte} that is different from {@literal b}
+     * @return a {@code byte} that is different from {@code b}
      */
     private byte another(byte b) {
         return (byte) (b == Byte.MAX_VALUE ? b - 1 : b + 1);

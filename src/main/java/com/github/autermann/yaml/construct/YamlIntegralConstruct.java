@@ -18,7 +18,7 @@ package com.github.autermann.yaml.construct;
 import java.math.BigInteger;
 
 import com.github.autermann.yaml.YamlNodeFactory;
-import com.github.autermann.yaml.nodes.AbstractYamlScalarNode;
+import com.github.autermann.yaml.nodes.YamlScalarNode;
 import com.github.autermann.yaml.util.Numbers;
 
 /**
@@ -31,7 +31,7 @@ import com.github.autermann.yaml.util.Numbers;
  * @see com.github.autermann.yaml.nodes.YamlLongNode
  * @see com.github.autermann.yaml.nodes.YamlBigIntegerNode
  */
-public class YamlIntegralConstruct extends AbstractYamlScalarNodeConstruct {
+public class YamlIntegralConstruct extends YamlScalarNodeConstruct {
 
     /**
      * Creates a new {@link YamlIntegralConstruct}.
@@ -45,7 +45,7 @@ public class YamlIntegralConstruct extends AbstractYamlScalarNodeConstruct {
     }
 
     @Override
-    public AbstractYamlScalarNode construct(String value) {
+    public YamlScalarNode construct(String value) {
         BigInteger number = new BigInteger(value);
         if (Numbers.fitsIntoByte(number)) {
             return getNodeFactory().byteNode(number.byteValue());

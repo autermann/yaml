@@ -20,12 +20,12 @@ import com.github.autermann.yaml.YamlNodeFactory;
 import org.yaml.snakeyaml.nodes.Node;
 import org.yaml.snakeyaml.nodes.SequenceNode;
 
-import com.github.autermann.yaml.nodes.YamlSequenceNode;
+import com.github.autermann.yaml.nodes.YamlSeqNode;
 
 /**
- * Constructs a {@link YamlSequenceNode} from a mapping node.
+ * Constructs a {@link YamlSeqNode} from a mapping node.
  */
-public class YamlSequenceNodeConstruct extends AbstractYamlConstruct {
+public class YamlSequenceNodeConstruct extends YamlConstruct {
 
     /**
      * Creates a new {@link YamlSequenceNodeConstruct}.
@@ -39,8 +39,8 @@ public class YamlSequenceNodeConstruct extends AbstractYamlConstruct {
     }
 
     @Override
-    public YamlSequenceNode construct(Node node) {
-        YamlSequenceNode seq = getNodeFactory().sequenceNode();
+    public YamlSeqNode construct(Node node) {
+        YamlSeqNode seq = getNodeFactory().sequenceNode();
         for (Object o : getDelegate().constructSequence((SequenceNode) node)) {
             seq.add((YamlNode) o);
         }

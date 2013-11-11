@@ -43,7 +43,7 @@ import com.google.common.collect.Multimaps;
  *
  * @author Christian Autermann
  */
-public class YamlPairsNode extends AbstractYamlMappingNode<YamlPairsNode> {
+public class YamlPairsNode extends YamlMappingNode<YamlPairsNode> {
     /**
      * A {@link ListMultimap} to enable fast access to all values of a key.
      */

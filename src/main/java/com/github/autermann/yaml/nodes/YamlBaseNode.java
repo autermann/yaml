@@ -35,7 +35,7 @@ import com.google.common.collect.Iterators;
  *
  * @author Christian Autermann
  */
-public abstract class AbstractYamlNode implements YamlNode {
+public abstract class YamlBaseNode implements YamlNode {
 
     @Override
     public YamlMapNode asMap() {
@@ -53,7 +53,7 @@ public abstract class AbstractYamlNode implements YamlNode {
     }
 
     @Override
-    public YamlSequenceNode asSequence() {
+    public YamlSeqNode asSequence() {
         return null;
     }
 
