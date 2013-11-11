@@ -64,4 +64,8 @@ public abstract class YamlDecimalNode extends YamlNumberNode {
     @Override
     public abstract BigDecimal bigDecimalValue();
 
+    @Override
+    public BigDecimal asBigDecimalValue(BigDecimal defaultValue) {
+        return bigDecimalValue();
+    }
 }
