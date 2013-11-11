@@ -20,7 +20,6 @@ import static org.hamcrest.Matchers.not;
 
 import java.math.BigInteger;
 import java.util.Date;
-import java.util.Random;
 
 import org.joda.time.DateTime;
 import org.yaml.snakeyaml.nodes.Tag;
@@ -33,10 +32,6 @@ import com.github.autermann.yaml.YamlNode;
  * @author Christian Autermann
  */
 public class YamlByteNodeTest extends AbstractYamlScalarNodeTest {
-    /**
-     * The {{@link Random} to create instances with.
-     */
-    private final Random random = new Random();
 
     @Override
     public void testToString() {
@@ -353,29 +348,6 @@ public class YamlByteNodeTest extends AbstractYamlScalarNodeTest {
         errors.checkThat(instance.asTextValue(""), is(v));
         errors.checkThat(instance.asTextValue(null), is(v));
         errors.checkThat(instance.asTextValue("asdf"), is(v));
-    }
-
-    /**
-     * Creates a random byte.
-     *
-     * @return the random byte
-     */
-    private byte randomByte() {
-        byte[] bytes = new byte[1];
-        random.nextBytes(bytes);
-        byte value = bytes[0];
-        return value;
-    }
-
-    /**
-     * Creates a {@code byte} that is different from {@code b}.
-     *
-     * @param b the {@code byte}
-     *
-     * @return a {@code byte} that is different from {@code b}
-     */
-    private byte another(byte b) {
-        return (byte) (b == Byte.MAX_VALUE ? b - 1 : b + 1);
     }
 
     @Override

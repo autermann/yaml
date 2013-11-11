@@ -15,7 +15,6 @@
  */
 package com.github.autermann.yaml.nodes;
 
-
 import static com.github.autermann.yaml.nodes.YamlNodesMatcher.bigDecimalNode;
 import static com.github.autermann.yaml.nodes.YamlNodesMatcher.bigIntegerNode;
 import static com.github.autermann.yaml.nodes.YamlNodesMatcher.binaryNode;
@@ -149,20 +148,16 @@ public class YamlPairsNodeTest {
     }
 
     protected void checkEqualHashCode(YamlNode a, YamlNode b) {
-        errors
-                .checkThat(a.hashCode(), allOf(is(equalTo(a.hashCode())), is(equalTo(b
-                                                .hashCode()))));
-        errors
-                .checkThat(b.hashCode(), allOf(is(equalTo(a.hashCode())), is(equalTo(b
-                                                .hashCode()))));
+        errors.checkThat(a.hashCode(), allOf(is(equalTo(a.hashCode())),
+                                             is(equalTo(b.hashCode()))));
+        errors.checkThat(b.hashCode(), allOf(is(equalTo(a.hashCode())),
+                                             is(equalTo(b.hashCode()))));
     }
 
     protected void checkNotEqualHashCode(YamlNode a, YamlNode b) {
-        errors
-                .checkThat(a.hashCode(), allOf(is(equalTo(a.hashCode())), is(not(equalTo(b
-                                                        .hashCode())))));
-        errors
-                .checkThat(b.hashCode(), allOf(is(not(equalTo(a.hashCode()))), is(equalTo(b
-                                                .hashCode()))));
+        errors.checkThat(a.hashCode(), allOf(is(equalTo(a.hashCode())),
+                                             is(not(equalTo(b.hashCode())))));
+        errors.checkThat(b.hashCode(), allOf(is(not(equalTo(a.hashCode()))),
+                                             is(equalTo(b.hashCode()))));
     }
 }

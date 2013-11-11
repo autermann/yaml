@@ -20,7 +20,6 @@ import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.assertThat;
 
 import java.math.BigDecimal;
-import java.util.Random;
 
 import org.yaml.snakeyaml.nodes.Tag;
 
@@ -32,11 +31,6 @@ import com.github.autermann.yaml.YamlNode;
  * @author Christian Autermann
  */
 public class YamlFloatNodeTest extends AbstractYamlScalarNodeTest {
-    /**
-     * The random to create floats.
-     */
-    private final Random random = new Random();
-
     @Override
     public void testValue() {
         YamlFloatNode node = instance();
@@ -45,7 +39,7 @@ public class YamlFloatNodeTest extends AbstractYamlScalarNodeTest {
 
     @Override
     protected YamlFloatNode instance() {
-        return new YamlFloatNode(random.nextFloat());
+        return new YamlFloatNode(randomFloat());
     }
 
     @Override
@@ -56,7 +50,7 @@ public class YamlFloatNodeTest extends AbstractYamlScalarNodeTest {
 
     @Override
     public void testEquals() {
-        float value = random.nextFloat();
+        float value = randomFloat();
         errors.checkThat(new YamlFloatNode(value), is(new YamlFloatNode(value)));
         errors.checkThat(new YamlFloatNode(value).equals(null), is(false));
         errors.checkThat(new YamlFloatNode(value),
@@ -67,7 +61,7 @@ public class YamlFloatNodeTest extends AbstractYamlScalarNodeTest {
 
     @Override
     public void testHashCode() {
-        float value = random.nextFloat();
+        float value = randomFloat();
         errors.checkThat(new YamlFloatNode(value).hashCode(), is(Float
                 .valueOf(value).hashCode()));
     }
@@ -129,39 +123,39 @@ public class YamlFloatNodeTest extends AbstractYamlScalarNodeTest {
 
     @Override
     public void testFloatValue() {
-        float v = random.nextFloat();
+        float v = randomFloat();
         assertThat(new YamlFloatNode(v).floatValue(), is(v));
     }
 
     @Override
     public void testDoubleValue() {
-        float v = random.nextFloat();
+        float v = randomFloat();
         assertThat(new YamlFloatNode(v).doubleValue(), is((double) v));
     }
 
     @Override
     public void testNumberValue() {
-        float v = random.nextFloat();
+        float v = randomFloat();
         assertThat(new YamlFloatNode(v).numberValue(), is((Number) v));
     }
 
     @Override
     public void testBigDecimalValue() {
-        float v = random.nextFloat();
+        float v = randomFloat();
         assertThat(new YamlFloatNode(v).bigDecimalValue(),
                    is(BigDecimal.valueOf((double) v)));
     }
 
     @Override
     public void testAsTextValue_0args() {
-        float v = random.nextFloat();
+        float v = randomFloat();
         YamlFloatNode node = new YamlFloatNode(v);
         errors.checkThat(node.asTextValue(), is(String.valueOf(v)));
     }
 
     @Override
     public void testAsTextValue_String() {
-        float v = random.nextFloat();
+        float v = randomFloat();
         YamlFloatNode node = new YamlFloatNode(v);
         errors.checkThat(node.asTextValue(null), is(String.valueOf(v)));
         errors.checkThat(node.asTextValue(""), is(String.valueOf(v)));
@@ -170,7 +164,7 @@ public class YamlFloatNodeTest extends AbstractYamlScalarNodeTest {
 
     @Override
     public void testAsBigDecimalValue_0args() {
-        float v = random.nextFloat();
+        float v = randomFloat();
         YamlFloatNode node = new YamlFloatNode(v);
         errors.checkThat(node.asBigDecimalValue(),
                          is(BigDecimal.valueOf((double) v)));
@@ -178,7 +172,7 @@ public class YamlFloatNodeTest extends AbstractYamlScalarNodeTest {
 
     @Override
     public void testAsBigDecimalValue_BigDecimal() {
-        float v = random.nextFloat();
+        float v = randomFloat();
         YamlFloatNode node = new YamlFloatNode(v);
         BigDecimal bdv = BigDecimal.valueOf((double) v);
         errors.checkThat(node.asBigDecimalValue(BigDecimal.ONE), is(bdv));
@@ -188,14 +182,14 @@ public class YamlFloatNodeTest extends AbstractYamlScalarNodeTest {
 
     @Override
     public void testAsFloatValue_0args() {
-        float v = random.nextFloat();
+        float v = randomFloat();
         YamlFloatNode node = new YamlFloatNode(v);
         errors.checkThat(node.asFloatValue(), is(v));
     }
 
     @Override
     public void testAsFloatValue_float() {
-        float v = random.nextFloat();
+        float v = randomFloat();
         YamlFloatNode node = new YamlFloatNode(v);
         errors.checkThat(node.asFloatValue(0.0f), is(v));
         errors.checkThat(node.asFloatValue(1.0f), is(v));
@@ -204,14 +198,14 @@ public class YamlFloatNodeTest extends AbstractYamlScalarNodeTest {
 
     @Override
     public void testAsDoubleValue_0args() {
-        float v = random.nextFloat();
+        float v = randomFloat();
         YamlFloatNode node = new YamlFloatNode(v);
         errors.checkThat(node.asDoubleValue(), is((double) v));
     }
 
     @Override
     public void testAsDoubleValue_double() {
-        float v = random.nextFloat();
+        float v = randomFloat();
         YamlFloatNode node = new YamlFloatNode(v);
         errors.checkThat(node.asDoubleValue(0.0d), is((double) v));
         errors.checkThat(node.asDoubleValue(1.0d), is((double) v));
@@ -220,14 +214,14 @@ public class YamlFloatNodeTest extends AbstractYamlScalarNodeTest {
 
     @Override
     public void testAsNumberValue_0args() {
-        float v = random.nextFloat();
+        float v = randomFloat();
         YamlFloatNode node = new YamlFloatNode(v);
         errors.checkThat(node.asNumberValue(), is((Number) v));
     }
 
     @Override
     public void testAsNumberValue_Number() {
-        float v = random.nextFloat();
+        float v = randomFloat();
         YamlFloatNode node = new YamlFloatNode(v);
         errors.checkThat(node.asNumberValue(1), is((Number) v));
         errors.checkThat(node.asNumberValue(null), is((Number) v));

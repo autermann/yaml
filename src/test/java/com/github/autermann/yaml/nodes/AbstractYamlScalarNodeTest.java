@@ -15,6 +15,11 @@
  */
 package com.github.autermann.yaml.nodes;
 
+import java.math.BigDecimal;
+import java.util.Date;
+import java.util.Random;
+
+import org.joda.time.DateTime;
 import org.junit.Test;
 
 /**
@@ -25,6 +30,11 @@ import org.junit.Test;
 public abstract class AbstractYamlScalarNodeTest extends AbstractYamlNodeTest {
 
     /**
+     * The random to create {@code double}s.
+     */
+    private final Random random = new Random();
+
+    /**
      * Tests {@link YamlScalarNode#value() }.
      */
     @Test
@@ -32,5 +42,139 @@ public abstract class AbstractYamlScalarNodeTest extends AbstractYamlNodeTest {
 
     @Override
     protected abstract YamlScalarNode instance();
+
+    /**
+     * Creates a random {@code byte}.
+     *
+     * @return the random {@code byte}
+     */
+    public byte randomByte() {
+        return (byte) random.nextInt(Byte.MAX_VALUE + 1);
+    }
+
+    /**
+     * Creates a random {@code short}.
+     *
+     * @return the random {@code short}
+     */
+    public short randomShort() {
+        return (short) random.nextInt(Short.MAX_VALUE + 1);
+    }
+
+    /**
+     * Creates a random {@code int}.
+     *
+     * @return the random {@code int}
+     */
+    public int randomInt() {
+        return random.nextInt();
+    }
+
+    /**
+     * Creates a random {@code long}.
+     *
+     * @return the random {@code long}
+     */
+    public long randomLong() {
+        return random.nextLong();
+    }
+
+    /**
+     * Creates a random {@code boolean}.
+     *
+     * @return the random {@code boolean}
+     */
+    public boolean randomBoolean() {
+        return random.nextBoolean();
+    }
+
+    /**
+     * Creates a random {@code float}.
+     *
+     * @return the random {@code float}
+     */
+    public float randomFloat() {
+        return random.nextFloat();
+    }
+
+    /**
+     * Creates a random {@code double}.
+     *
+     * @return the random {@code double}
+     */
+    public double randomDouble() {
+        return random.nextDouble();
+    }
+
+    /**
+     * Creates a random {@link BigDecimal}.
+     *
+     * @return the random number
+     */
+    public BigDecimal randomBigDecimal() {
+        return new BigDecimal(random.nextDouble());
+    }
+
+    /**
+     * Creates a random {@link DateTime}.
+     *
+     * @return the random number
+     */
+    public DateTime randomDateTime() {
+        return new DateTime(randomLong());
+    }
+
+    /**
+     * Creates a random {@link Date}.
+     *
+     * @return the random number
+     */
+    public Date randomDate() {
+        return new Date(randomLong());
+    }
+
+    /**
+     * Creates a {@code byte} that is different from {@code value}.
+     *
+     * @param value the {@code byte}
+     *
+     * @return a {@code byte} that is different from {@code value}
+     */
+    public byte another(byte value) {
+        return (byte) (value == Byte.MAX_VALUE ? value - 1 : value + 1);
+    }
+
+    /**
+     * Creates a {@code short} that is different from {@code value}.
+     *
+     * @param value the {@code short}
+     *
+     * @return a {@code short} that is different from {@code value}
+     */
+    public short another(short value) {
+        return (short) (value == Short.MAX_VALUE ? value - 1 : value + 1);
+    }
+
+    /**
+     * Creates a {@code int} that is different from {@code value}.
+     *
+     * @param value the {@code int}
+     *
+     * @return a {@code int} that is different from {@code value}
+     */
+    public int another(int value) {
+        return value == Integer.MAX_VALUE ? value - 1 : value + 1;
+    }
+
+    /**
+     * Creates a {@code long} that is different from {@code value}.
+     *
+     * @param value the {@code long}
+     *
+     * @return a {@code long} that is different from {@code value}
+     */
+    public long another(long value) {
+        return value == Long.MAX_VALUE ? value - 1L : value + 1L;
+    }
 
 }

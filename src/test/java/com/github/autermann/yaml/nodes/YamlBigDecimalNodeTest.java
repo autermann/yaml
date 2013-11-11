@@ -15,81 +15,280 @@
  */
 package com.github.autermann.yaml.nodes;
 
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.bigDecimalNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.bigIntegerNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.binaryNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.booleanNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.byteNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.containerNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.decimalNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.doubleNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.existingNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.floatNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.intNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.integralNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.longNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.mapNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.nullNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.numberNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.orderedMapNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.pairsNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.scalarNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.sequenceNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.setNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.shortNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.textNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.timeNode;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
-import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.Assert.assertThat;
 
 import java.math.BigDecimal;
 
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ErrorCollector;
+import org.yaml.snakeyaml.nodes.Tag;
 
-import com.github.autermann.yaml.DefaultYamlNodeFactory;
 import com.github.autermann.yaml.YamlNode;
-import com.github.autermann.yaml.YamlNodeFactory;
-import com.github.autermann.yaml.util.DecimalPrecision;
 
-public class YamlBigDecimalNodeTest {
+/**
+ * Tests for {@link YamlBigDecimalNode}s.
+ *
+ * @author Christian Autermann
+ */
+public class YamlBigDecimalNodeTest extends AbstractYamlScalarNodeTest {
 
-    public final YamlNodeFactory factory = DefaultYamlNodeFactory
-            .create(DecimalPrecision.BIG_DECIMAL);
-
-    @Rule
-    public final ErrorCollector errors = new ErrorCollector();
-
+    /**
+     * Test {@code null} in {@link YamlBigDecimalNode} constructor.
+     */
     @Test
-    public void testType() {
-        YamlNode node = factory.bigDecimalNode(BigDecimal.ONE);
-        assertThat(node, is(notNullValue()));
-        errors.checkThat(node, is(not(binaryNode())));
-        errors.checkThat(node, is(not(booleanNode())));
-        errors.checkThat(node, is(not(containerNode())));
-        errors.checkThat(node, is((decimalNode())));
-        errors.checkThat(node, is((existingNode())));
-        errors.checkThat(node, is(not(integralNode())));
-        errors.checkThat(node, is(not(mapNode())));
-        errors.checkThat(node, is(not(nullNode())));
-        errors.checkThat(node, is((numberNode())));
-        errors.checkThat(node, is(not(orderedMapNode())));
-        errors.checkThat(node, is(not(pairsNode())));
-        errors.checkThat(node, is((scalarNode())));
-        errors.checkThat(node, is(not(sequenceNode())));
-        errors.checkThat(node, is(not(setNode())));
-        errors.checkThat(node, is(not(textNode())));
-        errors.checkThat(node, is(not(timeNode())));
-        errors.checkThat(node, is(not(bigIntegerNode())));
-        errors.checkThat(node, is(not(longNode())));
-        errors.checkThat(node, is(not(intNode())));
-        errors.checkThat(node, is(not(shortNode())));
-        errors.checkThat(node, is(not(byteNode())));
-        errors.checkThat(node, is((bigDecimalNode())));
-        errors.checkThat(node, is(not(doubleNode())));
-        errors.checkThat(node, is(not(floatNode())));
+    public void testNullConstructor() {
+        thrown.expect(NullPointerException.class);
+        new YamlBigDecimalNode(null);
     }
+
+
+    @Override
+    public void testValue() {
+        YamlBigDecimalNode node = instance();
+        errors.checkThat(node.value(), is((Object) node.bigDecimalValue()));;
+    }
+
+    @Override
+    protected YamlBigDecimalNode instance() {
+        return new YamlBigDecimalNode(randomBigDecimal());
+    }
+
+    @Override
+    public void testToString() {
+        YamlBigDecimalNode node = instance();
+        errors.checkThat(node.toString(),
+                         is(node.bigDecimalValue().toString()));
+    }
+
+    @Override
+    public void testEquals() {
+        BigDecimal value = randomBigDecimal();
+        errors.checkThat(new YamlBigDecimalNode(value),
+                         is(new YamlBigDecimalNode(value)));
+        errors.checkThat(new YamlBigDecimalNode(value).equals(null), is(false));
+        errors.checkThat(new YamlBigDecimalNode(value),
+                         is(not(new YamlBigDecimalNode(value.add(BigDecimal.ONE)))));
+        errors.checkThat(new YamlBigDecimalNode(value),
+                         is(not((YamlNode) factory.arrayNode())));
+    }
+
+    @Override
+    public void testHashCode() {
+        BigDecimal value = randomBigDecimal();
+        errors.checkThat(new YamlBigDecimalNode(value).hashCode(),
+                         is(value.hashCode()));
+    }
+
+    @Override
+    public void testTag() {
+        errors.checkThat(instance().tag(), is(Tag.FLOAT));
+    }
+
+    @Override
+    protected FailingReturningYamlNodeVisitor returningVisitor() {
+        return new FailingReturningYamlNodeVisitor() {
+            @Override
+            public Void visit(YamlDecimalNode node) {
+                return hasVisited(true);
+            }
+        };
+    }
+
+    @Override
+    protected FailingYamlNodeVisitor visitor() {
+        return new FailingYamlNodeVisitor() {
+            @Override
+            public void visit(YamlDecimalNode node) {
+                hasVisited(true);
+            }
+        };
+    }
+
+    @Override
+    public void testIsDecimal() {
+        assertThat(instance().isDecimal(), is(true));
+    }
+
+    @Override
+    public void testIsBigDecimal() {
+        assertThat(instance().isBigDecimal(), is(true));
+    }
+
+    @Override
+    public void testIsNumber() {
+        assertThat(instance().isNumber(), is(true));
+    }
+
+    @Override
+    public void testIsScalar() {
+        assertThat(instance().isScalar(), is(true));
+    }
+
+    @Override
+    public void testNumberValue() {
+        BigDecimal v = randomBigDecimal();
+        assertThat(new YamlBigDecimalNode(v).numberValue(), is((Number) v));
+    }
+
+    @Override
+    public void testBigDecimalValue() {
+        BigDecimal v = randomBigDecimal();
+        assertThat(new YamlBigDecimalNode(v).bigDecimalValue(), is(v));
+    }
+
+    @Override
+    public void testAsTextValue_0args() {
+        BigDecimal v = randomBigDecimal();
+        YamlBigDecimalNode node = new YamlBigDecimalNode(v);
+        errors.checkThat(node.asTextValue(), is(String.valueOf(v)));
+    }
+
+    @Override
+    public void testAsTextValue_String() {
+        BigDecimal v = randomBigDecimal();
+        YamlBigDecimalNode node = new YamlBigDecimalNode(v);
+        errors.checkThat(node.asTextValue(null), is(String.valueOf(v)));
+        errors.checkThat(node.asTextValue(""), is(String.valueOf(v)));
+        errors.checkThat(node.asTextValue("asdf"), is(String.valueOf(v)));
+    }
+
+    @Override
+    public void testAsBigDecimalValue_0args() {
+        BigDecimal v = randomBigDecimal();
+        YamlBigDecimalNode node = new YamlBigDecimalNode(v);
+        errors.checkThat(node.asBigDecimalValue(), is(v));
+    }
+
+    @Override
+    public void testAsBigDecimalValue_BigDecimal() {
+        BigDecimal v = randomBigDecimal();
+        YamlBigDecimalNode node = new YamlBigDecimalNode(v);
+        errors.checkThat(node.asBigDecimalValue(BigDecimal.ONE), is(v));
+        errors.checkThat(node.asBigDecimalValue(BigDecimal.TEN), is(v));
+        errors.checkThat(node.asBigDecimalValue(BigDecimal.ZERO), is(v));
+    }
+
+    @Override
+    public void testAsFloatValue_0args() {
+        BigDecimal v = randomBigDecimal();
+        YamlBigDecimalNode node = new YamlBigDecimalNode(v);
+        errors.checkThat(node.asFloatValue(), is(v.floatValue()));
+    }
+
+    @Override
+    public void testAsFloatValue_float() {
+        BigDecimal v = randomBigDecimal();
+        YamlBigDecimalNode node = new YamlBigDecimalNode(v);
+        errors.checkThat(node.asFloatValue(0.0f), is(v.floatValue()));
+        errors.checkThat(node.asFloatValue(1.0f), is(v.floatValue()));
+        errors.checkThat(node.asFloatValue(-1.0f), is(v.floatValue()));
+    }
+
+    @Override
+    public void testAsDoubleValue_0args() {
+        BigDecimal v = randomBigDecimal();
+        YamlBigDecimalNode node = new YamlBigDecimalNode(v);
+        errors.checkThat(node.asDoubleValue(), is(v.doubleValue()));
+    }
+
+    @Override
+    public void testAsDoubleValue_double() {
+        BigDecimal v = randomBigDecimal();
+        YamlBigDecimalNode node = new YamlBigDecimalNode(v);
+        errors.checkThat(node.asDoubleValue(0.0d), is(v.doubleValue()));
+        errors.checkThat(node.asDoubleValue(1.0d), is(v.doubleValue()));
+        errors.checkThat(node.asDoubleValue(-1.0d), is(v.doubleValue()));
+    }
+
+    @Override
+    public void testAsNumberValue_0args() {
+        BigDecimal v = randomBigDecimal();
+        YamlBigDecimalNode node = new YamlBigDecimalNode(v);
+        errors.checkThat(node.asNumberValue(), is((Number) v));
+    }
+
+    @Override
+    public void testAsNumberValue_Number() {
+        BigDecimal v = randomBigDecimal();
+        YamlBigDecimalNode node = new YamlBigDecimalNode(v);
+        errors.checkThat(node.asNumberValue(1), is((Number) v));
+        errors.checkThat(node.asNumberValue(null), is((Number) v));
+        errors.checkThat(node.asNumberValue(0.0d), is((Number) v));
+        errors.checkThat(node.asNumberValue(1.0d), is((Number) v));
+        errors.checkThat(node.asNumberValue(-1.0d), is((Number) v));
+    }
+
+    @Override
+    public void testAsIntValue_0args() {
+        YamlBigDecimalNode node = instance();
+        errors.checkThat(node.asIntValue(),
+                         is(node.numberValue().intValue()));
+    }
+
+    @Override
+    public void testAsIntValue_int() {
+        YamlBigDecimalNode node = instance();
+        errors.checkThat(node.asIntValue(1),
+                         is(node.numberValue().intValue()));
+        errors.checkThat(node.asIntValue(0),
+                         is(node.numberValue().intValue()));
+        errors.checkThat(node.asIntValue(-1),
+                         is(node.numberValue().intValue()));
+    }
+
+    @Override
+    public void testAsByteValue_0args() {
+        YamlBigDecimalNode node = instance();
+        errors.checkThat(node.asByteValue(),
+                         is(node.numberValue().byteValue()));
+    }
+
+    @Override
+    public void testAsByteValue_byte() {
+        YamlBigDecimalNode node = instance();
+        errors.checkThat(node.asByteValue((byte) 0),
+                         is(node.numberValue().byteValue()));
+        errors.checkThat(node.asByteValue((byte) 1),
+                         is(node.numberValue().byteValue()));
+        errors.checkThat(node.asByteValue((byte) -1),
+                         is(node.numberValue().byteValue()));
+    }
+
+    @Override
+    public void testAsShortValue_0args() {
+        YamlBigDecimalNode node = instance();
+        errors.checkThat(node.asShortValue(),
+                         is(node.numberValue().shortValue()));
+    }
+
+    @Override
+    public void testAsShortValue_short() {
+        YamlBigDecimalNode node = instance();
+        errors.checkThat(node.asShortValue((short) 1),
+                         is(node.numberValue().shortValue()));
+        errors.checkThat(node.asShortValue((short) 0),
+                         is(node.numberValue().shortValue()));
+        errors.checkThat(node.asShortValue((short) -1),
+                         is(node.numberValue().shortValue()));
+    }
+
+    @Override
+    public void testAsLongValue_0args() {
+        YamlBigDecimalNode node = instance();
+        errors.checkThat(node.asLongValue(),
+                         is(node.numberValue().longValue()));
+    }
+
+    @Override
+    public void testAsLongValue_long() {
+        YamlBigDecimalNode node = instance();
+        errors.checkThat(node.asLongValue(0),
+                         is(node.numberValue().longValue()));
+        errors.checkThat(node.asLongValue(1),
+                         is(node.numberValue().longValue()));
+        errors.checkThat(node.asLongValue(-1),
+                         is(node.numberValue().longValue()));
+    }
+
 }

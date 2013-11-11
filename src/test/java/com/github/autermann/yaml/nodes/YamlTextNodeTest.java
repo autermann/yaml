@@ -37,7 +37,7 @@ import com.github.autermann.yaml.YamlNode;
 public class YamlTextNodeTest extends AbstractYamlScalarNodeTest {
 
     /**
-     * Tests for {@literal null} in constructor.
+     * Tests for {@code null} in constructor.
      */
     public void testConstructorNull() {
         thrown.expect(NullPointerException.class);
