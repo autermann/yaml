@@ -135,7 +135,7 @@ public abstract class AbstractReturningYamlNodeVisitor<T>
      *
      * @return the returned value
      */
-    protected T visitScalar(AbstractYamlScalarNode<?> node) {
+    protected T visitScalar(AbstractYamlScalarNode node) {
         return null;
     }
 

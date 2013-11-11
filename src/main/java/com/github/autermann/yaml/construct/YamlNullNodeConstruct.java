@@ -36,7 +36,7 @@ public class YamlNullNodeConstruct extends AbstractYamlScalarNodeConstruct {
     }
 
     @Override
-    public AbstractYamlScalarNode<?> construct(String value) {
+    public AbstractYamlScalarNode construct(String value) {
         return getNodeFactory().nullNode();
     }
 

@@ -42,7 +42,7 @@ public class YamlDecimalNodeConstruct extends AbstractYamlScalarNodeConstruct {
     }
 
     @Override
-    public AbstractYamlScalarNode<?> construct(String value) {
+    public AbstractYamlScalarNode construct(String value) {
         String v = value.trim().toLowerCase().replaceAll("_", "");
         if (v.equals(".inf")) {
             return getNodeFactory().doubleNode(Double.POSITIVE_INFINITY);

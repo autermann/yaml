@@ -45,7 +45,7 @@ public class YamlIntegralConstruct extends AbstractYamlScalarNodeConstruct {
     }
 
     @Override
-    public AbstractYamlScalarNode<?> construct(String value) {
+    public AbstractYamlScalarNode construct(String value) {
         BigInteger number = new BigInteger(value);
         if (Numbers.fitsIntoByte(number)) {
             return getNodeFactory().byteNode(number.byteValue());

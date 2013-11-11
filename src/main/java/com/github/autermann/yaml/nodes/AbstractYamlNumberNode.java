@@ -23,7 +23,7 @@ import com.google.common.base.Objects;
  *
  * @author Christian Autermann
  */
-public abstract class AbstractYamlNumberNode extends AbstractYamlScalarNode<Number> {
+public abstract class AbstractYamlNumberNode extends AbstractYamlScalarNode {
 
     @Override
     public boolean isNumber() {
@@ -91,4 +91,7 @@ public abstract class AbstractYamlNumberNode extends AbstractYamlScalarNode<Numb
     public Number numberValue() {
         return value();
     }
+
+    @Override
+    public abstract Number value();
 }

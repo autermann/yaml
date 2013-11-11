@@ -227,7 +227,7 @@ public class YamlNodeRepresenter extends Representer {
         }
 
         @Override
-        protected Node visitScalar(AbstractYamlScalarNode<?> node) {
+        protected Node visitScalar(AbstractYamlScalarNode node) {
             return delegate(node.tag(), node.value());
         }
 

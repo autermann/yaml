@@ -28,7 +28,7 @@ import com.github.autermann.yaml.YamlNodeVisitor;
  *
  * @author Christian Autermann
  */
-public abstract class YamlBooleanNode extends AbstractYamlScalarNode<Boolean> {
+public abstract class YamlBooleanNode extends AbstractYamlScalarNode {
     /**
      * Singleton for {@code true}.
      */

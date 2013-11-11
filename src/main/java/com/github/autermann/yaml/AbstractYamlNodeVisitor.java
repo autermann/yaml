@@ -125,7 +125,7 @@ public abstract class AbstractYamlNodeVisitor implements YamlNodeVisitor {
      *
      * @param node the node to visit
      */
-    protected void visitScalar(AbstractYamlScalarNode<?> node) {
+    protected void visitScalar(AbstractYamlScalarNode node) {
         // no-op
     }
 

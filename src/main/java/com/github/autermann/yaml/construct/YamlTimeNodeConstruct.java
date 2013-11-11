@@ -47,7 +47,7 @@ public class YamlTimeNodeConstruct extends AbstractYamlScalarNodeConstruct {
     }
 
     @Override
-    protected AbstractYamlScalarNode<?> construct(String value) {
+    protected AbstractYamlScalarNode construct(String value) {
         return getNodeFactory().dateTimeNode(timeEncoding.parseDateTime(value));
     }
 

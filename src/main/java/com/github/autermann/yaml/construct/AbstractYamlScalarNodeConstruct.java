@@ -53,6 +53,6 @@ public abstract class AbstractYamlScalarNodeConstruct extends AbstractYamlConstr
      *
      * @return the {@link com.github.autermann.yaml.YamlNode}
      */
-    protected abstract AbstractYamlScalarNode<?> construct(String value);
+    protected abstract AbstractYamlScalarNode construct(String value);
 
 }

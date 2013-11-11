@@ -46,7 +46,7 @@ public class YamlBinaryNodeConstruct extends AbstractYamlScalarNodeConstruct {
     }
 
     @Override
-    protected AbstractYamlScalarNode<?> construct(String value) {
+    protected AbstractYamlScalarNode construct(String value) {
         return getNodeFactory().binaryNode(binaryEncoding.decode(value));
     }
 

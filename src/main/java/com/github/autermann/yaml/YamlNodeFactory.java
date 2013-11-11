@@ -56,7 +56,7 @@ public abstract class YamlNodeFactory {
      *
      * @return a {@link YamlBinaryNode} or {@link YamlNullNode}
      */
-    public AbstractYamlScalarNode<?> binaryNode(Byte[] value) {
+    public AbstractYamlScalarNode binaryNode(Byte[] value) {
         if (value == null) {
             return nullNode();
         }
@@ -75,7 +75,7 @@ public abstract class YamlNodeFactory {
      *
      * @return a {@link YamlBinaryNode} or {@link YamlNullNode}
      */
-    public AbstractYamlScalarNode<?> binaryNode(byte[] value) {
+    public AbstractYamlScalarNode binaryNode(byte[] value) {
         if (value == null) {
             return nullNode();
         }
@@ -90,7 +90,7 @@ public abstract class YamlNodeFactory {
      *
      * @return a {@link YamlBooleanNode} or {@link YamlNullNode}
      */
-    public AbstractYamlScalarNode<?> booleanNode(Boolean value) {
+    public AbstractYamlScalarNode booleanNode(Boolean value) {
         if (value == null) {
             return nullNode();
         }
@@ -107,7 +107,7 @@ public abstract class YamlNodeFactory {
      * @return a {@link com.github.autermann.yaml.nodes.YamlByteNode} or
      *         {@link YamlNullNode}
      */
-    public AbstractYamlScalarNode<?> byteNode(Byte value) {
+    public AbstractYamlScalarNode byteNode(Byte value) {
         if (value == null) {
             return nullNode();
         }
@@ -124,7 +124,7 @@ public abstract class YamlNodeFactory {
      * @return a {@link com.github.autermann.yaml.nodes.YamlShortNode} or
      *         {@link YamlNullNode}
      */
-    public AbstractYamlScalarNode<?> shortNode(Short value) {
+    public AbstractYamlScalarNode shortNode(Short value) {
         if (value == null) {
             return nullNode();
         }
@@ -141,7 +141,7 @@ public abstract class YamlNodeFactory {
      * @return a {@link com.github.autermann.yaml.nodes.YamlIntegerNode} or
      *         {@link YamlNullNode}
      */
-    public AbstractYamlScalarNode<?> intNode(Integer value) {
+    public AbstractYamlScalarNode intNode(Integer value) {
         if (value == null) {
             return nullNode();
         }
@@ -158,7 +158,7 @@ public abstract class YamlNodeFactory {
      * @return a {@link com.github.autermann.yaml.nodes.YamlLongNode} or
      *         {@link YamlNullNode}
      */
-    public AbstractYamlScalarNode<?> longNode(Long value) {
+    public AbstractYamlScalarNode longNode(Long value) {
         if (value == null) {
             return nullNode();
         }
@@ -175,7 +175,7 @@ public abstract class YamlNodeFactory {
      * @return a {@link com.github.autermann.yaml.nodes.YamlBigIntegerNode} or
      *         {@link YamlNullNode}
      */
-    public AbstractYamlScalarNode<?> bigIntegerNode(BigInteger value) {
+    public AbstractYamlScalarNode bigIntegerNode(BigInteger value) {
         if (value == null) {
             return nullNode();
         }
@@ -192,7 +192,7 @@ public abstract class YamlNodeFactory {
      * @return a {@link com.github.autermann.yaml.nodes.YamlFloatNode} or
      *         {@link YamlNullNode}
      */
-    public AbstractYamlScalarNode<?> floatNode(Float value) {
+    public AbstractYamlScalarNode floatNode(Float value) {
         if (value == null) {
             return nullNode();
         }
@@ -209,7 +209,7 @@ public abstract class YamlNodeFactory {
      * @return a {@link com.github.autermann.yaml.nodes.YamlDoubleNode} or
      *         {@link YamlNullNode}
      */
-    public AbstractYamlScalarNode<?> doubleNode(Double value) {
+    public AbstractYamlScalarNode doubleNode(Double value) {
         if (value == null) {
             return nullNode();
         }
@@ -226,7 +226,7 @@ public abstract class YamlNodeFactory {
      * @return a {@link com.github.autermann.yaml.nodes.YamlBigDecimalNode} or
      *         {@link YamlNullNode}
      */
-    public AbstractYamlScalarNode<?> bigDecimalNode(BigDecimal value) {
+    public AbstractYamlScalarNode bigDecimalNode(BigDecimal value) {
         if (value == null) {
             return nullNode();
         }
@@ -241,7 +241,7 @@ public abstract class YamlNodeFactory {
      *
      * @return a {@link YamlTextNode} or {@link YamlNullNode}
      */
-    public AbstractYamlScalarNode<?> textNode(String value) {
+    public AbstractYamlScalarNode textNode(String value) {
         if (value == null) {
             return nullNode();
         }
@@ -256,7 +256,7 @@ public abstract class YamlNodeFactory {
      *
      * @return a {@link YamlTimeNode} or {@link YamlNullNode}
      */
-    public AbstractYamlScalarNode<?> dateTimeNode(Date value) {
+    public AbstractYamlScalarNode dateTimeNode(Date value) {
         if (value == null) {
             return nullNode();
         }
@@ -271,7 +271,7 @@ public abstract class YamlNodeFactory {
      *
      * @return a {@link YamlTimeNode} or {@link YamlNullNode}
      */
-    public AbstractYamlScalarNode<?> dateTimeNode(DateTime value) {
+    public AbstractYamlScalarNode dateTimeNode(DateTime value) {
         if (value == null) {
             return nullNode();
         }

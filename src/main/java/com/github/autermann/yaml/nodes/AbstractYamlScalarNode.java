@@ -20,11 +20,9 @@ import com.github.autermann.yaml.YamlNode;
 /**
  * Abstract {@link YamlNode} to represent a scalar node.
  *
- * @param <T> the value type
- *
  * @author Christian Autermann
  */
-public abstract class AbstractYamlScalarNode<T> extends AbstractYamlNode {
+public abstract class AbstractYamlScalarNode extends AbstractYamlNode {
 
     @Override
     public boolean isScalar() {
@@ -44,7 +42,7 @@ public abstract class AbstractYamlScalarNode<T> extends AbstractYamlNode {
      *
      * @return the value
      */
-    public abstract T value();
+    public abstract Object value();
 
     @Override
     @SuppressWarnings("unchecked")

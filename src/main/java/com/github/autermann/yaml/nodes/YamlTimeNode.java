@@ -33,7 +33,7 @@ import com.github.autermann.yaml.YamlNodeVisitor;
  *
  * @author Christian Autermann
  */
-public class YamlTimeNode extends AbstractYamlScalarNode<DateTime> {
+public class YamlTimeNode extends AbstractYamlScalarNode {
     /**
      * The {@link DateTime} value.
      */
