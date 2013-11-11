@@ -72,7 +72,7 @@ public abstract class AbstractYamlNumberNode extends AbstractYamlScalarNode<Numb
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(numberValue());
+        return numberValue().hashCode();
     }
 
     @Override

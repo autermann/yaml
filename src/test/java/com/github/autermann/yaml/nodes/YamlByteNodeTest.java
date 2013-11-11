@@ -15,76 +15,366 @@
  */
 package com.github.autermann.yaml.nodes;
 
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.bigDecimalNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.bigIntegerNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.binaryNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.booleanNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.byteNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.containerNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.decimalNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.doubleNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.existingNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.floatNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.intNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.integralNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.longNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.mapNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.nullNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.numberNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.orderedMapNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.pairsNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.scalarNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.sequenceNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.setNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.shortNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.textNode;
-import static com.github.autermann.yaml.nodes.YamlNodesMatcher.timeNode;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
-import static org.hamcrest.Matchers.notNullValue;
-import static org.junit.Assert.assertThat;
 
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ErrorCollector;
+import java.math.BigInteger;
+import java.util.Date;
+import java.util.Random;
+
+import org.joda.time.DateTime;
+import org.yaml.snakeyaml.nodes.Tag;
 
 import com.github.autermann.yaml.YamlNode;
-import com.github.autermann.yaml.YamlNodeFactory;
 
-public class YamlByteNodeTest {
+/**
+ * Tests for {@link YamlByteNode}s.
+ *
+ * @author Christian Autermann
+ */
+public class YamlByteNodeTest extends AbstractYamlNodeTest {
+    /**
+     * The {{@link Random} to create instances with.
+     */
+    private final Random random = new Random();
 
-    public final YamlNodeFactory factory = YamlNodeFactory.createDefault();
+    @Override
+    public void testToString() {
+        YamlByteNode instance = instance();
+        errors.checkThat(instance.toString(),
+                         is(Byte.valueOf(instance.byteValue()).toString()));
+    }
 
-    @Rule
-    public final ErrorCollector errors = new ErrorCollector();
+    @Override
+    public void testEquals() {
+        byte b = randomByte();
+        errors.checkThat(new YamlByteNode(b), is(new YamlByteNode(b)));
+        errors.checkThat(new YamlByteNode(b),
+                         is(not(new YamlByteNode(another(b)))));
+        errors.checkThat((YamlNode) new YamlByteNode(b),
+                         is(not((YamlNode) YamlNullNode.instance())));
+    }
 
-    @Test
-    public void testType() {
-        YamlNode node = factory.byteNode(Byte.MAX_VALUE);
-        assertThat(node, is(notNullValue()));
-        errors.checkThat(node, is(not(binaryNode())));
-        errors.checkThat(node, is(not(booleanNode())));
-        errors.checkThat(node, is(not(containerNode())));
-        errors.checkThat(node, is(not(decimalNode())));
-        errors.checkThat(node, is((existingNode())));
-        errors.checkThat(node, is((integralNode())));
-        errors.checkThat(node, is(not(mapNode())));
-        errors.checkThat(node, is(not(nullNode())));
-        errors.checkThat(node, is((numberNode())));
-        errors.checkThat(node, is(not(orderedMapNode())));
-        errors.checkThat(node, is(not(pairsNode())));
-        errors.checkThat(node, is((scalarNode())));
-        errors.checkThat(node, is(not(sequenceNode())));
-        errors.checkThat(node, is(not(setNode())));
-        errors.checkThat(node, is(not(textNode())));
-        errors.checkThat(node, is(not(timeNode())));
-        errors.checkThat(node, is((bigIntegerNode())));
-        errors.checkThat(node, is((longNode())));
-        errors.checkThat(node, is((intNode())));
-        errors.checkThat(node, is((shortNode())));
-        errors.checkThat(node, is((byteNode())));
-        errors.checkThat(node, is(not(bigDecimalNode())));
-        errors.checkThat(node, is(not(doubleNode())));
-        errors.checkThat(node, is(not(floatNode())));
+    @Override
+    public void testHashCode() {
+        YamlByteNode instance = instance();
+        errors.checkThat(instance.hashCode(),
+                         is(Byte.valueOf(instance.byteValue()).hashCode()));
+    }
+
+    @Override
+    public void testTag() {
+        errors.checkThat(instance().tag(), is(Tag.INT));
+    }
+
+    @Override
+    protected YamlByteNode instance() {
+        return new YamlByteNode(randomByte());
+    }
+
+    @Override
+    protected FailingReturningYamlNodeVisitor returningVisitor() {
+        return new FailingReturningYamlNodeVisitor() {
+            @Override
+            public Void visit(YamlIntegralNode node) {
+                return hasVisited(true);
+            }
+        };
+    }
+
+    @Override
+    protected FailingYamlNodeVisitor visitor() {
+        return new FailingYamlNodeVisitor() {
+            @Override
+            public void visit(YamlIntegralNode node) {
+                hasVisited(true);
+            }
+
+        };
+    }
+
+    @Override
+    public void testIsByte() {
+        errors.checkThat(instance().isByte(), is(true));
+    }
+
+    @Override
+    public void testIsIntegral() {
+        errors.checkThat(instance().isIntegral(), is(true));
+    }
+
+    @Override
+    public void testIsShort() {
+        errors.checkThat(instance().isShort(), is(true));
+    }
+
+    @Override
+    public void testIsInt() {
+        errors.checkThat(instance().isInt(), is(true));
+    }
+
+    @Override
+    public void testIsLong() {
+        errors.checkThat(instance().isLong(), is(true));
+    }
+
+    @Override
+    public void testIsBigInteger() {
+        errors.checkThat(instance().isBigInteger(), is(true));
+    }
+
+    @Override
+    public void testIsScalar() {
+        errors.checkThat(instance().isScalar(), is(true));
+    }
+
+    @Override
+    public void testIsNumber() {
+        errors.checkThat(instance().isNumber(), is(true));
+    }
+
+    @Override
+    public void testByteValue() {
+        byte b = randomByte();
+        YamlNode node = new YamlByteNode(b);
+        errors.checkThat(node.byteValue(), is(b));
+    }
+
+    @Override
+    public void testShortValue() {
+        byte b = randomByte();
+        YamlNode node = new YamlByteNode(b);
+        errors.checkThat(node.shortValue(), is((short) b));
+    }
+
+    @Override
+    public void testIntValue() {
+        byte b = randomByte();
+        YamlNode node = new YamlByteNode(b);
+        errors.checkThat(node.intValue(), is((int) b));
+    }
+
+    @Override
+    public void testLongValue() {
+        byte b = randomByte();
+        YamlNode node = new YamlByteNode(b);
+        errors.checkThat(node.longValue(), is((long) b));
+    }
+
+    @Override
+    public void testBigIntegerValue() {
+        byte b = randomByte();
+        YamlNode node = new YamlByteNode(b);
+        errors.checkThat(node.bigIntegerValue(),
+                         is(BigInteger.valueOf((long) b)));
+    }
+
+    @Override
+    public void testAsByteValue_0args() {
+        byte b = randomByte();
+        YamlNode node = new YamlByteNode(b);
+        errors.checkThat(node.asByteValue(), is(b));
+    }
+
+    @Override
+    public void testAsByteValue_byte() {
+        byte b = randomByte();
+        YamlNode node = new YamlByteNode(b);
+        errors.checkThat(node.asByteValue((byte) 0), is(b));
+        errors.checkThat(node.asByteValue((byte) 1), is(b));
+        errors.checkThat(node.asByteValue((byte) -1), is(b));
+    }
+
+    @Override
+    public void testAsShortValue_0args() {
+        byte b = randomByte();
+        YamlNode node = new YamlByteNode(b);
+        errors.checkThat(node.asShortValue(), is((short) b));
+    }
+
+    @Override
+    public void testAsShortValue_short() {
+        byte b = randomByte();
+        YamlNode node = new YamlByteNode(b);
+        errors.checkThat(node.asShortValue((short) 0), is((short) b));
+        errors.checkThat(node.asShortValue((short) 1), is((short) b));
+        errors.checkThat(node.asShortValue((short) -1), is((short) b));
+    }
+
+    @Override
+    public void testAsIntValue_0args() {
+        byte b = randomByte();
+        YamlNode node = new YamlByteNode(b);
+        errors.checkThat(node.asIntValue(), is((int) b));
+    }
+
+    @Override
+    public void testAsIntValue_int() {
+        byte b = randomByte();
+        YamlNode node = new YamlByteNode(b);
+        errors.checkThat(node.asIntValue(0), is((int) b));
+        errors.checkThat(node.asIntValue(1), is((int) b));
+        errors.checkThat(node.asIntValue(-1), is((int) b));
+    }
+
+    @Override
+    public void testAsLongValue_0args() {
+        byte b = randomByte();
+        YamlNode node = new YamlByteNode(b);
+        errors.checkThat(node.asLongValue(), is((long) b));
+    }
+
+    @Override
+    public void testAsLongValue_long() {
+        byte b = randomByte();
+        YamlNode node = new YamlByteNode(b);
+        errors.checkThat(node.asLongValue(0), is((long) b));
+        errors.checkThat(node.asLongValue(1), is((long) b));
+        errors.checkThat(node.asLongValue(-1), is((long) b));
+    }
+
+    @Override
+    public void testAsBigIntegerValue_0args() {
+        byte b = randomByte();
+        YamlNode node = new YamlByteNode(b);
+        errors.checkThat(node.asBigIntegerValue(),
+                         is(BigInteger.valueOf((long) b)));
+    }
+
+    @Override
+    public void testAsBigIntegerValue_BigInteger() {
+         byte b = randomByte();
+        YamlNode node = new YamlByteNode(b);
+        BigInteger v = BigInteger.valueOf((long) b);
+        errors.checkThat(node.asBigIntegerValue(BigInteger.ONE), is(v));
+        errors.checkThat(node.asBigIntegerValue(BigInteger.ZERO), is(v));
+        errors.checkThat(node.asBigIntegerValue(BigInteger.TEN), is(v));
+    }
+
+
+
+    @Override
+    public void testAsFloatValue_0args() {
+        byte b = randomByte();
+        YamlNode node = new YamlByteNode(b);
+        errors.checkThat(node.asFloatValue(), is((float) b));
+    }
+
+    @Override
+    public void testAsFloatValue_float() {
+        byte b = randomByte();
+        YamlNode node = new YamlByteNode(b);
+        errors.checkThat(node.asFloatValue(0.0f), is((float) b));
+        errors.checkThat(node.asFloatValue(1.0f), is((float) b));
+        errors.checkThat(node.asFloatValue(-1.0f), is((float) b));
+    }
+
+    @Override
+    public void testAsDoubleValue_0args() {
+        byte b = randomByte();
+        YamlNode node = new YamlByteNode(b);
+        errors.checkThat(node.asDoubleValue(), is((double) b));
+    }
+
+    @Override
+    public void testAsDoubleValue_double() {
+        byte b = randomByte();
+        YamlNode node = new YamlByteNode(b);
+        errors.checkThat(node.asDoubleValue(0.0d), is((double) b));
+        errors.checkThat(node.asDoubleValue(1.0d), is((double) b));
+        errors.checkThat(node.asDoubleValue(-1.0d), is((double) b));
+    }
+
+    @Override
+    public void testAsNumberValue_0args() {
+        byte b = randomByte();
+        YamlNode node = new YamlByteNode(b);
+        errors.checkThat(node.asNumberValue(), is((Number) b));
+    }
+
+    @Override
+    public void testAsNumberValue_Number() {
+        byte b = randomByte();
+        YamlNode node = new YamlByteNode(b);
+        errors.checkThat(node.asNumberValue((Number) 0), is((Number) b));
+        errors.checkThat(node.asNumberValue((Number) 1), is((Number) b));
+        errors.checkThat(node.asNumberValue((Number) (-1)), is((Number) b));
+    }
+
+    @Override
+    public void testNumberValue() {
+        byte b = randomByte();
+        YamlNode node = new YamlByteNode(b);
+        errors.checkThat(node.numberValue(), is((Number) b));
+    }
+
+    @Override
+    public void testAsDateTimeValue_0args() {
+        YamlByteNode instance = instance();
+        errors.checkThat(instance.asDateTimeValue(),
+                         is(new DateTime(instance.asLongValue())));
+    }
+
+    @Override
+    public void testAsDateTimeValue_DateTime() {
+        YamlByteNode instance = instance();
+        DateTime v = new DateTime(instance.asLongValue());
+        errors.checkThat(instance.asDateTimeValue(null), is(v));
+        errors.checkThat(instance.asDateTimeValue(DateTime.now()), is(v));
+    }
+
+
+    @Override
+    public void testAsDateValue_0args() {
+        YamlByteNode instance = instance();
+        errors.checkThat(instance.asDateValue(),
+                         is(new Date(instance.asLongValue())));
+    }
+
+    @Override
+    public void testAsDateValue_Date() {
+        YamlByteNode instance = instance();
+        Date v = new Date(instance.asLongValue());
+        errors.checkThat(instance.asDateValue(new Date()), is(v));
+        errors.checkThat(instance.asDateValue(null), is(v));
+    }
+
+    @Override
+    public void testAsTextValue_0args() {
+        YamlByteNode instance = instance();
+        errors.checkThat(instance.asTextValue(),
+                         is(String.valueOf(instance.byteValue())));
+    }
+
+    @Override
+    public void testAsTextValue_String() {
+        YamlByteNode instance = instance();
+        String v = String.valueOf(instance.byteValue());
+        errors.checkThat(instance.asTextValue(""), is(v));
+        errors.checkThat(instance.asTextValue(null), is(v));
+        errors.checkThat(instance.asTextValue("asdf"), is(v));
+    }
+
+    /**
+     * Creates a random byte.
+     *
+     * @return the random byte
+     */
+    private byte randomByte() {
+        byte[] bytes = new byte[1];
+        random.nextBytes(bytes);
+        byte value = bytes[0];
+        return value;
+    }
+
+    /**
+     * Creates a {@literal byte} that is different from {@literal b}.
+     *
+     * @param b the {@literal byte}
+     *
+     * @return a {@literal byte} that is different from {@literal b}
+     */
+    private byte another(byte b) {
+        return (byte) (b == Byte.MAX_VALUE ? b - 1 : b + 1);
     }
 }
