@@ -27,7 +27,7 @@ import com.github.autermann.yaml.YamlNode;
  *
  * @author Christian Autermann
  */
-public abstract class YamlBooleanNodeTest extends AbstractYamlNodeTest {
+public abstract class YamlBooleanNodeTest extends AbstractYamlScalarNodeTest {
 
     @Override
     public void testHashCode() {
@@ -71,4 +71,11 @@ public abstract class YamlBooleanNodeTest extends AbstractYamlNodeTest {
     public void testIsScalar() {
         assertThat(instance().isScalar(), is(true));
     }
+
+    @Override
+    public void testValue() {
+        assertThat(instance().booleanValue(), is(instance().value()));
+    }
+
+
 }

@@ -64,9 +64,8 @@ public final class YamlMissingNode extends YamlBaseNode {
     }
 
     @Override
-    @SuppressWarnings("unchecked")
-    public <T extends YamlNode> T copy() {
-        return (T) this;
+    public YamlMissingNode copy() {
+        return this;
     }
 
     @Override

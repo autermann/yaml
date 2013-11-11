@@ -31,7 +31,7 @@ import com.github.autermann.yaml.YamlNode;
  *
  * @author Christian Autermann
  */
-public class YamlNullNodeTest extends AbstractYamlNodeTest {
+public class YamlNullNodeTest extends AbstractYamlScalarNodeTest {
     @Override
     public void testIsScalar() {
         assertThat(instance().isScalar(), is(true));
@@ -68,13 +68,12 @@ public class YamlNullNodeTest extends AbstractYamlNodeTest {
                          is(not((YamlNode) YamlMissingNode.instance())));
     }
 
-    @Test
     @Override
     public void testIsNull() {
         assertThat(instance().isNull(), is(true));
     }
 
-    @Test
+    @Override
     public void testValue() {
         assertThat(instance().value(), is(nullValue()));
     }

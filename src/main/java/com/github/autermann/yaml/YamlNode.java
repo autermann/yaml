@@ -955,11 +955,9 @@ public interface YamlNode extends Iterable<YamlNode> {
     /**
      * Create a (deep) copy of this node.
      *
-     * @param <T> the type of this node
-     *
      * @return the copy
      */
-    <T extends YamlNode> T copy();
+    YamlNode copy();
 
     /**
      * Lets a visitor visit this node.

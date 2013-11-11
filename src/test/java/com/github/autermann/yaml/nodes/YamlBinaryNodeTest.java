@@ -32,7 +32,7 @@ import com.google.common.io.BaseEncoding;
  *
  * @author Christian Autermann
  */
-public class YamlBinaryNodeTest extends AbstractYamlNodeTest {
+public class YamlBinaryNodeTest extends AbstractYamlScalarNodeTest {
     /**
      * The random to fill the byte arrays.
      */
@@ -170,5 +170,11 @@ public class YamlBinaryNodeTest extends AbstractYamlNodeTest {
      */
     private String base64(YamlBinaryNode node) {
         return BaseEncoding.base64().encode(node.binaryValue());
+    }
+
+    @Override
+    public void testValue() {
+        YamlBinaryNode node = instance();
+        errors.checkThat(node.value(), is(node.binaryValue()));
     }
 }

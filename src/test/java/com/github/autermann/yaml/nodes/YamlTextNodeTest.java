@@ -30,7 +30,7 @@ import com.github.autermann.yaml.YamlNode;
  *
  * @author Christian Autermann
  */
-public class YamlTextNodeTest extends AbstractYamlNodeTest {
+public class YamlTextNodeTest extends AbstractYamlScalarNodeTest {
 
     @Override
     public void testToString() {
@@ -161,5 +161,11 @@ public class YamlTextNodeTest extends AbstractYamlNodeTest {
         errors.checkThat(f.asBooleanValue(false), is(false));
         errors.checkThat(instance().asBooleanValue(true), is(false));
         errors.checkThat(instance().asBooleanValue(false), is(false));
+    }
+
+    @Override
+    public void testValue() {
+        YamlTextNode v = instance();
+        assertThat(v.value(), is(v.textValue()));
     }
 }

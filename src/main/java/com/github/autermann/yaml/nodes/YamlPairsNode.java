@@ -118,13 +118,12 @@ public class YamlPairsNode extends YamlMappingNode<YamlPairsNode> {
     }
 
     @Override
-    @SuppressWarnings("unchecked")
-    public <T extends YamlNode> T copy() {
+    public YamlPairsNode copy() {
         YamlPairsNode copy = getNodeFactory().pairsNode();
         for (Entry<YamlNode, YamlNode> e : entries()) {
             copy.put(e.getKey().copy(), e.getValue().copy());
         }
-        return (T) copy;
+        return copy;
     }
 
     @Override

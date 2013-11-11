@@ -57,13 +57,12 @@ public class YamlOrderedMapNode extends YamlMapNode {
     }
 
     @Override
-    @SuppressWarnings("unchecked")
-    public <T extends YamlNode> T copy() {
+    public YamlOrderedMapNode copy() {
         YamlOrderedMapNode copy = getNodeFactory().orderedMapNode();
         for (Entry<YamlNode, YamlNode> e : entries()) {
             copy.put(e.getKey().copy(), e.getValue().copy());
         }
-        return (T) copy;
+        return copy;
     }
 
     @Override

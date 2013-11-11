@@ -143,7 +143,7 @@ public abstract class AbstractYamlNodeTest {
     @Test
     public void testCopy() {
         YamlNode node = instance();
-        assertThat(node.<YamlNode>copy(), is(node));
+        assertThat(node.copy(), is(node));
     }
 
     /**

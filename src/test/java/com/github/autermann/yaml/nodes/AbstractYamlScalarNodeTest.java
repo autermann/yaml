@@ -15,39 +15,22 @@
  */
 package com.github.autermann.yaml.nodes;
 
-import com.github.autermann.yaml.YamlNode;
+import org.junit.Test;
 
 /**
- * Abstract {@link YamlNode} to represent a scalar node.
+ * Tests for {@link YamlScalarNode}.
  *
  * @author Christian Autermann
  */
-public abstract class YamlScalarNode extends YamlBaseNode {
-
-    @Override
-    public boolean isScalar() {
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return asTextValue();
-    }
-
-    @Override
-    public abstract String asTextValue(String defaultValue);
+public abstract class AbstractYamlScalarNodeTest extends AbstractYamlNodeTest {
 
     /**
-     * Gets the internal value of this scalar.
-     *
-     * @return the value
+     * Tests {@link YamlScalarNode#value() }.
      */
-    public abstract Object value();
+    @Test
+    public abstract void testValue();
 
     @Override
-    public YamlScalarNode copy() {
-        // subclasses are immutable
-        return this;
-    }
+    protected abstract YamlScalarNode instance();
 
 }

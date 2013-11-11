@@ -32,7 +32,7 @@ import com.github.autermann.yaml.YamlNode;
  *
  * @author Christian Autermann
  */
-public class YamlByteNodeTest extends AbstractYamlNodeTest {
+public class YamlByteNodeTest extends AbstractYamlScalarNodeTest {
     /**
      * The {{@link Random} to create instances with.
      */
@@ -376,5 +376,11 @@ public class YamlByteNodeTest extends AbstractYamlNodeTest {
      */
     private byte another(byte b) {
         return (byte) (b == Byte.MAX_VALUE ? b - 1 : b + 1);
+    }
+
+    @Override
+    public void testValue() {
+        YamlByteNode node = instance();
+        errors.checkThat(node.value(), is(node.byteValue()));
     }
 }

@@ -67,13 +67,12 @@ public class YamlSeqNode extends YamlSequenceNode<YamlSeqNode> {
     }
 
     @Override
-    @SuppressWarnings("unchecked")
-    public <T extends YamlNode> T copy() {
+    public YamlSeqNode copy() {
         YamlSeqNode copy = getNodeFactory().sequenceNode();
         for (YamlNode node : this) {
             copy.add(node.copy());
         }
-        return (T) copy;
+        return copy;
     }
 
     @Override

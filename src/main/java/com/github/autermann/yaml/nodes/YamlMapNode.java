@@ -102,13 +102,12 @@ public class YamlMapNode extends YamlMappingNode<YamlMapNode> {
     }
 
     @Override
-    @SuppressWarnings("unchecked")
-    public <T extends YamlNode> T copy() {
+    public YamlMapNode copy() {
         YamlMapNode copy = getNodeFactory().mapNode();
         for (Entry<YamlNode, YamlNode> e : entries()) {
             copy.put(e.getKey().copy(), e.getValue().copy());
         }
-        return (T) copy;
+        return copy;
     }
 
     @Override
