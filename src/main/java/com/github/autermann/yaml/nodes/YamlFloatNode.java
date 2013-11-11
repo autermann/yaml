@@ -45,7 +45,7 @@ public class YamlFloatNode extends YamlDecimalNode {
 
     @Override
     public BigDecimal bigDecimalValue() {
-        return BigDecimal.valueOf(value);
+        return BigDecimal.valueOf(doubleValue());
     }
 
     @Override
@@ -55,7 +55,7 @@ public class YamlFloatNode extends YamlDecimalNode {
 
     @Override
     public double doubleValue() {
-        return this.value;
+        return (double) this.value;
     }
 
     @Override
