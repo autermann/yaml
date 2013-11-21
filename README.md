@@ -2,7 +2,18 @@
 
 A [Jackson][jackson]-like API to create YAML nodes (based on [SnakeYAML][snakeyaml]).
 
-## Example
+## Example Usage
+
+### Maven
+
+Add this to your `dependencies`:
+```xml
+<dependency>
+     <groupId>com.github.autermann</groupId>
+     <artifactId>yaml</artifactId>
+     <version>1.0.0</version>
+</dependency>
+```
 
 ### Creating nodes
 ```java
