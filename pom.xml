@@ -17,7 +17,7 @@
     <name>YAML API</name>
     <description>A Jackson-like API to create YAML nodes (based on SnakeYAML)</description>
     <inceptionYear>2013</inceptionYear>
-    <url>https://github.com/autermann/yaml-api</url>
+    <url>https://github.com/autermann/yaml</url>
 
     <licenses>
         <license>
