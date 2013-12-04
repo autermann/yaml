@@ -51,8 +51,18 @@ public abstract class YamlIntegralNode extends YamlNumberNode {
     }
 
     @Override
+    public long longValue() {
+        return value().longValue();
+    }
+
+    @Override
     public boolean isInt() {
         return fitsIntoInt();
+    }
+
+    @Override
+    public int intValue() {
+        return value().intValue();
     }
 
     @Override
@@ -61,8 +71,18 @@ public abstract class YamlIntegralNode extends YamlNumberNode {
     }
 
     @Override
+    public short shortValue() {
+        return value().shortValue();
+    }
+
+    @Override
     public boolean isByte() {
         return fitsIntoByte();
+    }
+
+    @Override
+    public byte byteValue() {
+        return value().byteValue();
     }
 
     @Override

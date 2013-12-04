@@ -70,11 +70,6 @@ public class YamlShortNode extends YamlIntegralNode {
     }
 
     @Override
-    public byte byteValue() {
-        return (byte) this.value;
-    }
-
-    @Override
     public Short value() {
         return this.value;
     }

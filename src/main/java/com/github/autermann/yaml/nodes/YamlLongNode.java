@@ -59,11 +59,6 @@ public class YamlLongNode extends YamlIntegralNode {
     }
 
     @Override
-    public long longValue() {
-        return this.value;
-    }
-
-    @Override
     public Long value() {
         return this.value;
     }

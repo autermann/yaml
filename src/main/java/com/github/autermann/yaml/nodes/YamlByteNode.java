@@ -61,21 +61,6 @@ public class YamlByteNode extends YamlIntegralNode {
     }
 
     @Override
-    public long longValue() {
-        return (long) this.value;
-    }
-
-    @Override
-    public int intValue() {
-        return (int) this.value;
-    }
-
-    @Override
-    public short shortValue() {
-        return (short) this.value;
-    }
-
-    @Override
     public Byte value() {
         return this.value;
     }
