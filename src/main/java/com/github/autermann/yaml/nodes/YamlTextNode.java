@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 Christian Autermann
+ * Copyright 2013-2015 Christian Autermann
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,11 +15,12 @@
  */
 package com.github.autermann.yaml.nodes;
 
-import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.nio.charset.Charset;
 import java.util.Date;
+import java.util.Objects;
 
 import org.joda.time.DateTime;
 import org.joda.time.format.ISODateTimeFormat;
@@ -27,7 +28,6 @@ import org.yaml.snakeyaml.nodes.Tag;
 
 import com.github.autermann.yaml.ReturningYamlNodeVisitor;
 import com.github.autermann.yaml.YamlNodeVisitor;
-import com.google.common.base.Charsets;
 
 /**
  * A {@link com.github.autermann.yaml.YamlNode} for {@link String} values.
@@ -46,7 +46,7 @@ public class YamlTextNode extends YamlScalarNode {
      * @param value the value
      */
     public YamlTextNode(String value) {
-        this.value = checkNotNull(value);
+        this.value = Objects.requireNonNull(value);
     }
 
     @Override
@@ -125,7 +125,7 @@ public class YamlTextNode extends YamlScalarNode {
 
     @Override
     public byte[] asBinaryValue(byte[] defaultValue) {
-        return textValue().getBytes(Charsets.UTF_8);
+        return textValue().getBytes(Charset.forName("UTF-8"));
     }
 
     @Override

@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 Christian Autermann
+ * Copyright 2013-2015 Christian Autermann
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,6 +15,11 @@
  */
 package com.github.autermann.yaml.construct;
 
+import java.util.function.BiConsumer;
+import java.util.function.Supplier;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 import org.yaml.snakeyaml.nodes.MappingNode;
 import org.yaml.snakeyaml.nodes.Node;
 import org.yaml.snakeyaml.nodes.NodeTuple;
@@ -22,7 +27,6 @@ import org.yaml.snakeyaml.nodes.NodeTuple;
 import com.github.autermann.yaml.YamlNode;
 import com.github.autermann.yaml.YamlNodeFactory;
 import com.github.autermann.yaml.nodes.YamlMappingNode;
-import com.google.common.base.Supplier;
 
 /**
  * Constructs a {@link YamlMappingNode} from a mapping node.
@@ -53,15 +57,18 @@ public class YamlMappingNodeConstruct extends YamlConstruct {
 
     @Override
     public YamlNode construct(Node node) {
-        YamlMappingNode<?> mapping = supplier.get();
         MappingNode mnode = (MappingNode) node;
+        YamlMappingNode<?> mapping = supplier.get();
         for (NodeTuple tuple : mnode.getValue()) {
             Node key = tuple.getKeyNode();
             Node value = tuple.getValueNode();
-            mapping.put((YamlNode) getDelegate().constructObject(key),
-                        (YamlNode) getDelegate().constructObject(value));
+            mapping.put(delegate(key), delegate(value));
         }
         return mapping;
+    }
+
+    private YamlNode delegate(Node key) {
+        return (YamlNode) getDelegate().constructObject(key);
     }
 
 }

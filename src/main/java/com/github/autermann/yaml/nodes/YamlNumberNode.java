@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 Christian Autermann
+ * Copyright 2013-2015 Christian Autermann
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,7 @@
  */
 package com.github.autermann.yaml.nodes;
 
-import com.google.common.base.Objects;
+import java.util.Objects;
 
 /**
  * A abstract {@link com.github.autermann.yaml.YamlNode} representing a
@@ -78,8 +78,7 @@ public abstract class YamlNumberNode extends YamlScalarNode {
     @Override
     public boolean equals(Object o) {
         return o != null && getClass() == o.getClass() &&
-               Objects.equal(numberValue(), ((YamlNumberNode) o)
-                .numberValue());
+               Objects.equals(numberValue(), ((YamlNumberNode) o).numberValue());
     }
 
     @Override

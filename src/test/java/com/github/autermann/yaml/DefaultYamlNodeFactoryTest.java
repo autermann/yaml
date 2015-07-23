@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 Christian Autermann
+ * Copyright 2013-2015 Christian Autermann
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -50,7 +50,7 @@ import com.github.autermann.yaml.nodes.YamlScalarNode;
 import com.github.autermann.yaml.util.DecimalPrecision;
 
 /**
- * TODO JavaDoc
+ * Tests for {@link DefaultYamlNodeFactory}.
  *
  * @author Christian Autermann
  */

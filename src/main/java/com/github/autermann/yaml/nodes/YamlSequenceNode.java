@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 Christian Autermann
+ * Copyright 2013-2015 Christian Autermann
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,13 +20,13 @@ import java.math.BigInteger;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.stream.Collectors;
 
 import org.joda.time.DateTime;
 
 import com.github.autermann.yaml.YamlNode;
 import com.github.autermann.yaml.YamlNodeFactory;
 import com.github.autermann.yaml.YamlNodes;
-import com.google.common.base.Joiner;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Iterators;
 
@@ -39,10 +39,6 @@ import com.google.common.collect.Iterators;
  */
 public abstract class YamlSequenceNode<T extends YamlSequenceNode<T>>
         extends YamlContainerNode {
-    /**
-     * The {@link Joiner} used in {@link #toString()}.
-     */
-    private static final Joiner JOINER = Joiner.on(", ");
 
     /**
      * Creates a new {@link YamlSequenceNode}.
@@ -427,9 +423,11 @@ public abstract class YamlSequenceNode<T extends YamlSequenceNode<T>>
 
     @Override
     public String toString() {
-        StringBuilder builder = new StringBuilder();
-        builder.append(getClass().getSimpleName()).append("[");
-        return JOINER.appendTo(builder, value()).append("]").toString();
+        String pre = getClass().getSimpleName() + "[";
+        String post = "]";
+        String delim = ",";
+        return value().stream().map(String::valueOf)
+                .collect(Collectors.joining(delim, pre, post));
     }
 
     @Override
@@ -444,10 +442,11 @@ public abstract class YamlSequenceNode<T extends YamlSequenceNode<T>>
 
     @Override
     public YamlNode path(int index) {
-        if (index < 0 || index >= size()) {
+        if (index < 0) {
             return YamlMissingNode.instance();
         }
-        return Iterables.get(value(), index);
+        return value().stream().skip(index)
+                .findFirst().orElseGet(YamlMissingNode::instance);
     }
 
     /**

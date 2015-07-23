@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 Christian Autermann
+ * Copyright 2013-2015 Christian Autermann
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,7 +26,7 @@ import com.github.autermann.yaml.YamlNodeVisitor;
  *
  * @author Christian Autermann
  */
-public final class YamlMissingNode extends YamlBaseNode {
+public final class YamlMissingNode implements YamlNode {
     /**
      * The singleton instance.
      */

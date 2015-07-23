@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 Christian Autermann
+ * Copyright 2013-2015 Christian Autermann
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,19 +15,20 @@
  */
 package com.github.autermann.yaml;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Reader;
 import java.io.Writer;
+import java.nio.charset.Charset;
 import java.util.Iterator;
+import java.util.Objects;
+import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 import org.yaml.snakeyaml.DumperOptions;
 
 import com.github.autermann.yaml.construct.YamlNodeConstructor;
-import com.google.common.base.Charsets;
 import com.google.common.collect.UnmodifiableIterator;
 
 /**
@@ -77,8 +78,8 @@ public class Yaml {
      * @param nodeFactory   the node factory
      */
     public Yaml(DumperOptions dumperOptions, YamlNodeFactory nodeFactory) {
-        checkNotNull(nodeFactory);
-        checkNotNull(dumperOptions);
+        Objects.requireNonNull(nodeFactory);
+        Objects.requireNonNull(dumperOptions);
         this.delegate = new org.yaml.snakeyaml.Yaml(
                 new YamlNodeConstructor(nodeFactory, dumperOptions),
                 new YamlNodeRepresenter(dumperOptions),
@@ -119,7 +120,8 @@ public class Yaml {
      *
      */
     public void dump(YamlNode data, OutputStream output) {
-        getDelegate().dump(data, new OutputStreamWriter(output, Charsets.UTF_8));
+        getDelegate().dump(data, new OutputStreamWriter(output, Charset
+                                                        .forName("UTF-8")));
     }
 
     /**
@@ -156,8 +158,8 @@ public class Yaml {
      *
      */
     public void dumpAll(Iterator<? extends YamlNode> data, OutputStream output) {
-        getDelegate()
-                .dumpAll(data, new OutputStreamWriter(output, Charsets.UTF_8));
+        getDelegate().dumpAll(data, new OutputStreamWriter(output, Charset
+                                                           .forName("UTF-8")));
     }
 
     /**
@@ -276,29 +278,63 @@ public class Yaml {
     }
 
     /**
+     * Loads the string representations into {@link YamlNode}s.
+     *
+     * @param yaml the reader
+     *
+     * @return the {@link YamlNode}s
+     *
+     * @see org.yaml.snakeyaml.Yaml#loadAll(Reader)
+     */
+    public Stream<YamlNode> loadStream(Reader yaml) {
+        return StreamSupport.stream(loadAll(yaml).spliterator(), false);
+    }
+
+    /**
+     * Loads the string representations into {@link YamlNode}s.
+     *
+     * @param yaml the string
+     *
+     * @return the {@link YamlNode}s
+     *
+     * @see org.yaml.snakeyaml.Yaml#loadAll(String)
+     */
+    public Stream<YamlNode> loadStream(String yaml) {
+        return StreamSupport.stream(loadAll(yaml).spliterator(), false);
+    }
+
+    /**
+     * Loads the string representations into {@link YamlNode}s.
+     *
+     * @param yaml the input stream
+     *
+     * @return the {@link YamlNode}s
+     *
+     * @see org.yaml.snakeyaml.Yaml#loadAll(InputStream)
+     */
+    public Stream<YamlNode> loadStream(InputStream yaml) {
+        return StreamSupport.stream(loadAll(yaml).spliterator(), false);
+    }
+
+    /**
      * Transforms a {@code Iterable<Object>} into a {@code Iterable<YamlNode>}.
      *
      * @param nodes the {@link YamlNode}s as {@code Object}s
      *
      * @return the {@link YamlNode}s
      */
-    private Iterable<YamlNode> cast(final Iterable<Object> nodes) {
-        return new Iterable<YamlNode>() {
+    private Iterable<YamlNode> cast(Iterable<Object> nodes) {
+        return () -> new UnmodifiableIterator<YamlNode>() {
+            private final Iterator<Object> iter = nodes.iterator();
+
             @Override
-            public Iterator<YamlNode> iterator() {
-                return new UnmodifiableIterator<YamlNode>() {
-                    private final Iterator<Object> iter = nodes.iterator();
+            public boolean hasNext() {
+                return iter.hasNext();
+            }
 
-                    @Override
-                    public boolean hasNext() {
-                        return iter.hasNext();
-                    }
-
-                    @Override
-                    public YamlNode next() {
-                        return (YamlNode) iter.next();
-                    }
-                };
+            @Override
+            public YamlNode next() {
+                return (YamlNode) iter.next();
             }
         };
     }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 Christian Autermann
+ * Copyright 2013-2015 Christian Autermann
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,8 +16,8 @@
 package com.github.autermann.yaml.nodes;
 
 import java.math.BigDecimal;
+import java.util.Objects;
 
-import com.google.common.base.Preconditions;
 
 /**
  * A {@link com.github.autermann.yaml.YamlNode} for {@link BigDecimal}s.
@@ -36,7 +36,7 @@ public class YamlBigDecimalNode extends YamlDecimalNode {
      * @param value the value
      */
     public YamlBigDecimalNode(BigDecimal value) {
-        this.value = Preconditions.checkNotNull(value);
+        this.value = Objects.requireNonNull(value);
     }
 
     @Override

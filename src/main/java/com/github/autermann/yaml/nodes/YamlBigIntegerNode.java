@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 Christian Autermann
+ * Copyright 2013-2015 Christian Autermann
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,9 +15,9 @@
  */
 package com.github.autermann.yaml.nodes;
 
-import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.math.BigInteger;
+import java.util.Objects;
 
 import com.github.autermann.yaml.util.Numbers;
 
@@ -38,7 +38,7 @@ public class YamlBigIntegerNode extends YamlIntegralNode {
      * @param value the value
      */
     public YamlBigIntegerNode(BigInteger value) {
-        this.value = checkNotNull(value);
+        this.value = Objects.requireNonNull(value);
     }
 
     @Override

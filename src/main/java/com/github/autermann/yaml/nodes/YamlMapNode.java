@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 Christian Autermann
+ * Copyright 2013-2015 Christian Autermann
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,12 +15,13 @@
  */
 package com.github.autermann.yaml.nodes;
 
-import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Objects;
 
 import org.yaml.snakeyaml.nodes.Tag;
 
@@ -29,9 +30,7 @@ import com.github.autermann.yaml.YamlNode;
 import com.github.autermann.yaml.YamlNodeFactory;
 import com.github.autermann.yaml.YamlNodeVisitor;
 import com.github.autermann.yaml.YamlNodes;
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterators;
-import com.google.common.collect.Maps;
 
 /**
  * A {@link YamlNode} for {@code !!map} mappings.
@@ -53,7 +52,7 @@ public class YamlMapNode extends YamlMappingNode<YamlMapNode> {
     protected YamlMapNode(YamlNodeFactory factory,
                               Map<YamlNode, YamlNode> nodes) {
         super(factory);
-        this.value = checkNotNull(nodes);
+        this.value = Objects.requireNonNull(nodes);
     }
 
     /**
@@ -62,7 +61,7 @@ public class YamlMapNode extends YamlMappingNode<YamlMapNode> {
      * @param factory the factory to create children with
      */
     public YamlMapNode(YamlNodeFactory factory) {
-        this(factory, Maps.<YamlNode, YamlNode>newHashMap());
+        this(factory, new HashMap<>());
     }
 
     @Override

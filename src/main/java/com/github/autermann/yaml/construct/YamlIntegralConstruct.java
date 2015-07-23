@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 Christian Autermann
+ * Copyright 2013-2015 Christian Autermann
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -47,16 +47,17 @@ public class YamlIntegralConstruct extends YamlScalarNodeConstruct {
     @Override
     public YamlScalarNode construct(String value) {
         BigInteger number = new BigInteger(value);
+        YamlNodeFactory nodeFactory = getNodeFactory();
         if (Numbers.fitsIntoByte(number)) {
-            return getNodeFactory().byteNode(number.byteValue());
+            return nodeFactory.byteNode(number.byteValue());
         } else if (Numbers.fitsIntoShort(number)) {
-            return getNodeFactory().shortNode(number.shortValue());
+            return nodeFactory.shortNode(number.shortValue());
         } else if (Numbers.fitsIntoInt(number)) {
-            return getNodeFactory().intNode(number.intValue());
+            return nodeFactory.intNode(number.intValue());
         } else if (Numbers.fitsIntoLong(number)) {
-            return getNodeFactory().longNode(number.longValue());
+            return nodeFactory.longNode(number.longValue());
         } else {
-            return getNodeFactory().bigIntegerNode(number);
+            return nodeFactory.bigIntegerNode(number);
         }
     }
 

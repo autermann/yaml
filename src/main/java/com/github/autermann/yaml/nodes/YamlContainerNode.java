@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 Christian Autermann
+ * Copyright 2013-2015 Christian Autermann
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,9 +15,9 @@
  */
 package com.github.autermann.yaml.nodes;
 
-import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.util.Iterator;
+import java.util.Objects;
 
 import com.github.autermann.yaml.YamlNode;
 import com.github.autermann.yaml.YamlNodeFactory;
@@ -27,7 +27,7 @@ import com.github.autermann.yaml.YamlNodeFactory;
  *
  * @author Christian Autermann
  */
-public abstract class YamlContainerNode extends YamlBaseNode {
+public abstract class YamlContainerNode implements YamlNode {
 
     /**
      * The {@link YamlNodeFactory} to create children with.
@@ -40,7 +40,7 @@ public abstract class YamlContainerNode extends YamlBaseNode {
      * @param factory the factory to create children with
      */
     public YamlContainerNode(YamlNodeFactory factory) {
-        this.factory = checkNotNull(factory);
+        this.factory = Objects.requireNonNull(factory);
     }
 
     /**

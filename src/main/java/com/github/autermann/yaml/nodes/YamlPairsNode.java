@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 Christian Autermann
+ * Copyright 2013-2015 Christian Autermann
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,10 +17,13 @@ package com.github.autermann.yaml.nodes;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Iterator;
-import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Objects;
 
 import org.yaml.snakeyaml.nodes.Tag;
 
@@ -29,14 +32,9 @@ import com.github.autermann.yaml.YamlNode;
 import com.github.autermann.yaml.YamlNodeFactory;
 import com.github.autermann.yaml.YamlNodeVisitor;
 import com.github.autermann.yaml.YamlNodes;
-import com.github.autermann.yaml.util.LinkedListSupplier;
-import com.google.common.base.Supplier;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Iterators;
 import com.google.common.collect.ListMultimap;
-import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import com.google.common.collect.Multimaps;
 
 /**
  * A {@link YamlNode} for {@code !!pairs} mappings.
@@ -47,7 +45,7 @@ public class YamlPairsNode extends YamlMappingNode<YamlPairsNode> {
     /**
      * A {@link ListMultimap} to enable fast access to all values of a key.
      */
-    private final ListMultimap<YamlNode, YamlNode> multiMap;
+    private final Map<YamlNode, List<YamlNode>> multiMap;
     /**
      * A {@link List} of all entries to maintain insertion order.
      */
@@ -60,11 +58,8 @@ public class YamlPairsNode extends YamlMappingNode<YamlPairsNode> {
      */
     public YamlPairsNode(YamlNodeFactory factory) {
         super(factory);
-        LinkedHashMap<YamlNode, Collection<YamlNode>> map = Maps
-                .newLinkedHashMap();
-        Supplier<List<YamlNode>> supplier = LinkedListSupplier.instance();
-        this.multiMap = Multimaps.newListMultimap(map, supplier);
-        this.value = Lists.newLinkedList();
+        this.multiMap = new HashMap<>();
+        this.value = new LinkedList<>();
     }
 
     @Override
@@ -89,7 +84,7 @@ public class YamlPairsNode extends YamlMappingNode<YamlPairsNode> {
             throw new IllegalArgumentException("recursive structures are currently not supported");
         }
         this.value.add(Maps.immutableEntry(key, value));
-        this.multiMap.put(key, value);
+        this.multiMap.computeIfAbsent(key, k -> new LinkedList<>()).add(value);
         return this;
     }
 
@@ -149,7 +144,9 @@ public class YamlPairsNode extends YamlMappingNode<YamlPairsNode> {
 
     @Override
     public boolean hasNotNull(YamlNode key) {
-        return has(key) && Iterables.any(this.multiMap.get(key), YamlNodes.notNullOrMissing());
+        return this.multiMap.getOrDefault(key, Collections.emptyList())
+                .stream().filter(Objects::nonNull)
+                .anyMatch(n -> !n.isNull() && n.exists());
     }
 
     @Override

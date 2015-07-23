@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 Christian Autermann
+ * Copyright 2013-2015 Christian Autermann
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,11 +15,10 @@
  */
 package com.github.autermann.yaml;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.EnumMap;
+import java.util.Objects;
 
 import org.joda.time.DateTime;
 
@@ -44,20 +43,18 @@ import com.github.autermann.yaml.nodes.YamlShortNode;
 import com.github.autermann.yaml.nodes.YamlTextNode;
 import com.github.autermann.yaml.nodes.YamlTimeNode;
 import com.github.autermann.yaml.util.DecimalPrecision;
-import com.google.common.base.Preconditions;
-import com.google.common.collect.Maps;
 
 /**
  * Default implementation of {@link YamlNodeFactory}.
  *
  * @author Christian Autermann
  */
-public class DefaultYamlNodeFactory extends YamlNodeFactory {
+public class DefaultYamlNodeFactory implements YamlNodeFactory {
     /**
      * Created {@link DecimalPrecision} specific instances.
      */
     private static final EnumMap<DecimalPrecision, DefaultYamlNodeFactory> FACTORIES
-            = Maps.newEnumMap(DecimalPrecision.class);
+            = new EnumMap<>(DecimalPrecision.class);
     /**
      * The {@link DecimalPrecision} of this factory.
      */
@@ -70,16 +67,16 @@ public class DefaultYamlNodeFactory extends YamlNodeFactory {
      * @param precision the precision
      */
     protected DefaultYamlNodeFactory(DecimalPrecision precision) {
-        this.decimalPrecision = Preconditions.checkNotNull(precision);
+        this.decimalPrecision = Objects.requireNonNull(precision);
     }
 
     @Override
-    protected YamlTextNode createTextNode(String value) {
+    public YamlTextNode createTextNode(String value) {
         return new YamlTextNode(value);
     }
 
     @Override
-    protected YamlIntegralNode createBigIntegerNode(BigInteger value) {
+    public YamlIntegralNode createBigIntegerNode(BigInteger value) {
         return new YamlBigIntegerNode(value);
     }
 
@@ -89,7 +86,7 @@ public class DefaultYamlNodeFactory extends YamlNodeFactory {
     }
 
     @Override
-    protected YamlBinaryNode createBinaryNode(byte[] value) {
+    public YamlBinaryNode createBinaryNode(byte[] value) {
         return new YamlBinaryNode(value);
     }
 
@@ -99,7 +96,7 @@ public class DefaultYamlNodeFactory extends YamlNodeFactory {
     }
 
     @Override
-    protected YamlTimeNode createDateTimeNode(DateTime value) {
+    public YamlTimeNode createDateTimeNode(DateTime value) {
         return new YamlTimeNode(value);
     }
 
@@ -149,7 +146,7 @@ public class DefaultYamlNodeFactory extends YamlNodeFactory {
     }
 
     @Override
-    protected YamlDecimalNode createBigDecimalNode(BigDecimal value) {
+    public YamlDecimalNode createBigDecimalNode(BigDecimal value) {
         switch (getDecimalPrecision()) {
             case BIG_DECIMAL:
                 return new YamlBigDecimalNode(value);
@@ -215,7 +212,7 @@ public class DefaultYamlNodeFactory extends YamlNodeFactory {
      * @return the factory
      */
     public static DefaultYamlNodeFactory create(DecimalPrecision precision) {
-        checkNotNull(precision);
+        Objects.requireNonNull(precision);
         DefaultYamlNodeFactory fac = FACTORIES.get(precision);
         if (fac == null) {
             FACTORIES.put(precision, fac

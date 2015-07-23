@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 Christian Autermann
+ * Copyright 2013-2015 Christian Autermann
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,10 +15,11 @@
  */
 package com.github.autermann.yaml.construct;
 
+import java.util.Objects;
+
 import org.yaml.snakeyaml.constructor.AbstractConstruct;
 
 import com.github.autermann.yaml.YamlNodeFactory;
-import com.google.common.base.Preconditions;
 
 /**
  * {@link org.yaml.snakeyaml.constructor.Construct} to construct
@@ -44,9 +45,9 @@ public abstract class YamlConstruct extends AbstractConstruct {
      * @param delegate    the delegate
      */
     protected YamlConstruct(YamlNodeFactory nodeFactory,
-                                    YamlNodeConstructor delegate) {
-        this.nodeFactory = Preconditions.checkNotNull(nodeFactory);
-        this.delegate = Preconditions.checkNotNull(delegate);
+                            YamlNodeConstructor delegate) {
+        this.nodeFactory = Objects.requireNonNull(nodeFactory);
+        this.delegate = Objects.requireNonNull(delegate);
     }
 
     /**

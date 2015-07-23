@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 Christian Autermann
+ * Copyright 2013-2015 Christian Autermann
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,10 +15,9 @@
  */
 package com.github.autermann.yaml.construct;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 import org.joda.time.format.DateTimeFormatter;
@@ -88,8 +87,8 @@ public class YamlNodeConstructor extends SafeConstructor {
      */
     public YamlNodeConstructor(YamlNodeFactory nodeFactory,
                                DumperOptions options) {
-        this.options = checkNotNull(options);
-        this.nodeFactory = checkNotNull(nodeFactory);
+        this.options = Objects.requireNonNull(options);
+        this.nodeFactory = Objects.requireNonNull(nodeFactory);
         register();
     }
 
@@ -203,8 +202,7 @@ public class YamlNodeConstructor extends SafeConstructor {
      * @return the construct
      */
     protected Construct pairsConstruct() {
-        return new YamlMappingNodeConstruct(
-                getNodeFactory(), this, getNodeFactory().pairsNodeSupplier());
+        return new YamlMappingNodeConstruct(getNodeFactory(), this, getNodeFactory()::pairsNode);
     }
 
     /**
@@ -213,9 +211,7 @@ public class YamlNodeConstructor extends SafeConstructor {
      * @return the construct
      */
     protected Construct omapConstruct() {
-        return new YamlMappingNodeConstruct(
-                getNodeFactory(), this, getNodeFactory()
-                .orderedMapNodeSupplier());
+        return new YamlMappingNodeConstruct(getNodeFactory(), this, getNodeFactory()::orderedMapNode);
     }
 
     /**
@@ -224,8 +220,7 @@ public class YamlNodeConstructor extends SafeConstructor {
      * @return the construct
      */
     protected Construct mapConstruct() {
-        return new YamlMappingNodeConstruct(
-                getNodeFactory(), this, getNodeFactory().mapNodeSupplier());
+        return new YamlMappingNodeConstruct(getNodeFactory(), this, getNodeFactory()::mapNode);
     }
 
     /**

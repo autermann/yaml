@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 Christian Autermann
+ * Copyright 2013-2015 Christian Autermann
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,10 +15,11 @@
  */
 package com.github.autermann.yaml;
 
+import java.util.Optional;
+import java.util.function.Predicate;
+
 import com.github.autermann.yaml.nodes.YamlMissingNode;
 import com.github.autermann.yaml.nodes.YamlNullNode;
-import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
 
 /**
  * Utility methods to handle {@link YamlNode}s.
@@ -42,7 +43,7 @@ public class YamlNodes {
      * @return {@code value} if not {@code null}, else a {@link YamlNullNode}
      */
     public static YamlNode nullToNode(YamlNode value) {
-        return value == null ? YamlNullNode.instance() : value;
+        return Optional.ofNullable(value).orElseGet(YamlNullNode::instance);
     }
 
     /**
@@ -54,7 +55,7 @@ public class YamlNodes {
      * @return {@code value} if not {@code null}, else a {@link YamlMissingNode}
      */
     public static YamlNode nullToMissing(YamlNode value) {
-        return value == null ? YamlMissingNode.instance() : value;
+        return Optional.ofNullable(value).orElseGet(YamlMissingNode::instance);
     }
 
     /**
@@ -64,7 +65,7 @@ public class YamlNodes {
      * @return the predicate
      */
     public static Predicate<YamlNode> notNull() {
-        return NotNullPredicate.instance();
+        return node -> node != null && !node.isNull();
     }
 
     /**
@@ -73,7 +74,7 @@ public class YamlNodes {
      * @return the predicate
      */
     public static Predicate<YamlNode> notMissing() {
-        return NotMissingPredicate.instance();
+        return node -> node != null && node.exists();
     }
 
     /**
@@ -83,86 +84,6 @@ public class YamlNodes {
      * @return the predicate
      */
     public static Predicate<YamlNode> notNullOrMissing() {
-        return Predicates.and(notNull(), notMissing());
-    }
-
-    /**
-     * {@link Predicate} for {@link YamlNode}s that are not {@code null}.
-     */
-    private static class NotNullPredicate implements Predicate<YamlNode> {
-        /**
-         * The singleton instance.
-         */
-        private static final NotNullPredicate INSTANCE
-                = new NotNullPredicate();
-
-        @Override
-        public boolean apply(YamlNode input) {
-            return input != null && !input.isNull();
-        }
-
-        @Override
-        public String toString() {
-            return "YamlNodes.notNull()";
-        }
-
-        @Override
-        public boolean equals(Object obj) {
-            return obj == this;
-        }
-
-        @Override
-        public int hashCode() {
-            return System.identityHashCode(this);
-        }
-
-        /**
-         * Gets the singleton instance.
-         *
-         * @return the instance
-         */
-        public static NotNullPredicate instance() {
-            return INSTANCE;
-        }
-    }
-
-    /**
-     * {@link Predicate} for {@link YamlNode}s that are not missing.
-     */
-    private static class NotMissingPredicate implements Predicate<YamlNode> {
-        /**
-         * The singleton instance.
-         */
-        private static final NotMissingPredicate INSTANCE
-                = new NotMissingPredicate();
-
-        @Override
-        public boolean apply(YamlNode input) {
-            return input != null && input.exists();
-        }
-
-        @Override
-        public String toString() {
-            return "YamlNodes.notNullOrMissing()";
-        }
-
-        @Override
-        public boolean equals(Object obj) {
-            return obj == this;
-        }
-
-        @Override
-        public int hashCode() {
-            return System.identityHashCode(this);
-        }
-
-        /**
-         * Gets the singleton instance.
-         *
-         * @return the instance
-         */
-        public static NotMissingPredicate instance() {
-            return INSTANCE;
-        }
+        return notNull().and(notMissing());
     }
 }

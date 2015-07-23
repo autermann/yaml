@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 Christian Autermann
+ * Copyright 2013-2015 Christian Autermann
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -44,14 +44,16 @@ public class YamlDecimalNodeConstruct extends YamlScalarNodeConstruct {
     @Override
     public YamlScalarNode construct(String value) {
         String v = value.trim().toLowerCase().replaceAll("_", "");
-        if (v.equals(".inf")) {
-            return getNodeFactory().doubleNode(Double.POSITIVE_INFINITY);
-        } else if (v.equals(".nan")) {
-            return getNodeFactory().doubleNode(Double.NaN);
-        } else if (v.equals("-.inf")) {
-            return getNodeFactory().doubleNode(Double.NEGATIVE_INFINITY);
+        YamlNodeFactory nodeFactory = getNodeFactory();
+        switch (v) {
+            case ".inf":
+                return nodeFactory.doubleNode(Double.POSITIVE_INFINITY);
+            case ".nan":
+                return nodeFactory.doubleNode(Double.NaN);
+            case "-.inf":
+                return nodeFactory.doubleNode(Double.NEGATIVE_INFINITY);
         }
-        return getNodeFactory().bigDecimalNode(new BigDecimal(value));
+        return nodeFactory.bigDecimalNode(new BigDecimal(value));
     }
 
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 Christian Autermann
+ * Copyright 2013-2015 Christian Autermann
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,128 +15,16 @@
  */
 package com.github.autermann.yaml;
 
-import com.github.autermann.yaml.nodes.YamlBinaryNode;
-import com.github.autermann.yaml.nodes.YamlBooleanNode;
-import com.github.autermann.yaml.nodes.YamlDecimalNode;
-import com.github.autermann.yaml.nodes.YamlIntegralNode;
-import com.github.autermann.yaml.nodes.YamlMapNode;
-import com.github.autermann.yaml.nodes.YamlMappingNode;
-import com.github.autermann.yaml.nodes.YamlNullNode;
-import com.github.autermann.yaml.nodes.YamlOrderedMapNode;
-import com.github.autermann.yaml.nodes.YamlPairsNode;
-import com.github.autermann.yaml.nodes.YamlScalarNode;
-import com.github.autermann.yaml.nodes.YamlSeqNode;
-import com.github.autermann.yaml.nodes.YamlSequenceNode;
-import com.github.autermann.yaml.nodes.YamlSetNode;
-import com.github.autermann.yaml.nodes.YamlTextNode;
-import com.github.autermann.yaml.nodes.YamlTimeNode;
-
 /**
- * Abstract {@link ReturningYamlNodeVisitor} implementation to allow smaller
- * implementations. Per default implementations will return null and
- * delegate to one of
- * <ul>
- * <li>{@link #visitMapping(YamlMappingNode)}</li>
- * <li>{@link #visitScalar(YamlScalarNode)}</li>
- * <li>{@link #visitSequence(YamlSequenceNode)}</li>
- * </ul>
+ * Compatibility class.
  *
- * @param <T> the returned type
+ * @author Christian Autermann
+ * @param <T> the return type
+ *
+ * @deprecated use {@link SimpleReturningYamlNodeVisitor}
  */
+@Deprecated
 public abstract class AbstractReturningYamlNodeVisitor<T>
-        implements ReturningYamlNodeVisitor<T> {
-
-    @Override
-    public T visit(YamlMapNode node) {
-        return visitMapping(node);
-    }
-
-    @Override
-    public T visit(YamlOrderedMapNode node) {
-        return visitMapping(node);
-    }
-
-    @Override
-    public T visit(YamlPairsNode node) {
-        return visitMapping(node);
-    }
-
-    @Override
-    public T visit(YamlSeqNode node) {
-        return visitSequence(node);
-    }
-
-    @Override
-    public T visit(YamlSetNode node) {
-        return visitSequence(node);
-    }
-
-    @Override
-    public T visit(YamlBinaryNode node) {
-        return visitScalar(node);
-    }
-
-    @Override
-    public T visit(YamlBooleanNode node) {
-        return visitScalar(node);
-    }
-
-    @Override
-    public T visit(YamlDecimalNode node) {
-        return visitScalar(node);
-    }
-
-    @Override
-    public T visit(YamlIntegralNode node) {
-        return visitScalar(node);
-    }
-
-    @Override
-    public T visit(YamlNullNode node) {
-        return visitScalar(node);
-    }
-
-    @Override
-    public T visit(YamlTextNode node) {
-        return visitScalar(node);
-    }
-
-    @Override
-    public T visit(YamlTimeNode node) {
-        return visitScalar(node);
-    }
-
-    /**
-     * Visit any mapping node.
-     *
-     * @param node the node to visit
-     *
-     * @return the returned value
-     */
-    protected T visitMapping(YamlMappingNode<?> node) {
-        return null;
-    }
-
-    /**
-     * Visit any sequence node.
-     *
-     * @param node the node to visit
-     *
-     * @return the returned value
-     */
-    protected T visitSequence(YamlSequenceNode<?> node) {
-        return null;
-    }
-
-    /**
-     * Visit any scalar node.
-     *
-     * @param node the node to visit
-     *
-     * @return the returned value
-     */
-    protected T visitScalar(YamlScalarNode node) {
-        return null;
-    }
+        implements SimpleReturningYamlNodeVisitor<T> {
 
 }

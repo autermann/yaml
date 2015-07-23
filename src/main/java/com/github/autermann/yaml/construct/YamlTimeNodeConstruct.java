@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 Christian Autermann
+ * Copyright 2013-2015 Christian Autermann
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,11 +15,12 @@
  */
 package com.github.autermann.yaml.construct;
 
+import java.util.Objects;
+
 import org.joda.time.format.DateTimeFormatter;
 
 import com.github.autermann.yaml.YamlNodeFactory;
 import com.github.autermann.yaml.nodes.YamlScalarNode;
-import com.google.common.base.Preconditions;
 
 /**
  * Constructs a {@link com.github.autermann.yaml.nodes.YamlTimeNode} from a
@@ -43,7 +44,7 @@ public class YamlTimeNodeConstruct extends YamlScalarNodeConstruct {
                                  YamlNodeConstructor delegate,
                                  DateTimeFormatter timeEncoding) {
         super(nodeFactory, delegate);
-        this.timeEncoding = Preconditions.checkNotNull(timeEncoding);
+        this.timeEncoding = Objects.requireNonNull(timeEncoding);
     }
 
     @Override

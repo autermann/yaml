@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 Christian Autermann
+ * Copyright 2013-2015 Christian Autermann
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,12 +15,11 @@
  */
 package com.github.autermann.yaml;
 
-import static com.google.common.base.Preconditions.checkArgument;
-import static com.google.common.base.Preconditions.checkNotNull;
-
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Objects;
 
 import org.joda.time.format.DateTimeFormatter;
 import org.joda.time.format.ISODateTimeFormat;
@@ -34,9 +33,6 @@ import org.yaml.snakeyaml.nodes.Tag;
 import org.yaml.snakeyaml.representer.Represent;
 import org.yaml.snakeyaml.representer.Representer;
 
-import com.github.autermann.yaml.nodes.YamlMappingNode;
-import com.github.autermann.yaml.nodes.YamlScalarNode;
-import com.github.autermann.yaml.nodes.YamlSequenceNode;
 import com.github.autermann.yaml.nodes.YamlBigDecimalNode;
 import com.github.autermann.yaml.nodes.YamlBigIntegerNode;
 import com.github.autermann.yaml.nodes.YamlBinaryNode;
@@ -47,16 +43,17 @@ import com.github.autermann.yaml.nodes.YamlFloatNode;
 import com.github.autermann.yaml.nodes.YamlIntegerNode;
 import com.github.autermann.yaml.nodes.YamlLongNode;
 import com.github.autermann.yaml.nodes.YamlMapNode;
+import com.github.autermann.yaml.nodes.YamlMappingNode;
 import com.github.autermann.yaml.nodes.YamlNullNode;
 import com.github.autermann.yaml.nodes.YamlOrderedMapNode;
 import com.github.autermann.yaml.nodes.YamlPairsNode;
+import com.github.autermann.yaml.nodes.YamlScalarNode;
 import com.github.autermann.yaml.nodes.YamlSeqNode;
+import com.github.autermann.yaml.nodes.YamlSequenceNode;
 import com.github.autermann.yaml.nodes.YamlSetNode;
 import com.github.autermann.yaml.nodes.YamlShortNode;
 import com.github.autermann.yaml.nodes.YamlTextNode;
 import com.github.autermann.yaml.nodes.YamlTimeNode;
-import com.google.common.base.Preconditions;
-import com.google.common.collect.Lists;
 import com.google.common.io.BaseEncoding;
 
 /**
@@ -88,7 +85,7 @@ public class YamlNodeRepresenter extends Representer {
      * @param options the dumper options
      */
     public YamlNodeRepresenter(DumperOptions options) {
-        checkNotNull(options);
+        Objects.requireNonNull(options);
         this.timeEncoding = ISODateTimeFormat.dateTime();
         this.binaryEncoding = BaseEncoding.base64()
                 .withSeparator(options.getLineBreak().getString(),
@@ -148,7 +145,7 @@ public class YamlNodeRepresenter extends Representer {
      * @return the representation created by the delegate
      */
     private Node delegate(Tag tag, Object value) {
-        Preconditions.checkNotNull(tag);
+        Objects.requireNonNull(tag);
         Node node = delegate(value);
         node.setTag(tag);
         return node;
@@ -164,7 +161,7 @@ public class YamlNodeRepresenter extends Representer {
      */
     private MappingNode delegate(Tag tag,
                                  Iterable<Entry<YamlNode, YamlNode>> mapping) {
-        List<NodeTuple> value = Lists.newLinkedList();
+        List<NodeTuple> value = new LinkedList<>();
         MappingNode node = new MappingNode(tag, value, null);
         representedObjects.put(objectToRepresent, node);
         boolean bestStyle = true;
@@ -206,28 +203,29 @@ public class YamlNodeRepresenter extends Representer {
      * Representing visitor to represent {@link YamlNode}s.
      */
     private class YamlNodeRepresent
-            extends AbstractReturningYamlNodeVisitor<Node>
-            implements Represent {
+            implements SimpleReturningYamlNodeVisitor<Node>, Represent {
 
         @Override
         public Node representData(Object data) {
             YamlNode node = (YamlNode) data;
-            checkArgument(node.exists());
+            if (!node.exists()) {
+                throw new IllegalArgumentException();
+            }
             return node.accept(this);
         }
 
         @Override
-        protected Node visitMapping(YamlMappingNode<?> node) {
+        public Node visitMapping(YamlMappingNode<?> node) {
             return delegate(node.tag(), node.entries());
         }
 
         @Override
-        protected Node visitSequence(YamlSequenceNode<?> node) {
+        public Node visitSequence(YamlSequenceNode<?> node) {
             return delegate(node.tag(), node.value());
         }
 
         @Override
-        protected Node visitScalar(YamlScalarNode node) {
+        public Node visitScalar(YamlScalarNode node) {
             return delegate(node.tag(), node.value());
         }
 

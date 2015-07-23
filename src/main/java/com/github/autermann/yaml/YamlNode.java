@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 Christian Autermann
+ * Copyright 2013-2015 Christian Autermann
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,16 +20,20 @@ import java.io.Writer;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Date;
+import java.util.Iterator;
+import java.util.stream.Stream;
 
 import org.joda.time.DateTime;
 import org.yaml.snakeyaml.DumperOptions;
 import org.yaml.snakeyaml.nodes.Tag;
 
 import com.github.autermann.yaml.nodes.YamlMapNode;
+import com.github.autermann.yaml.nodes.YamlMissingNode;
 import com.github.autermann.yaml.nodes.YamlOrderedMapNode;
 import com.github.autermann.yaml.nodes.YamlPairsNode;
 import com.github.autermann.yaml.nodes.YamlSeqNode;
 import com.github.autermann.yaml.nodes.YamlSetNode;
+import com.google.common.collect.Iterators;
 
 /**
  * Interface for a generic YAML node.
@@ -89,7 +93,9 @@ public interface YamlNode extends Iterable<YamlNode> {
      *
      * @return if this node exists
      */
-    boolean exists();
+    default boolean exists() {
+        return true;
+    }
 
     /**
      * Checks if this node is a container node.
@@ -102,7 +108,9 @@ public interface YamlNode extends Iterable<YamlNode> {
      * @see YamlOrderedMapNode
      * @see YamlPairsNode
      */
-    boolean isContainer();
+    default boolean isContainer() {
+        return false;
+    }
 
     /**
      * Checks if this node is a mapping node.
@@ -113,7 +121,9 @@ public interface YamlNode extends Iterable<YamlNode> {
      * @see YamlOrderedMapNode
      * @see #asMap()
      */
-    boolean isMap();
+    default boolean isMap() {
+        return false;
+    }
 
     /**
      * Checks if this node is ordered mapping node.
@@ -123,7 +133,9 @@ public interface YamlNode extends Iterable<YamlNode> {
      * @see YamlOrderedMapNode
      * @see #asOrderedMap()
      */
-    boolean isOrderedMap();
+    default boolean isOrderedMap() {
+        return false;
+    }
 
     /**
      * Checks if this node is pairs node.
@@ -133,7 +145,9 @@ public interface YamlNode extends Iterable<YamlNode> {
      * @see YamlPairsNode
      * @see #asPairs()
      */
-    boolean isPairs();
+    default boolean isPairs() {
+        return false;
+    }
 
     /**
      * Checks if this node is a sequence node.
@@ -143,7 +157,9 @@ public interface YamlNode extends Iterable<YamlNode> {
      * @see YamlSeqNode
      * @see #asSequence()
      */
-    boolean isSequence();
+    default boolean isSequence() {
+        return false;
+    }
 
     /**
      * Checks if this node is a set node.
@@ -153,14 +169,18 @@ public interface YamlNode extends Iterable<YamlNode> {
      * @see YamlSetNode
      * @see #asSet()
      */
-    boolean isSet();
+    default boolean isSet() {
+        return false;
+    }
 
     /**
      * Checks if this node is a scalar node.
      *
      * @return if this is a scalar node
      */
-    boolean isScalar();
+    default boolean isScalar() {
+        return false;
+    }
 
     /**
      * Checks if this node is a binary node.
@@ -170,7 +190,9 @@ public interface YamlNode extends Iterable<YamlNode> {
      * @see com.github.autermann.yaml.nodes.YamlBinaryNode
      * @see #binaryValue()
      */
-    boolean isBinary();
+    default boolean isBinary() {
+        return false;
+    }
 
     /**
      * Checks if this node is a {@code boolean} node.
@@ -180,7 +202,9 @@ public interface YamlNode extends Iterable<YamlNode> {
      * @see com.github.autermann.yaml.nodes.YamlBooleanNode
      * @see #booleanValue()
      */
-    boolean isBoolean();
+    default boolean isBoolean() {
+        return false;
+    }
 
     /**
      * Checks if this node is a {@code null} node.
@@ -190,7 +214,9 @@ public interface YamlNode extends Iterable<YamlNode> {
      * @see com.github.autermann.yaml.nodes.YamlNullNode
      *
      */
-    boolean isNull();
+    default boolean isNull() {
+        return false;
+    }
 
     /**
      * Checks if this node is number node.
@@ -200,7 +226,9 @@ public interface YamlNode extends Iterable<YamlNode> {
      * @see com.github.autermann.yaml.nodes.YamlNumberNode
      * @see #numberValue()
      */
-    boolean isNumber();
+    default boolean isNumber() {
+        return false;
+    }
 
     /**
      * Checks if this node is a decimal node.
@@ -212,7 +240,9 @@ public interface YamlNode extends Iterable<YamlNode> {
      * @see #doubleValue()
      * @see #floatValue()
      */
-    boolean isDecimal();
+    default boolean isDecimal() {
+        return false;
+    }
 
     /**
      * Checks if this node is {@code float} node.
@@ -223,7 +253,9 @@ public interface YamlNode extends Iterable<YamlNode> {
      * @see #doubleValue()
      * @see #bigDecimalValue()
      */
-    boolean isFloat();
+    default boolean isFloat() {
+        return false;
+    }
 
     /**
      * Checks if this node is {@code double} node.
@@ -233,7 +265,9 @@ public interface YamlNode extends Iterable<YamlNode> {
      * @see #doubleValue()
      * @see #bigDecimalValue()
      */
-    boolean isDouble();
+    default boolean isDouble() {
+        return false;
+    }
 
     /**
      * Checks if this node is {@code BigDecimal} node.
@@ -242,7 +276,9 @@ public interface YamlNode extends Iterable<YamlNode> {
      *
      * @see #bigDecimalValue()
      */
-    boolean isBigDecimal();
+    default boolean isBigDecimal() {
+        return false;
+    }
 
     /**
      * Checks if this node is integral node.
@@ -256,7 +292,9 @@ public interface YamlNode extends Iterable<YamlNode> {
      * @see com.github.autermann.yaml.nodes.YamlShortNode
      * @see com.github.autermann.yaml.nodes.YamlByteNode
      */
-    boolean isIntegral();
+    default boolean isIntegral() {
+        return false;
+    }
 
     /**
      * Checks if this node is {@code byte} node.
@@ -265,7 +303,9 @@ public interface YamlNode extends Iterable<YamlNode> {
      *
      * @see #bigIntegerValue()
      */
-    boolean isBigInteger();
+    default boolean isBigInteger() {
+        return false;
+    }
 
     /**
      * Checks if this node is {@code long} node.
@@ -276,7 +316,9 @@ public interface YamlNode extends Iterable<YamlNode> {
      * @see #longValue()
      *
      */
-    boolean isLong();
+    default boolean isLong() {
+        return false;
+    }
 
     /**
      * Checks if this node is {@code int} node.
@@ -287,7 +329,9 @@ public interface YamlNode extends Iterable<YamlNode> {
      * @see #longValue()
      * @see #intValue()
      */
-    boolean isInt();
+    default boolean isInt() {
+        return false;
+    }
 
     /**
      * Checks if this node is {@code short} node.
@@ -299,7 +343,9 @@ public interface YamlNode extends Iterable<YamlNode> {
      * @see #intValue()
      * @see #shortValue()
      */
-    boolean isShort();
+    default boolean isShort() {
+        return false;
+    }
 
     /**
      * Checks if this node is {@code byte} node.
@@ -312,7 +358,9 @@ public interface YamlNode extends Iterable<YamlNode> {
      * @see #shortValue()
      * @see #byteValue()
      */
-    boolean isByte();
+    default boolean isByte() {
+        return false;
+    }
 
     /**
      * Checks if this node is a text node.
@@ -322,7 +370,9 @@ public interface YamlNode extends Iterable<YamlNode> {
      * @see com.github.autermann.yaml.nodes.YamlTextNode
      * @see #textValue()
      */
-    boolean isText();
+    default boolean isText() {
+        return false;
+    }
 
     /**
      * Checks if this node is date/time node.
@@ -333,7 +383,9 @@ public interface YamlNode extends Iterable<YamlNode> {
      * @see #dateTimeValue()
      * @see #dateValue()
      */
-    boolean isTime();
+    default boolean isTime() {
+        return false;
+    }
 
     /**
      * Converts this node into a {@link YamlMapNode} if applicable.
@@ -343,7 +395,9 @@ public interface YamlNode extends Iterable<YamlNode> {
      * @see #isMap()
      * @see YamlMapNode
      */
-    YamlMapNode asMap();
+    default YamlMapNode asMap() {
+        return null;
+    }
 
     /**
      * Converts this node into a {@link YamlMapNode} if applicable.
@@ -353,7 +407,9 @@ public interface YamlNode extends Iterable<YamlNode> {
      * @see #isOrderedMap()
      * @see YamlOrderedMapNode
      */
-    YamlOrderedMapNode asOrderedMap();
+    default YamlOrderedMapNode asOrderedMap() {
+        return null;
+    }
 
     /**
      * Converts this node into a {@link YamlPairsNode} if applicable.
@@ -363,7 +419,9 @@ public interface YamlNode extends Iterable<YamlNode> {
      * @see #isPairs()
      * @see YamlPairsNode
      */
-    YamlPairsNode asPairs();
+    default YamlPairsNode asPairs() {
+        return null;
+    }
 
     /**
      * Converts this node into a {@link YamlSeqNode} if applicable.
@@ -373,7 +431,9 @@ public interface YamlNode extends Iterable<YamlNode> {
      * @see #isSequence()
      * @see YamlSeqNode
      */
-    YamlSeqNode asSequence();
+    default YamlSeqNode asSequence() {
+        return null;
+    }
 
     /**
      * Converts this node into a {@link YamlSetNode} if applicable.
@@ -383,7 +443,9 @@ public interface YamlNode extends Iterable<YamlNode> {
      * @see #isSet()
      * @see YamlSetNode
      */
-    YamlSetNode asSet();
+    default YamlSetNode asSet() {
+        return null;
+    }
 
     /**
      * Tries to convert the value of this node to a {@code BigDecimal}. Returns
@@ -392,7 +454,9 @@ public interface YamlNode extends Iterable<YamlNode> {
      *
      * @return the {@code BigDecimal} or {@link BigDecimal#ZERO}
      */
-    BigDecimal asBigDecimalValue();
+    default BigDecimal asBigDecimalValue() {
+        return asBigDecimalValue(DEFAULT_BIG_DECIMAL_VALUE);
+    }
 
     /**
      * Tries to convert the value of this node to a {@code BigDecimal}. Returns
@@ -404,7 +468,9 @@ public interface YamlNode extends Iterable<YamlNode> {
      *
      * @return the {@code BigDecimal} or {@code defaultValue}
      */
-    BigDecimal asBigDecimalValue(BigDecimal defaultValue);
+    default BigDecimal asBigDecimalValue(BigDecimal defaultValue) {
+        return defaultValue;
+    }
 
     /**
      * Returns the {@code BigDecimal} value of this node or
@@ -414,7 +480,9 @@ public interface YamlNode extends Iterable<YamlNode> {
      *
      * @see #isDecimal()
      */
-    BigDecimal bigDecimalValue();
+    default BigDecimal bigDecimalValue() {
+        return null;
+    }
 
     /**
      * Tries to convert the value of this node to a {@code BigInteger}. Returns
@@ -423,7 +491,9 @@ public interface YamlNode extends Iterable<YamlNode> {
      *
      * @return the {@code BigInteger} or {@link BigInteger#ZERO}
      */
-    BigInteger asBigIntegerValue();
+    default BigInteger asBigIntegerValue() {
+        return asBigIntegerValue(DEFAULT_BIG_INTEGER_VALUE);
+    }
 
     /**
      * Tries to convert the value of this node to a {@code BigInteger}. Returns
@@ -435,17 +505,21 @@ public interface YamlNode extends Iterable<YamlNode> {
      *
      * @return the {@code BigInteger} or {@code defaultValue}
      */
-    BigInteger asBigIntegerValue(BigInteger defaultValue);
+    default BigInteger asBigIntegerValue(BigInteger defaultValue) {
+        return defaultValue;
+    }
 
     /**
      * Returns the {@code BigInteger} value of this node or
-     * {@link BigInteger#ZERO} if this is not a BigInteger node.
+     * {@code null} if this is not a BigInteger node.
      *
-     * @return the {@code BigInteger} or {@link BigInteger#ZERO}
+     * @return the {@code BigInteger} or {@code null}
      *
      * @see #isIntegral()
      */
-    BigInteger bigIntegerValue();
+    default BigInteger bigIntegerValue() {
+        return null;
+    }
 
     /**
      * Tries to convert the value of this node to a {@code boolean}. Returns
@@ -454,7 +528,9 @@ public interface YamlNode extends Iterable<YamlNode> {
      *
      * @return the {@code boolean} or {@value #DEFAULT_BOOLEAN_VALUE}
      */
-    boolean asBooleanValue();
+    default boolean asBooleanValue() {
+        return asBooleanValue(DEFAULT_BOOLEAN_VALUE);
+    }
 
     /**
      * Tries to convert the value of this node to a {@code boolean}. Returns
@@ -466,7 +542,9 @@ public interface YamlNode extends Iterable<YamlNode> {
      *
      * @return the {@code boolean} or {@code defaultValue}
      */
-    boolean asBooleanValue(boolean defaultValue);
+    default boolean asBooleanValue(boolean defaultValue) {
+        return defaultValue;
+    }
 
     /**
      * Returns the {@code boolean} value of this node or
@@ -476,7 +554,9 @@ public interface YamlNode extends Iterable<YamlNode> {
      *
      * @see #isBoolean()
      */
-    boolean booleanValue();
+    default boolean booleanValue() {
+        return DEFAULT_BOOLEAN_VALUE;
+    }
 
     /**
      * Tries to convert the value of this node to a {@code byte}. Returns
@@ -485,7 +565,9 @@ public interface YamlNode extends Iterable<YamlNode> {
      *
      * @return the {@code byte} or {@value #DEFAULT_BYTE_VALUE}
      */
-    byte asByteValue();
+    default byte asByteValue() {
+        return asByteValue(DEFAULT_BYTE_VALUE);
+    }
 
     /**
      * Tries to convert the value of this node to a {@code byte}. Returns
@@ -497,7 +579,9 @@ public interface YamlNode extends Iterable<YamlNode> {
      *
      * @return the {@code byte} or {@code defaultValue}
      */
-    byte asByteValue(byte defaultValue);
+    default byte asByteValue(byte defaultValue) {
+        return defaultValue;
+    }
 
     /**
      * Returns the {@code byte} value of this node or
@@ -507,7 +591,9 @@ public interface YamlNode extends Iterable<YamlNode> {
      *
      * @see #isIntegral()
      */
-    byte byteValue();
+    default byte byteValue() {
+        return DEFAULT_BYTE_VALUE;
+    }
 
     /**
      * Tries to convert the value of this node to a {@code byte[]}. Returns
@@ -515,7 +601,10 @@ public interface YamlNode extends Iterable<YamlNode> {
      *
      * @return the {@code byte[]} or {@code null}
      */
-    byte[] asBinaryValue();
+    default byte[] asBinaryValue() {
+        return asBinaryValue(DEFAULT_BINARY_VALUE);
+    }
+    static final byte[] DEFAULT_BINARY_VALUE = new byte[0];
 
     /**
      * Tries to convert the value of this node to a {@code byte[]}. Returns
@@ -527,7 +616,9 @@ public interface YamlNode extends Iterable<YamlNode> {
      *
      * @return the {@code byte[]} or {@code defaultValue}
      */
-    byte[] asBinaryValue(byte[] defaultValue);
+    default byte[] asBinaryValue(byte[] defaultValue) {
+        return defaultValue;
+    }
 
     /**
      * Returns the {@code byte[]} value of this node or {@code null} if this is
@@ -537,7 +628,9 @@ public interface YamlNode extends Iterable<YamlNode> {
      *
      * @see #isBinary()
      */
-    byte[] binaryValue();
+    default byte[] binaryValue() {
+        return null;
+    }
 
     /**
      * Tries to convert the value of this node to a {@code double}. Returns
@@ -546,7 +639,9 @@ public interface YamlNode extends Iterable<YamlNode> {
      *
      * @return the {@code double} or {@value #DEFAULT_DOUBLE_VALUE}
      */
-    double asDoubleValue();
+    default double asDoubleValue() {
+        return asDoubleValue(DEFAULT_DOUBLE_VALUE);
+    }
 
     /**
      * Tries to convert the value of this node to a {@code double}. Returns
@@ -558,7 +653,9 @@ public interface YamlNode extends Iterable<YamlNode> {
      *
      * @return the {@code double} or {@code defaultValue}
      */
-    double asDoubleValue(double defaultValue);
+    default double asDoubleValue(double defaultValue) {
+        return defaultValue;
+    }
 
     /**
      * Returns the {@code double} value of this node or
@@ -568,7 +665,9 @@ public interface YamlNode extends Iterable<YamlNode> {
      *
      * @see #isDecimal()
      */
-    double doubleValue();
+    default double doubleValue() {
+        return DEFAULT_DOUBLE_VALUE;
+    }
 
     /**
      * Tries to convert the value of this node to a {@code float}. Returns
@@ -577,7 +676,9 @@ public interface YamlNode extends Iterable<YamlNode> {
      *
      * @return the {@code float} or {@value #DEFAULT_FLOAT_VALUE}
      */
-    float asFloatValue();
+    default float asFloatValue() {
+        return asFloatValue(DEFAULT_FLOAT_VALUE);
+    }
 
     /**
      * Tries to convert the value of this node to a {@code float}. Returns
@@ -589,7 +690,9 @@ public interface YamlNode extends Iterable<YamlNode> {
      *
      * @return the {@code float} or {@code defaultValue}
      */
-    float asFloatValue(float defaultValue);
+    default float asFloatValue(float defaultValue) {
+        return defaultValue;
+    }
 
     /**
      * Returns the {@code float} value of this node or
@@ -599,7 +702,9 @@ public interface YamlNode extends Iterable<YamlNode> {
      *
      * @see #isDecimal()
      */
-    float floatValue();
+    default float floatValue() {
+        return DEFAULT_FLOAT_VALUE;
+    }
 
     /**
      * Tries to convert the value of this node to a {@code int}. Returns
@@ -608,7 +713,9 @@ public interface YamlNode extends Iterable<YamlNode> {
      *
      * @return the {@code int} or {@value #DEFAULT_INTEGER_VALUE}
      */
-    int asIntValue();
+    default int asIntValue() {
+        return asIntValue(DEFAULT_INTEGER_VALUE);
+    }
 
     /**
      * Tries to convert the value of this node to a {@code int}. Returns
@@ -620,7 +727,9 @@ public interface YamlNode extends Iterable<YamlNode> {
      *
      * @return the {@code int} or {@code defaultValue}
      */
-    int asIntValue(int defaultValue);
+    default int asIntValue(int defaultValue) {
+        return defaultValue;
+    }
 
     /**
      * Returns the {@code int} value of this node or
@@ -630,7 +739,9 @@ public interface YamlNode extends Iterable<YamlNode> {
      *
      * @see #isIntegral()
      */
-    int intValue();
+    default int intValue() {
+        return DEFAULT_INTEGER_VALUE;
+    }
 
     /**
      * Tries to convert the value of this node to a {@code long}. Returns
@@ -639,7 +750,9 @@ public interface YamlNode extends Iterable<YamlNode> {
      *
      * @return the {@code long} or {@value #DEFAULT_LONG_VALUE}
      */
-    long asLongValue();
+    default long asLongValue() {
+        return asLongValue(DEFAULT_LONG_VALUE);
+    }
 
     /**
      * Tries to convert the value of this node to a {@code long}. Returns
@@ -651,7 +764,9 @@ public interface YamlNode extends Iterable<YamlNode> {
      *
      * @return the {@code long} or {@code defaultValue}
      */
-    long asLongValue(long defaultValue);
+    default long asLongValue(long defaultValue) {
+        return defaultValue;
+    }
 
     /**
      * Returns the {@code long} value of this node or
@@ -661,7 +776,9 @@ public interface YamlNode extends Iterable<YamlNode> {
      *
      * @see #isIntegral()
      */
-    long longValue();
+    default long longValue() {
+        return DEFAULT_LONG_VALUE;
+    }
 
     /**
      * Tries to convert the value of this node to a {@code Number}. Returns
@@ -669,7 +786,9 @@ public interface YamlNode extends Iterable<YamlNode> {
      *
      * @return the {@code Number} or {@code null}
      */
-    Number asNumberValue();
+    default Number asNumberValue() {
+        return asNumberValue(null);
+    }
 
     /**
      * Tries to convert the value of this node to a {@code Number}. Returns
@@ -681,7 +800,9 @@ public interface YamlNode extends Iterable<YamlNode> {
      *
      * @return the {@code Number} or {@code defaultValue}
      */
-    Number asNumberValue(Number defaultValue);
+    default Number asNumberValue(Number defaultValue) {
+        return defaultValue;
+    }
 
     /**
      * Returns the {@code Number} value of this node or {@code null} if this is
@@ -691,7 +812,9 @@ public interface YamlNode extends Iterable<YamlNode> {
      *
      * @see #isNumber()
      */
-    Number numberValue();
+    default Number numberValue() {
+        return null;
+    }
 
     /**
      * Tries to convert the value of this node to a {@code short}. Returns
@@ -700,7 +823,9 @@ public interface YamlNode extends Iterable<YamlNode> {
      *
      * @return the {@code short} or {@value #DEFAULT_SHORT_VALUE}
      */
-    short asShortValue();
+    default short asShortValue() {
+        return asShortValue(DEFAULT_SHORT_VALUE);
+    }
 
     /**
      * Tries to convert the value of this node to a {@code short}. Returns
@@ -712,7 +837,9 @@ public interface YamlNode extends Iterable<YamlNode> {
      *
      * @return the {@code short} or {@code defaultValue}
      */
-    short asShortValue(short defaultValue);
+    default short asShortValue(short defaultValue) {
+        return defaultValue;
+    }
 
     /**
      * Returns the {@code short} value of this node or
@@ -722,7 +849,9 @@ public interface YamlNode extends Iterable<YamlNode> {
      *
      * @see #isIntegral()
      */
-    short shortValue();
+    default short shortValue() {
+        return DEFAULT_SHORT_VALUE;
+    }
 
     /**
      * Tries to convert the value of this node to a {@link String}. Returns
@@ -730,7 +859,9 @@ public interface YamlNode extends Iterable<YamlNode> {
      *
      * @return the {@code String} or {@code null}
      */
-    String asTextValue();
+    default String asTextValue() {
+        return asTextValue(null);
+    }
 
     /**
      * Tries to convert the value of this node to a {@code String}. Returns
@@ -742,7 +873,9 @@ public interface YamlNode extends Iterable<YamlNode> {
      *
      * @return the {@code String} or {@code defaultValue}
      */
-    String asTextValue(String defaultValue);
+    default String asTextValue(String defaultValue) {
+        return defaultValue;
+    }
 
     /**
      * Returns the {@link String} value of this node or {@code null} if this is
@@ -752,7 +885,9 @@ public interface YamlNode extends Iterable<YamlNode> {
      *
      * @see #isText()
      */
-    String textValue();
+    default String textValue() {
+        return null;
+    }
 
     /**
      * Tries to convert the value of this node to a {@link DateTime}. Returns
@@ -761,7 +896,9 @@ public interface YamlNode extends Iterable<YamlNode> {
      *
      * @return the {@code DateTime} or {@code null}
      */
-    DateTime asDateTimeValue();
+    default DateTime asDateTimeValue() {
+        return asDateTimeValue(null);
+    }
 
     /**
      * Tries to convert the value of this node to a {@link DateTime}. Returns
@@ -772,7 +909,9 @@ public interface YamlNode extends Iterable<YamlNode> {
      *
      * @return the {@code DateTime} or {@code defaultValue}
      */
-    DateTime asDateTimeValue(DateTime defaultValue);
+    default DateTime asDateTimeValue(DateTime defaultValue) {
+       return defaultValue;
+    }
 
     /**
      * Returns the {@link DateTime} value of this node or {@code null} if this
@@ -782,7 +921,9 @@ public interface YamlNode extends Iterable<YamlNode> {
      *
      * @see #isTime()
      */
-    DateTime dateTimeValue();
+    default DateTime dateTimeValue() {
+        return null;
+    }
 
     /**
      * Tries to convert the value of this node to a {@link Date}. Returns
@@ -790,7 +931,9 @@ public interface YamlNode extends Iterable<YamlNode> {
      *
      * @return the {@code Date} or {@code null}
      */
-    Date asDateValue();
+    default Date asDateValue() {
+        return asDateValue(null);
+    }
 
     /**
      * Tries to convert the value of this node to a {@link Date}. Returns
@@ -800,7 +943,9 @@ public interface YamlNode extends Iterable<YamlNode> {
      *
      * @return the {@code Date} or {@code defaultValue}
      */
-    Date asDateValue(Date defaultValue);
+    default Date asDateValue(Date defaultValue) {
+        return defaultValue;
+    }
 
     /**
      * Returns the {@link Date} value of this node or {@code null} if this is
@@ -810,7 +955,9 @@ public interface YamlNode extends Iterable<YamlNode> {
      *
      * @see #isTime()
      */
-    Date dateValue();
+    default Date dateValue() {
+        return null;
+    }
 
     /**
      * Gets the size of this node if it is a container node.
@@ -819,7 +966,9 @@ public interface YamlNode extends Iterable<YamlNode> {
      *
      * @see #isContainer()
      */
-    int size();
+    default int size() {
+        return 0;
+    }
 
     /**
      * Checks if this container node is empty if it is a container node.
@@ -828,7 +977,9 @@ public interface YamlNode extends Iterable<YamlNode> {
      *
      * * @see #isContainer()
      */
-    boolean isEmpty();
+    default boolean isEmpty() {
+        return true;
+    }
 
     /**
      * Get the {@link YamlNode} at the specified position or with the specified
@@ -839,7 +990,9 @@ public interface YamlNode extends Iterable<YamlNode> {
      * @return the {@link YamlNode} with the specified index or key, or
      *         {@code null}
      */
-    YamlNode get(int key);
+    default YamlNode get(int key) {
+        return null;
+    }
 
     /**
      * Get the {@link YamlNode} with the specified key. If it does not exist
@@ -849,7 +1002,9 @@ public interface YamlNode extends Iterable<YamlNode> {
      *
      * @return the {@link YamlNode} with the specified key, or {@code null}
      */
-    YamlNode get(String key);
+    default YamlNode get(String key) {
+        return null;
+    }
 
     /**
      * Get the {@link YamlNode} with the specified key. If it does not exist
@@ -859,7 +1014,9 @@ public interface YamlNode extends Iterable<YamlNode> {
      *
      * @return the {@link YamlNode} with the specified key, or {@code null}
      */
-    YamlNode get(YamlNode key);
+    default YamlNode get(YamlNode key) {
+        return null;
+    }
 
     /**
      * Get the {@link YamlNode} at the specified position or with the specified
@@ -871,7 +1028,9 @@ public interface YamlNode extends Iterable<YamlNode> {
      * @return the {@link YamlNode} with the specified index or key, or a
      *         {@link com.github.autermann.yaml.nodes.YamlIntegerNode}.
      */
-    YamlNode path(int key);
+    default YamlNode path(int key) {
+        return YamlMissingNode.instance();
+    }
 
     /**
      * Get the {@link YamlNode} with the specified key. If it does not exist a
@@ -882,7 +1041,9 @@ public interface YamlNode extends Iterable<YamlNode> {
      * @return the {@link YamlNode} with the specified key, or a
      *         {@link com.github.autermann.yaml.nodes.YamlIntegerNode}.
      */
-    YamlNode path(String key);
+    default YamlNode path(String key) {
+        return YamlMissingNode.instance();
+    }
 
     /**
      * Get the {@link YamlNode} with the specified key. If it does not exist a
@@ -893,7 +1054,9 @@ public interface YamlNode extends Iterable<YamlNode> {
      * @return the {@link YamlNode} with the specified key, or a
      *         {@link com.github.autermann.yaml.nodes.YamlIntegerNode}.
      */
-    YamlNode path(YamlNode key);
+    default YamlNode path(YamlNode key) {
+        return YamlMissingNode.instance();
+    }
 
     /**
      * Checks if a {@link YamlNode} with the specified key or index exists.
@@ -902,7 +1065,9 @@ public interface YamlNode extends Iterable<YamlNode> {
      *
      * @return {@code true} if the node exists, else {@code false}
      */
-    boolean has(int key);
+    default boolean has(int key) {
+        return false;
+    }
 
     /**
      * Checks if a {@link YamlNode} with the specified key exists.
@@ -911,7 +1076,9 @@ public interface YamlNode extends Iterable<YamlNode> {
      *
      * @return {@code true} if the node exists, else {@code false}
      */
-    boolean has(String key);
+    default boolean has(String key) {
+        return false;
+    }
 
     /**
      * Checks if a {@link YamlNode} with the specified key exists.
@@ -920,7 +1087,9 @@ public interface YamlNode extends Iterable<YamlNode> {
      *
      * @return {@code true} if the node exists, else {@code false}
      */
-    boolean has(YamlNode key);
+    default boolean has(YamlNode key) {
+        return false;
+    }
 
     /**
      * Checks if a {@link YamlNode} with the specified key or index exists and
@@ -930,7 +1099,9 @@ public interface YamlNode extends Iterable<YamlNode> {
      *
      * @return {@code true} if the node exists, else {@code false}
      */
-    boolean hasNotNull(int key);
+    default boolean hasNotNull(int key) {
+        return false;
+    }
 
     /**
      * Checks if a {@link YamlNode} with the specified key exists and is not a
@@ -940,7 +1111,9 @@ public interface YamlNode extends Iterable<YamlNode> {
      *
      * @return {@code true} if the node exists, else {@code false}
      */
-    boolean hasNotNull(String key);
+    default boolean hasNotNull(String key) {
+        return false;
+    }
 
     /**
      * Checks if a {@link YamlNode} with the specified key exists and is not a
@@ -950,7 +1123,9 @@ public interface YamlNode extends Iterable<YamlNode> {
      *
      * @return {@code true} if the node exists, else {@code false}
      */
-    boolean hasNotNull(YamlNode key);
+    default boolean hasNotNull(YamlNode key) {
+        return false;
+    }
 
     /**
      * Create a (deep) copy of this node.
@@ -996,7 +1171,9 @@ public interface YamlNode extends Iterable<YamlNode> {
      *
      * @see Yaml
      */
-    String dump();
+    default String dump() {
+        return new Yaml().dump(this);
+    }
 
     /**
      * Dumps this node to a writer with default options.
@@ -1005,7 +1182,9 @@ public interface YamlNode extends Iterable<YamlNode> {
      *
      * @see Yaml
      */
-    void dump(Writer output);
+    default void dump(Writer output) {
+        new Yaml().dump(this, output);
+    }
 
     /**
      * Dumps this node to a output stream with default options.
@@ -1014,7 +1193,9 @@ public interface YamlNode extends Iterable<YamlNode> {
      *
      * @see Yaml
      */
-    void dump(OutputStream output);
+    default void dump(OutputStream output) {
+        dump(output, new Yaml());
+    }
 
     /**
      * Dumps this node to a string using the supplied options.
@@ -1025,7 +1206,9 @@ public interface YamlNode extends Iterable<YamlNode> {
      *
      * @see Yaml
      */
-    String dump(DumperOptions options);
+    default String dump(DumperOptions options) {
+        return dump(new Yaml(options));
+    }
 
     /**
      * Dumps this node to a writer using the supplied options.
@@ -1035,7 +1218,9 @@ public interface YamlNode extends Iterable<YamlNode> {
      *
      * @see Yaml
      */
-    void dump(Writer output, DumperOptions options);
+    default void dump(Writer output, DumperOptions options) {
+        dump(output, new Yaml(options));
+    }
 
     /**
      * Dumps this node to a output stream using the supplied options.
@@ -1045,7 +1230,9 @@ public interface YamlNode extends Iterable<YamlNode> {
      *
      * @see Yaml
      */
-    void dump(OutputStream output, DumperOptions options);
+    default void dump(OutputStream output, DumperOptions options) {
+        new Yaml(options).dump(this, output);
+    }
 
     /**
      * Dumps this node to a string using the supplied {@link Yaml}. This is
@@ -1055,7 +1242,9 @@ public interface YamlNode extends Iterable<YamlNode> {
      *
      * @return the string representation of this node
      */
-    String dump(Yaml yaml);
+    default String dump(Yaml yaml) {
+        return yaml.dump(this);
+    }
 
     /**
      * Dumps this node to a writer using the supplied {@link Yaml}. This is
@@ -1064,7 +1253,9 @@ public interface YamlNode extends Iterable<YamlNode> {
      * @param output the writer
      * @param yaml   the {@link Yaml}
      */
-    void dump(Writer output, Yaml yaml);
+    default void dump(Writer output, Yaml yaml) {
+        yaml.dump(this, output);
+    }
 
     /**
      * Dumps this node to a output stream using the supplied {@link Yaml}. This
@@ -1073,5 +1264,22 @@ public interface YamlNode extends Iterable<YamlNode> {
      * @param output the output stream
      * @param yaml   the {@link Yaml}
      */
-    void dump(OutputStream output, Yaml yaml);
+    default void dump(OutputStream output, Yaml yaml) {
+        yaml.dump(this, output);
+    }
+
+    @Override
+    default Iterator<YamlNode> iterator() {
+        return Iterators.<YamlNode>singletonIterator(this);
+    }
+
+    /**
+     * Creates a stream of nodes for this {@code YamlNode}.
+     *
+     * @return the stream
+     */
+    default Stream<YamlNode> stream() {
+        return Stream.of(this);
+    }
+
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 Christian Autermann
+ * Copyright 2013-2015 Christian Autermann
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,13 +18,13 @@ package com.github.autermann.yaml;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.sameInstance;
 
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
-import org.junit.Ignore;
 import org.junit.rules.ErrorCollector;
 
 /**
- * TODO JavaDoc
+ * Tests for YAML references.
  *
  * @author Christian Autermann
  */
@@ -57,7 +57,8 @@ public class YamlReferenceTest {
         YamlNode load = YAML.load("a: &a {value: *a}");
         errors.checkThat(load.path("a").isMap(), is(true));
         errors.checkThat(load.path("a").path("value").isMap(), is(true));
-        errors.checkThat(load.path("a"), is(sameInstance(load.path("a").path("value"))));
+        errors.checkThat(load.path("a"), is(sameInstance(load.path("a")
+                         .path("value"))));
     }
 
 }

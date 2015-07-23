@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 Christian Autermann
+ * Copyright 2013-2015 Christian Autermann
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -418,8 +418,7 @@ public abstract class AbstractYamlNodeTest {
     @Test
     public void testAsBigIntegerValue_BigInteger() {
         errors.checkThat(instance().asBigIntegerValue(null), is(nullValue()));
-        errors
-                .checkThat(instance().asBigIntegerValue(BigInteger.ONE), is(BigInteger.ONE));
+        errors.checkThat(instance().asBigIntegerValue(BigInteger.ONE), is(BigInteger.ONE));
     }
 
     /**
@@ -427,7 +426,7 @@ public abstract class AbstractYamlNodeTest {
      */
     @Test
     public void testBigIntegerValue() {
-        assertThat(instance().bigIntegerValue(), is(BigInteger.ZERO));
+        assertThat(instance().bigIntegerValue(), is(nullValue()));
     }
 
     /**
@@ -471,10 +470,8 @@ public abstract class AbstractYamlNodeTest {
         errors.checkThat(instance().asByteValue((byte) 0), is((byte) 0));
         errors.checkThat(instance().asByteValue((byte) -1), is((byte) -1));
         errors.checkThat(instance().asByteValue((byte) 1), is((byte) 1));
-        errors
-                .checkThat(instance().asByteValue(Byte.MIN_VALUE), is(Byte.MIN_VALUE));
-        errors
-                .checkThat(instance().asByteValue(Byte.MAX_VALUE), is(Byte.MAX_VALUE));
+        errors.checkThat(instance().asByteValue(Byte.MIN_VALUE), is(Byte.MIN_VALUE));
+        errors.checkThat(instance().asByteValue(Byte.MAX_VALUE), is(Byte.MAX_VALUE));
     }
 
     /**
@@ -490,7 +487,7 @@ public abstract class AbstractYamlNodeTest {
      */
     @Test
     public void testAsBinaryValue_0args() {
-        assertThat(instance().asBinaryValue(), is(nullValue()));
+        assertThat(instance().asBinaryValue(), is(new byte[0]));
     }
 
     /**

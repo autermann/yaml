@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 Christian Autermann
+ * Copyright 2013-2015 Christian Autermann
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,21 +15,18 @@
  */
 package com.github.autermann.yaml.util;
 
+import java.util.LinkedList;
 import java.util.List;
+import java.util.function.Supplier;
 
-import com.google.common.base.Supplier;
-import com.google.common.collect.Lists;
 
 /**
  * {@link Supplier} for {@link java.util.LinkedList}s.
  *
  * @author Christian Autermann
  */
+@Deprecated
 public final class LinkedListSupplier implements Supplier<List<?>> {
-    /**
-     * The singleton instance.
-     */
-    private static final LinkedListSupplier INSTANCE = new LinkedListSupplier();
 
     /**
      * Private constructor for singleton.
@@ -39,7 +36,7 @@ public final class LinkedListSupplier implements Supplier<List<?>> {
 
     @Override
     public List<?> get() {
-        return Lists.newLinkedList();
+        return new LinkedList<>();
     }
 
     /**
@@ -51,9 +48,9 @@ public final class LinkedListSupplier implements Supplier<List<?>> {
      * @return a list supplier
      */
     @SuppressWarnings(value = "unchecked")
+    @Deprecated
     public static <T> Supplier<List<T>> instance() {
-        Object o = INSTANCE;
-        return (Supplier<List<T>>) o;
+        return LinkedList::new;
     }
 
 }

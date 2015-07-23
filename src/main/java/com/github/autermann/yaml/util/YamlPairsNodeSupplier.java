@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 Christian Autermann
+ * Copyright 2013-2015 Christian Autermann
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,15 +15,17 @@
  */
 package com.github.autermann.yaml.util;
 
+import java.util.Objects;
+import java.util.function.Supplier;
+
 import com.github.autermann.yaml.YamlNodeFactory;
 import com.github.autermann.yaml.nodes.YamlPairsNode;
-import com.google.common.base.Preconditions;
-import com.google.common.base.Supplier;
 
 /**
  * A {@link Supplier} for {@link YamlPairsNode}s backed by a
  * {@link YamlNodeFactory}.
  */
+@Deprecated
 public class YamlPairsNodeSupplier implements Supplier<YamlPairsNode> {
 
     /**
@@ -38,7 +40,7 @@ public class YamlPairsNodeSupplier implements Supplier<YamlPairsNode> {
      * @param factory the factory to use
      */
     public YamlPairsNodeSupplier(YamlNodeFactory factory) {
-        this.factory = Preconditions.checkNotNull(factory);
+        this.factory = Objects.requireNonNull(factory);
     }
 
     @Override

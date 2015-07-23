@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 Christian Autermann
+ * Copyright 2013-2015 Christian Autermann
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,7 +24,6 @@ import com.github.autermann.yaml.ReturningYamlNodeVisitor;
 import com.github.autermann.yaml.YamlNode;
 import com.github.autermann.yaml.YamlNodeFactory;
 import com.github.autermann.yaml.YamlNodeVisitor;
-import com.google.common.collect.Sets;
 
 /**
  * A {@link YamlNode} for {@code !!set} mappings.
@@ -44,7 +43,7 @@ public class YamlSetNode extends YamlSequenceNode<YamlSetNode> {
      */
     public YamlSetNode(YamlNodeFactory factory) {
         super(factory);
-        this.nodes = Sets.newLinkedHashSet();
+        this.nodes = new LinkedHashSet<>();
     }
 
     @Override
