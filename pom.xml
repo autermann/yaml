@@ -1,5 +1,4 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
 
@@ -11,7 +10,7 @@
 
     <groupId>com.github.autermann</groupId>
     <artifactId>yaml</artifactId>
-    <version>1.0.2-SNAPSHOT</version>
+    <version>1.0.2</version>
     <packaging>jar</packaging>
 
     <name>YAML API</name>
@@ -38,7 +37,7 @@
         <url>https://github.com/autermann/yaml</url>
         <connection>scm:git:https://github.com/autermann/yaml.git</connection>
         <developerConnection>scm:git:https://github.com/autermann/yaml.git</developerConnection>
-        <tag>HEAD</tag>
+        <tag>v1.0.2</tag>
     </scm>
 
     <issueManagement>
