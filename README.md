@@ -68,6 +68,25 @@ if (loaded.isMapping()) {
 }
 ```
 
+### Anchors and Aliases
+As long they are not  [recursive][failingTest], they are supported:
+```java
+YamlMapNode a = factory.mapNode().put("value", true);
+YamlMapNode root = factory.orderedMapNode().put("a", a).put("b", a);
+System.out.println(root.dump());
+```
+```yaml
+!!omap
+a: &id001
+  value: true
+b: *id001
+```
+```java
+YamlNode node = YAML.load(/* ... */);
+System.out.println(node.path("a") == node.path("b")); // == true
+```
+[failingTest]: https://github.com/autermann/yaml/blob/master/src/test/java/com/github/autermann/yaml/YamlReferenceTest.java#L55
+
 ## License
 The project is licensed under the [Apache License, Version 2.0][apache]
 ```
