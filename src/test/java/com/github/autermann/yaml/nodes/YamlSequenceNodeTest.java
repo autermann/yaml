@@ -44,6 +44,11 @@ import static org.hamcrest.Matchers.not;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.Assert.assertThat;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Stream;
+
+import org.hamcrest.Matchers;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ErrorCollector;
@@ -86,5 +91,22 @@ public class YamlSequenceNodeTest {
         errors.checkThat(node, is(not(bigDecimalNode())));
         errors.checkThat(node, is(not(doubleNode())));
         errors.checkThat(node, is(not(floatNode())));
+    }
+
+    @Test
+    public void testStream() {
+        int num = 5;
+        YamlNode[] arr = new YamlNode[num];
+
+        YamlSeqNode node = factory.sequenceNode();
+        for (int i = 0; i < num; ++i) {
+            arr[i] = factory.intNode(i);
+            node.add(i);
+        }
+        Stream<YamlNode> stream = node.stream();
+        List<YamlNode> nodes = new ArrayList<>(num);
+        node.stream().forEach(nodes::add);
+
+        errors.checkThat(nodes, Matchers.contains(arr));
     }
 }

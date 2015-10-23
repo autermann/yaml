@@ -15,6 +15,10 @@
  */
 package com.github.autermann.yaml.nodes;
 
+import java.util.Spliterator;
+import java.util.Spliterators;
+import java.util.stream.Stream;
+
 import org.yaml.snakeyaml.nodes.Tag;
 
 import com.github.autermann.yaml.ReturningYamlNodeVisitor;
@@ -75,6 +79,16 @@ public final class YamlMissingNode implements YamlNode {
     @Override
     public <T> T accept(ReturningYamlNodeVisitor<T> visitor) {
         return null;
+    }
+
+    @Override
+    public Stream<YamlNode> stream() {
+        return Stream.empty();
+    }
+
+    @Override
+    public Spliterator<YamlNode> spliterator() {
+        return Spliterators.emptySpliterator();
     }
 
     /**

@@ -15,7 +15,11 @@
  */
 package com.github.autermann.yaml.nodes;
 
+import java.util.Spliterator;
+import java.util.stream.Stream;
+
 import com.github.autermann.yaml.YamlNode;
+import com.github.autermann.yaml.util.SingletonSpliterator;
 
 /**
  * Abstract {@link YamlNode} to represent a scalar node.
@@ -48,6 +52,16 @@ public abstract class YamlScalarNode implements YamlNode {
     public YamlScalarNode copy() {
         // subclasses are immutable
         return this;
+    }
+
+    @Override
+    public Stream<YamlNode> stream() {
+        return Stream.of(this);
+    }
+
+    @Override
+    public Spliterator<YamlNode> spliterator() {
+        return new SingletonSpliterator<>(this);
     }
 
 }
