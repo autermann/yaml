@@ -21,6 +21,7 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.Spliterator;
 import java.util.stream.Stream;
 
 import org.joda.time.DateTime;
@@ -910,7 +911,7 @@ public interface YamlNode extends Iterable<YamlNode> {
      * @return the {@code DateTime} or {@code defaultValue}
      */
     default DateTime asDateTimeValue(DateTime defaultValue) {
-       return defaultValue;
+        return defaultValue;
     }
 
     /**
@@ -1278,8 +1279,9 @@ public interface YamlNode extends Iterable<YamlNode> {
      *
      * @return the stream
      */
-    default Stream<YamlNode> stream() {
-        return Stream.of(this);
-    }
+    Stream<YamlNode> stream();
 
+
+    @Override
+    Spliterator<YamlNode> spliterator();
 }

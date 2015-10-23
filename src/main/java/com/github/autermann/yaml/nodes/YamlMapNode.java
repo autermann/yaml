@@ -22,6 +22,8 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Objects;
+import java.util.Spliterator;
+import java.util.Spliterators;
 
 import org.yaml.snakeyaml.nodes.Tag;
 
@@ -143,5 +145,12 @@ public class YamlMapNode extends YamlMappingNode<YamlMapNode> {
     @Override
     public Iterator<YamlNode> iterator() {
         return Iterators.unmodifiableIterator(this.value.keySet().iterator());
+    }
+
+    @Override
+    public Spliterator<YamlNode> spliterator() {
+        return Spliterators.spliterator(iterator(), size(), Spliterator.SIZED |
+                                                            Spliterator.SUBSIZED |
+                                                            Spliterator.NONNULL);
     }
 }

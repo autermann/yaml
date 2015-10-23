@@ -18,6 +18,8 @@ package com.github.autermann.yaml.nodes;
 
 import java.util.Iterator;
 import java.util.Objects;
+import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 import com.github.autermann.yaml.YamlNode;
 import com.github.autermann.yaml.YamlNodeFactory;
@@ -126,4 +128,10 @@ public abstract class YamlContainerNode implements YamlNode {
 
     @Override
     public abstract Iterator<YamlNode> iterator();
+
+    @Override
+    public Stream<YamlNode> stream() {
+        return StreamSupport.stream(spliterator(), false);
+    }
+
 }

@@ -17,6 +17,8 @@ package com.github.autermann.yaml.nodes;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
+import java.util.Spliterator;
+import java.util.Spliterators;
 
 import org.yaml.snakeyaml.nodes.Tag;
 
@@ -83,5 +85,11 @@ public class YamlSetNode extends YamlSequenceNode<YamlSetNode> {
     @Override
     public <T> T accept(ReturningYamlNodeVisitor<T> visitor) {
         return visitor.visit(this);
+    }
+
+    @Override
+    public Spliterator<YamlNode> spliterator() {
+        return Spliterators.spliterator(value(), Spliterator.DISTINCT |
+                                                 Spliterator.NONNULL);
     }
 }

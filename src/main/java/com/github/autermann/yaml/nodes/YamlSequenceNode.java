@@ -27,7 +27,6 @@ import org.joda.time.DateTime;
 import com.github.autermann.yaml.YamlNode;
 import com.github.autermann.yaml.YamlNodeFactory;
 import com.github.autermann.yaml.YamlNodes;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Iterators;
 
 /**

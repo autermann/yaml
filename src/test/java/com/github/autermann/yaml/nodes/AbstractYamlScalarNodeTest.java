@@ -15,12 +15,20 @@
  */
 package com.github.autermann.yaml.nodes;
 
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.notNullValue;
+
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.joda.time.DateTime;
 import org.junit.Test;
+
+import com.github.autermann.yaml.YamlNode;
 
 /**
  * Tests for {@link YamlScalarNode}.
@@ -175,6 +183,16 @@ public abstract class AbstractYamlScalarNodeTest extends AbstractYamlNodeTest {
      */
     public long another(long value) {
         return value == Long.MAX_VALUE ? value - 1L : value + 1L;
+    }
+
+    @Test
+    public void test_stream() {
+        YamlScalarNode instance = instance();
+        Stream<YamlNode> stream = instance.stream();
+        errors.checkThat(stream, is(notNullValue()));
+        List<YamlNode> list = stream.collect(Collectors.toList());
+        errors.checkThat(list.size(), is(1));
+        errors.checkThat(list.get(0), is(instance));
     }
 
 }
