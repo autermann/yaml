@@ -15,6 +15,8 @@ Add this to your `dependencies`:
 </dependency>
 ```
 
+**Note:** Requires JDK 1.8 or higher
+
 ### Creating nodes
 ```java
 YamlNodeFactory factory = YamlNodeFactory.createDefault();
