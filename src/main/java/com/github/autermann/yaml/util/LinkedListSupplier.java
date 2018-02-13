@@ -47,7 +47,6 @@ public final class LinkedListSupplier implements Supplier<List<?>> {
      *
      * @return a list supplier
      */
-    @SuppressWarnings(value = "unchecked")
     @Deprecated
     public static <T> Supplier<List<T>> instance() {
         return LinkedList::new;

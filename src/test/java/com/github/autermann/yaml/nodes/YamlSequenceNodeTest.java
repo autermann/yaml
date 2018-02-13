@@ -46,7 +46,6 @@ import static org.junit.Assert.assertThat;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Stream;
 
 import org.hamcrest.Matchers;
 import org.junit.Rule;
@@ -103,7 +102,6 @@ public class YamlSequenceNodeTest {
             arr[i] = factory.intNode(i);
             node.add(i);
         }
-        Stream<YamlNode> stream = node.stream();
         List<YamlNode> nodes = new ArrayList<>(num);
         node.stream().forEach(nodes::add);
 
