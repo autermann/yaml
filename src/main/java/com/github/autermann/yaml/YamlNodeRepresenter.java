@@ -85,6 +85,7 @@ public class YamlNodeRepresenter extends Representer {
      * @param options the dumper options
      */
     public YamlNodeRepresenter(DumperOptions options) {
+        super(options);
         Objects.requireNonNull(options);
         this.timeEncoding = ISODateTimeFormat.dateTime();
         this.binaryEncoding = BaseEncoding.base64()
@@ -162,9 +163,9 @@ public class YamlNodeRepresenter extends Representer {
     private MappingNode delegate(Tag tag,
                                  Iterable<Entry<YamlNode, YamlNode>> mapping) {
         List<NodeTuple> value = new LinkedList<>();
-        MappingNode node = new MappingNode(tag, value, null);
+        MappingNode node = new MappingNode(tag, value, FlowStyle.AUTO);
         representedObjects.put(objectToRepresent, node);
-        boolean bestStyle = true;
+        FlowStyle bestStyle = FlowStyle.AUTO;
         for (Map.Entry<?, ?> entry : mapping) {
             Node nodeKey = representData(entry.getKey());
             Node nodeValue = representData(entry.getValue());
@@ -174,7 +175,7 @@ public class YamlNodeRepresenter extends Representer {
         }
 
         if (getDefaultFlowStyle() != FlowStyle.AUTO) {
-            node.setFlowStyle(getDefaultFlowStyle().getStyleBoolean());
+            node.setFlowStyle(getDefaultFlowStyle());
         } else {
             node.setFlowStyle(bestStyle);
         }
@@ -189,11 +190,11 @@ public class YamlNodeRepresenter extends Representer {
      *
      * @return the new best style
      */
-    private boolean bestStyle(Node node, boolean bestStyle) {
+    private FlowStyle bestStyle(Node node, FlowStyle bestStyle) {
         if (node instanceof ScalarNode) {
             ScalarNode scalar = (ScalarNode) node;
-            if (scalar.getStyle() == null) {
-                return false;
+            if (scalar.getScalarStyle() == null) {
+                return FlowStyle.AUTO;
             }
         }
         return bestStyle;
