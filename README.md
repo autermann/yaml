@@ -11,7 +11,7 @@ Add this to your `dependencies`:
 <dependency>
      <groupId>com.github.autermann</groupId>
      <artifactId>yaml</artifactId>
-     <version>1.0.3</version>
+     <version>2.0.0</version>
 </dependency>
 ```
 
