@@ -23,6 +23,7 @@ import java.util.Set;
 import org.joda.time.format.DateTimeFormatter;
 import org.joda.time.format.ISODateTimeFormat;
 import org.yaml.snakeyaml.DumperOptions;
+import org.yaml.snakeyaml.LoaderOptions;
 import org.yaml.snakeyaml.constructor.Construct;
 import org.yaml.snakeyaml.constructor.SafeConstructor;
 import org.yaml.snakeyaml.nodes.MappingNode;
@@ -87,6 +88,7 @@ public class YamlNodeConstructor extends SafeConstructor {
      */
     public YamlNodeConstructor(YamlNodeFactory nodeFactory,
                                DumperOptions options) {
+        super(new LoaderOptions());
         this.options = Objects.requireNonNull(options);
         this.nodeFactory = Objects.requireNonNull(nodeFactory);
         register();
@@ -320,13 +322,11 @@ public class YamlNodeConstructor extends SafeConstructor {
      * Constructs a scalar.
      *
      * @param node the node to construct from
-     *
      * @return the constructed scalar
-     *
      * @see SafeConstructor#constructScalar(ScalarNode)
      */
     @Override
-    public Object constructScalar(ScalarNode node) {
+    public String constructScalar(ScalarNode node) {
         return super.constructScalar(node);
     }
 }
